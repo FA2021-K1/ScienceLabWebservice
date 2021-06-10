@@ -1,0 +1,68 @@
+version: '3.7'
+
+services:
+  # An Apodini Example Web Service
+  example-web-service:
+    container_name: "example-web-service"
+    # We need the address so the buildagent knows where to push the image
+    image: "harbor.ase.in.tum.de/ios21-monorepo/serversideexample:latest"
+    build:
+      context: ./
+      dockerfile: ./WebService/Dockerfile
+    # During development, we want extensive logging
+    environment:
+      LOG_LEVEL: debug
+    networks:
+      - backend_network
+    expose:
+      - "80"
+    volumes:
+      # Use the volume defined below to save the database file in a persistent volume to preserve it across deployments
+      - type: volume
+        source: database
+        target: /app/database/
+    # Pass the network interface (local docker network with 0.0.0.0) and the desired port to the Apodini web service
+    command: ["--hostname", "0.0.0.0", "--port", "80"]
+    labels:
+      # The domain the service will respond to
+      - "traefik.http.routers.backend.rule=Host(`localhost`)"
+      # Allow request only from the predefined entry point named "web"
+      - "traefik.http.routers.backend.entrypoints=web"
+      # We need to define the a service and specify, on which port our server is reachable
+      - "traefik.http.services.backend-service.loadbalancer.server.port=80"
+      # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
+      - "traefik.http.routers.backend.service=backend-service"
+  # Reverse Proxy to protect our service from direct access
+  traefik:
+    container_name: "traefik"
+    image: "traefik:v2.4"
+    command:
+      # Enable Debug output
+      - "--log.level=DEBUG"
+      # Enable the api and the traefik dashboard for debugging purposes, which can be reached under 127.0.0.1:8080
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      # Enabling docker provider
+      - "--providers.docker=true"
+      # Traefik will listen to incoming request on the port 8090
+      - "--entrypoints.web.address=:80"
+    networks:
+        - backend_network
+    ports:
+      # 8080 on the container is mapped to 8080 on the server/VM/your Machine.
+      # Port 8080 is where the api traefik dashboard is located
+      - "8080:8080"
+      # Port 80 is where our example-web-service is running
+      - "80:80"
+    # Traefik needs the docker.sock to detect new docker container
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+networks:
+  backend_network:
+    driver: bridge
+    name: backend_network
+
+volumes:
+  # A volume used to host the database file from the Example Web Service
+  database:

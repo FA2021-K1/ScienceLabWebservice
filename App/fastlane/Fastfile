@@ -1,0 +1,142 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+    desc "[local] Build only"
+    lane :build do
+
+        # Resolve the Swift Package Manager dependencies
+        xcodebuild(
+                build: false,
+                xcargs: "-resolvePackageDependencies",
+        )
+
+        # Build the application without tests
+        xcodebuild(
+                configuration: "Debug",
+                clean: true,
+                build: true,
+                build_settings: {
+                    "CODE_SIGNING_ALLOWED" => "NO",
+                    "CODE_SIGNING_REQUIRED" => "NO",
+                    "CODE_SIGN_IDENTITY" => "",
+                    "CODE_SIGN_ENTITLEMENTS" => "",
+                }
+        )
+    end
+
+    desc "[local] Run Unit and UI Tests"
+    lane :test do
+
+        # Run UI and Unit Tests
+        scan(
+                clean: true, 
+        )
+    end
+
+    desc "[ci] Default bamboo configuration"
+    lane :bamboo do
+
+        ##########################################
+        # Environment Setup
+        ##########################################
+
+        # Unlock the agent keychain to gain access to the necessary certificates
+        unlock_keychain(
+                path: ENV['bamboo_KeyChain'],
+                password: ENV['bamboo_KeyChainPassword'],
+        )
+
+        # Setup Fastlane Variables
+        ENV['FASTLANE_PASSWORD'] = ENV['bamboo_FASTLANE_PASSWORD'] # Necessary for Developer Protal login
+        ENV['FASTLANE_SESSION'] = ENV['bamboo_FASTLANE_SESSION_PASSWORD'] # Necessary for 2FA
+        
+
+        ##########################################
+        # Prototyper Setup  
+        ##########################################
+
+        # Location of the info.plist in the folder structure
+        INFO_PLIST = sh("find .. -name Info.plist -type f -not -path */Pods/* -not -path *Test* | head -n 1 | cut -c 2-").strip 
+
+        # Prototyper Buildstring to identify releases
+        ENV['PROTOTYPER_BUILDSTRING'] = sh("date", "+%y%m%d_%H%M").rstrip + "-build" + (ENV['bamboo_buildNumber'] ||= "") + "-" + (ENV['bamboo_repository_branch_name'] ||= "")
+
+        puts "#############################################"
+        puts INFO_PLIST
+        puts ENV['PROTOTYPER_BUILDSTRING']
+        puts "#############################################"
+
+        # Write Prototyper BuildString to Info.plist
+        set_info_plist_value(
+                path: INFO_PLIST,
+                key: "CFBundleVersion",
+                value: "$(PROTOTYPER_BUILDSTRING)"
+        )
+
+        # Create BuildString file as Artifact
+        sh "echo $PROTOTYPER_BUILDSTRING > BuildString.txt"
+        sh "mv BuildString.txt ../"
+        
+
+        ##########################################
+        # Provisioning Profile
+        ##########################################
+
+        # Invoke fastlane sigh to get the app provisioned
+        get_provisioning_profile
+
+        ##########################################
+        # Project Setup 
+        ##########################################
+
+        # Update AppID for enterprise team
+        update_app_identifier(
+                plist_path: INFO_PLIST
+        )
+
+        # Update Xcode Project to use maunual code signing
+        update_code_signing_settings(
+                use_automatic_signing: false,
+        )
+
+        # Define correct Provisioning Profile in Xcode Project
+        update_project_provisioning(
+                build_configuration: "Release"
+        )
+
+        ##########################################
+        # Swift Package Manager
+        ##########################################
+
+        # Resolve the Swift Package Manager dependencies
+        xcodebuild(
+                build: false,
+                xcargs: "-resolvePackageDependencies",
+        )
+
+        ##########################################
+        # Code sign and Build 
+        ##########################################
+
+        # Build the app
+        build_ios_app(
+                clean: true,
+                output_name: "BuildedApplication.ipa",
+                export_method: "enterprise",
+                configuration: "Release"
+        )
+
+    end
+end
