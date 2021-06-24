@@ -61,7 +61,7 @@ jobs:
         run: docker-compose up -d --build
 
       - name: Test WebService and traefik
-        run: sleep 10 && docker ps && curl http://127.0.0.1:80 -sf  # && curl http://127.0.0.1:8080 -sf
+        run: sleep 10 && docker ps && curl http://127.0.0.1:80  # -sf && curl http://127.0.0.1:8080 -sf
 
       - name: Stop containers
         if: always()
