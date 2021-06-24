@@ -67,12 +67,12 @@ public final class DatabaseRevertConfiguration: Configuration {
             return .sqlite(sqliteConfiguration)
         case .defaultPostgreSQL(let conString):
             return try .postgres(url: conString)
-        case let .postgreSQL(hostName, username, password, database):
-            return .postgres(hostname: hostName, username: username, password: password, database: database)
+        case let .postgreSQL(hostName, port, username, password, database, configuration):
+            return .postgres(hostname: hostName, port: port, username: username, password: password, database: database, tlsConfiguration: configuration)
         case .defaultMySQL(let conString):
             return try .mysql(url: conString)
-        case let .mySQL(hostname, username, password):
-            return .mysql(hostname: hostname, username: username, password: password)
+        case let .mySQL(hostname, username, password, database, configuration):
+            return .mysql(hostname: hostname, username: username, password: password, database: database, tlsConfiguration: configuration)
         }
     }
 }

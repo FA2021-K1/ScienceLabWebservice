@@ -48,3 +48,19 @@ jobs:
     - name: Debug Build & Test
       if: matrix.configuration == 'debug'
       run: cd WebService && swift test -c debug --enable-test-discovery
+
+  docker:
+    name: Docker compose build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Start containers
+        run: docker-compose up -d --build
+
+      - name: Test if WebService is alive
+        run: sleep 10 && curl http://127.0.0.1:80 -sf && curl http://127.0.0.1:8080 -sf
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose down

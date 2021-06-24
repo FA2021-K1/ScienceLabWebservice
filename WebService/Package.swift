@@ -11,7 +11,7 @@ let package = Package(
         .executable(name: "WebService", targets: ["WebService"])
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .branch("feature/improveTests")),
+        .package(url: "https://github.com/Apodini/Apodini.git", .branch("develop")),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.3.0"),
         .package(path: "../Shared"),
         .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.4.0"))
@@ -38,8 +38,8 @@ let package = Package(
         .testTarget(
             name: "ExampleWebServiceTests",
             dependencies: [
-                .product(name: "XCTApodini", package: "Apodini"),
-                .product(name: "XCTApodiniDatabase", package: "Apodini"),
+                //.product(name: "XCTApodini", package: "Apodini"),
+                //.product(name: "XCTApodiniDatabase", package: "Apodini"),
                 .target(name: "ExampleWebService")
             ]
         )

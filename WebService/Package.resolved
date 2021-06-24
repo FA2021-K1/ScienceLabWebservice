@@ -14,8 +14,8 @@
         "package": "Apodini",
         "repositoryURL": "https://github.com/Apodini/Apodini.git",
         "state": {
-          "branch": "feature/improveTests",
-          "revision": "4a9cdfc1be00e080c619b13d85423a7c5a6bb63f",
+          "branch": "develop",
+          "revision": "0417e955a32c2e80afd0a4573fa5b01e10ce3f57",
           "version": null
         }
       },
@@ -62,24 +62,6 @@
           "branch": null,
           "revision": "cfe8bcd58f74ffecb4f536d8237de146b634ecd3",
           "version": "4.2.6"
-        }
-      },
-      {
-        "package": "CwlCatchException",
-        "repositoryURL": "https://github.com/mattgallagher/CwlCatchException.git",
-        "state": {
-          "branch": null,
-          "revision": "682841464136f8c66e04afe5dbd01ab51a3a56f2",
-          "version": "2.1.0"
-        }
-      },
-      {
-        "package": "CwlPreconditionTesting",
-        "repositoryURL": "https://github.com/mattgallagher/CwlPreconditionTesting.git",
-        "state": {
-          "branch": null,
-          "revision": "02b7a39a99c4da27abe03cab2053a9034379639f",
-          "version": "2.0.0"
         }
       },
       {
