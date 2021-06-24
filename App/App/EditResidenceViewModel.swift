@@ -3,7 +3,6 @@ import Model
 import Combine
 
 class EditResidenceViewModel: ObservableObject {
-    
     @Published var address: String = ""
     
     @Published var postalCode: String = ""

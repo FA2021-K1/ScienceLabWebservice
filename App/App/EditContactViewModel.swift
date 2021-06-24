@@ -3,10 +3,9 @@ import Model
 import Combine
 
 class EditContactViewModel: ObservableObject {
-    
     @Published var name: String = ""
     
-    @Published var birthday: Date = Date()
+    @Published var birthday = Date()
     
     @Published var showDeleteAlert = false
     

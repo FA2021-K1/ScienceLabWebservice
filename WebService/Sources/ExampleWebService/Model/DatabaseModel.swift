@@ -9,17 +9,14 @@ import Apodini
 import FluentKit
 import Shared
 
-
 // MARK: - DatabaseModel
 final class DatabaseModel {
     enum DatabaseError: Error {
         case notFound
     }
-    
-    
+
     let database: Database
-    
-    
+
     init(_ database: Database) {
         self.database = database
     }
@@ -32,7 +29,7 @@ extension Application {
                 .configure(self)
             return self.databaseModel
         }
-        
+
         return databaseModel
     }
 }
@@ -43,10 +40,9 @@ public final class DatabaseModelConfiguration: Configuration {
     }
 }
 
-fileprivate struct DatabaseModelStorageKey: StorageKey {
+private struct DatabaseModelStorageKey: StorageKey {
     typealias Value = DatabaseModel
 }
-
 
 // MARK: - DatabaseModel + Contact
 extension DatabaseModel {
@@ -55,12 +51,12 @@ extension DatabaseModel {
             .save(on: database)
             .map { contact }
     }
-    
+
     func readContact(_ contactID: Contact.IDValue) -> EventLoopFuture<Contact?> {
         Contact
             .find(contactID, on: database)
     }
-    
+
     func readContact() -> EventLoopFuture<[Contact]> {
         Contact
             .query(on: database)
@@ -68,7 +64,7 @@ extension DatabaseModel {
             .sort(\.$name, .ascending)
             .all()
     }
-    
+
     func updateContact(_ contactID: Contact.IDValue, with mediator: ContactMediator) -> EventLoopFuture<Contact> {
         Contact
             .find(contactID, on: database)
@@ -80,7 +76,7 @@ extension DatabaseModel {
                     .transform(to: contact)
             }
     }
-    
+
     func deleteContact(_ contactID: Contact.IDValue) -> EventLoopFuture<Void> {
         Contact
             .find(contactID, on: database)
@@ -92,7 +88,6 @@ extension DatabaseModel {
     }
 }
 
-
 // MARK: - DatabaseModel + Residence
 extension DatabaseModel {
     func createResidence(_ residence: Residence) -> EventLoopFuture<Residence> {
@@ -100,19 +95,19 @@ extension DatabaseModel {
             .save(on: database)
             .map { residence }
     }
-    
+
     func readResidence(_ residenceID: Residence.IDValue) -> EventLoopFuture<Residence?> {
         Residence
             .find(residenceID, on: database)
     }
-    
+
     func readResidence() -> EventLoopFuture<[Residence]> {
         Residence
             .query(on: database)
             .sort(\.$country, .ascending)
             .all()
     }
-    
+
     func updateResidence(_ residenceID: Residence.IDValue, with mediator: ResidenceMediator) -> EventLoopFuture<Residence> {
         Residence
             .find(residenceID, on: database)
@@ -124,7 +119,7 @@ extension DatabaseModel {
                     .transform(to: residence)
             }
     }
-    
+
     func deleteResidence(_ residenceID: Residence.IDValue) -> EventLoopFuture<Void> {
         readResidence(residenceID)
             .unwrap(orError: DatabaseError.notFound)

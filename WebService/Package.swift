@@ -2,7 +2,6 @@
 
 import PackageDescription
 
-
 let package = Package(
     name: "WebService",
     platforms: [
@@ -15,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/Apodini/Apodini.git", .branch("feature/improveTests")),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.3.0"),
         .package(path: "../Shared"),
-        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.4.0")),
+        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.4.0"))
     ],
     targets: [
         .target(

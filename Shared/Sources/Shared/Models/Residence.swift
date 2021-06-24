@@ -58,4 +58,3 @@ extension Residence: Hashable {
         hasher.combine(id)
     }
 }
-

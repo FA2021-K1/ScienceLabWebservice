@@ -2,7 +2,6 @@ import Foundation
 import Shared
 
 public class MockModel: LocalStorageModel {
-    
     private static func createHomeGermany(_ contact: Contact) -> Residence {
         guard let contactId = contact.id else {
             fatalError("Tried to creeate a Residence with a Contact which's id is nil")

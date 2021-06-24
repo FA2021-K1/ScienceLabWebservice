@@ -9,7 +9,7 @@ import Fluent
 public final class DatabaseRevertConfiguration: Configuration {
     private let type: DatabaseType
     private(set) var migrations: [Migration] = []
-    
+
     public var databaseID: DatabaseID {
         switch type {
         case .defaultMongoDB:
@@ -22,7 +22,7 @@ public final class DatabaseRevertConfiguration: Configuration {
             return .sqlite
         }
     }
-    
+
     /// Initializes a new database configuration
     ///
     /// - Parameters:
@@ -30,7 +30,7 @@ public final class DatabaseRevertConfiguration: Configuration {
     public init(_ type: DatabaseType) {
         self.type = type
     }
-    
+
     public func configure(_ app: Application) {
         do {
             let databases = app.databases
@@ -42,7 +42,7 @@ public final class DatabaseRevertConfiguration: Configuration {
             app.logger.error("Could not revert the database: \(error)")
         }
     }
-    
+
     /// A modifier to add one or more `Migrations` to the database. The given `Migrations` need to conform to the `Vapor.Migration ` class.
     ///
     /// - Parameters:
@@ -51,7 +51,7 @@ public final class DatabaseRevertConfiguration: Configuration {
         self.migrations.append(contentsOf: migrations)
         return self
     }
-    
+
     private func databaseFactory(for type: DatabaseType) throws -> Fluent.DatabaseConfigurationFactory {
         switch type {
         case .defaultMongoDB(let conString):

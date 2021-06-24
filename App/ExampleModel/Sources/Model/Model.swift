@@ -11,7 +11,6 @@ import Shared
 
 
 public class Model: ObservableObject {
-    
     @Published public internal(set) var contacts: [Contact]
     
     @Published public internal(set) var residencies: [Residence]

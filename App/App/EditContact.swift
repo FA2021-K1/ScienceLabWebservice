@@ -3,7 +3,6 @@ import Model
 import Combine
 
 struct EditContact: View {
-    
     @Environment(\.presentationMode) private var presentationMode
     
     @ObservedObject private var viewModel: EditContactViewModel
@@ -38,11 +37,11 @@ struct EditContact: View {
     }
     
     private func save() {
-        loadingCancellable = viewModel.save().sink {_ in }
+        loadingCancellable = viewModel.save().sink { _ in }
     }
     
     private func delete() {
-        loadingCancellable = viewModel.delete().sink {_ in }
+        loadingCancellable = viewModel.delete().sink { _ in }
     }
     
     private var form: some View {
@@ -79,7 +78,6 @@ struct EditContact: View {
 }
 
 struct EditContact_Previews: PreviewProvider {
-    
     private static let model: Model = MockModel()
     
     static var previews: some View {

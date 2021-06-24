@@ -3,24 +3,21 @@ import Shared
 import XCTApodini
 import XCTApodiniDatabase
 
-
 final class ContactHandlerTests: XCTApodiniDatabaseTest {
     /// Used to pass in a `Binding` in the test cases.
     ///
     /// Note: In Swift 5.4 we can add property wrappers to local constants/variables but as we need to compile for Swift 5.3 for Linux we can not use this here now.
     @PathParameter var contactId: Contact.IDValue
-    
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
+
         try addMigrations(
             ContactMigration(),
             ResidenceMigration()
         )
     }
-    
-    
+
     /// `XCTCheckHandler(handler:,mocks:,)` can be used to test a single `Handler`
     /// The result builder expects one or more elements conforming to `Mock` like
     /// - `MockRequest` to send mock requests to a `Handler`
@@ -30,7 +27,7 @@ final class ContactHandlerTests: XCTApodiniDatabaseTest {
     /// Here we use `MockRequest` to send a request with no parameters. The expectation is a `Name` struct with the `name` `"Robot"`.
     func testCreateContact() throws {
         let emma = Contact(name: "Emma Stone", birthday: Date(timeIntervalSince1970: 594777600))
-        
+
         try XCTCheckHandler(CreateContact()) {
             MockRequest(assertion: { (returnedContact: Contact) in
                 XCTAssertEqual(returnedContact.name, emma.name)
@@ -40,17 +37,16 @@ final class ContactHandlerTests: XCTApodiniDatabaseTest {
             }
         }
     }
-    
-    
+
     func testGetContacts() throws {
         let emma = Contact(name: "Emma Stone", birthday: Date(timeIntervalSince1970: 594777600))
         try emma.save(on: app.database).wait()
-        
+
         try XCTCheckHandler(GetContacts()) {
             MockRequest(expectation: [emma])
         }
     }
-    
+
     /// This test case showcases how to pass parameters to a `MockRequest`.
     /// There are two types of `MockableParameters`:
     /// - `UnnamedParameter(_)` to create a parameter that is matched based on its type to the available parameters
@@ -70,7 +66,7 @@ final class ContactHandlerTests: XCTApodiniDatabaseTest {
         try emma.save(on: app.database).wait()
         let ryan = Contact(name: "Ryan Reynolds", birthday: Date(timeIntervalSince1970: 214876800))
         try ryan.save(on: app.database).wait()
-        
+
         try XCTCheckHandler(GetContact(contactId: $contactId)) {
             MockRequest(expectation: emma) {
                 UnnamedParameter(emma.id)

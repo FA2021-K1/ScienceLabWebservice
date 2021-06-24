@@ -3,7 +3,6 @@ import Model
 import Combine
 
 struct ContactDetailsView: View {
-    
     @EnvironmentObject private var model: Model
     
     var id: Contact.IDValue
@@ -14,7 +13,7 @@ struct ContactDetailsView: View {
     
     @State private var deleteResidence = false
     
-    @State private var selectedResidence: Residence.IDValue? = nil
+    @State private var selectedResidence: Residence.IDValue?
     
     @State private var loadingCancellable: AnyCancellable?
     
@@ -25,7 +24,7 @@ struct ContactDetailsView: View {
     var body: some View {
         model.contact(id).map { contact in
             ScrollView {
-                LazyVStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 16) {
+                LazyVStack(alignment: .center/*@END_MENU_TOKEN@*/, spacing: 16) {
                     Image(systemName: "person.circle.fill")
                         .font(.system(size: 80))
                     Text(contact.name)
@@ -89,7 +88,7 @@ struct ContactDetailsView: View {
         if let selectedResidenceId = selectedResidence {
             loadingCancellable = model.delete(residence: selectedResidenceId)
                 .eraseToAnyPublisher()
-                .sink {_ in }
+                .sink { _ in }
         }
     }
 }
