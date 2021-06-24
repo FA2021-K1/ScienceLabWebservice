@@ -14,7 +14,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Apodini/Apodini.git", .branch("feature/improveTests")),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.3.0"),
-        .package(path: "../Shared")
+        .package(path: "../Shared"),
+        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.4.0")),
     ],
     targets: [
         .target(
@@ -31,7 +32,8 @@ let package = Package(
                 .product(name: "ApodiniOpenAPI", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
-                .product(name: "Shared", package: "Shared")
+                .product(name: "Shared", package: "Shared"),
+                .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
         ),
         .testTarget(
