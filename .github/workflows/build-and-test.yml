@@ -60,8 +60,8 @@ jobs:
       - name: Start containers
         run: docker-compose up -d --build
 
-      - name: Test if WebService is alive
-        run: sleep 10 && curl http://127.0.0.1:80 -sf && curl http://127.0.0.1:8080 -sf
+      - name: Test WebService and traefik
+        run: sleep 10 && docker ps && curl http://127.0.0.1:80 -sf  # && curl http://127.0.0.1:8080 -sf
 
       - name: Stop containers
         if: always()
