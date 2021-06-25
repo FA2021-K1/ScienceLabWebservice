@@ -14,6 +14,7 @@ public struct Example: WebService {
     @Option
     var port: Int = 8080
     
+    // Flag to revert the database migrations
     @Flag
     var revertDatabaseMigrations = false
 
