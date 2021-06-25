@@ -39,7 +39,7 @@ class AppTests: XCTestCase {
         
         let saveExpectation = XCTestExpectation(description: "Save Complete")
         editContactViewModel.save()
-            .sink() { _ in
+            .sink { _ in
                 saveExpectation.fulfill()
             }
             .store(in: &cancellables)
@@ -59,7 +59,7 @@ class AppTests: XCTestCase {
         
         let deleteExpectation = XCTestExpectation(description: "Delete Complete")
         editContactViewModel.delete()
-            .sink() { _ in
+            .sink { _ in
                 deleteExpectation.fulfill()
             }
             .store(in: &cancellables)

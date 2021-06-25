@@ -63,4 +63,3 @@ public class LocalStorageModel: Model {
         Future.delay(super.delete(residence: id), by: 0.5)
     }
 }
-

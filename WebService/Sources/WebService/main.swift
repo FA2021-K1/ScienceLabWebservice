@@ -1,4 +1,3 @@
 import ExampleWebService
 
-
-try Example.main()
+Example.main()

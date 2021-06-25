@@ -18,4 +18,3 @@ public struct ContactMigration: Migration {
         database.schema(Contact.schema).delete()
     }
 }
-

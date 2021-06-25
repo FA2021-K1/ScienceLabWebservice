@@ -3,7 +3,6 @@ import Combine
 import Model
 
 struct EditResidence: View {
-    
     @Environment(\.presentationMode) private var presentationMode
     
     @ObservedObject private var viewModel: EditResidenceViewModel
@@ -56,7 +55,7 @@ struct EditResidence: View {
     }
     
     private func save() {
-        loadingCancellable = viewModel.save().sink {_ in }
+        loadingCancellable = viewModel.save().sink { _ in }
     }
 }
 

@@ -4,7 +4,6 @@ import Shared
 
 
 public class RestfulModel: LocalStorageModel {
-    
     static var baseURL: URL = {
         guard let baseURL = URL(string: "http://localhost:8080/v1/") else {
             fatalError("Could not create the base URL for the Web Service")

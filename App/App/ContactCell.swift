@@ -20,7 +20,6 @@ struct ContactCell: View {
                         .bold()
                         .multilineTextAlignment(.center)
                         .font(.system(.title3, design: .rounded))
-                        
                 }.padding()
             }
         }

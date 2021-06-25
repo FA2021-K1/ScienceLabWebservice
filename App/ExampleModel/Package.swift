@@ -12,7 +12,7 @@ let package = Package(
         .library(
             name: "Model",
             targets: ["Model"]
-        ),
+        )
     ],
     dependencies: [
         .package(path: "../../Shared")
@@ -27,6 +27,6 @@ let package = Package(
         .testTarget(
             name: "ModelTests",
             dependencies: ["Model"]
-        ),
+        )
     ]
 )
