@@ -1,7 +1,7 @@
 # ================================
 # Build image
 # ================================
-FROM swift:5.3-focal as build
+FROM swift:5.4-focal as build
 
 # Install OS updates and, if needed, sqlite3
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -16,8 +16,8 @@ WORKDIR /build
 # Copy all source files
 COPY . .
 
-# Build everything, with optimizations and test discovery
-RUN swift build -c release --package-path ./WebService
+# Build everything, with optimizations
+RUN swift build -Xswiftc -Xfrontend -Xswiftc -sil-verify-none -c release --package-path ./WebService
 
 # Switch to the staging area
 WORKDIR /staging
@@ -42,7 +42,7 @@ RUN mkdir database
 # ================================
 # Run image
 # ================================
-FROM swift:5.3-focal-slim
+FROM swift:5.4-focal-slim
 
 # Make sure all system packages are up to date.
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \

@@ -165,7 +165,7 @@ only_rules:
   - multiline_parameters
     # Functions and methods parameters should be either on the same line, or one per line.
   - nesting
-    # Types and functions should only be nested to a certain level deep.
+    # Types and statements should only be nested to a certain level deep.
     # See nesting below for the exact configuration.
   - nimble_operator
     # Prefer Nimble operator overloads over free matcher functions.
@@ -309,7 +309,7 @@ only_rules:
     # Don’t include vertical whitespace (empty line) after opening braces.
   - void_return
     # Prefer -> Void over -> ().
- # - weak_delegate (we don't really use the delegate pattern anywhere and the name-collision with our own 'Delegate' is annoying)
+  - weak_delegate
     # Delegates should be weak to avoid reference cycles.
   - xctfail_message
     # An XCTFail call should include a description of the assertion.
@@ -346,10 +346,6 @@ identifier_name:
     - id
     - ok
     - or
-    - p8
-    - of
-    - s3
-    - at
 
 large_tuple: # Tuples shouldn't have too many members. Create a custom type instead.
   - 2 # warning - default: 2
@@ -363,10 +359,10 @@ line_length: # Lines should not span too many characters.
   ignores_function_declarations: false # default: false
   ignores_interpolated_strings: true # default: false
 
-nesting: # Types should be nested at most 2 level deep, and functions should be nested at most 5 levels deep.
+nesting: # Types should be nested at most 2 level deep, and statements should be nested at most 5 levels deep.
   type_level:
     warning: 2 # warning - default: 1
-  function_level:
+  statement_level:
     warning: 5 # warning - default: 5
     
 trailing_closure:

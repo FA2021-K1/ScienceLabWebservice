@@ -5,28 +5,16 @@ import ApodiniDatabase
 import Shared
 import ArgumentParser
 
+
 public struct Example: WebService {
-    // Default HTTP configuration values so the developers don't have to pass
-    // these arguments in the development process themselves
-    @Option
-    var hostname: String = "0.0.0.0"
-
-    @Option
+    @Option(help: "The port the web service of binding to")
     var port: Int = 8080
-    
-    // Flag to revert the database migrations
-    @Flag
+    @Option(help: "The path the database file should be saved in")
+    var databasePath: String = "./example.sqlite"
+    @Flag(help: "Set to true if you want to revert the database migrations")
     var revertDatabaseMigrations = false
-
-    private var databasePath: String {
-        #if !DEBUG && os(Linux)
-        // In the release configuration we store the database file in the database directory mounted as a volume
-        return "/app/database/example.sqlite"
-        #else
-        return "./example.sqlite"
-        #endif
-    }
-
+    
+    
     public var configuration: Configuration {
         // Exposed interfaces, in this case a RESTful API and an OpenAPI documentation generated with it
         REST {
@@ -34,7 +22,7 @@ public struct Example: WebService {
         }
         
         // Defines on which hostname and port the webservice should be bound to, configurable via CLI-arguments, else defaults
-        HTTPConfiguration(hostname: hostname, port: port)
+        HTTPConfiguration(port: port)
         
         // Setup of example database (in this case SQlite) and add migrations to create the respective tables
         DatabaseConfiguration(.sqlite(.file(databasePath)))

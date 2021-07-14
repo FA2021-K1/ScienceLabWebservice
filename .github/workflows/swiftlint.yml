@@ -1,6 +1,11 @@
 name: SwiftLint
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/swiftlint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
 
 jobs:
   swiftlint:
@@ -8,8 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
+        uses: norio-nomura/action-swiftlint@3.1.0
         with:
           args: --strict
         env:
-          WORKING_DIRECTORY: WebService
+          DIFF_BASE: ${{ github.base_ref }}
+

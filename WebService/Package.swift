@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.4
 
 import PackageDescription
 
@@ -11,13 +11,11 @@ let package = Package(
         .executable(name: "WebService", targets: ["WebService"])
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .branch("develop")),
-        .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.3.0"),
-        .package(path: "../Shared"),
-        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.4.0"))
+        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.3.0")),
+        .package(path: "../Shared")
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "WebService",
             dependencies: [
                 .target(name: "ExampleWebService")
@@ -30,9 +28,7 @@ let package = Package(
                 .product(name: "ApodiniREST", package: "Apodini"),
                 .product(name: "ApodiniOpenAPI", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
-                .product(name: "AsyncHTTPClient", package: "async-http-client"),
-                .product(name: "Shared", package: "Shared"),
-                .product(name: "ArgumentParser", package: "swift-argument-parser")
+                .product(name: "Shared", package: "Shared")
             ]
         ),
         .testTarget(

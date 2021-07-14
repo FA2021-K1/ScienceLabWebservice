@@ -10,7 +10,7 @@ struct ResidenceCell: View {
         model.residence(id).map { residence in
             ZStack(alignment: .top) {
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(Color("Cell"))
+                    .foregroundColor(Color(uiColor: .systemGray6))
                     .shadow(radius: 5)
                 HStack(spacing: 10) {
                     Image(systemName: "house.fill")

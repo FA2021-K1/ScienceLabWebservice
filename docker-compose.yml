@@ -1,19 +1,13 @@
-version: '3.7'
+version: '3.9'
 
 services:
   # An Apodini Example Web Service
   example-web-service:
     container_name: "example-web-service"
-    # We need the address so the buildagent knows where to push the image
-    image: "harbor.ase.in.tum.de/ios21-monorepo/serversideexample:latest"
+    image: "apodini/examplewebservice:latest"
     build:
       context: ./
       dockerfile: ./WebService/Dockerfile
-    # During development, we want extensive logging
-    environment:
-      LOG_LEVEL: debug
-    networks:
-      - backend_network
     expose:
       - "80"
     volumes:
@@ -21,8 +15,8 @@ services:
       - type: volume
         source: database
         target: /app/database/
-    # Pass the network interface (local docker network with 0.0.0.0) and the desired port to the Apodini web service
-    command: ["--hostname", "0.0.0.0", "--port", "80"]
+    # Pass the desired port and the path to the mounted database volume to the Apodini web service
+    command: ["--port", "80", "--database-path", "/app/database/example.sqlite"]
     labels:
       # The domain the service will respond to
       - "traefik.http.routers.backend.rule=Host(`localhost`)"
@@ -46,8 +40,6 @@ services:
       - "--providers.docker=true"
       # Traefik will listen to incoming request on the port 8090
       - "--entrypoints.web.address=:80"
-    networks:
-        - backend_network
     ports:
       # 8080 on the container is mapped to 8080 on the server/VM/your Machine.
       # Port 8080 is where the api traefik dashboard is located
@@ -57,11 +49,6 @@ services:
     # Traefik needs the docker.sock to detect new docker container
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-networks:
-  backend_network:
-    driver: bridge
-    name: backend_network
 
 volumes:
   # A volume used to host the database file from the Example Web Service

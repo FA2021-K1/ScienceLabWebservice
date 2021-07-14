@@ -5,11 +5,6 @@ import XCTApodini
 import XCTApodiniDatabase
 
 final class ContactHandlerTests: XCTApodiniDatabaseTest {
-    /// Used to pass in a `Binding` in the test cases.
-    ///
-    /// Note: In Swift 5.4 we can add property wrappers to local constants/variables but as we need to compile for Swift 5.3 for Linux we can not use this here now.
-    @PathParameter var contactId: Contact.IDValue
-
     override func setUpWithError() throws {
         try super.setUpWithError()
 
@@ -68,6 +63,7 @@ final class ContactHandlerTests: XCTApodiniDatabaseTest {
         let ryan = Contact(name: "Ryan Reynolds", birthday: Date(timeIntervalSince1970: 214876800))
         try ryan.save(on: app.database).wait()
 
+        @PathParameter var contactId: Contact.IDValue
         try XCTCheckHandler(GetContact(contactId: $contactId)) {
             MockRequest(expectation: emma) {
                 UnnamedParameter(emma.id)

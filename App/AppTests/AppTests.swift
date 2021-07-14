@@ -7,6 +7,7 @@ import XCTest
 class AppTests: XCTestCase {
     var cancellables: Set<AnyCancellable> = []
     
+    
     func testEditContactViewModelChanges() throws {
         let model = MockModel()
         let person = try XCTUnwrap(model.contacts.first)
@@ -25,8 +26,8 @@ class AppTests: XCTestCase {
         
         XCTAssertEqual(editContactViewModel.name, "Emma Stone")
         XCTAssertEqual(editContactViewModel.birthday, person.birthday)
-        XCTAssertEqual(model.contact(person.id)?.name, person.name)
-        XCTAssertEqual(model.contact(person.id)?.birthday, person.birthday)
+        XCTAssertEqual(model.contact(try XCTUnwrap(person.id))?.name, person.name)
+        XCTAssertEqual(model.contact(try XCTUnwrap(person.id))?.birthday, person.birthday)
     }
     
     func testEditContactViewModelSave() throws {
@@ -46,8 +47,8 @@ class AppTests: XCTestCase {
         
         wait(for: [saveExpectation], timeout: 1.0)
         
-        XCTAssertEqual(model.contact(person.id)?.name, "Emma Stone")
-        XCTAssertEqual(model.contact(person.id)?.birthday, person.birthday)
+        XCTAssertEqual(model.contact(try XCTUnwrap(person.id))?.name, "Emma Stone")
+        XCTAssertEqual(model.contact(try XCTUnwrap(person.id))?.birthday, person.birthday)
     }
     
     func testEditContactViewModelDelete() throws {
@@ -66,6 +67,6 @@ class AppTests: XCTestCase {
         
         wait(for: [deleteExpectation], timeout: 1.0)
         
-        XCTAssertNil(model.contact(person.id))
+        XCTAssertNil(model.contact(try XCTUnwrap(person.id)))
     }
 }

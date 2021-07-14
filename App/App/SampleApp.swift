@@ -6,9 +6,9 @@ import Model
 struct ExampleApp: App {
     @StateObject var model: Model = {
         #if DEBUG
-            return RestfulModel()
-        #else
             return LocalStorageModel()
+        #else
+            return RestfulModel()
         #endif
     }()
     

@@ -4,7 +4,8 @@ import XCTest
 class AppUITests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
+        try super.setUpWithError()
+        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
@@ -13,7 +14,7 @@ class AppUITests: XCTestCase {
         
         // Check if the app is installed and remove it if nescessary
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        let icon = springboard.icons["Example App"]
+        let icon = springboard.icons["App"]
         
         if icon.exists && icon.isHittable {
             icon.press(forDuration: 2)
@@ -32,6 +33,7 @@ class AppUITests: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
     }
     
     
@@ -39,9 +41,8 @@ class AppUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
         // Go to the new contacts screen
-        app.navigationBars["Your Contacts"].buttons["add"].tap()
+        app.navigationBars["Your Contacts"].buttons["Add"].tap()
         
         // Enter information
         let testField = app.tables.textFields["Name"]

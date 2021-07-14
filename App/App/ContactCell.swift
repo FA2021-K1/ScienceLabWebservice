@@ -10,7 +10,7 @@ struct ContactCell: View {
         model.contact(id).map { contact in
             ZStack(alignment: .top) {
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(Color("Cell"))
+                    .foregroundColor(Color(uiColor: .systemGray6))
                     .shadow(radius: 5)
                 VStack(spacing: 10) {
                     Image(systemName: "person.fill")
