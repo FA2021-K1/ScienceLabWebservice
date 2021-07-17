@@ -1,16 +1,13 @@
-# This docker-compose file will be deployed to your Virtual Machine.and will run in production.
-#
-# To start this docker-compose file use: docker-compose -f docker-compose.production.yml up -d
-#
-# To stop this docker-compose use: docker-compose -f docker-compose.production.yml down
-version: '3.7'
+version: '3.9'
 
 services:
   # An Apodini Example Web Service
   example-web-service:
     container_name: "example-web-service"
-    # We need the address so the buildagent knows where to pull the image from
-    image: "ghcr.io/apodini/examplewebservice:latest"
+    image: "apodini/examplewebservice:latest"
+    build:
+      context: ./
+      dockerfile: ./WebService/Dockerfile
     expose:
       - "80"
     volumes:
@@ -22,7 +19,7 @@ services:
     command: ["--port", "80", "--database-path", "/app/database/example.sqlite"]
     labels:
       # The domain the service will respond to
-      - "traefik.http.routers.backend.rule=Host(`example.ase.in.tum.de`)"
+      - "traefik.http.routers.backend.rule=Host(`localhost`)"
       # Allow request only from the predefined entry point named "web"
       - "traefik.http.routers.backend.entrypoints=web"
       # We need to define the a service and specify, on which port our server is reachable
@@ -34,12 +31,20 @@ services:
     container_name: "traefik"
     image: "traefik:v2.4"
     command:
+      # Enable Debug output
+      - "--log.level=DEBUG"
+      # Enable the api and the traefik dashboard for debugging purposes, which can be reached under 127.0.0.1:8080
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
       # Enabling docker provider
       - "--providers.docker=true"
-      # Traefik will listen to incoming request on the port 80 (HTTP)
+      # Traefik will listen to incoming request on the port 8090
       - "--entrypoints.web.address=:80"
     ports:
-      # 80 on the container is mapped to 80 on the server/VM/your Machine.
+      # 8080 on the container is mapped to 8080 on the server/VM/your Machine.
+      # Port 8080 is where the api traefik dashboard is located
+      - "8080:8080"
+      # Port 80 is where our example-web-service is running
       - "80:80"
     # Traefik needs the docker.sock to detect new docker container
     volumes:
