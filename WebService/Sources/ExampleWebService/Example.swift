@@ -8,7 +8,7 @@ import ArgumentParser
 
 public struct Example: WebService {
     @Option(help: "The port the web service of binding to")
-    var port: Int = 8080
+    var port: Int = 80
     @Option(help: "The path the database file should be saved in")
     var databasePath: String = "./example.sqlite"
     @Flag(help: "Set to true if you want to revert the database migrations")
