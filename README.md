@@ -6,6 +6,11 @@
 
 This repository includes an example Apodini web service, a shared Swift Package, and an iOS App that can be used as a starting point for an Apodini web service.  
 
+<p float="left">
+ <img width="350" alt="Screenshot of the client application showing the contact screen. The connect screen shows a list of all contacts that are added to the application." src="https://user-images.githubusercontent.com/28656495/126041554-4f3064f0-4114-43a7-b235-af24950729b3.png">
+ <img width="350" alt="Screenshot of the detail screen showing information about a contact including the residences." src="https://user-images.githubusercontent.com/28656495/126041557-d43004d8-7b9c-493d-b079-af1b925873e2.png">
+</p>
+
 ## Run the Example System
 
 You can start the Apodini example web services on any system that supports [docker](https://www.docker.com) and [docker compose](https://docs.docker.com/compose/). Follow the instructions on https://docs.docker.com/compose/install/ to install docker and docker compose.
