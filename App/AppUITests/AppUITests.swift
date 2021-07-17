@@ -40,6 +40,7 @@ class AppUITests: XCTestCase {
     func testAddContact() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
+        app.launchArguments = ["AppUITests"]
         app.launch()
         // Go to the new contacts screen
         app.navigationBars["Your Contacts"].buttons["Add"].tap()

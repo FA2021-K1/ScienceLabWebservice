@@ -1,15 +1,16 @@
 import SwiftUI
 import Model
+import Foundation
 
 
 @main
 struct ExampleApp: App {
     @StateObject var model: Model = {
-        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("AppUITests") || ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             return LocalStorageModel()
-        #else
+        } else {
             return RestfulModel()
-        #endif
+        }
     }()
     
     
