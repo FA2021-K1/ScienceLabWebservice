@@ -1,5 +1,5 @@
 #if canImport(XCTApodini) && canImport(XCTApodiniDatabase)
-@testable import ExampleWebService
+@testable import WebService
 import Shared
 import XCTApodini
 import XCTApodiniDatabase
