@@ -1,19 +1,19 @@
 version: '3.9'
 
 services:
-  # An Apodini Example Web Service
-  example-web-service:
-    container_name: "example-web-service"
-    image: "ghcr.io/apodini/examplewebservice:latest"
+  # Science Lab Web Service
+  science-lab-web-service:
+    container_name: "science-lab-web-service"
+    build:
+      context: ./
+      dockerfile: ./WebService/Dockerfile
+    image: "philippzagar/science-lab-web-service"
+    env_file:
+      - database.env
     expose:
       - "80"
-    volumes:
-      # Use the volume defined below to save the database file in a persistent volume to preserve it across deployments
-      - type: volume
-        source: database
-        target: /app/database/
-    # Pass the desired port and the path to the mounted database volume to the Apodini web service
-    command: ["--port", "80", "--database-path", "/app/database/example.sqlite"]
+    # Pass the desired port to the Apodini web service
+    command: ["--port", "80"]
     labels:
       # The domain the service will respond to
       - "traefik.http.routers.backend.rule=Host(`localhost`)"
@@ -23,6 +23,12 @@ services:
       - "traefik.http.services.backend-service.loadbalancer.server.port=80"
       # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
       - "traefik.http.routers.backend.service=backend-service"
+    # Wait for PostreSQL, ES and Prometheus to start
+    depends_on:
+      - postgres
+      - elasticsearch
+      - prometheus
+      
   # Reverse Proxy to protect our service from direct access
   traefik:
     container_name: "traefik"
@@ -38,7 +44,122 @@ services:
     # Traefik needs the docker.sock to detect new docker container
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    # Wait for PostreSQL to start
+    depends_on:
+      - science-lab-web-service
+
+  # PostgreSQL database for persistent data storage
+  postgres:
+    container_name: "postgres-database"
+    image: "postgres"
+    env_file:
+      - database.env    # Configure postgres via .env file
+    ports:
+      # 5432 on the container is mapped to 5432 on the server/VM/your Machine.
+      - "5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/data/     # Persist data even if container shuts down
+      
+  elasticsearch:
+    build:
+      context: Observability/elasticsearch/
+      args:
+        ELK_VERSION: 7.14.0
+    volumes:
+      - type: bind
+        source: ./Observability/elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+    restart: always
+      
+  logstash:
+    build:
+      context: Observability/logstash/
+      args:
+        ELK_VERSION: 7.14.0
+    volumes:
+      - type: bind
+        source: ./Observability/logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./Observability/logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+    ports:
+      - "31311:31311"   # For HTTP connection
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    restart: always
+    depends_on:
+      - elasticsearch
+      
+  kibana:
+    build:
+      context: Observability/kibana/
+      args:
+        ELK_VERSION: 7.14.0
+    volumes:
+      - type: bind
+        source: ./Observability/kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - "5601:5601"
+    restart: always
+    depends_on:
+      - elasticsearch
+      
+  prometheus:
+    container_name: "prometheus"
+    image: "prom/prometheus"
+    volumes:
+      - ./Observability/prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+
+  grafana:
+    container_name: "grafana"
+    image: "grafana/grafana"
+    user: "472"
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./Observability/grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./Observability/grafana/config.monitoring
+    restart: always
+    depends_on:
+      - prometheus
 
 volumes:
-  # A volume used to host the database file from the Example Web Service
-  database:
+  database-data:    # Volume for PostgreSQL
+  elasticsearch:    # Volume for ElasticSearch
+  prometheus_data:  # Volume for Prometheus
+  grafana_data:     # Volume for Grafana

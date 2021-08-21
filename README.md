@@ -1,15 +1,10 @@
-# Apodini Example
+# FA21 Science Lab WebService
 
 [![DOI](https://zenodo.org/badge/375610092.svg)](https://zenodo.org/badge/latestdoi/375610092)
 [![Build and Test](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml)
 [![Build Docker Compose](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml)
 
-This repository includes an example Apodini web service, a shared Swift Package, and an iOS App that can be used as a starting point for an Apodini web service.  
-
-<p float="left">
- <img width="350" alt="Screenshot of the client application showing the contact screen. The connect screen shows a list of all contacts that are added to the application." src="https://user-images.githubusercontent.com/28656495/126041554-4f3064f0-4114-43a7-b235-af24950729b3.png">
- <img width="350" alt="Screenshot of the detail screen showing information about a contact including the residences." src="https://user-images.githubusercontent.com/28656495/126041557-d43004d8-7b9c-493d-b079-af1b925873e2.png">
-</p>
+This repository includes the FA21 Science Lab WebService and a shared Swift Package.
 
 ## Run the Example System
 
@@ -17,9 +12,6 @@ You can start the Apodini example web services on any system that supports [dock
 To start and test the web service, you can run the `$ docker compose up` command to start the web service. 
 
 Xcode 13 (only available on macOS) is required to build and run the example client application. Follow the instructions on https://developer.apple.com/xcode/ to install the latest version of Xcode.
-
-1. Opening the *Example.xcworkspace*. The workspace bundles the web services and the client application.
-2. Select the *WebService* target, and then the *App* target and start the web service as well as the app by following the instructions on [Running Your App in the Simulator or on a Device](https://developer.apple.com/documentation/xcode/running-your-app-in-the-simulator-or-on-a-device)
 
 ## System Functionality
 
@@ -131,10 +123,6 @@ You can try out the following curl command to delete a residence:
 curl --request DELETE \
    http://localhost/v1/residencies/E621E1F8-C36C-495A-93FC-0C247A3E6E5F
 ```
-
-### Client Application
-
-You can use the functionality of the web service using the bundled client application. You can also test the functionality of the app using the bundled unit and UI tests.
 
 ## Contributing
 Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.

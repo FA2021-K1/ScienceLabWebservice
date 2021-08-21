@@ -1,7 +1,7 @@
 # ================================
 # Build image
 # ================================
-FROM swift:5.4-focal as build
+FROM swiftlang/swift:nightly-5.5-focal as build
 
 # Install OS updates and, if needed, sqlite3
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -14,7 +14,8 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
 WORKDIR /build
 
 # Copy all source files
-COPY . .
+COPY ./WebService ./WebService
+COPY ./Shared ./Shared
 
 # Build everything, with optimizations
 RUN swift build -Xswiftc -Xfrontend -Xswiftc -sil-verify-none -c release --package-path ./WebService
@@ -31,18 +32,15 @@ RUN [ -d "$(swift build --package-path /build/WebService -c release --show-bin-p
     && mv "$(swift build --package-path /build/WebService -c release --show-bin-path)/Apodini_ApodiniOpenAPI.resources" ./ \
     && chmod -R a-w ./Apodini_ApodiniOpenAPI.resources \
     || echo No resources to copy
-RUN [ -d "$(swift build --package-path /build/WebService -c release --show-bin-path)/WebService_ExampleWebService.resources" ] \
-    && mv "$(swift build --package-path /build/WebService -c release --show-bin-path)/WebService_ExampleWebService.resources" ./ \
-    && chmod -R a-w ./WebService_ExampleWebService.resources \
+RUN [ -d "$(swift build --package-path /build/WebService -c release --show-bin-path)/WebService_WebService.resources" ] \
+    && mv "$(swift build --package-path /build/WebService -c release --show-bin-path)/WebService_WebService.resources" ./ \
+    && chmod -R a-w ./WebService_WebService.resources \
     || echo No resources to copy
-
-# Create a database directory
-RUN mkdir database
 
 # ================================
 # Run image
 # ================================
-FROM swift:5.4-focal-slim
+FROM swiftlang/swift:nightly-5.5-focal-slim as run
 
 # Make sure all system packages are up to date.
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -59,12 +57,9 @@ WORKDIR /app
 # Copy built executable and any staged resources from builder
 COPY --from=build --chown=apodini:apodini /staging /app
 
-RUN chown apodini: ./database \
-    && chmod u+w ./database
-
 # Ensure all further commands run as the apodini user
 USER apodini:apodini
 
 # Start the Apodini service when the image is run.
-# The default port is 8080. Can be adapted using the `--port` argument
+# The default port is 80. Can be adapted using the `--port` argument
 ENTRYPOINT ["./WebService"]

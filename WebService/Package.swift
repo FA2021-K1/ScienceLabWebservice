@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "WebService",
+    name: "ScienceLabWebservice",
     platforms: [
         .macOS(.v12)
     ],
@@ -12,6 +12,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/Apodini/Apodini.git", .branch("develop")),
+        //.package(url: "https://github.com/Apodini/Apodini.git", from: "0.4.0"),
         .package(path: "../Shared"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(url: "https://github.com/Apodini/swift-log-elk.git", from: "0.2.0")
