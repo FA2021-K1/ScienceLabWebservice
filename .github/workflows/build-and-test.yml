@@ -9,7 +9,7 @@ on:
       - develop
 
 jobs:
-  # Doesn't work since MacOS12 is required
+  # Doesn't work since MacOS12 is required, not available via GitHub Actions yet
 #  macoswebservices:
 #    name: macOS WebService
 #    runs-on: macos-11
@@ -31,10 +31,10 @@ jobs:
     name: Linux WebService ${{ matrix.linux }}
     runs-on: ubuntu-latest
     container:
-      image: swift:${{ matrix.linux }}
+      image: swiftlang/swift:nightly-5.5-${{ matrix.linux }}
     strategy:
       matrix:
-        linux: [latest, focal, amazonlinux2, centos8]
+        linux: [bionic, focal, amazonlinux2, centos8]
     defaults:
       run:
         working-directory: ./WebService
