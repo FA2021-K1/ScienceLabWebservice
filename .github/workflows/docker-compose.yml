@@ -20,7 +20,7 @@ jobs:
       - name: Test web service
         run: |
           sleep 3
-          curl --fail http://0.0.0.0:80/v1/contacts
+          curl --fail http://localhost/v1/contacts
       - name: Stop containers
         if: always()
         run: docker-compose down
