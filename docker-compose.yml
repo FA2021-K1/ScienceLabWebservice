@@ -4,12 +4,19 @@ services:
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
+    hostname: "webservice"
     build:
       context: ./
       dockerfile: ./WebService/Dockerfile
     image: "philippzagar/science-lab-web-service"
-    env_file:
-      - database.env
+    environment:
+        POSTGRES_HOST: ${POSTGRES_HOST}
+        POSTGRES_PORT: ${POSTGRES_PORT}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
+        LOGSTASH_HOST: ${LOGSTASH_HOST}
+        LOGSTASH_PORT: ${LOGSTASH_PORT}
     expose:
       - "80"
     # Pass the desired port to the Apodini web service
@@ -31,8 +38,9 @@ services:
       
   # Reverse Proxy to protect our service from direct access
   traefik:
-    container_name: "traefik"
     image: "traefik:v2.4"
+    container_name: "traefik"
+    hostname: "traefik"
     command:
       # Enabling docker provider
       - "--providers.docker=true"
@@ -50,10 +58,13 @@ services:
 
   # PostgreSQL database for persistent data storage
   postgres:
-    container_name: "postgres-database"
     image: "postgres"
-    env_file:
-      - database.env    # Configure postgres via .env file
+    container_name: "postgres"
+    hostname: "postgres"
+    environment:
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
     ports:
       # 5432 on the container is mapped to 5432 on the server/VM/your Machine.
       - "5432:5432"
@@ -61,42 +72,47 @@ services:
       - database-data:/var/lib/postgresql/data/     # Persist data even if container shuts down
       
   elasticsearch:
+    container_name: "elasticsearch"
+    hostname: "elasticsearch"
     build:
       context: Observability/elasticsearch/
       args:
-        ELK_VERSION: 7.14.0
+        ELK_VERSION: ${ELK_VERSION}
+    environment:
+        xpack.security.enabled: true
+        xpack.monitoring.collection.enabled: true
+        ELASTIC_USER: ${ELASTIC_USER}
+        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+        ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+        # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+        # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+        discovery.type: single-node
     volumes:
       - type: bind
         source: ./Observability/elasticsearch/config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
-        read_only: true
       - type: volume
         source: elasticsearch
         target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
-    environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
-      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-      discovery.type: single-node
     restart: always
       
   logstash:
+    container_name: "logstash"
+    hostname: "logstash"
     build:
       context: Observability/logstash/
       args:
-        ELK_VERSION: 7.14.0
+        ELK_VERSION: ${ELK_VERSION}
     volumes:
       - type: bind
         source: ./Observability/logstash/config/logstash.yml
         target: /usr/share/logstash/config/logstash.yml
-        read_only: true
       - type: bind
         source: ./Observability/logstash/pipeline
         target: /usr/share/logstash/pipeline
-        read_only: true
     ports:
       - "31311:31311"   # For HTTP connection
       - "5044:5044"
@@ -104,21 +120,34 @@ services:
       - "5000:5000/udp"
       - "9600:9600"
     environment:
+      xpack.monitoring.enabled: true
+      xpack.monitoring.elasticsearch.hosts: '["http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]'
+      xpack.monitoring.elasticsearch.username: ${ELASTIC_USER}
+      xpack.monitoring.elasticsearch.password: ${ELASTIC_PASSWORD}
+      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST}
+      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT}
+      ELASTICSEARCH_USER: ${ELASTIC_USER}
+      ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD}
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     restart: always
     depends_on:
       - elasticsearch
       
   kibana:
+    container_name: "kibana"
+    hostname: "kibana"
     build:
       context: Observability/kibana/
       args:
-        ELK_VERSION: 7.14.0
+        ELK_VERSION: ${ELK_VERSION}
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]'
+      ELASTICSEARCH_USERNAME: ${ELASTIC_USER}
+      ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD}
     volumes:
       - type: bind
         source: ./Observability/kibana/config/kibana.yml
         target: /usr/share/kibana/config/kibana.yml
-        read_only: true
     ports:
       - "5601:5601"
     restart: always
@@ -126,8 +155,11 @@ services:
       - elasticsearch
       
   prometheus:
-    container_name: "prometheus"
     image: "prom/prometheus"
+    container_name: "prometheus"
+    hostname: "prometheus"
+    ports:
+      - "9090:9090"
     volumes:
       - ./Observability/prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -136,16 +168,12 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
-    volumes:
-      - ./prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheus
     restart: always
-    ports:
-      - "9090:9090"
 
   grafana:
-    container_name: "grafana"
     image: "grafana/grafana"
+    container_name: "grafana"
+    hostname: "grafana"
     user: "472"
     ports:
       - "3000:3000"
