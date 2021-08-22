@@ -79,8 +79,8 @@ services:
       args:
         ELK_VERSION: ${ELK_VERSION}
     environment:
-        xpack.security.enabled: true
-        xpack.monitoring.collection.enabled: true
+        xpack.security.enabled: "true"
+        xpack.monitoring.collection.enabled: "true"
         ELASTIC_USER: ${ELASTIC_USER}
         ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
         ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -120,7 +120,7 @@ services:
       - "5000:5000/udp"
       - "9600:9600"
     environment:
-      xpack.monitoring.enabled: true
+      xpack.monitoring.enabled: "true"
       xpack.monitoring.elasticsearch.hosts: '["http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]'
       xpack.monitoring.elasticsearch.username: ${ELASTIC_USER}
       xpack.monitoring.elasticsearch.password: ${ELASTIC_PASSWORD}
