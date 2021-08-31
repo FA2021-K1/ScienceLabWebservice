@@ -3,7 +3,9 @@ version: "3.9"
 services:
   frontend:
     container_name: "frontend"
-    image: "node:16-alpine3.11"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     working_dir: "/app"
     volumes:
       - "./frontend:/app"
