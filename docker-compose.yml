@@ -5,13 +5,20 @@ services:
     container_name: "frontend"
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     working_dir: "/app"
     volumes:
       - "./frontend:/app"
     ports:
-      - "8080:3000"
-    command: yarn start
+      - "8080:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      # We need to define the a service and specify, on which port our server is reachable
+      - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
+      # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
+      - "traefik.http.routers.frontend.service=frontend-service"
     depends_on:
       - science-lab-web-service
   # Science Lab Web Service
