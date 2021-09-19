@@ -45,7 +45,7 @@ struct ExampleWebService: WebService {
         }
         
         // Setup of ApodiniMetrics with a Prometheus backend
-        MetricsConfiguration(handlerConfiguration: .defaultPrometheus,
+        MetricsConfiguration(handlerConfiguration: MetricPullHandlerConfiguration.defaultPrometheus,
                              systemMetricsConfiguration: .default)
         
         // Setup of database and add migrations to create the respective tables
