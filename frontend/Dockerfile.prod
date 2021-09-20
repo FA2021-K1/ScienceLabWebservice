@@ -9,14 +9,14 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
 COPY package.json ./
-COPY yarn.lock ./
-RUN yarn install --silent
+COPY package-lock.json ./
+RUN npm install --silent
 
 # add app
 COPY . ./
 
 # start app
-RUN yarn build
+RUN npm build
 
 # production environment
 FROM nginx:stable-alpine
