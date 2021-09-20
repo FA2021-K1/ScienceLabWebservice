@@ -3,9 +3,7 @@ version: "3.9"
 services:
   frontend:
     container_name: "frontend"
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.prod
+    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabfrontend:initialdeploymentsetup"
     working_dir: "/app"
     expose:
       - "80"
