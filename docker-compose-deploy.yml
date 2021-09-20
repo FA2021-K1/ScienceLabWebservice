@@ -3,32 +3,23 @@ version: "3.9"
 services:
   frontend:
     container_name: "frontend"
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.prod
+    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabfrontend:initialdeploymentsetup"
     working_dir: "/app"
-    volumes:
-      - "./frontend:/app"
     expose:
       - "80"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
+      - "traefik.http.routers.frontend.rule=Host(`3.123.38.88`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       # We need to define the a service and specify, on which port our server is reachable
       - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
       # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
       - "traefik.http.routers.frontend.service=frontend-service"
-    depends_on:
-      - science-lab-web-service
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
     hostname: "webservice"
-    build:
-      context: ./
-      dockerfile: ./WebService/Dockerfile
-    image: "philippzagar/science-lab-web-service"
+    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:initialdeploymentsetup"
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
@@ -43,7 +34,7 @@ services:
     command: ["--port", "6969"]
     labels:
       # The domain the service will respond to
-      - "traefik.http.routers.backend.rule=Host(`localhost`)"
+      - "traefik.http.routers.backend.rule=Host(`3.123.38.88`)"
       # Allow request only from the predefined entry point named "web"
       - "traefik.http.routers.backend.entrypoints=data"
       # We need to define the a service and specify, on which port our server is reachable
@@ -75,7 +66,6 @@ services:
     # Wait for PostreSQL to start
     depends_on:
       - science-lab-web-service
-      - frontend
 
   # PostgreSQL database for persistent data storage
   postgres:
@@ -91,5 +81,6 @@ services:
       - "5432:5432"
     volumes:
       - database-data:/var/lib/postgresql/data/ # Persist data even if container shuts down
+
 volumes:
   database-data: # Volume for PostgreSQL
