@@ -9,7 +9,7 @@ services:
       - "80"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
+      - "traefik.http.routers.frontend.rule=Host(`3.123.38.88`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       # We need to define the a service and specify, on which port our server is reachable
       - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
@@ -34,7 +34,7 @@ services:
     command: ["--port", "6969"]
     labels:
       # The domain the service will respond to
-      - "traefik.http.routers.backend.rule=Host(`localhost`)"
+      - "traefik.http.routers.backend.rule=Host(`3.123.38.88`)"
       # Allow request only from the predefined entry point named "web"
       - "traefik.http.routers.backend.entrypoints=data"
       # We need to define the a service and specify, on which port our server is reachable
