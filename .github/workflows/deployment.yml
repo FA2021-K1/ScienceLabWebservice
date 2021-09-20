@@ -7,7 +7,7 @@ name: Deploy webservice and frontend to AWS
 
 on:
   push:
-    branches: ["InitialDeploymentSetup"]
+    branches: ["develop"]
 
 env:
   REGISTRY: ghcr.io
