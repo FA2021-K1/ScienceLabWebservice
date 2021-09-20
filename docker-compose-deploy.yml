@@ -7,8 +7,6 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
     working_dir: "/app"
-    volumes:
-      - "./frontend:/app"
     expose:
       - "80"
     labels:
@@ -19,16 +17,11 @@ services:
       - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
       # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
       - "traefik.http.routers.frontend.service=frontend-service"
-    depends_on:
-      - science-lab-web-service
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
     hostname: "webservice"
-    build:
-      context: ./
-      dockerfile: ./WebService/Dockerfile
-    image: "philippzagar/science-lab-web-service"
+    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:initialdeploymentsetup"
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
@@ -75,7 +68,6 @@ services:
     # Wait for PostreSQL to start
     depends_on:
       - science-lab-web-service
-      - frontend
 
   # PostgreSQL database for persistent data storage
   postgres:
@@ -91,5 +83,6 @@ services:
       - "5432:5432"
     volumes:
       - database-data:/var/lib/postgresql/data/ # Persist data even if container shuts down
+
 volumes:
   database-data: # Volume for PostgreSQL
