@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Apodini",
+        "repositoryURL": "https://github.com/Apodini/Apodini.git",
+        "state": {
+          "branch": "feature/metrics",
+          "revision": "91b25e7aae42a1744d5b4bea810e603029c4751d",
+          "version": null
+        }
+      },
+      {
         "package": "ApodiniTypeInformation",
         "repositoryURL": "https://github.com/Apodini/ApodiniTypeInformation.git",
         "state": {
@@ -132,8 +141,8 @@
         "repositoryURL": "https://github.com/vapor/multipart-kit.git",
         "state": {
           "branch": null,
-          "revision": "c9ea04017b7fb3b1f034ad7a77f8e53d3e080be5",
-          "version": "4.2.1"
+          "revision": "30f53439b52587b016a5e5b3dce7f50f686681be",
+          "version": "4.4.0"
         }
       },
       {
@@ -384,8 +393,8 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "a8bd13fa10b14d2c014f002a4eed0558f66bcf6f",
-          "version": "4.48.5"
+          "revision": "69b0e257b1a86c1eaa1767563a093e208fdb8fab",
+          "version": "4.48.7"
         }
       },
       {
