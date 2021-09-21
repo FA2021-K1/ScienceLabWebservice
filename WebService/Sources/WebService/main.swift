@@ -1,6 +1,7 @@
 import Foundation
 import Apodini
 import ApodiniObserve
+import ApodiniObserveMetricsPrometheus
 import ApodiniOpenAPI
 import ApodiniREST
 import ApodiniDatabase
@@ -43,14 +44,18 @@ struct ExampleWebService: WebService {
             )
         }
         
+        // Setup of ApodiniMetrics with a Prometheus backend
+        MetricsConfiguration(handlerConfiguration: MetricPullHandlerConfiguration.defaultPrometheus,
+                             systemMetricsConfiguration: .default)
+        
         // Setup of database and add migrations to create the respective tables
         DatabaseConfiguration(
             .postgres(
                 hostname: ProcessInfo.processInfo.environment["POSTGRES_HOST"] ?? "0.0.0.0",
-                port: Int(ProcessInfo.processInfo.environment["POSTGRES_PORT"] ?? "54321") ?? 54321,
-                username: ProcessInfo.processInfo.environment["POSTGRES_USER"] ?? "default",
-                password: ProcessInfo.processInfo.environment["POSTGRES_PASSWORD"] ?? "default",
-                database: ProcessInfo.processInfo.environment["POSTGRES_DB"] ?? "default"),
+                port: Int(ProcessInfo.processInfo.environment["POSTGRES_PORT"] ?? "5432") ?? 5432,
+                username: ProcessInfo.processInfo.environment["POSTGRES_USER"] ?? "ScienceLab",
+                password: ProcessInfo.processInfo.environment["POSTGRES_PASSWORD"] ?? "FA2021",
+                database: ProcessInfo.processInfo.environment["POSTGRES_DB"] ?? "science_lab"),
             as: .psql)
                 .addMigrations(ContactMigration())
                 .addMigrations(ResidenceMigration())
@@ -58,7 +63,9 @@ struct ExampleWebService: WebService {
 
     var content: some Component {
         ContactComponent()
+            .record(.all)
         ResidenceComponent()
+            .record(.all)
     }
 }
 
