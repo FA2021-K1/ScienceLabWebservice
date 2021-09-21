@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-      import ReactApexCharts from 'react-apexcharts'
+import ReactApexCharts from 'react-apexcharts'
       import Chart from "react-apexcharts";
+import dummyData from "data_context";
       
       const chartStyle = {
           position: "relative",
@@ -16,7 +17,7 @@ class zoomableChart extends React.Component {
       
         series: [{
           name: 'XYZ MOTORS',
-          data: [0,1,2,3,4,5]
+          data: dummyData
         }],
         options: {
           chart: {

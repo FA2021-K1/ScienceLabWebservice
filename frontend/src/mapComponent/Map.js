@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import './map.css'
+import { EventNote } from '@material-ui/icons';
 
 const mapStyles = {
   position: "relative",
@@ -88,5 +89,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'YOUR_API_TOKEN'
+  apiKey: process.env.apiKeyValue
 })(MapContainer);
