@@ -23,7 +23,7 @@ struct ExampleWebService: WebService {
     var configuration: Configuration {
         // Exposed interfaces, in this case a RESTful API and an OpenAPI documentation generated with it
         REST {
-            OpenAPI()
+            OpenAPI(swaggerUiEndpoint: "/swagger")
         }
         
         // Defines on which hostname and port the webservice should be bound to, configurable via CLI-arguments, else defaults
@@ -57,14 +57,21 @@ struct ExampleWebService: WebService {
                 password: ProcessInfo.processInfo.environment["POSTGRES_PASSWORD"] ?? "FA2021",
                 database: ProcessInfo.processInfo.environment["POSTGRES_DB"] ?? "science_lab"),
             as: .psql)
-                .addMigrations(ContactMigration())
-                .addMigrations(ResidenceMigration())
+                //.addMigrations(ContactMigration())
+                //.addMigrations(ResidenceMigration())
+                .addMigrations(MeasurementMigration())
+                .addMigrations(SensorTypeMigration())
+                .addMigrations(SensorAssignmentMigration())
+                .addMigrations(MeasurementDataMigration())
+                
     }
 
     var content: some Component {
         ContactComponent()
             .record(.all)
         ResidenceComponent()
+            .record(.all)
+        MeasurementsComponent()
             .record(.all)
     }
 }
