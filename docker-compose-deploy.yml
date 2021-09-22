@@ -3,7 +3,7 @@ version: "3.9"
 services:
   frontend:
     container_name: "frontend"
-    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabfrontend:initialdeploymentsetup"
+    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabfrontend:develop"
     working_dir: "/app"
     expose:
       - "80"
@@ -16,7 +16,7 @@ services:
   science-lab-web-service:
     container_name: "science-lab-web-service"
     hostname: "webservice"
-    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:initialdeploymentsetup"
+    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:develop"
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
