@@ -15,12 +15,7 @@ import reportWebVitals from './reportWebVitals'
 import Header from './headerComponent/Header.js'
 import Boxplot from "./boxplotComponent/boxplot";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+
 
 const reactStyles = {
   position: "relative",
@@ -43,7 +38,7 @@ function App() {
       <Header />
 
       <div>
-        <Grid container spacing={5}
+        <Grid container spacing={2}
           justifyContent="space-evenly"
           alignItems="center"
           padding-left = {100}
