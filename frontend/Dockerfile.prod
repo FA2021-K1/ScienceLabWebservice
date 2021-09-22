@@ -7,6 +7,10 @@ WORKDIR /app
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
+ARG MAPBOX_API_KEY
+
+RUN echo $MAPBOX_API_KEY
+
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
@@ -15,10 +19,8 @@ RUN npm install --silent
 # add app
 COPY . ./
 
-RUN echo $INPUT_MAPBOX_API_KEY
-RUN echo $MAPBOX_API_KEY
 # start app
-RUN REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=${INPUT_MAPBOX_API_KEY} npm run build
+RUN REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=$MAPBOX_API_KEY npm run build
 
 # production environment
 FROM nginx:stable-alpine
