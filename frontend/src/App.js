@@ -1,41 +1,37 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import logo from "./logo.svg";
 import "./App.css";
-import LineChart from './lineChartComponent/LineChart';
-import MapContainer from "./mapComponent/Map"
-import MapboxContainer from "./mapboxComponent/mapbox"
-import SliderContainer from "./sliderComponent/slider2"
-import ListContainer from "./listComponent/list"
-import CardContainer from "./cardComponent/card"
-import reportWebVitals from './reportWebVitals'
-import Header from './headerComponent/Header.js'
+import { LineChart } from "./lineChartComponent/LineChart";
+import { MapboxContainer } from "./mapboxComponent/mapbox";
+import { SliderContainer } from "./sliderComponent/slider";
+import ListContainer from "./listComponent/list";
+import CardContainer from "./cardComponent/card";
+import reportWebVitals from "./reportWebVitals";
+import Header from "./headerComponent/Header.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getJsonData, selectData } from "./dataSlice";
 import store from "./app/store";
 import Boxplot from "./boxplotComponent/boxplot";
 
-
-
 const reactStyles = {
   position: "relative",
-  left: '20px',
-  width: '60%',
-  height: '60%'
+  left: "20px",
+  width: "60%",
+  height: "60%",
 };
 
 function App() {
-
   const dispatch = useDispatch();
-  const data = useSelector(state => state.data.dataState);
-  const dataState = useSelector(state => state.data.data);
+  const data = useSelector((state) => state.data.dataState);
+  const dataState = useSelector((state) => state.data.data);
 
   useEffect(() => {
-    if(dataState === "idle"){
+    if (dataState === "idle") {
       dispatch(getJsonData());
     }
   }, [dispatch]);
@@ -44,14 +40,16 @@ function App() {
       <Header />
 
       <div>
-        <Grid container spacing={2}
+        <Grid
+          container
+          spacing={2}
           justifyContent="space-evenly"
           alignItems="center"
-          padding-left = {100}
-          padding-right = {100}>
-
+          padding-left={100}
+          padding-right={100}
+        >
           <Grid item xs={12} xl={12}>
-            <Box sx={{ xs:12, height: '500', border: "1px solid red" }}>
+            <Box sx={{ xs: 12, height: "500", border: "1px solid red" }}>
               <MapboxContainer />
             </Box>
           </Grid>
@@ -72,13 +70,10 @@ function App() {
           <Grid item xs={8} xl={8}>
             <LineChart />
           </Grid>
-
-
         </Grid>
       </div>
 
-
-      
+      <SliderContainer />
     </React.StrictMode>
   );
 }
