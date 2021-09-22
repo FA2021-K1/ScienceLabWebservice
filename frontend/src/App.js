@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 
 import { styled } from '@mui/material/styles';
@@ -14,14 +14,12 @@ import ListContainer from "./listComponent/list"
 import CardContainer from "./cardComponent/card"
 import reportWebVitals from './reportWebVitals'
 import Header from './headerComponent/Header.js'
+import { useDispatch, useSelector } from "react-redux";
+import { getJsonData, selectData } from "./dataSlice";
+import store from "./app/store";
 import Boxplot from "./boxplotComponent/boxplot";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+
 
 const reactStyles = {
   position: "relative",
@@ -31,25 +29,27 @@ const reactStyles = {
 };
 
 function App() {
-  const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.data.dataState);
+  const dataState = useSelector(state => state.data.data);
 
+  useEffect(() => {
+    if(dataState === "idle"){
+      dispatch(getJsonData());
+    }
+  }, [dispatch]);
   return (
     <React.StrictMode>
       <Header />
 
       <div>
-        <Grid container spacing={5}
+        <Grid container spacing={2}
           justifyContent="space-evenly"
           alignItems="center"
           padding-left = {100}
-          padding-react = {100}
           margin-top = {100}>
+          padding-right = {100}>
 
           <Grid item xs={12} xl={12}>
             <Box sx={{ xs:12, height: '500', border: "1px solid red" }}>
