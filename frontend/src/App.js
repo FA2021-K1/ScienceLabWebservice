@@ -8,6 +8,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import LineChart from './lineChartComponent/LineChart';
 import MapContainer from "./mapComponent/Map"
+import MapboxContainer from "./mapboxComponent/mapbox"
 import SliderContainer from "./sliderComponent/slider2"
 import ListContainer from "./listComponent/list"
 import CardContainer from "./cardComponent/card"
@@ -51,7 +52,7 @@ function App() {
 
           <Grid item xs={12} xl={12}>
             <Box sx={{ xs:12, height: '500', border: "1px solid red" }}>
-              <MapContainer />
+              <MapboxContainer />
             </Box>
           </Grid>
 
