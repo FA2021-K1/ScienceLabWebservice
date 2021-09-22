@@ -62,6 +62,47 @@ export const MapboxContainer = ()  => {
                 showCompass: true,
             }));
 
+
+            map.current.addSource('circles', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [
+                        {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': [11.4451, 46.743]
+                            }
+                        },
+                        {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': [11.4471, 46.7426]
+                            }
+                        },
+                        {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': [11.442, 46.7407]
+                            }
+                        },
+                    ]
+            }
+
+            })
+            map.current.addLayer({
+                'id': 'circles',
+                'type': 'circle',
+                'source': 'circles',
+                'paint': {
+                    'circle-color': '#4264fb',
+                    'circle-radius': 20,
+                    'circle-opacity': 0.5
+                }
+            })
         })
     });
 
