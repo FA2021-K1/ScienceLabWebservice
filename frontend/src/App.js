@@ -48,7 +48,6 @@ function App() {
           justifyContent="space-evenly"
           alignItems="center"
           padding-left = {100}
-          margin-top = {100}>
           padding-right = {100}>
 
           <Grid item xs={12} xl={12}>
