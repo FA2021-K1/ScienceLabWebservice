@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import data from './mockData.json';
 import axios from "axios"
 
 export const getJsonData = createAsyncThunk("data/getJsonData",
@@ -30,7 +31,7 @@ export const dataSlice = createSlice({
         },
         [getJsonData.rejected]: (state, action) => {
             state.dataState = "rejected";
-            // TODO: provide some dummy data until the backend works
+            state.data = data;
         }
     }
 })
