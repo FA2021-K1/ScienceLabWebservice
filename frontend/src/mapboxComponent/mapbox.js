@@ -5,8 +5,7 @@ require('dotenv').config()
 
 mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
-
-export default function MapboxContainer() {
+export const MapboxContainer = ()  => {
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(11.444);
