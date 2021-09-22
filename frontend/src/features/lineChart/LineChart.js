@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Chart from "react-apexcharts";
 
 export const LineChart = () => {
-  const [series, setSeries] = useState([
+  const [series, ] = useState([
     {
       name: "Suspended solids",
       data: [28, 29, 33, 36, 32, 32, 33],
@@ -12,7 +12,7 @@ export const LineChart = () => {
       data: [12, 11, 14, 18, 17, 13, 13],
     },
   ]);
-  const [options, setOptions] = useState({
+  const [options, ] = useState({
     chart: {
       height: 350,
       type: "line",

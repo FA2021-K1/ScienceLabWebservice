@@ -1,49 +1,35 @@
 import React, { useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
-
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import logo from "./logo.svg";
-import "./App.css";
-import { LineChart } from "./lineChartComponent/LineChart";
-import { MapboxContainer } from "./mapboxComponent/mapbox";
-import { SliderContainer } from "./sliderComponent/slider";
-import ListContainer from "./listComponent/list";
-import CardContainer from "./cardComponent/card";
-import reportWebVitals from "./reportWebVitals";
-import Header from "./headerComponent/Header.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getJsonData, selectData } from "./dataSlice";
-import store from "./app/store";
-import Boxplot from "./boxplotComponent/boxplot";
 
-const reactStyles = {
-  position: "relative",
-  left: "20px",
-  width: "60%",
-  height: "60%",
-};
+import Grid from "@material-ui/core/Grid";
+import Box from "@mui/material/Box";
+import "./App.css";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
-}));
+import { Header } from "./features/header/Header.js";
 
-function App() {
+import { LineChart } from "./features/lineChart/LineChart";
+import { MapboxContainer } from "./features/mapbox/mapbox";
+import { SliderContainer } from "./features/slider/slider";
+import { Boxplot } from "./features/boxplot/Boxplot";
+import {ValueList} from "./features/valueList/ValueList";
+
+import { getJsonData } from "./dataSlice";
+
+
+export const App = ()  => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.data.dataState);
-  const dataState = useSelector((state) => state.data.data);
+  const dataState = useSelector((state) => state.data.dataState);
+  //const data = useSelector((state) => state.data.data);
 
   useEffect(() => {
     if (dataState === "idle") {
       dispatch(getJsonData());
     }
-  }, [dispatch]);
+  }, [dispatch, dataState]);
   return (
     <React.StrictMode>
       <Header />
+
       <div>
         <Grid
           container
@@ -54,36 +40,26 @@ function App() {
           padding-right={100}
         >
           <Grid item xs={12} xl={12}>
-            <Item>
+            <Box sx={{ xs: 12, height: "500", border: "1px solid red" }}>
               <MapboxContainer />
-            </Item>
+            </Box>
           </Grid>
 
           <Grid item xs={4} xl={4}>
-            <Item>
-              <LineChart />
-            </Item>
+            <LineChart />
           </Grid>
           <Grid item xs={4} xl={4}>
-          <Item>
             <Boxplot />
-          </Item>
           </Grid>
           <Grid item xs={4} xl={4}>
-          <Item>
             <Boxplot />
-          </Item>
           </Grid>
 
           <Grid item xs={4} xl={4}>
-          <Item>
-            <ListContainer />
-          </Item>
+            <ValueList />
           </Grid>
           <Grid item xs={8} xl={8}>
-          <Item>
             <LineChart />
-          </Item>
           </Grid>
         </Grid>
       </div>
