@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import ReactApexCharts from 'react-apexcharts'
 import Chart from "react-apexcharts";
 
-const chartStyle = {
-    position: "relative",
-    top: '600px',
-    width: "70%"
-};
 
 class LineChart extends Component {
     constructor(props) {
@@ -95,12 +90,7 @@ class LineChart extends Component {
                 <Chart
                     options={this.state.options}
                     series={this.state.series}
-                    type="line"
-                    rootstyle={chartStyle}
-                    top={900}
-                    width={800}
-
-                        height={400} />
+                    type="line" />
             </div>
 
 
