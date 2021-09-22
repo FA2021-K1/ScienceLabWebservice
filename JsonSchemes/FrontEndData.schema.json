@@ -1,0 +1,50 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ferienakademie.de/FrontEndData.schema.json",
+    "title": "FrontEndData",
+    "description": "Data used by first version of FrontEnd",
+    "type": "object",
+    "properties": {
+        "measurements": {
+            "description": "Array of measurements\nLast 24h in 10min Intervals\nOther values in 1h Intervals",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "bouyId": {
+                        "description": "The unique identifier for the bouy",
+                        "type": "integer"
+                    },
+                    "date": {
+                        "description": "Timestamp when the measurements were taken; the format is ISO 8601",
+                        "type": "string"
+                    },
+                    "location": {
+                        "description": "Current position of the bouy",
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "type": "number",
+                                "minimum": -90,
+                                "maximum": 90
+                            },
+                            "longitude": {
+                                "type": "number",
+                                "minimum": -180,
+                                "maximum": 180
+                            }
+                        }
+                    },
+                    "dissolvedSolids": {
+                        "description": "The sum of all substances in suspended form",
+                        "type": "number"
+                    },
+                    "phValue": {
+                        "description": "Scale used to specify the acidity or basicity",
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
