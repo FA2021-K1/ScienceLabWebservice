@@ -2,7 +2,7 @@ import { useState } from "react";
 import Chart from "react-apexcharts";
 
 export const Boxplot = () => {
-  const [series, setSeries] = useState([
+  const [series, ] = useState([
     {
       name: "box",
       type: "boxPlot",
@@ -61,7 +61,7 @@ export const Boxplot = () => {
     },
   ]);
 
-  const [options, setOptions] = useState({
+  const [options, ] = useState({
     chart: {
       type: "boxPlot",
       height: 350,
