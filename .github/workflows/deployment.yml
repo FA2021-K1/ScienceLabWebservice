@@ -70,13 +70,16 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE_NAME }}
 
+      - name: Set env
+        run: echo "MAPBOX_API_KEY=$(echo Test)" >> 
+
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: ./frontend
           file: ./frontend/Dockerfile.prod
           push: true
-          MAPBOX_API_KEY: Test Key  # ${{ secrets.MAPBOX_API_KEY }}
+          build-args: [MAPBOX_API_KEY=Test]  # ${{ secrets.MAPBOX_API_KEY }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
