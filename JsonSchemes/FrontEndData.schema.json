@@ -35,12 +35,8 @@
                             }
                         }
                     },
-                    "dissolvedSolids": {
-                        "description": "The sum of all substances in suspended form",
-                        "type": "number"
-                    },
-                    "phValue": {
-                        "description": "Scale used to specify the acidity or basicity",
+                    "value": {
+                        "description": "The value of the requested type",
                         "type": "number"
                     }
                 }
