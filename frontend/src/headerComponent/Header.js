@@ -26,8 +26,8 @@ export default function DenseAppBar() {
 
     return (
         <div className={classes.root}>
-            <AppBar>
-                <Toolbar className="toolbar" variant="dense">
+            <AppBar position ="sticky">
+                <Toolbar className="toolbar" variant="dense" position ='sticky'>
                     <IconButton edge="start" className={classes.homeButton} color="inherit" aria-label="home">
                         <HomeIcon onClick={refreshPage}/>
                     </IconButton>

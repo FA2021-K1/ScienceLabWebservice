@@ -25,6 +25,12 @@ const reactStyles = {
   height: "60%",
 };
 
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  color: theme.palette.text.secondary,
+}));
+
 function App() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data.dataState);
@@ -38,7 +44,6 @@ function App() {
   return (
     <React.StrictMode>
       <Header />
-
       <div>
         <Grid
           container
@@ -49,26 +54,36 @@ function App() {
           padding-right={100}
         >
           <Grid item xs={12} xl={12}>
-            <Box sx={{ xs: 12, height: "500", border: "1px solid red" }}>
+            <Item>
               <MapboxContainer />
-            </Box>
+            </Item>
           </Grid>
 
           <Grid item xs={4} xl={4}>
-            <LineChart />
+            <Item>
+              <LineChart />
+            </Item>
           </Grid>
           <Grid item xs={4} xl={4}>
+          <Item>
             <Boxplot />
+          </Item>
           </Grid>
           <Grid item xs={4} xl={4}>
+          <Item>
             <Boxplot />
+          </Item>
           </Grid>
 
           <Grid item xs={4} xl={4}>
+          <Item>
             <ListContainer />
+          </Item>
           </Grid>
           <Grid item xs={8} xl={8}>
+          <Item>
             <LineChart />
+          </Item>
           </Grid>
         </Grid>
       </div>
