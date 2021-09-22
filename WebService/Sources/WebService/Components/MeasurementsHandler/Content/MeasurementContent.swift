@@ -12,11 +12,11 @@ struct MeasurementContent: Content, Decodable {
 
 struct MeasurementDataContent: Content, Decodable {
     public var sensorSlot: Int
-    public var sensorType: SensorType
+    public var sensorType: SensorTypeContent
     public var measurement: Double
 }
 
-enum SensorType: Int, Content, Decodable {
+enum SensorTypeContent: Int, Content, Decodable {
     case temperaturSensor
     case conductivitySensor
     case phSensor

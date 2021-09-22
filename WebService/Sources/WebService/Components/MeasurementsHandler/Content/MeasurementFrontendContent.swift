@@ -11,6 +11,5 @@ struct MeasurementFrontendValueContent: Content, Decodable {
     public var buoyId: Int
     public var date: Date
     public var location: Coordinate
-    public var dissolvedSolids: Double
-    public var phValue: Double
+    public var value: Double
 }

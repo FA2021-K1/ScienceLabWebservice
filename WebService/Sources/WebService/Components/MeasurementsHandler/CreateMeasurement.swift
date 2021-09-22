@@ -12,6 +12,9 @@ struct CreateMeasurement: Handler {
     
     @Throws(.serverError, reason: "Measurement couldn't be saved correctly")
     var serverError: ApodiniError
+    
+    @Throws(.serverError, reason: "Sensor type is not configured correctly")
+    var sensorTypeNotConfigured: ApodiniError
 
     func handle() async throws -> Shared.Measurement {
         let measurement = Measurement(measuredAt: measurementContent.date,
@@ -25,9 +28,13 @@ struct CreateMeasurement: Handler {
         try await measurementContent
             .measurements
             .forEach { measurementDataContent in
-                var sensorID: UUID
+                // Check if sensor type exists
+                if await !databaseModel.isSensorTypeConfigured(sensorType: measurementDataContent.sensorType) {
+                    throw sensorTypeNotConfigured
+                }
                 
                 // Check if sensor exists
+                var sensorID: UUID
                 if await !databaseModel.isSensorConfigured(buoyID: measurementContent.buoyId,
                                                            sensorSlot: measurementDataContent.sensorSlot) {
                     // Create sensor
@@ -50,7 +57,8 @@ struct CreateMeasurement: Handler {
                     
                     sensorID = tempSensorID
                 }
-                        
+                    
+                // Create Measurement data
                 guard let _ = try? await databaseModel
                             .createMeasurementData(
                                 MeasurementData(
@@ -63,6 +71,7 @@ struct CreateMeasurement: Handler {
                 }
             }
         
+        // Get Measurement with respective data
         guard let measurementWithData = await databaseModel.readMeasurementWithData(measurementID) else {
             throw serverError
         }

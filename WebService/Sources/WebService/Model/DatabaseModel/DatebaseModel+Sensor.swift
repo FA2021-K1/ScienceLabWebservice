@@ -30,4 +30,9 @@ extension DatabaseModel {
             .first()
             )?.id
     }
+    
+    func isSensorTypeConfigured(sensorType: SensorTypeContent) async -> Bool {
+        return (try? await SensorType
+            .find(sensorType, on: database)) != nil
+    }
 }
