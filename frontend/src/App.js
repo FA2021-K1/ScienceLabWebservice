@@ -5,22 +5,22 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@mui/material/Box";
 import "./App.css";
 
-import { Header } from "./features/headerComponent/Header.js";
+import { Header } from "./features/header/Header.js";
 
-import { LineChart } from "./lineChartComponent/LineChart";
-import { MapboxContainer } from "./mapboxComponent/mapbox";
-import { SliderContainer } from "./sliderComponent/slider";
-import { Boxplot } from "./boxplotComponent/Boxplot";
+import { LineChart } from "./features/lineChart/LineChart";
+import { MapboxContainer } from "./features/mapbox/mapbox";
+import { SliderContainer } from "./features/slider/slider";
+import { Boxplot } from "./features/boxplot/Boxplot";
 
 import ListContainer from "./listComponent/list";
 
 import { getJsonData, selectData } from "./dataSlice";
 
 
-function App() {
+export const App = ()  => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.data.dataState);
-  const dataState = useSelector((state) => state.data.data);
+  const dataState = useSelector((state) => state.data.dataState);
+  const data = useSelector((state) => state.data.data);
 
   useEffect(() => {
     if (dataState === "idle") {
