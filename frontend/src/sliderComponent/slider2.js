@@ -5,63 +5,54 @@ import { subDays, startOfToday, format } from "date-fns";
 import './slider.css';
 import MapContainer from '../mapComponent/Map';
 
-const today = startOfToday();
+const todayStart = startOfToday();
+
+const stepSize = 3 * 60 * 60 * 1000;
 
 const marks = [
   {
-    value: subDays(today, 7).getTime(),
-    label: format(subDays(today, 7), "MMM dd"),
+    value: subDays(todayStart, 6).getTime(),
+    label: format(subDays(todayStart, 6), "MMM dd"),
   },
   {
-    value: 10,
-    label: format(subDays(startOfToday(), 6), "MMM dd"),
+    value: subDays(todayStart, 4).getTime(),
+    label: format(subDays(todayStart, 4), "MMM dd"),
   },
   {
-    value: 20,
-    label: format(subDays(startOfToday(), 5), "MMM dd"),
+    value: subDays(todayStart, 2).getTime(),
+    label: format(subDays(todayStart, 2), "MMM dd"),
   },
   {
-    value: 30,
-    label: format(subDays(startOfToday(), 4), "MMM dd"),
-  },
-  {
-    value: 40,
-    label: format(subDays(startOfToday(), 3), "MMM dd"),
-  },
-  {
-    value: 50,
-    label: format(subDays(startOfToday(), 2), "MMM dd"),
-  },
-  {
-    value: 60,
-    label: format(subDays(startOfToday(), 1), "MMM dd"),
-  },
-  {
-    value: 100,
-    label: format(startOfToday(), "MMM dd"),
+    value: todayStart.getTime(),
+    label: format(todayStart, "MMM dd"),
   },
 ];
 
 
 
-function valuetext(value) {
-  return `${value}°C`;
+function dateFormatter(ms) {
+  return format(new Date(ms), "MMM dd h a");
 }
 
-function dateFormatter(ms) {
-  return format(new Date(ms), "MMM dd h:mm a");
+function roundHours(date) {
+  date.setHours(date.getHours() - date.getHours() % 3);
+  return date;
 }
 
 export default function SliderContainer() {
 
+const currentTimeRounded = roundHours(new Date());
+
+    
     return (
         <Box sx={{ m: 4, width: 350, height: 100, border: "1px solid red" }}>
             <Slider className="slider"
                 aria-label="Always visible"
-                defaultValue={80}
-                getAriaValueText={valuetext}
+                defaultValue={currentTimeRounded}
                 valueLabelFormat={value => <div>{dateFormatter(value)}</div>}
-                step={10}
+                min={subDays(currentTimeRounded, 7).getTime()}
+                max={currentTimeRounded.getTime()}
+                step={stepSize}
                 marks={marks}
                 valueLabelDisplay="on"
             />
