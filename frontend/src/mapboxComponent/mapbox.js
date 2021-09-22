@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import './mapbox.css';
 require('dotenv').config()
 
-mapboxgl.accessToken = process.env.REACT_APP_mapboxAccessToken;
+mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
 
 export default function MapboxContainer() {
@@ -62,6 +62,7 @@ export default function MapboxContainer() {
             map.current.addControl(new mapboxgl.NavigationControl({
                 showCompass: true,
             }));
+
         })
     });
 
