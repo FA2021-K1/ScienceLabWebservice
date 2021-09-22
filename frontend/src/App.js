@@ -42,7 +42,7 @@ function App() {
           justifyContent="space-evenly"
           alignItems="center"
           padding-left = {100}
-          padding-react = {100}>
+          padding-right = {100}>
 
           <Grid item xs={12} xl={12}>
             <Box sx={{ xs:12, height: '500', border: "1px solid red" }}>
