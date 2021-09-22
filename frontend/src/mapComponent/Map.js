@@ -36,7 +36,7 @@ export class MapContainer extends Component {
 
   render() {
     return (
-      <Map
+      <Map className="googleMaps"
         google={this.props.google}
         onClick={this.close}
         zoom={16}

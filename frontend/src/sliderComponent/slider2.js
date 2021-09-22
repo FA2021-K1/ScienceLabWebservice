@@ -5,19 +5,36 @@ import { subDays, startOfToday, format } from "date-fns";
 import './slider.css';
 import MapContainer from '../mapComponent/Map';
 
+const today = startOfToday();
 
 const marks = [
   {
-    value: 0,
-    label: format(subDays(startOfToday(), 7), "MMM dd"),
+    value: subDays(today, 7).getTime(),
+    label: format(subDays(today, 7), "MMM dd"),
+  },
+  {
+    value: 10,
+    label: format(subDays(startOfToday(), 6), "MMM dd"),
   },
   {
     value: 20,
-    label: '20°C',
+    label: format(subDays(startOfToday(), 5), "MMM dd"),
   },
   {
-    value: 37,
-    label: '37°C',
+    value: 30,
+    label: format(subDays(startOfToday(), 4), "MMM dd"),
+  },
+  {
+    value: 40,
+    label: format(subDays(startOfToday(), 3), "MMM dd"),
+  },
+  {
+    value: 50,
+    label: format(subDays(startOfToday(), 2), "MMM dd"),
+  },
+  {
+    value: 60,
+    label: format(subDays(startOfToday(), 1), "MMM dd"),
   },
   {
     value: 100,
@@ -25,39 +42,29 @@ const marks = [
   },
 ];
 
+
+
 function valuetext(value) {
   return `${value}°C`;
 }
 
-export class SliderContainer extends Component {
-
-    constructor(props) {
-        super(props);
-    
-        const today = startOfToday();
-        const oneWeekAgo = subDays(today, 7);
-    }
-
-    render() {
-        return (
-            <Box sx={{ m: 4, width: 350, height: 100, border: "1px solid red" }}>
-                <Box sx={{ m: 4, width: 350, height: 100, border: "1px solid red" }}>
-                    <MapContainer
-                    />
-                </Box>
-                <Box sx={{ m: 4, width: 350, height: 100, border: "1px solid red" }}>
-                    <Slider className="slider"
-                        aria-label="Always visible"
-                        defaultValue={80}
-                        getAriaValueText={valuetext}
-                        step={10}
-                        marks={marks}
-                        valueLabelDisplay="on"
-                    />
-                </Box>
-            </Box>
-        );
-    }
+function dateFormatter(ms) {
+  return format(new Date(ms), "MMM dd h:mm a");
 }
 
-export default SliderContainer;
+export default function SliderContainer() {
+
+    return (
+        <Box sx={{ m: 4, width: 350, height: 100, border: "1px solid red" }}>
+            <Slider className="slider"
+                aria-label="Always visible"
+                defaultValue={80}
+                getAriaValueText={valuetext}
+                valueLabelFormat={value => <div>{dateFormatter(value)}</div>}
+                step={10}
+                marks={marks}
+                valueLabelDisplay="on"
+            />
+        </Box>
+    );
+}
