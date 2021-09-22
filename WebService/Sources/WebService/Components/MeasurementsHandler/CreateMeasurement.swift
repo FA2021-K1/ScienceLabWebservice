@@ -18,7 +18,8 @@ struct CreateMeasurement: Handler {
 
     func handle() async throws -> Shared.Measurement {
         let measurement = Measurement(measuredAt: measurementContent.date,
-                                      coordinate: measurementContent.location)
+                                      coordinate: measurementContent.location,
+                                      buoyID: measurementContent.buoyId)
         
         guard let measurement = try? await databaseModel.createMeasurement(measurement),
               let measurementID = measurement.id else {

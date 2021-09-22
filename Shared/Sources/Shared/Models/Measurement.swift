@@ -19,16 +19,20 @@ public final class Measurement: Model {
 
     @Field(key: "coordinate")
     public var coordinate: Coordinate
+    
+    @Field(key: "buoyID")
+    public var buoyID: Int?
 
     @Children(for: \.$measurement)
     public var measurementData: [MeasurementData]
     
     public init() { }
     
-    public init(id: UUID? = nil, measuredAt: Date, coordinate: Coordinate) {
+    public init(id: UUID? = nil, measuredAt: Date, coordinate: Coordinate, buoyID: Int) {
         self.id = id
         self.measuredAt = measuredAt
         self.coordinate = coordinate
+        self.buoyID = buoyID
     }
 }
 

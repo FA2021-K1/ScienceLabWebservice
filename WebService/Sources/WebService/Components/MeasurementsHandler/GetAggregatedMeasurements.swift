@@ -9,8 +9,9 @@ struct GetAggregatedMeasurements: Handler {
     @Parameter(.http(.body))
     var sensorTyp: String
     
+    @Parameter(.http(.query))
+    var withMeasurementData: Bool
     
-
     func handle() async throws -> [Measurement] {
         await withMeasurementData ?
             databaseModel.readMeasurementsWithData()

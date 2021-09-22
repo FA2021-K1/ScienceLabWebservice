@@ -8,6 +8,7 @@ public struct MeasurementMigration: Migration {
             .field("measurementID", .uuid, .identifier(auto: false))
             .field("measuredAt", .datetime, .required)
             .field("coordinate", .dictionary, .required)
+            .field("buoyID", .int, .required)
             .field("createdAt", .string, .required)
             .field("updatedAt", .string, .required)
             .create()
