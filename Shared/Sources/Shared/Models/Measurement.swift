@@ -5,7 +5,7 @@ import Foundation
 public final class Measurement: Model {
     public static let schema = "measurements"
     
-    @ID(key: "measurementID")
+    @ID(custom: .string("measurementID"))
     public var id: UUID?
     
     @Timestamp(key: "createdAt", on: .create, format: .iso8601(withMilliseconds: true))
@@ -20,19 +20,15 @@ public final class Measurement: Model {
     @Field(key: "coordinate")
     public var coordinate: Coordinate
 
-    @Field(key: "buoyID")
-    public var buoyID: Int
-
     @Children(for: \.$measurement)
     public var measurementData: [MeasurementData]
     
     public init() { }
     
-    public init(id: UUID? = nil, measuredAt: Date, coordinate: Coordinate, buoyID: Int) {
+    public init(id: UUID? = nil, measuredAt: Date, coordinate: Coordinate) {
         self.id = id
         self.measuredAt = measuredAt
         self.coordinate = coordinate
-        self.buoyID = buoyID
     }
 }
 

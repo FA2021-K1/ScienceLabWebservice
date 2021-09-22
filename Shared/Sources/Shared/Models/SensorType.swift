@@ -5,7 +5,7 @@ import Foundation
 public final class SensorType: Model {
     public static let schema = "sensorTypes"
     
-    @ID(key: "sensorTypeID")
+    @ID(custom: .string("sensorTypeID"))
     public var id: Int?
     
     @Timestamp(key: "createdAt", on: .create, format: .iso8601(withMilliseconds: true))

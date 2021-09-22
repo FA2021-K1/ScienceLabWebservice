@@ -15,6 +15,9 @@ struct MeasurementsComponent: Component {
             Group($measurementId) {
                 GetMeasurement(measurementId: $measurementId)
                 
+                UpdateMeasurement(measurementId: $measurementId)
+                    .operation(.update)
+                
                 DeleteMeasurement(measurementId: $measurementId)
                     .operation(.delete)
             }

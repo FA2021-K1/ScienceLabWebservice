@@ -22,7 +22,7 @@ struct ExampleWebService: WebService {
     
     var configuration: Configuration {
         // Exposed interfaces, in this case a RESTful API and an OpenAPI documentation generated with it
-        REST {
+        REST(encoder: jsonEncoder, decoder: jsonDecoder) {
             OpenAPI(swaggerUiEndpoint: "/swagger")
         }
         
@@ -61,7 +61,7 @@ struct ExampleWebService: WebService {
                 //.addMigrations(ResidenceMigration())
                 .addMigrations(MeasurementMigration())
                 .addMigrations(SensorTypeMigration())
-                .addMigrations(SensorAssignmentMigration())
+                .addMigrations(SensorMigration())
                 .addMigrations(MeasurementDataMigration())
                 
     }
@@ -77,3 +77,4 @@ struct ExampleWebService: WebService {
 }
 
 ExampleWebService.main()
+

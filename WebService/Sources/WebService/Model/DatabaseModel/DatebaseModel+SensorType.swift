@@ -2,7 +2,8 @@ import Apodini
 import FluentKit
 import Shared
 
-// MARK: - DatabaseModel + Measurement
+// MARK: - DatabaseModel + SensorType
+/*
 extension DatabaseModel {
     func createMeasurement(_ measurement: Measurement) async -> Measurement {
         try! await measurement.save(on: database)
@@ -19,14 +20,6 @@ extension DatabaseModel {
     func readMeasurement(_ measurementID: Measurement.IDValue) -> EventLoopFuture<Measurement?> {
         Measurement
             .find(measurementID, on: database)
-    }
-    
-    func readMeasurementWithData(_ measurementID: Measurement.IDValue) async -> Measurement? {
-        try! await Measurement
-            .query(on: database)
-            .filter(\.$id == measurementID)
-            .with(\.$measurementData)
-            .first()
     }
     
     func updateMeasurement(_ measurementID: Measurement.IDValue, with mediator: MeasurementMediator) -> EventLoopFuture<Measurement> {
@@ -50,3 +43,4 @@ extension DatabaseModel {
             }
     }
 }
+*/
