@@ -15,8 +15,8 @@ RUN npm install --silent
 # add app
 COPY . ./
 
-RUN echo ${INPUT_MAPBOX_API_KEY}
-RUN echo ${MAPBOX_API_KEY}
+RUN echo $INPUT_MAPBOX_API_KEY
+RUN echo $MAPBOX_API_KEY
 # start app
 RUN REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=${INPUT_MAPBOX_API_KEY} npm run build
 
