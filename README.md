@@ -34,6 +34,18 @@ make start-verbose
 
 ## Reaching the services
 
+### Production Environment
+DataScience Service
+```
+https://drones.zack-bumm.com/
+```
+
+DataManagement Service
+```
+https://data.zack-bumm.com/
+```
+
+### Development Environment
 To reach the frontend open
 ```
 localhost
