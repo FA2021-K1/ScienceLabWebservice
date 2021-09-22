@@ -8,6 +8,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import LineChart from './lineChartComponent/LineChart';
 import MapContainer from "./mapComponent/Map"
+import MapboxContainer from "./mapboxComponent/mapbox"
 import SliderContainer from "./sliderComponent/slider2"
 import ListContainer from "./listComponent/list"
 import CardContainer from "./cardComponent/card"
@@ -47,11 +48,12 @@ function App() {
           justifyContent="space-evenly"
           alignItems="center"
           padding-left = {100}
-          padding-react = {100}>
+          padding-react = {100}
+          margin-top = {100}>
 
           <Grid item xs={12} xl={12}>
             <Box sx={{ xs:12, height: '500', border: "1px solid red" }}>
-              <MapContainer />
+              <MapboxContainer />
             </Box>
           </Grid>
 
