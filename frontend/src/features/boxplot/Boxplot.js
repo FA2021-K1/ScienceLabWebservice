@@ -88,8 +88,8 @@ export const Boxplot = () => {
   return (
     <div id="chart">
       <Chart
-        options={this.state.options}
-        series={this.state.series}
+        options={options}
+        series={series}
         type="boxPlot"
         height={350}
       />
