@@ -12,12 +12,12 @@ struct DeleteMeasurement: Handler {
     @Throws(.notFound, reason: "The specified measurement could not be found")
     var notFound: ApodiniError
 
-    func handle() throws -> EventLoopFuture<Status> {
-        databaseModel
-            .deleteMeasurement(measurementId)
-            .flatMapErrorThrowing { _ in
-                throw notFound
-            }
-            .transform(to: .ok)
+    func handle() async throws -> Status {
+        do {
+            try await databaseModel.deleteMeasurement(measurementId)
+            return .ok
+        } catch {
+            throw notFound
+        }
     }
 }

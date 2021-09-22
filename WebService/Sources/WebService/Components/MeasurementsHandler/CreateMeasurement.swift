@@ -1,6 +1,7 @@
 import Apodini
 import FluentKit
 import Shared
+import Foundation
 
 struct CreateMeasurement: Handler {    
     @Environment(\.databaseModel)
@@ -12,34 +13,60 @@ struct CreateMeasurement: Handler {
     @Throws(.serverError, reason: "Measurement couldn't be saved correctly")
     var serverError: ApodiniError
 
-    func handle() async throws -> Measurement {
-        var measurement = Measurement(measuredAt: measurementContent.date,
+    func handle() async throws -> Shared.Measurement {
+        let measurement = Measurement(measuredAt: measurementContent.date,
                                       coordinate: measurementContent.location)
         
-        measurement = await databaseModel
-                                .createMeasurement(measurement)
-        
-        guard let measurementID = measurement.id else {
+        guard let measurement = try? await databaseModel.createMeasurement(measurement),
+              let measurementID = measurement.id else {
             throw serverError
         }
         
-        await measurementContent
+        try await measurementContent
             .measurements
             .forEach { measurementDataContent in
-                if let sensorAssignmentID =
-                    await databaseModel.getSensorAssignmentID(buoyID: measurementContent.buoyId,
-                                                              sensorSlot: measurementDataContent.sensorSlot) {
-                    _ = await databaseModel
-                                .createMeasurementData(
-                                    MeasurementData(
-                                        value: measurementDataContent.measurement,
-                                        sensorID: sensorAssignmentID,
-                                        measureID: measurementID
-                                    )
+                var sensorID: UUID
+                
+                // Check if sensor exists
+                if await !databaseModel.isSensorConfigured(buoyID: measurementContent.buoyId,
+                                                           sensorSlot: measurementDataContent.sensorSlot) {
+                    // Create sensor
+                    let sensor = Sensor(sensorSlot: measurementDataContent.sensorSlot,
+                                        buoyID: measurementContent.buoyId,
+                                        sensorTypeID: measurementDataContent.sensorType.rawValue)
+                    
+                    guard let _ = try? await databaseModel.createSensor(sensor),
+                          let tempSensorID = sensor.id else {
+                        throw serverError
+                    }
+                    
+                    sensorID = tempSensorID
+                } else {
+                    // Get ID of existing sensor
+                    guard let tempSensorID = await databaseModel.getSensorID(buoyID: measurementContent.buoyId,
+                                                                             sensorSlot: measurementDataContent.sensorSlot) else {
+                        throw serverError
+                    }
+                    
+                    sensorID = tempSensorID
+                }
+                        
+                guard let _ = try? await databaseModel
+                            .createMeasurementData(
+                                MeasurementData(
+                                    value: measurementDataContent.measurement,
+                                    sensorID: sensorID,
+                                    measureID: measurementID
                                 )
+                            ) else {
+                    throw serverError
                 }
             }
         
-        return await databaseModel.readMeasurementWithData(measurementID)!
+        guard let measurementWithData = await databaseModel.readMeasurementWithData(measurementID) else {
+            throw serverError
+        }
+        
+        return measurementWithData
     }
 }

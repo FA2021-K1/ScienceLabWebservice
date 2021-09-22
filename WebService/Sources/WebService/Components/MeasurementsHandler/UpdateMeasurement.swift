@@ -15,11 +15,12 @@ struct UpdateMeasurement: Handler {
     @Throws(.notFound, reason: "The measurement could not be found")
     var notFound: ApodiniError
 
-    func handle() throws -> EventLoopFuture<Measurement> {
-        databaseModel
-            .updateMeasurement(measurementId, with: mediator)
-            .flatMapErrorThrowing { _ in
-                throw notFound
-            }
+    func handle() async throws -> Measurement {
+        do {
+            return try await databaseModel
+                .updateMeasurement(measurementId, with: mediator)
+        } catch {
+            throw notFound
+        }
     }
 }

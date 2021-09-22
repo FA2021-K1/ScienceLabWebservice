@@ -13,6 +13,7 @@ import Shared
 final class DatabaseModel {
     enum DatabaseError: Error {
         case notFound
+        case internalError
     }
 
     let database: Database

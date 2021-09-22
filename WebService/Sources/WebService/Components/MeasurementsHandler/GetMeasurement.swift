@@ -8,11 +8,26 @@ struct GetMeasurement: Handler {
     
     @Binding
     var measurementId: Measurement.IDValue
+    
+    @Parameter(.http(.query))
+    var withMeasurementData: Bool
 
     @Throws(.notFound, reason: "The measurement could not be found")
     var notFound: ApodiniError
 
-    func handle() throws -> EventLoopFuture<Measurement?> {
-        databaseModel.readMeasurement(measurementId)
+    func handle() async throws -> Measurement {
+        if withMeasurementData {
+            guard let measurementWithData = await databaseModel.readMeasurementWithData(measurementId) else {
+                throw notFound
+            }
+            
+            return measurementWithData
+        } else {
+            guard let measurement = await databaseModel.readMeasurement(measurementId) else {
+                throw notFound
+            }
+            
+            return measurement
+        }
     }
 }

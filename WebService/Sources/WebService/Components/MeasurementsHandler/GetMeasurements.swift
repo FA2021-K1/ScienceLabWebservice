@@ -5,8 +5,13 @@ import Shared
 struct GetMeasurements: Handler {
     @Environment(\.databaseModel)
     var databaseModel: DatabaseModel
+    
+    @Parameter(.http(.query))
+    var withMeasurementData: Bool
 
-    func handle() throws -> EventLoopFuture<[Measurement]> {
-        databaseModel.readMeasurements()
+    func handle() async throws -> [Measurement] {
+        await withMeasurementData ?
+            databaseModel.readMeasurementsWithData()
+            : databaseModel.readMeasurements()
     }
 }

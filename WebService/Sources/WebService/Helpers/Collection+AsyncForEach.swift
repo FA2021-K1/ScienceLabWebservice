@@ -1,13 +1,13 @@
 extension Collection {
-    func forEach(_ body: @escaping (Element) async -> Void) async -> Void {
-        await withTaskGroup(of: Void.self) { group in
+    func forEach(_ body: @escaping (Element) async throws -> Void) async rethrows -> Void {
+        try await withThrowingTaskGroup(of: Void.self) { group in
             for element in self {
                 group.addTask {
-                    await body(element)
+                    try await body(element)
                 }
             }
             
-            await group.waitForAll()
+            try await group.waitForAll()
         }
     }
 }
