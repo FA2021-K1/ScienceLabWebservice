@@ -9,8 +9,6 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 ARG MAPBOX_API_KEY
 
-RUN echo $MAPBOX_API_KEY
-
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./

@@ -76,7 +76,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile.prod
           push: true
-          build-args: MAPBOX_API_KEY=Test  # ${{ secrets.MAPBOX_API_KEY }}
+          build-args: MAPBOX_API_KEY=${{ secrets.MAPBOX_API_KEY }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
