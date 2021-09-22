@@ -13,6 +13,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "apexcharts": "^3.28.1",
+    "axios": "^0.21.4",
     "d3-scale": "^4.0.0",
     "date-fns": "^2.23.0",
     "google-maps-react": "^2.0.6",
@@ -23,6 +24,9 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
     "react-scripts": "4.0.3",
+    "react-window": "^1.8.6",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
