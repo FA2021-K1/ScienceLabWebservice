@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 
 import logo from "./logo.svg";
@@ -10,6 +10,9 @@ import ListContainer from "./listComponent/list"
 import CardContainer from "./cardComponent/card"
 import reportWebVitals from './reportWebVitals'
 import Header from './headerComponent/Header.js'
+import { useDispatch, useSelector } from "react-redux";
+import { getJsonData, selectData } from "./dataSlice";
+import store from "./app/store";
 
 const reactStyles = {
   position: "relative",
@@ -19,14 +22,16 @@ const reactStyles = {
 };
 
 function App() {
-  const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.data.dataState);
+  const dataState = useSelector(state => state.data.data);
 
+  useEffect(() => {
+    if(dataState === "idle"){
+      dispatch(getJsonData());
+    }
+  }, [dispatch]);
   return (
     <React.StrictMode>
     <Header />
