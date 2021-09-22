@@ -18,12 +18,7 @@ import { getJsonData, selectData } from "./dataSlice";
 import store from "./app/store";
 import Boxplot from "./boxplotComponent/boxplot";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+
 
 const reactStyles = {
   position: "relative",
@@ -48,11 +43,11 @@ function App() {
       <Header />
 
       <div>
-        <Grid container spacing={5}
+        <Grid container spacing={2}
           justifyContent="space-evenly"
           alignItems="center"
           padding-left = {100}
-          padding-react = {100}>
+          padding-right = {100}>
 
           <Grid item xs={12} xl={12}>
             <Box sx={{ xs:12, height: '500', border: "1px solid red" }}>
