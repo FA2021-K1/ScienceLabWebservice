@@ -7,7 +7,7 @@ name: Deploy webservice and frontend to AWS
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["develop", "DeploymentApiKey"]
 
 env:
   REGISTRY: ghcr.io
@@ -76,7 +76,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile.prod
           push: true
-          google-maps-api-key: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          MAPBOX_API_KEY: Test Key  # ${{ secrets.MAPBOX_API_KEY }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 

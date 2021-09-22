@@ -15,8 +15,10 @@ RUN npm install --silent
 # add app
 COPY . ./
 
+RUN echo ${INPUT_MAPBOX_API_KEY}
+RUN echo ${MAPBOX_API_KEY}
 # start app
-RUN REACT_APP_GOOGLE_MAPS_API_KEY=${INPUT_GOOGLE_MAPS_API_KEY} npm run build
+RUN REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=${INPUT_MAPBOX_API_KEY} npm run build
 
 # production environment
 FROM nginx:stable-alpine
