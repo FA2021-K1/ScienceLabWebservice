@@ -3,12 +3,14 @@
 [![DOI](https://zenodo.org/badge/375610092.svg)](https://zenodo.org/badge/latestdoi/375610092)
 [![Build and Test](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml)
 [![Build Docker Compose](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml)
+[![Deploy webservice and frontend to AWS](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml/badge.svg)](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml)
 
-This repository includes the FA21 Science Lab WebService and a shared Swift Package.j
+
+This repository includes the FA21 Science Lab WebService and a shared Swift Package.
 
 ## Run the Example System
 
-You can start the local development environment using make
+You can start the local development environment using make.
 
 To build the development containers run
 ```
@@ -32,19 +34,23 @@ make start-verbose
 
 ## Reaching the services
 
+### Production Environment
+DataScience Service
+https://drones.zack-bumm.com/
+
+DataManagement Service
+https://data.zack-bumm.com/
+
+### Development Environment
 To reach the frontend open
-```
-localhost
-```
+[localhost](localhost)
 
 To reach the backend open
-```
-localhost:6969
-```
+[localhost:6969](localhost:6969)
 
 ## Deployment pipeline
 
-On every change on the develop branch the whole system is automatically built and deployed to the Amazon EC2 instance. It is reachable on http://http://3.123.38.88 and http://3.123.38.88:6969 respectively.
+On every change on the develop branch the whole system is automatically built and deployed to the Amazon EC2 instance. It is reachable through the previously mentioned urls.
 
 ## Contributing
 Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.

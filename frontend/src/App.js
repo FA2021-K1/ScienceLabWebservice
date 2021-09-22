@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import logo from "./logo.svg";
 import "./App.css";
 import LineChart from './lineChartComponent/LineChart';
@@ -13,6 +16,14 @@ import Header from './headerComponent/Header.js'
 import { useDispatch, useSelector } from "react-redux";
 import { getJsonData, selectData } from "./dataSlice";
 import store from "./app/store";
+import Boxplot from "./boxplotComponent/boxplot";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 const reactStyles = {
   position: "relative",
@@ -34,36 +45,45 @@ function App() {
   }, [dispatch]);
   return (
     <React.StrictMode>
-    <Header />
-        <div>
-            <Grid container spacing={100}
-                justifyContent="space-evenly"
-            alignItems="center"            >
-                <Grid item md={5} xs={12}>
-                    <LineChart />
-                </Grid>
-                <Grid item md={3}>
-                    <Grid container spacing={100}
-                        direction="column"
-                        justifyContent="space-evenly"
-                        alignItems="center"            >
-                        <Grid item md={3}>
-                            <CardContainer />
-                        </Grid>
-                        <Grid item md={3}>
-                            <CardContainer />
-                        </Grid>
-                    </Grid>
-                    
-                </Grid>
-            </Grid>
-        </div>
-        
-        
-        <MapContainer />
-        <SliderContainer />
-        <ListContainer />
-        </React.StrictMode>
+      <Header />
+
+      <div>
+        <Grid container spacing={5}
+          justifyContent="space-evenly"
+          alignItems="center"
+          padding-left = {100}
+          padding-react = {100}>
+
+          <Grid item xs={12} xl={12}>
+            <Box sx={{ xs:12, height: '500', border: "1px solid red" }}>
+              <MapContainer />
+            </Box>
+          </Grid>
+
+          <Grid item xs={4} xl={4}>
+            <LineChart />
+          </Grid>
+          <Grid item xs={4} xl={4}>
+            <Boxplot />
+          </Grid>
+          <Grid item xs={4} xl={4}>
+            <Boxplot />
+          </Grid>
+
+          <Grid item xs={4} xl={4}>
+            <ListContainer />
+          </Grid>
+          <Grid item xs={8} xl={8}>
+            <LineChart />
+          </Grid>
+
+
+        </Grid>
+      </div>
+
+
+      
+    </React.StrictMode>
   );
 }
 
