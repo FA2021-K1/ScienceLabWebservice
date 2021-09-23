@@ -11,22 +11,21 @@ import { LineChart } from "./features/lineChart/LineChart";
 import { MapboxContainer } from "./features/mapbox/mapbox";
 import { SliderContainer } from "./features/slider/slider";
 import { Boxplot } from "./features/boxplot/Boxplot";
+import {ValueList} from "./features/valueList/ValueList";
+import { getJsonData } from "./dataSlice";
 
-import ListContainer from "./features/list/list";
-
-import { getJsonData, selectData } from "./dataSlice";
 
 
 export const App = ()  => {
   const dispatch = useDispatch();
   const dataState = useSelector((state) => state.data.dataState);
-  const data = useSelector((state) => state.data.data);
+  //const data = useSelector((state) => state.data.data);
 
   useEffect(() => {
     if (dataState === "idle") {
       dispatch(getJsonData());
     }
-  }, [dispatch]);
+  }, [dispatch, dataState]);
   return (
     <React.StrictMode>
       <Header />
@@ -57,7 +56,7 @@ export const App = ()  => {
           </Grid>
 
           <Grid item xs={4} xl={4}>
-            <ListContainer />
+            <ValueList />
           </Grid>
           <Grid item xs={8} xl={8}>
             <LineChart />
