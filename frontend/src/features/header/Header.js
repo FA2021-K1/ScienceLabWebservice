@@ -25,7 +25,7 @@ export const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar>
+      <AppBar position= 'sticky'>
         <Toolbar className="toolbar" variant="dense">
           <IconButton
             edge="start"
