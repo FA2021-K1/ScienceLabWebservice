@@ -64,7 +64,7 @@ export const Boxplot = () => {
   const [options, ] = useState({
     chart: {
       type: "boxPlot",
-      height: 350,
+      width: '400'
     },
     colors: ["#008FFB", "#FEB019"],
     title: {
@@ -91,7 +91,7 @@ export const Boxplot = () => {
         options={options}
         series={series}
         type="boxPlot"
-        height={350}
+        height={'350'}
       />
     </div>
   );

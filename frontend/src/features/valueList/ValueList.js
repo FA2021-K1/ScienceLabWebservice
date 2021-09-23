@@ -37,7 +37,7 @@ export const ValueList = () => {
       }
 
   return (
-    <Box sx={{ width: "100%", height: 600, bgcolor: "background.paper" }}>
+    <Box sx={{ width: "100%", height: '100%', bgcolor: "background.paper" }}>
 
       <Stack spacing={2} direction="row">
         <div id="latest-data-received">

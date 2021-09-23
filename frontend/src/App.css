@@ -2,9 +2,22 @@
   text-align: center;
 }
 
+.App-background{
+  background: #d9e3de;
+
+}
+.App-Grid{
+  padding-top:20px;
+  padding-left:20px;
+  padding-right:20px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.App-GridItem{
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
