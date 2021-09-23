@@ -48,7 +48,7 @@ export const Boxplot = () => {
     },
     colors: ["#008FFB", "#FEB019"],
     title: {
-      text: "BoxPlot - Scatter Chart",
+      text: "BoxPlot - Last 24 h",
       align: "left",
     },
     xaxis: {

@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from "@material-ui/icons/Home";
 import "./header.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = () => {
   const classes = useStyles();
+  const style = useSelector((state) => state.style)
 
   const refreshPage = () => {
     window.location.reload();
@@ -25,8 +27,8 @@ export const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position= 'sticky'>
-        <Toolbar className="toolbar" variant="dense">
+      <AppBar position= 'sticky' style = {{background: style.secondaryColor}}>
+        <Toolbar variant="dense" >
           <IconButton
             edge="start"
             className={classes.homeButton}

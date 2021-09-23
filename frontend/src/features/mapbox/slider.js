@@ -1,5 +1,4 @@
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { subDays, startOfToday, format } from "date-fns";
@@ -35,10 +34,12 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
     return date;
   };
   const currentTimeRounded = roundHours(new Date());
+  const style = useSelector((state) => state.style)
 
   return (
     <Box sx={{ width: 350, px: 2, py: 1 }}>
       <Slider
+        sx = {{color: style.primaryColor}}
         aria-label="Always visible"
         defaultValue={currentTimeRounded}
         valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}

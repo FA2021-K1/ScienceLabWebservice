@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
+import { useDispatch, useSelector } from "react-redux";
 
 export const LineChart = () => {
+  const style = useSelector((state) => state.style);
+
   const [series, ] = useState([
     {
       name: "pHS",
@@ -28,7 +31,7 @@ export const LineChart = () => {
         show: false,
       },
     },
-    colors: ["#77B6EA", "#545454"],
+    colors: [style.Green, style.Blue],
     dataLabels: {
       enabled: true,
     },

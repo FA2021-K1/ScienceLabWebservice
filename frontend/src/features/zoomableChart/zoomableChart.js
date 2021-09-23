@@ -32,7 +32,7 @@ export const ZoomableChart = () => {
       size: 0,
     },
     title: {
-      text: "Stock Price Movement",
+      text: "Measurement development over time",
       align: "left",
     },
     fill: {
@@ -52,7 +52,7 @@ export const ZoomableChart = () => {
         },
       },
       title: {
-        text: "Price",
+        text: "pH",
       },
     },
     xaxis: {
