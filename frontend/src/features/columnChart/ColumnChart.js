@@ -5,14 +5,11 @@ export const ColumnChart = () => {
 
     const [series,] = useState([
         {
-            name: 'Bouy 1',
-            data: [44, 55]
+            name: 'pH Value',
+            data: [44, 55, 34]
         }, {
-            name: 'Bouy 2',
-            data: [76, 85]
-        }, {
-            name: 'Bouy 3',
-            data: [35, 41]
+            name: 'Dissolved Solids',
+            data: [76, 85, 69]
         }]);
 
     const [options,] = useState({
@@ -36,22 +33,32 @@ export const ColumnChart = () => {
             colors: ['transparent']
         },
         xaxis: {
-            categories: ['pH Value', 'Dissolved Solids'],
+            categories: ['Bouy 1', 'Bouy 2', 'Bouy 3'],
         },
-        yaxis: {
+        yaxis: [{
             title: {
-                text: '$ (thousands)'
+                text: 'pH Value [-]'
             }
         },
+        {
+            opposite: true,
+            title: {
+                text: 'Dissolved Solids [ppm]'
+            }
+        }
+        ],
         fill: {
             opacity: 1
         },
         tooltip: {
-            y: {
+            y: [{
+                formatter: undefined
+            },
+            {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val + " ppm"
                 }
-            }
+            }]
         }
     });
 
