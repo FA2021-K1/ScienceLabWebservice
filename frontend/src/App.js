@@ -12,8 +12,8 @@ import { MapboxContainer } from "./features/mapbox/mapbox";
 import { SliderContainer } from "./features/slider/slider";
 import { Boxplot } from "./features/boxplot/Boxplot";
 import {ValueList} from "./features/valueList/ValueList";
-
 import { getJsonData } from "./dataSlice";
+
 
 
 export const App = ()  => {
