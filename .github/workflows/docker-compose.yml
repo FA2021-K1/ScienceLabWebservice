@@ -1,12 +1,4 @@
-name: Build Docker Compose
-
-on:
-  push:
-    branches:
-      - develop
-  pull_request:
-    branches:
-      - develop
+name: Build Docker Compose (deprecated)
 
 jobs:
   dockercompose:
