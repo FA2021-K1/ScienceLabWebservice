@@ -9,9 +9,13 @@ import Paper from "@mui/material/Paper";
 import { Header } from "./features/header/Header.js";
 
 import { LineChart } from "./features/lineChart/LineChart";
+
 import { Mapbox } from "./features/mapbox/Mapbox";
 import { Boxplot } from "./features/boxplot/Boxplot";
 import { ValueList } from "./features/valueList/ValueList";
+import { ZoomableChart } from "./features/zoomableChart/zoomableChart";
+import { ColumnChart } from "./features/columnChart/ColumnChart";
+
 
 import { getJsonData } from "./dataSlice";
 
@@ -24,13 +28,15 @@ const Item = styled(Paper)(({ theme }) => ({
 export const App = () => {
   const dispatch = useDispatch();
   const dataState = useSelector((state) => state.data.dataState);
+  const style = useSelector((state) => state.style)
   //const data = useSelector((state) => state.data.data);
 
   useEffect(() => {
+    console.log(style)
     if (dataState === "idle") {
       dispatch(getJsonData());
     }
-  }, [dispatch, dataState]);
+  }, [dispatch, dataState, style]);
   return (
     <React.StrictMode>
       <Header />
@@ -48,30 +54,31 @@ export const App = () => {
             </Item>
           </Grid>
 
+          <Grid item xs={4} xl={4} >
+          <Item>
+            <ColumnChart />
+            </Item>
+          </Grid>
           <Grid item xs={4} xl={4}>
-            <Item>
-              <LineChart />
+          <Item>
+            <Boxplot />
             </Item>
           </Grid>
-          <Grid item xs={4} xl={4} className="App-GridItem">
-            <Item>
-              <Boxplot />
-            </Item>
-          </Grid>
-          <Grid item xs={4} xl={4} className="App-GridItem">
-            <Item>
-              <Boxplot />
+          <Grid item xs={4} xl={4}>
+          <Item>
+            <LineChart />
             </Item>
           </Grid>
 
-          <Grid item xs={4} xl={4}>
-            <Item className="App-GridItem">
-              <ValueList />
+          <Grid item xs={3} xl={3}>
+            <Item>
+            <ValueList />
             </Item>
           </Grid>
-          <Grid item xs={8} xl={8} className="App-GridItem">
-            <Item>
-              <LineChart />
+          <Grid item xs={9} xl={9} >
+          <Item>
+            <ZoomableChart />
+
             </Item>
           </Grid>
         </Grid>
