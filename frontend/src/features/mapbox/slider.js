@@ -6,7 +6,7 @@ import { subDays, startOfToday, format } from "date-fns";
 
 import { updateSelectedTime } from "../../dataSlice";
 
-export const SliderContainer = ({ selectedTime, setSelectedTime }) => {
+export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }) => {
   const stepSize = 3 * 60 * 60 * 1000;
   const todayStart = startOfToday();
   const dispatch = useDispatch();
@@ -30,10 +30,6 @@ export const SliderContainer = ({ selectedTime, setSelectedTime }) => {
     },
   ];
 
-  const dateFormatter = (ms) => {
-    return format(new Date(ms), "MMM dd h a");
-  };
-
   const roundHours = (date) => {
     date.setHours(date.getHours() - (date.getHours() % 3));
     return date;
@@ -41,15 +37,16 @@ export const SliderContainer = ({ selectedTime, setSelectedTime }) => {
   const currentTimeRounded = roundHours(new Date());
 
   return (
-    <Box sx={{ width: 550, px: 2, py: 1 }}>
+    <Box sx={{ width: 350, px: 2, py: 1 }}>
       <Slider
         aria-label="Always visible"
         defaultValue={currentTimeRounded}
-        valueLabelFormat={(value) => <div>{dateFormatter(value)}</div>}
+        valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}
         min={subDays(currentTimeRounded, 7).getTime()}
         max={currentTimeRounded.getTime()}
         step={stepSize}
         marks={marks}
+        value={selectedTime.getTime()}
         valueLabelDisplay="auto"
         size="medium"
         onChange={(e) => {

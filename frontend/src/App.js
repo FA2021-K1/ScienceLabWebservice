@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Header } from "./features/header/Header.js";
 
 import { LineChart } from "./features/lineChart/LineChart";
-import { MapboxContainer } from "./features/mapbox/mapbox";
+import { Mapbox } from "./features/mapbox/Mapbox";
 import { Boxplot } from "./features/boxplot/Boxplot";
 import { ValueList } from "./features/valueList/ValueList";
 
@@ -44,7 +44,7 @@ export const App = () => {
         >
           <Grid item xs={12} xl={12}>
             <Item>
-              <MapboxContainer />
+              <Mapbox />
             </Item>
           </Grid>
 

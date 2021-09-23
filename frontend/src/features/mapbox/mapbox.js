@@ -5,12 +5,13 @@ import "./mapbox.css";
 import { SliderContainer } from "./slider";
 import Button from "@mui/material/Button";
 import { updateSelectedTime } from "../../dataSlice";
+import { format } from "date-fns";
 
 require("dotenv").config();
 
 mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
-export const MapboxContainer = () => {
+export const Mapbox = () => {
   const dispatch = useDispatch();
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -20,6 +21,10 @@ export const MapboxContainer = () => {
   const [lng, setLng] = useState(11.444);
   const [lat, setLat] = useState(46.7419041);
   const [zoom, setZoom] = useState(15.7);
+
+  const dateFormatter = (time) => {
+    return format(time, "MMM dd h a");
+  };
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -115,7 +120,7 @@ export const MapboxContainer = () => {
   return (
     <div>
       <div className="sidebar top">
-        {selectedTime.toLocaleString()}
+        {dateFormatter(selectedTime)}
         {selectedTime.toLocaleString() === new Date().toLocaleString() ? null : (
           <Button
             onClick={() => {
@@ -133,6 +138,7 @@ export const MapboxContainer = () => {
         <SliderContainer
           selectedTime={selectedTime}
           setSelectedTime={setSelectedTime}
+          dateFormatter={dateFormatter}
         />
       </div>
       <div ref={mapContainer} className="map-container" />

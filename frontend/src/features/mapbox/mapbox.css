@@ -13,7 +13,7 @@
 .sidebar {
   background-color: #FFFFFF;
   color: #555555;
-    font-family: monospace;
+   
   z-index: 1;
   position: absolute;
   top: 0;
@@ -27,6 +27,6 @@
   padding: 6px 12px;
 }
 .bottom {
-  margin-top: 600px;
+  margin-top: 570px;
   padding: 0px ;
 }
