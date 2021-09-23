@@ -5,6 +5,7 @@ require('dotenv').config()
 
 mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
+
 export const MapboxContainer = ()  => {
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -12,8 +13,11 @@ export const MapboxContainer = ()  => {
     const [lat, setLat] = useState(46.7419041);
     const [zoom, setZoom] = useState(15.7);
 
+
+
     useEffect(() => {
         if (map.current) return; // initialize map only once
+        console.log(mapboxgl.accessToken);
         map.current = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/outdoors-v11',

@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.App-background{
+  background: #d9e3de;
+
+}
+.App-Grid{
+  margin-left: 2;
+  height: 100%;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
