@@ -37,9 +37,9 @@ export const SliderContainer = () => {
   const currentTimeRounded = roundHours(new Date());
 
   return (
-    <Box sx={{ m: 4, width: 350, height: 100, border: "1px solid red" }}>
+    <Box sx={{ m: 4, width: 550, border: "1px solid red" , px: 4, py: 2}}>
       <Slider
-        className="slider"
+        //className="slider"
         aria-label="Always visible"
         defaultValue={currentTimeRounded}
         valueLabelFormat={(value) => <div>{dateFormatter(value)}</div>}
@@ -47,7 +47,9 @@ export const SliderContainer = () => {
         max={currentTimeRounded.getTime()}
         step={stepSize}
         marks={marks}
-        valueLabelDisplay="on"
+        valueLabelDisplay="auto"
+        size="medium"
+       
       />
     </Box>
   );
