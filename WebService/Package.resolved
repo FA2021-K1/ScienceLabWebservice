@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Apodini",
+        "repositoryURL": "https://github.com/Apodini/Apodini.git",
+        "state": {
+          "branch": "feature/metrics",
+          "revision": "b6c6accbcfd8e1c47f0a0d22f957782bfe04ac76",
+          "version": null
+        }
+      },
+      {
         "package": "ApodiniTypeInformation",
         "repositoryURL": "https://github.com/Apodini/ApodiniTypeInformation.git",
         "state": {
@@ -249,8 +258,8 @@
         "repositoryURL": "https://github.com/swift-server/swift-aws-lambda-runtime.git",
         "state": {
           "branch": null,
-          "revision": "a9e15b13b30b6700056c4cfbdcf6a69382a9fb6f",
-          "version": "0.5.0"
+          "revision": "dc37adebe7f2311b8da67d977a0972a7614d88a7",
+          "version": "0.5.1"
         }
       },
       {
@@ -348,8 +357,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio-http2.git",
         "state": {
           "branch": null,
-          "revision": "f6cde03ef8ad57e3bd25743d1e678efd1e5239f7",
-          "version": "1.18.1"
+          "revision": "dbfc8fcd1a0cc4d7254a060501120d378e91f16c",
+          "version": "1.18.3"
         }
       },
       {
