@@ -61,9 +61,7 @@ struct GetAggregatedMeasurements: Handler {
     }
     */
     
-    func handle() async throws -> [String] {
-        print("\(startDate.ISO8601Format(.init(dateSeparator: .dash, dateTimeSeparator: .space, timeZone: .current)))")
-        
+    func handle() async throws -> MeasurementFrontendContent {
         if let postgres = database as? PostgresDatabase {
             return try! await (postgres
             .simpleQuery("""
@@ -86,10 +84,48 @@ struct GetAggregatedMeasurements: Handler {
              FROM Values v;
             """)
             .map { rows in
-                rows.map { row in
+                let jsonDecoder = JSONDecoder()
+                let dateFormatter = ISO8601DateFormatter()
+                dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withTimeZone, .withFullDate, .withFullTime]
+                dateFormatter.timeZone = .current
+                
+                let measurementData = rows.compactMap { row -> MeasurementFrontendValueContent? in
                     print(row.rowDescription)
-                    return row.rowDescription.description
+                    
+                    let data = row
+                        .rowDescription
+                        .fields
+                        .reduce(into: [String: String](), { partialResult, field in
+                            let columnName = field.name
+                            if let rawResult = row.column(columnName) {
+                                if let rawJSONResult = rawResult.jsonb {
+                                    partialResult[columnName] = String(decoding: rawJSONResult, as: UTF8.self)
+                                } else if let rawStringResult = rawResult.string {
+                                    partialResult[columnName] = rawStringResult
+                                }
+                                
+                            }
+                        })
+                    
+                    guard let buoyIDString = data["buoyID"],
+                          let buoyID = Int(buoyIDString),
+                          let dateString = data["date"],
+                          let date = dateFormatter.date(from: dateString),
+                          let locationString = data["position"],
+                          let locationData = locationString.data(using: .utf8),
+                          let location = try? jsonDecoder.decode(Coordinate.self, from: locationData),
+                          let valueData = data["value"],
+                          let value = Double(valueData) else {
+                        return nil
+                    }
+                    
+                    return MeasurementFrontendValueContent(buoyId: buoyID,
+                                                           date: date,
+                                                           location: location,
+                                                           value: value)
                 }
+                
+                return MeasurementFrontendContent(measurements: measurementData)
             })
             .get()
         }
