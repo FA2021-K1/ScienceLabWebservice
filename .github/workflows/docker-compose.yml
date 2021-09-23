@@ -1,5 +1,7 @@
 name: Build Docker Compose (deprecated)
 
+on: workflow_dispatch
+
 jobs:
   dockercompose:
     name: Docker Compose Build and Test
