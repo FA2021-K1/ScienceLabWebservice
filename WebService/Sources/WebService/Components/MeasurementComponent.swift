@@ -1,7 +1,7 @@
 import Apodini
 import Shared
 
-struct MeasurementsComponent: Component {
+struct MeasurementComponent: Component {
     @PathParameter
     var measurementId: Measurement.IDValue
 
