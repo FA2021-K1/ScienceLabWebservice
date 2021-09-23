@@ -1,1 +1,2699 @@
-[{"boyId":3,"date":"2020-11-25T12:27:18.579Z","location":{"longitude":11.601649139879633,"latitude":48.81421638578157},"value":51.24},{"boyId":0,"date":"2020-12-16T06:00:13.783Z","location":{"longitude":8.07408719384962,"latitude":48.11108539000476},"value":12.52},{"boyId":2,"date":"2021-06-03T12:15:37.536Z","location":{"longitude":9.53049334340773,"latitude":47.80927504140969},"value":15.2},{"boyId":6,"date":"2021-07-20T07:11:55.077Z","location":{"longitude":10.54692339420518,"latitude":52.06944979631058},"value":56.2},{"boyId":5,"date":"2020-10-06T14:24:07.852Z","location":{"longitude":12.409870755504643,"latitude":49.58111225317076},"value":75.38},{"boyId":2,"date":"2021-06-28T05:20:14.243Z","location":{"longitude":10.770873418556008,"latitude":53.73567483198253},"value":89.9},{"boyId":0,"date":"2020-10-26T22:43:21.045Z","location":{"longitude":8.671044377742149,"latitude":52.55938528309879},"value":90.42},{"boyId":5,"date":"2020-12-15T08:25:26.407Z","location":{"longitude":12.334695327064848,"latitude":52.387408329772306},"value":17.16},{"boyId":1,"date":"2020-10-26T17:49:21.419Z","location":{"longitude":9.476990861056844,"latitude":50.919126440148354},"value":75.42},{"boyId":3,"date":"2021-02-24T05:08:26.801Z","location":{"longitude":11.397355889211521,"latitude":51.39204652203575},"value":11.97},{"boyId":5,"date":"2021-06-17T12:17:19.666Z","location":{"longitude":8.31262704712814,"latitude":51.649551017198206},"value":88.69},{"boyId":0,"date":"2021-06-20T14:38:07.920Z","location":{"longitude":8.998757832963394,"latitude":50.28645263482967},"value":65.41},{"boyId":5,"date":"2021-01-18T17:24:20.160Z","location":{"longitude":11.281910517466825,"latitude":53.89922525031148},"value":66.51},{"boyId":5,"date":"2020-10-15T18:12:25.409Z","location":{"longitude":8.162449197104227,"latitude":49.0731757523553},"value":33.14},{"boyId":0,"date":"2021-09-18T15:43:08.306Z","location":{"longitude":8.812585873300325,"latitude":53.067085941039714},"value":18.86},{"boyId":1,"date":"2021-01-18T14:21:43.747Z","location":{"longitude":12.172246136820847,"latitude":47.72240335353705},"value":63.07},{"boyId":4,"date":"2021-01-02T10:39:03.323Z","location":{"longitude":14.171215861284107,"latitude":47.8778303768778},"value":79.98},{"boyId":2,"date":"2021-08-26T19:51:58.877Z","location":{"longitude":6.656845374490609,"latitude":51.561218452807765},"value":6.17},{"boyId":5,"date":"2021-03-22T23:15:00.509Z","location":{"longitude":10.390109835379192,"latitude":49.38860834658854},"value":0.09},{"boyId":2,"date":"2021-09-19T04:41:45.345Z","location":{"longitude":9.29003387872778,"latitude":54.40654300475282},"value":53.18},{"boyId":5,"date":"2021-01-28T07:11:20.932Z","location":{"longitude":9.589831907794219,"latitude":53.41473398638599},"value":11.9},{"boyId":6,"date":"2021-03-02T21:01:54.664Z","location":{"longitude":11.707176145916481,"latitude":52.26233441875272},"value":15.79},{"boyId":5,"date":"2020-10-29T15:16:28.662Z","location":{"longitude":6.609089189550257,"latitude":52.566864503210056},"value":87.81},{"boyId":1,"date":"2021-03-25T07:10:31.796Z","location":{"longitude":8.256076976142005,"latitude":53.06787925984362},"value":40.34},{"boyId":0,"date":"2021-02-20T01:56:27.568Z","location":{"longitude":8.909382355652115,"latitude":53.42188205535427},"value":96.09},{"boyId":2,"date":"2021-05-15T20:00:32.584Z","location":{"longitude":8.720360392675424,"latitude":53.53063807228113},"value":0.87},{"boyId":2,"date":"2021-09-21T21:21:55.835Z","location":{"longitude":12.88850790803739,"latitude":48.02821139225066},"value":27.52},{"boyId":5,"date":"2021-06-24T14:44:58.573Z","location":{"longitude":11.031070892869852,"latitude":50.24232774891453},"value":50.62},{"boyId":3,"date":"2021-05-15T10:41:45.096Z","location":{"longitude":13.027446188109314,"latitude":48.93223927540111},"value":4.24},{"boyId":1,"date":"2021-07-01T01:09:36.773Z","location":{"longitude":9.638917579568366,"latitude":51.915411901741514},"value":92.05},{"boyId":4,"date":"2021-07-05T18:24:23.985Z","location":{"longitude":11.255743906245584,"latitude":48.932195825927884},"value":82.46},{"boyId":4,"date":"2021-08-12T23:59:51.784Z","location":{"longitude":11.388973712803564,"latitude":51.6921298266485},"value":97.23},{"boyId":5,"date":"2020-09-29T04:30:16.359Z","location":{"longitude":6.162557331067252,"latitude":50.352091978987325},"value":17.66},{"boyId":3,"date":"2020-10-26T13:31:19.897Z","location":{"longitude":7.899759349783963,"latitude":50.10045902734554},"value":49.59},{"boyId":1,"date":"2021-05-03T23:52:56.695Z","location":{"longitude":8.525184510232322,"latitude":47.830126164410125},"value":80.56},{"boyId":5,"date":"2021-07-30T07:06:27.313Z","location":{"longitude":7.015410752915299,"latitude":52.78798792832979},"value":25.32},{"boyId":2,"date":"2021-03-21T06:40:14.622Z","location":{"longitude":10.405344031638126,"latitude":54.323616467243625},"value":13.09},{"boyId":6,"date":"2021-02-13T00:36:18.783Z","location":{"longitude":10.061253291462442,"latitude":49.2306937537243},"value":15.55},{"boyId":4,"date":"2021-06-15T23:57:21.524Z","location":{"longitude":7.327037336730136,"latitude":51.432756808617796},"value":18.97},{"boyId":2,"date":"2020-10-17T11:16:09.031Z","location":{"longitude":12.627859528356904,"latitude":51.830066961191854},"value":51.53},{"boyId":0,"date":"2021-03-28T05:15:25.992Z","location":{"longitude":6.861003505764441,"latitude":51.63207398211004},"value":15.4},{"boyId":3,"date":"2021-02-11T22:38:41.894Z","location":{"longitude":10.906264144960524,"latitude":49.167057492498635},"value":30.97},{"boyId":4,"date":"2021-05-06T20:25:59.846Z","location":{"longitude":9.147194177003989,"latitude":51.32139515485028},"value":78.25},{"boyId":4,"date":"2021-06-19T06:58:19.482Z","location":{"longitude":12.562296641965252,"latitude":49.0177197656637},"value":52.67},{"boyId":3,"date":"2021-08-21T03:08:34.525Z","location":{"longitude":10.344867955319366,"latitude":51.31323019427426},"value":71.69},{"boyId":4,"date":"2020-11-26T15:53:08.940Z","location":{"longitude":11.034265005870779,"latitude":52.828988161397454},"value":4.46},{"boyId":1,"date":"2021-02-20T09:54:59.958Z","location":{"longitude":6.6634388753919005,"latitude":51.37641157537051},"value":41.35},{"boyId":6,"date":"2021-07-23T07:26:36.246Z","location":{"longitude":7.820260075172278,"latitude":50.58576647323764},"value":23.72},{"boyId":3,"date":"2021-01-16T15:37:00.150Z","location":{"longitude":6.791226880943619,"latitude":50.978327658334074},"value":9.7},{"boyId":3,"date":"2020-12-26T19:41:13.951Z","location":{"longitude":7.335299891182885,"latitude":47.765298524400215},"value":35.35},{"boyId":2,"date":"2020-11-25T07:29:09.587Z","location":{"longitude":13.123113005930737,"latitude":49.78418158544072},"value":35.86},{"boyId":5,"date":"2021-07-21T17:35:10.049Z","location":{"longitude":10.733840419472127,"latitude":50.391762132417995},"value":8.83},{"boyId":1,"date":"2020-10-03T04:07:38.572Z","location":{"longitude":9.313516450805242,"latitude":51.546358111421284},"value":55.14},{"boyId":1,"date":"2021-02-25T03:24:21.120Z","location":{"longitude":11.6159472479704,"latitude":52.11294987944781},"value":8.13},{"boyId":4,"date":"2021-05-31T17:23:21.836Z","location":{"longitude":12.985563861925112,"latitude":48.33299270142115},"value":55.49},{"boyId":5,"date":"2021-08-19T08:10:55.350Z","location":{"longitude":14.071876197324055,"latitude":53.507300124409696},"value":52.89},{"boyId":2,"date":"2021-09-16T22:06:26.138Z","location":{"longitude":9.648173040841897,"latitude":53.31973076082294},"value":12.69},{"boyId":0,"date":"2021-09-04T00:57:34.005Z","location":{"longitude":8.876387027653537,"latitude":50.49270556056868},"value":58.28},{"boyId":3,"date":"2020-11-07T14:20:27.185Z","location":{"longitude":9.332469247037428,"latitude":54.401457049458806},"value":44.12},{"boyId":6,"date":"2020-12-30T06:26:29.325Z","location":{"longitude":13.293123018823238,"latitude":54.06037770756804},"value":83.7},{"boyId":5,"date":"2021-01-17T00:59:31.562Z","location":{"longitude":12.624674206781414,"latitude":52.26820052151942},"value":98.29},{"boyId":6,"date":"2021-06-06T01:19:07.254Z","location":{"longitude":12.112519246325594,"latitude":47.63734622196529},"value":75.62},{"boyId":2,"date":"2021-05-15T10:56:53.335Z","location":{"longitude":10.830994131800892,"latitude":47.71091991406158},"value":22.69},{"boyId":3,"date":"2021-01-28T08:40:32.531Z","location":{"longitude":11.97197511389626,"latitude":49.62618738030283},"value":5.7},{"boyId":1,"date":"2021-02-27T03:35:34.459Z","location":{"longitude":10.363216866515515,"latitude":53.184176277358176},"value":96.35},{"boyId":2,"date":"2021-06-01T09:41:21.917Z","location":{"longitude":11.201175368670505,"latitude":51.34633694482589},"value":55.72},{"boyId":1,"date":"2021-04-16T09:02:05.266Z","location":{"longitude":8.963871722572744,"latitude":53.51388324928983},"value":33.19},{"boyId":2,"date":"2020-12-13T12:52:57.390Z","location":{"longitude":10.497885541334359,"latitude":52.792418011471725},"value":33.36},{"boyId":3,"date":"2021-02-23T08:22:27.595Z","location":{"longitude":8.067482126735475,"latitude":52.75040036384279},"value":37.73},{"boyId":5,"date":"2021-05-25T16:32:23.352Z","location":{"longitude":11.626989335241298,"latitude":47.75388140456355},"value":71.27},{"boyId":3,"date":"2020-11-25T22:25:38.869Z","location":{"longitude":13.950151392404173,"latitude":53.9938265761667},"value":93.08},{"boyId":6,"date":"2020-12-15T14:27:45.049Z","location":{"longitude":10.798403111112457,"latitude":48.33696948740581},"value":99.03},{"boyId":5,"date":"2021-06-07T14:11:08.555Z","location":{"longitude":12.028836548544167,"latitude":47.57838556917575},"value":98.28},{"boyId":5,"date":"2020-11-13T04:06:35.303Z","location":{"longitude":10.91508502468398,"latitude":51.606071786058195},"value":39.95},{"boyId":2,"date":"2020-10-27T07:21:10.289Z","location":{"longitude":8.276814446651237,"latitude":50.321843472303506},"value":52.84},{"boyId":2,"date":"2021-03-03T16:27:16.337Z","location":{"longitude":12.822020558558258,"latitude":52.224293110595816},"value":46.17},{"boyId":5,"date":"2021-06-21T12:36:23.845Z","location":{"longitude":14.295362653811974,"latitude":51.21900247483356},"value":46.79},{"boyId":6,"date":"2021-09-02T18:33:58.416Z","location":{"longitude":10.085063127925821,"latitude":49.986006753199256},"value":66.57},{"boyId":3,"date":"2021-02-12T22:37:49.462Z","location":{"longitude":11.588978501023327,"latitude":48.33167592651563},"value":71.54},{"boyId":2,"date":"2021-03-31T18:11:15.712Z","location":{"longitude":10.378227383563456,"latitude":51.164748899766145},"value":27.69},{"boyId":2,"date":"2020-12-02T14:03:54.554Z","location":{"longitude":9.313659408923591,"latitude":52.447273617441624},"value":80.91},{"boyId":1,"date":"2021-01-30T10:02:53.063Z","location":{"longitude":8.384156098630307,"latitude":51.198259691829676},"value":65.04},{"boyId":5,"date":"2021-04-20T14:11:13.053Z","location":{"longitude":8.196266003587134,"latitude":52.54785558392045},"value":84.17},{"boyId":5,"date":"2021-05-13T18:24:40.942Z","location":{"longitude":12.196981465074547,"latitude":53.52407302955595},"value":35.97},{"boyId":3,"date":"2021-03-06T11:06:46.816Z","location":{"longitude":6.815181512285586,"latitude":48.90234570693591},"value":11.68},{"boyId":5,"date":"2021-09-15T08:58:32.320Z","location":{"longitude":14.237410523917248,"latitude":48.36049257272949},"value":69.26},{"boyId":1,"date":"2020-11-12T00:25:22.553Z","location":{"longitude":10.66839990968722,"latitude":51.194014372296046},"value":82.38},{"boyId":5,"date":"2021-04-05T06:15:06.505Z","location":{"longitude":9.641828932035514,"latitude":52.93331158422123},"value":3.41},{"boyId":6,"date":"2020-10-17T01:03:38.881Z","location":{"longitude":8.279894997119197,"latitude":51.263854671710995},"value":61.73},{"boyId":5,"date":"2021-01-24T11:40:20.643Z","location":{"longitude":8.973983338379503,"latitude":51.34044587160159},"value":33.74},{"boyId":4,"date":"2020-11-17T23:55:22.177Z","location":{"longitude":10.819640902394646,"latitude":50.72867361117346},"value":49.64},{"boyId":2,"date":"2021-02-03T10:20:29.148Z","location":{"longitude":12.98770901002851,"latitude":49.51340017102931},"value":87.36},{"boyId":4,"date":"2021-04-22T11:16:42.337Z","location":{"longitude":7.308636993112578,"latitude":50.878143015348336},"value":53.52},{"boyId":0,"date":"2021-07-17T11:54:17.968Z","location":{"longitude":7.763834165034295,"latitude":52.090261620418275},"value":45.13},{"boyId":4,"date":"2021-08-27T20:25:17.797Z","location":{"longitude":10.399617991373294,"latitude":51.99374959938295},"value":60.22},{"boyId":6,"date":"2021-07-12T03:45:33.438Z","location":{"longitude":12.76943123081421,"latitude":53.310390105791484},"value":18.51},{"boyId":3,"date":"2021-02-04T09:17:34.451Z","location":{"longitude":12.261813234361538,"latitude":49.640184148769535},"value":89.77},{"boyId":5,"date":"2021-07-23T02:17:28.159Z","location":{"longitude":10.73295753564534,"latitude":47.92945162400338},"value":84.34},{"boyId":5,"date":"2020-10-21T12:17:22.317Z","location":{"longitude":9.439040181216981,"latitude":53.40367518059363},"value":75.57},{"boyId":0,"date":"2021-02-04T02:15:39.627Z","location":{"longitude":10.722085590550927,"latitude":48.159848004155094},"value":52.24},{"boyId":4,"date":"2021-09-18T01:08:52.844Z","location":{"longitude":8.791485187619678,"latitude":53.708800677738346},"value":60.35},{"boyId":4,"date":"2020-11-20T16:05:47.654Z","location":{"longitude":13.372347624698387,"latitude":54.489896774398765},"value":82.68},{"boyId":1,"date":"2020-12-16T11:32:47.282Z","location":{"longitude":7.568337110947368,"latitude":48.1488527337228},"value":72.59},{"boyId":5,"date":"2021-04-17T14:19:05.107Z","location":{"longitude":12.674818163807348,"latitude":51.19935321599199},"value":95.26},{"boyId":3,"date":"2021-05-21T13:10:53.632Z","location":{"longitude":13.04443256768645,"latitude":48.118525355933336},"value":22.26},{"boyId":1,"date":"2020-10-12T00:35:41.771Z","location":{"longitude":13.116828752000924,"latitude":49.31081353551246},"value":95.78},{"boyId":2,"date":"2020-10-19T13:07:02.450Z","location":{"longitude":13.207713795970344,"latitude":52.383546324453306},"value":20.57},{"boyId":4,"date":"2021-06-14T01:07:39.200Z","location":{"longitude":10.75040032684683,"latitude":51.39195545581969},"value":40.48},{"boyId":5,"date":"2020-12-12T13:10:38.959Z","location":{"longitude":11.74393823572106,"latitude":48.396345966885164},"value":83.69},{"boyId":1,"date":"2020-10-21T19:26:38.255Z","location":{"longitude":11.76440693510184,"latitude":51.76047757406426},"value":8.54},{"boyId":4,"date":"2021-02-02T23:30:27.717Z","location":{"longitude":9.042875084149468,"latitude":50.698313509652515},"value":6.81},{"boyId":5,"date":"2021-03-07T03:10:39.222Z","location":{"longitude":11.55914800962611,"latitude":49.969919329380545},"value":1.68},{"boyId":0,"date":"2021-04-17T00:12:34.629Z","location":{"longitude":7.891482795905102,"latitude":54.01211799770528},"value":57.74},{"boyId":3,"date":"2021-01-19T14:15:23.209Z","location":{"longitude":11.141821601023548,"latitude":53.6355054639432},"value":21.2},{"boyId":1,"date":"2021-05-15T13:43:22.928Z","location":{"longitude":9.78855572071161,"latitude":48.69195641942085},"value":85.82},{"boyId":6,"date":"2021-08-08T09:26:19.145Z","location":{"longitude":7.902693355417222,"latitude":51.636023545197155},"value":86.7},{"boyId":3,"date":"2020-11-06T08:34:36.858Z","location":{"longitude":12.024771293776329,"latitude":48.044411088280974},"value":77.52},{"boyId":6,"date":"2021-04-10T04:50:18.925Z","location":{"longitude":9.07880371961019,"latitude":49.48142901854914},"value":55.75},{"boyId":1,"date":"2021-09-11T11:46:47.223Z","location":{"longitude":13.487104277269673,"latitude":51.556299869399034},"value":62.65},{"boyId":5,"date":"2021-02-20T08:14:10.172Z","location":{"longitude":9.987762342286956,"latitude":52.26672880956219},"value":67.39},{"boyId":1,"date":"2021-08-12T17:16:59.033Z","location":{"longitude":10.535118636565564,"latitude":48.60080604605595},"value":42.68},{"boyId":1,"date":"2020-09-25T22:51:28.354Z","location":{"longitude":12.730120625056092,"latitude":51.48060119506526},"value":64.01},{"boyId":4,"date":"2021-04-30T09:51:10.876Z","location":{"longitude":11.705021105556934,"latitude":54.7828896960947},"value":30.12},{"boyId":1,"date":"2021-04-04T13:30:41.122Z","location":{"longitude":10.095955638621323,"latitude":53.59110856438943},"value":93.11},{"boyId":2,"date":"2021-03-03T09:50:46.525Z","location":{"longitude":9.05921382969304,"latitude":53.44038985327397},"value":19.75},{"boyId":2,"date":"2021-07-09T07:31:17.472Z","location":{"longitude":9.082901154793083,"latitude":53.48212727443504},"value":72.65},{"boyId":5,"date":"2020-11-29T16:12:28.708Z","location":{"longitude":8.596627818656621,"latitude":48.45430659948621},"value":67.86},{"boyId":3,"date":"2021-01-23T03:42:41.593Z","location":{"longitude":10.180236265902227,"latitude":53.538043607457915},"value":68.05},{"boyId":0,"date":"2021-02-01T22:05:30.063Z","location":{"longitude":12.712645951846373,"latitude":47.89129326089225},"value":44.92},{"boyId":6,"date":"2021-01-24T00:29:52.891Z","location":{"longitude":12.488584686097838,"latitude":53.155889320350454},"value":82.64},{"boyId":1,"date":"2021-02-23T22:25:34.723Z","location":{"longitude":10.088067770389358,"latitude":52.44074740068793},"value":82.82},{"boyId":6,"date":"2020-10-26T22:09:59.391Z","location":{"longitude":13.45854503643023,"latitude":53.12317746753335},"value":2.22},{"boyId":1,"date":"2021-03-14T17:22:57.334Z","location":{"longitude":13.575563191302598,"latitude":47.743915924535294},"value":58.71},{"boyId":5,"date":"2020-12-18T18:07:35.899Z","location":{"longitude":6.908905077206358,"latitude":50.3266749337507},"value":54.91},{"boyId":2,"date":"2021-09-20T03:12:56.105Z","location":{"longitude":7.328330249587215,"latitude":52.65564537056808},"value":93.51},{"boyId":3,"date":"2021-03-19T20:12:04.327Z","location":{"longitude":9.930175261626061,"latitude":50.29340146455804},"value":90.96},{"boyId":3,"date":"2021-03-24T09:49:43.534Z","location":{"longitude":10.329930956119895,"latitude":51.96600733318313},"value":3.56},{"boyId":3,"date":"2021-03-20T03:11:04.002Z","location":{"longitude":12.073095889380657,"latitude":51.96729537910608},"value":4.5},{"boyId":0,"date":"2021-05-31T12:00:34.038Z","location":{"longitude":12.210901612273432,"latitude":53.13479667151892},"value":42.18},{"boyId":1,"date":"2021-08-07T23:05:07.731Z","location":{"longitude":7.016662939474565,"latitude":49.12114995528832},"value":28.13},{"boyId":2,"date":"2020-10-22T19:26:37.157Z","location":{"longitude":10.491490521306158,"latitude":48.47495454458993},"value":82.22},{"boyId":3,"date":"2020-10-04T04:05:26.908Z","location":{"longitude":7.770456563180241,"latitude":48.50260202605859},"value":8.92},{"boyId":2,"date":"2021-05-25T09:19:54.500Z","location":{"longitude":8.079982121758075,"latitude":49.79181640585909},"value":91.02},{"boyId":6,"date":"2020-12-28T09:01:40.715Z","location":{"longitude":12.423221626361016,"latitude":52.80171574251672},"value":96.13},{"boyId":5,"date":"2021-03-20T11:48:28.468Z","location":{"longitude":11.018927064619561,"latitude":53.68605104732612},"value":13.98},{"boyId":5,"date":"2021-05-04T04:13:38.618Z","location":{"longitude":6.892621192883533,"latitude":53.76558525436039},"value":1.78},{"boyId":4,"date":"2021-09-07T21:33:19.703Z","location":{"longitude":9.937264907185678,"latitude":53.494292612780455},"value":21.38},{"boyId":3,"date":"2020-12-16T17:12:42.702Z","location":{"longitude":12.264925680818042,"latitude":49.237698915232514},"value":13.4},{"boyId":3,"date":"2021-03-05T21:06:53.296Z","location":{"longitude":11.713066267590804,"latitude":52.12279275113153},"value":80.45},{"boyId":1,"date":"2021-01-22T05:57:52.340Z","location":{"longitude":13.316667050103131,"latitude":47.903935693973665},"value":39.12},{"boyId":4,"date":"2021-04-13T11:01:24.255Z","location":{"longitude":12.789365535100252,"latitude":49.3062407457631},"value":23.89},{"boyId":4,"date":"2020-10-23T02:07:00.701Z","location":{"longitude":11.578710421211156,"latitude":50.90901039016715},"value":56.38},{"boyId":2,"date":"2021-02-28T01:57:57.192Z","location":{"longitude":12.189353724875874,"latitude":51.90975116323963},"value":6.85},{"boyId":5,"date":"2020-12-11T13:55:01.756Z","location":{"longitude":9.430626138332109,"latitude":53.612260606751136},"value":2.66},{"boyId":3,"date":"2021-04-01T01:58:12.686Z","location":{"longitude":12.53140760903769,"latitude":50.154197739420546},"value":72.83},{"boyId":1,"date":"2021-03-07T17:14:05.626Z","location":{"longitude":11.046446040009236,"latitude":52.90536095510043},"value":79.98},{"boyId":3,"date":"2021-09-10T23:44:49.055Z","location":{"longitude":12.303221904554038,"latitude":47.71933069005365},"value":98.12},{"boyId":0,"date":"2021-03-20T17:19:43.228Z","location":{"longitude":11.509091695096199,"latitude":49.431798502077626},"value":91.94},{"boyId":2,"date":"2021-07-30T16:46:54.297Z","location":{"longitude":8.007896479124117,"latitude":54.4247714380604},"value":71.47},{"boyId":5,"date":"2021-08-27T18:36:10.051Z","location":{"longitude":6.504050613919761,"latitude":51.314164882610456},"value":24.48},{"boyId":1,"date":"2020-09-28T14:36:00.677Z","location":{"longitude":11.562325427499054,"latitude":48.239495360074905},"value":46.13},{"boyId":1,"date":"2021-06-01T19:09:09.540Z","location":{"longitude":7.593442972120158,"latitude":50.25503220200729},"value":96.02},{"boyId":4,"date":"2020-11-24T18:21:06.328Z","location":{"longitude":8.511853340312808,"latitude":54.23985742253485},"value":87.55},{"boyId":2,"date":"2021-09-09T02:00:04.551Z","location":{"longitude":9.144934315702011,"latitude":51.28185270676553},"value":0.07},{"boyId":4,"date":"2021-05-22T21:10:58.687Z","location":{"longitude":9.46642986346369,"latitude":50.75748143414339},"value":42.79},{"boyId":3,"date":"2021-02-22T05:57:45.216Z","location":{"longitude":8.636184113568225,"latitude":52.93665473864289},"value":69.16},{"boyId":2,"date":"2021-07-22T01:01:36.997Z","location":{"longitude":11.65568175102013,"latitude":52.336189098255964},"value":3.67},{"boyId":1,"date":"2021-08-15T03:54:41.502Z","location":{"longitude":12.395117890501226,"latitude":54.115911332415465},"value":29.3},{"boyId":1,"date":"2021-02-13T20:09:06.275Z","location":{"longitude":11.620141811409146,"latitude":48.68135105196195},"value":76.85},{"boyId":1,"date":"2020-11-20T02:18:32.231Z","location":{"longitude":10.553244890763661,"latitude":50.011044887369266},"value":31.75},{"boyId":1,"date":"2021-02-28T08:33:00.257Z","location":{"longitude":10.091801476932336,"latitude":48.726537104365256},"value":95.26},{"boyId":1,"date":"2020-11-14T17:24:17.931Z","location":{"longitude":10.832078995750699,"latitude":52.90927867939231},"value":41.56},{"boyId":1,"date":"2020-10-04T21:49:47.534Z","location":{"longitude":8.384558467157614,"latitude":52.06170765549704},"value":71.8},{"boyId":0,"date":"2020-10-04T15:31:10.596Z","location":{"longitude":9.351113576180673,"latitude":53.57589337984865},"value":13.86},{"boyId":3,"date":"2021-04-20T19:26:08.644Z","location":{"longitude":12.524988898170271,"latitude":49.625159493646535},"value":35.29},{"boyId":5,"date":"2021-05-30T05:01:39.001Z","location":{"longitude":6.378342172214127,"latitude":52.40515268133312},"value":9.73},{"boyId":2,"date":"2020-09-24T03:55:29.727Z","location":{"longitude":7.082787737535146,"latitude":51.76920425505876},"value":78.4},{"boyId":0,"date":"2020-11-01T17:28:00.255Z","location":{"longitude":10.713353840894655,"latitude":52.27413867526593},"value":98.26},{"boyId":0,"date":"2021-02-12T02:54:58.550Z","location":{"longitude":8.719733441186726,"latitude":48.91371495348122},"value":75.89},{"boyId":4,"date":"2020-12-27T01:19:23.950Z","location":{"longitude":6.93601351910929,"latitude":50.48799765630284},"value":62.43},{"boyId":3,"date":"2021-03-14T07:02:44.105Z","location":{"longitude":11.895492871426626,"latitude":51.009956599675476},"value":59.06},{"boyId":3,"date":"2020-12-30T15:08:19.977Z","location":{"longitude":12.290161800093317,"latitude":49.68916258731675},"value":70.01},{"boyId":4,"date":"2021-09-14T06:19:43.631Z","location":{"longitude":10.816413729007923,"latitude":47.59431337456012},"value":25.35},{"boyId":5,"date":"2021-01-07T17:12:09.680Z","location":{"longitude":6.992290004395688,"latitude":47.86700175892455},"value":96.98},{"boyId":3,"date":"2020-11-30T03:43:18.047Z","location":{"longitude":11.257186556379022,"latitude":48.356118914594674},"value":65.51},{"boyId":5,"date":"2021-05-12T20:29:01.987Z","location":{"longitude":12.918173367732052,"latitude":49.92161496464927},"value":65.56},{"boyId":5,"date":"2020-11-01T12:56:46.084Z","location":{"longitude":13.084419756364063,"latitude":51.745995268104565},"value":73.86},{"boyId":5,"date":"2021-09-21T14:48:55.337Z","location":{"longitude":8.398710779019632,"latitude":52.9151723722672},"value":43.25},{"boyId":4,"date":"2021-05-18T07:48:01.727Z","location":{"longitude":8.283220500145621,"latitude":50.879781733275536},"value":77.47},{"boyId":3,"date":"2021-05-28T12:54:34.654Z","location":{"longitude":11.14886848738064,"latitude":51.04447866187761},"value":54.57},{"boyId":1,"date":"2021-07-10T20:06:04.353Z","location":{"longitude":8.090500804277852,"latitude":48.51709128870875},"value":11.97},{"boyId":3,"date":"2020-12-07T09:10:27.092Z","location":{"longitude":12.192149795700654,"latitude":51.32733930002486},"value":90.06},{"boyId":1,"date":"2021-02-04T04:38:48.258Z","location":{"longitude":9.210966115458142,"latitude":48.68091505418631},"value":39.45},{"boyId":5,"date":"2021-05-08T10:23:35.247Z","location":{"longitude":8.720450615238246,"latitude":50.77103897040175},"value":99.67},{"boyId":1,"date":"2020-12-15T14:17:46.333Z","location":{"longitude":10.15615180215169,"latitude":47.56309735558039},"value":7.79},{"boyId":5,"date":"2021-04-11T08:34:18.597Z","location":{"longitude":9.663142162325638,"latitude":49.541831934379225},"value":94.02},{"boyId":3,"date":"2021-09-06T15:34:51.836Z","location":{"longitude":6.562891703811649,"latitude":52.15695491379844},"value":31.96},{"boyId":1,"date":"2020-09-27T15:00:46.151Z","location":{"longitude":9.112856628674322,"latitude":48.74549409392008},"value":8.72},{"boyId":4,"date":"2020-10-02T00:48:33.743Z","location":{"longitude":11.897530005208012,"latitude":50.06965221520785},"value":6.17},{"boyId":3,"date":"2020-10-10T16:35:41.880Z","location":{"longitude":9.754367815875709,"latitude":50.49417453903619},"value":81.9},{"boyId":4,"date":"2021-05-22T02:38:09.927Z","location":{"longitude":11.41342457784362,"latitude":54.687307800280614},"value":22.89},{"boyId":4,"date":"2020-10-26T18:37:29.838Z","location":{"longitude":13.165560144466667,"latitude":49.00712164643552},"value":64.31},{"boyId":0,"date":"2020-10-29T11:10:15.744Z","location":{"longitude":8.1947423569353,"latitude":52.876045722069264},"value":42.05},{"boyId":1,"date":"2021-04-15T14:18:25.276Z","location":{"longitude":7.972594909328892,"latitude":50.71539029439317},"value":30.83},{"boyId":0,"date":"2020-12-30T22:12:42.404Z","location":{"longitude":9.579958250760871,"latitude":51.13775491313971},"value":14.06},{"boyId":2,"date":"2021-03-18T08:02:27.368Z","location":{"longitude":7.320711457594477,"latitude":53.60862711917245},"value":56.89},{"boyId":4,"date":"2021-08-15T16:55:31.497Z","location":{"longitude":9.750380737837466,"latitude":48.50975275476279},"value":87.38},{"boyId":2,"date":"2020-12-22T20:50:22.954Z","location":{"longitude":11.388271309964107,"latitude":50.7796039241968},"value":70.37},{"boyId":5,"date":"2020-11-05T02:27:46.628Z","location":{"longitude":6.614708118725208,"latitude":51.5946311538248},"value":1.32},{"boyId":2,"date":"2021-01-25T09:33:30.569Z","location":{"longitude":10.321845924620135,"latitude":50.33672737476946},"value":29.67},{"boyId":6,"date":"2021-03-10T14:24:38.610Z","location":{"longitude":10.110561836591781,"latitude":51.82155060071673},"value":66.4},{"boyId":5,"date":"2021-09-01T02:25:17.042Z","location":{"longitude":6.6592799525597455,"latitude":52.9636986847959},"value":32.31},{"boyId":2,"date":"2021-04-29T21:51:37.030Z","location":{"longitude":8.35418477910122,"latitude":49.711222002378726},"value":42.32},{"boyId":2,"date":"2021-08-08T07:45:40.733Z","location":{"longitude":7.352481828864327,"latitude":53.38994451508411},"value":76.94},{"boyId":5,"date":"2021-05-17T08:15:24.468Z","location":{"longitude":12.7396676161525,"latitude":51.524239452804125},"value":28.09},{"boyId":2,"date":"2020-10-26T02:54:13.918Z","location":{"longitude":8.603441243854302,"latitude":51.25769369694571},"value":40.13},{"boyId":2,"date":"2021-08-31T09:46:47.167Z","location":{"longitude":8.99480899832379,"latitude":52.167658533390664},"value":86.86},{"boyId":4,"date":"2020-10-28T01:41:33.255Z","location":{"longitude":11.81262628389575,"latitude":48.97486441512604},"value":16.76},{"boyId":3,"date":"2020-10-10T00:07:54.608Z","location":{"longitude":11.0112551019512,"latitude":50.50657944144884},"value":14.82},{"boyId":4,"date":"2020-10-29T16:30:04.439Z","location":{"longitude":6.308364541434279,"latitude":47.69318277424371},"value":48.78},{"boyId":6,"date":"2021-05-24T13:21:25.065Z","location":{"longitude":10.21575754445097,"latitude":49.42717478560619},"value":79.19},{"boyId":0,"date":"2021-07-10T06:56:13.516Z","location":{"longitude":12.270964366551445,"latitude":48.43817397117453},"value":46.86},{"boyId":1,"date":"2021-05-10T05:18:29.548Z","location":{"longitude":7.387194875828955,"latitude":47.796001396473},"value":94.25},{"boyId":3,"date":"2021-08-05T04:02:29.322Z","location":{"longitude":8.83244691606727,"latitude":47.63835261554753},"value":76},{"boyId":3,"date":"2021-03-06T07:56:41.845Z","location":{"longitude":9.282176713773909,"latitude":47.99237833045525},"value":69.66},{"boyId":2,"date":"2021-05-01T06:07:23.287Z","location":{"longitude":12.781954455482186,"latitude":47.85314949365977},"value":50.94},{"boyId":3,"date":"2021-01-22T06:43:06.898Z","location":{"longitude":12.66822018057906,"latitude":48.680037175906875},"value":96.73},{"boyId":1,"date":"2021-03-26T23:50:46.087Z","location":{"longitude":6.179374935254868,"latitude":48.457112845966336},"value":21.5},{"boyId":5,"date":"2021-05-15T16:31:31.338Z","location":{"longitude":9.291136458421343,"latitude":50.65553022992577},"value":1.97},{"boyId":0,"date":"2021-02-14T08:07:17.807Z","location":{"longitude":9.707085157778087,"latitude":51.62444703723942},"value":70.72},{"boyId":4,"date":"2020-12-28T05:18:02.619Z","location":{"longitude":10.974222945962634,"latitude":53.2865831921809},"value":97.34},{"boyId":4,"date":"2021-01-07T02:50:06.510Z","location":{"longitude":14.905347951476998,"latitude":51.28233791722988},"value":26.69},{"boyId":0,"date":"2021-03-12T02:51:22.229Z","location":{"longitude":12.60882678909136,"latitude":52.64306720497278},"value":70.23},{"boyId":2,"date":"2021-01-25T21:34:54.783Z","location":{"longitude":7.18773796180303,"latitude":51.275182249653774},"value":96.04},{"boyId":6,"date":"2021-01-15T18:02:53.092Z","location":{"longitude":8.989868944916626,"latitude":51.83577474116205},"value":86.61},{"boyId":1,"date":"2020-10-10T04:38:31.319Z","location":{"longitude":12.886145079061167,"latitude":53.354553690127055},"value":73.44},{"boyId":0,"date":"2020-10-23T13:21:25.245Z","location":{"longitude":9.679915128645725,"latitude":51.720654587908044},"value":72.08},{"boyId":3,"date":"2021-04-28T20:26:19.460Z","location":{"longitude":7.510931357968561,"latitude":50.417380546685976},"value":39.05},{"boyId":4,"date":"2020-10-07T23:22:14.237Z","location":{"longitude":9.58383578277953,"latitude":50.412472484096085},"value":45.66},{"boyId":1,"date":"2021-06-13T00:40:32.987Z","location":{"longitude":14.34441589023968,"latitude":51.695196584690706},"value":8.45},{"boyId":4,"date":"2021-09-13T12:44:59.749Z","location":{"longitude":8.974640808258343,"latitude":52.91304989536111},"value":2.08},{"boyId":2,"date":"2021-01-16T04:17:53.442Z","location":{"longitude":12.755834461574166,"latitude":51.42060140445557},"value":29.59},{"boyId":6,"date":"2021-04-18T14:38:32.710Z","location":{"longitude":10.803207325662989,"latitude":47.71223018375229},"value":32.85},{"boyId":4,"date":"2021-04-15T15:11:18.934Z","location":{"longitude":12.927986928476098,"latitude":52.0835400218321},"value":30.02},{"boyId":4,"date":"2020-12-03T09:55:18.134Z","location":{"longitude":12.85581995274895,"latitude":53.31920226930296},"value":92.69},{"boyId":5,"date":"2021-09-03T19:52:05.275Z","location":{"longitude":13.63711100876153,"latitude":50.92151933452643},"value":42},{"boyId":4,"date":"2020-10-27T04:06:08.841Z","location":{"longitude":12.265935228310378,"latitude":48.54140565705414},"value":20.02},{"boyId":1,"date":"2021-04-22T08:46:40.213Z","location":{"longitude":7.09607103122185,"latitude":48.569522437004345},"value":79.5},{"boyId":0,"date":"2021-03-30T11:21:41.991Z","location":{"longitude":7.30753932374922,"latitude":51.583109463174175},"value":31.56},{"boyId":1,"date":"2020-11-15T12:43:59.216Z","location":{"longitude":12.793951352429744,"latitude":51.701091557722684},"value":51.27},{"boyId":3,"date":"2021-02-27T17:19:42.038Z","location":{"longitude":12.607076786003105,"latitude":50.65749082168755},"value":3.39},{"boyId":2,"date":"2021-06-24T11:44:57.066Z","location":{"longitude":9.456810018718352,"latitude":51.819441045396374},"value":22.39},{"boyId":6,"date":"2021-06-27T01:05:19.263Z","location":{"longitude":7.352919378800314,"latitude":52.51527033393464},"value":33.04},{"boyId":6,"date":"2021-04-05T02:53:45.643Z","location":{"longitude":8.556415282204785,"latitude":48.07332111442183},"value":81.4},{"boyId":3,"date":"2020-12-18T22:06:29.063Z","location":{"longitude":8.74046227251826,"latitude":54.205484033222746},"value":57.1},{"boyId":3,"date":"2020-10-06T20:40:25.738Z","location":{"longitude":9.386861959933054,"latitude":49.40148100677882},"value":84.57},{"boyId":3,"date":"2021-08-27T03:51:38.804Z","location":{"longitude":12.145737016750996,"latitude":53.55747544591397},"value":91.6},{"boyId":3,"date":"2020-10-06T13:52:50.555Z","location":{"longitude":8.757346700845318,"latitude":52.39214698654324},"value":47.59},{"boyId":5,"date":"2021-04-04T22:04:10.864Z","location":{"longitude":8.88905857481484,"latitude":49.10468260731191},"value":24.16},{"boyId":2,"date":"2021-06-02T00:35:44.527Z","location":{"longitude":12.442231098859152,"latitude":50.977636383854566},"value":94.37},{"boyId":4,"date":"2021-03-10T01:31:51.189Z","location":{"longitude":12.145231997424839,"latitude":52.14179375190755},"value":21.65},{"boyId":1,"date":"2020-11-13T10:05:52.324Z","location":{"longitude":9.271950348973089,"latitude":50.42395445476283},"value":13.9},{"boyId":1,"date":"2021-02-08T13:13:51.285Z","location":{"longitude":6.854648640919934,"latitude":49.871462386778354},"value":12.42},{"boyId":2,"date":"2021-07-25T14:42:27.320Z","location":{"longitude":12.231470467654697,"latitude":52.92065769728668},"value":12.88},{"boyId":0,"date":"2021-07-11T07:58:17.287Z","location":{"longitude":10.09229543806804,"latitude":50.37794867702021},"value":44.37},{"boyId":1,"date":"2021-01-18T02:34:55.938Z","location":{"longitude":11.563505342078512,"latitude":50.908984673569954},"value":95.64},{"boyId":3,"date":"2021-07-15T21:09:42.081Z","location":{"longitude":10.386597782693148,"latitude":52.925280500596294},"value":2.19},{"boyId":3,"date":"2020-12-20T16:20:02.414Z","location":{"longitude":11.52451814214508,"latitude":50.430569042879036},"value":37.07},{"boyId":3,"date":"2021-06-30T10:44:13.256Z","location":{"longitude":11.581255541150174,"latitude":53.22372334766828},"value":50.65},{"boyId":5,"date":"2021-05-14T21:19:22.395Z","location":{"longitude":13.41438037474248,"latitude":47.84130645418691},"value":5.08},{"boyId":4,"date":"2021-08-28T12:36:22.036Z","location":{"longitude":14.327100982539896,"latitude":47.96570079486984},"value":27.53},{"boyId":3,"date":"2020-10-29T13:22:31.977Z","location":{"longitude":10.423242901888884,"latitude":51.91205759200618},"value":23.08},{"boyId":1,"date":"2021-09-06T06:51:48.709Z","location":{"longitude":10.550237501548057,"latitude":48.171536055980226},"value":68.76},{"boyId":6,"date":"2020-12-09T00:19:00.428Z","location":{"longitude":7.8880173043545545,"latitude":49.667842477124225},"value":76.45},{"boyId":4,"date":"2021-05-04T00:53:45.805Z","location":{"longitude":11.075408909349154,"latitude":49.465682017134284},"value":38.07},{"boyId":0,"date":"2021-01-12T14:43:48.768Z","location":{"longitude":12.172888154879251,"latitude":49.17790591190319},"value":97.97},{"boyId":1,"date":"2021-04-16T20:47:21.740Z","location":{"longitude":10.66435465229953,"latitude":48.87387672579897},"value":12.49},{"boyId":4,"date":"2021-05-31T18:04:47.554Z","location":{"longitude":12.738465188406956,"latitude":51.16562830330072},"value":98.28},{"boyId":4,"date":"2021-07-26T13:52:04.369Z","location":{"longitude":11.782705944753017,"latitude":51.18805574910323},"value":33.41},{"boyId":4,"date":"2021-05-30T23:05:52.583Z","location":{"longitude":9.455962317541706,"latitude":52.30721075786598},"value":19.73},{"boyId":6,"date":"2021-02-14T02:24:13.969Z","location":{"longitude":12.767397938207381,"latitude":51.909855085960565},"value":25.32},{"boyId":5,"date":"2021-08-08T01:13:54.204Z","location":{"longitude":13.209301550704517,"latitude":52.52011738632365},"value":78.3},{"boyId":4,"date":"2021-05-07T01:07:44.888Z","location":{"longitude":14.727528020722783,"latitude":53.55037370792927},"value":40.84},{"boyId":2,"date":"2021-01-23T05:15:07.609Z","location":{"longitude":9.157952875054827,"latitude":52.042604282662936},"value":97.54},{"boyId":0,"date":"2021-04-14T07:53:35.623Z","location":{"longitude":7.091934462639115,"latitude":49.29144504355907},"value":30.2},{"boyId":0,"date":"2021-08-19T13:59:14.030Z","location":{"longitude":7.092844750175882,"latitude":48.88346923124823},"value":0.22},{"boyId":1,"date":"2021-09-09T05:40:40.157Z","location":{"longitude":11.622000616467783,"latitude":50.41988274923823},"value":85.46},{"boyId":4,"date":"2021-04-02T18:37:33.231Z","location":{"longitude":11.194669094032065,"latitude":50.68810586661487},"value":95.8},{"boyId":2,"date":"2021-04-13T02:11:37.492Z","location":{"longitude":10.873690073555395,"latitude":52.78155654413173},"value":1.3},{"boyId":1,"date":"2021-01-02T13:27:35.227Z","location":{"longitude":8.52385397970786,"latitude":50.57923050971749},"value":68.39},{"boyId":5,"date":"2021-07-03T22:37:13.840Z","location":{"longitude":13.20716270186065,"latitude":54.34650447043643},"value":44.89},{"boyId":6,"date":"2021-03-19T13:17:26.166Z","location":{"longitude":8.237416988741929,"latitude":47.90778967863084},"value":58.37},{"boyId":1,"date":"2021-08-26T21:44:40.512Z","location":{"longitude":13.33305220895313,"latitude":54.107581990477286},"value":20.89},{"boyId":5,"date":"2021-06-14T11:02:04.332Z","location":{"longitude":12.580249004175403,"latitude":50.45917937670702},"value":99.01},{"boyId":5,"date":"2021-06-08T06:39:13.459Z","location":{"longitude":7.730853740201015,"latitude":51.84613151480219},"value":73.73},{"boyId":3,"date":"2021-03-09T00:50:15.763Z","location":{"longitude":13.117288324869545,"latitude":53.216004352141915},"value":19.56},{"boyId":5,"date":"2021-09-05T11:21:37.638Z","location":{"longitude":7.16964873717193,"latitude":49.89368930614976},"value":18.14},{"boyId":5,"date":"2021-02-18T17:20:58.650Z","location":{"longitude":8.787344552889438,"latitude":49.40192412089396},"value":29.93},{"boyId":1,"date":"2021-04-28T11:00:06.858Z","location":{"longitude":8.561879734380621,"latitude":53.234560951753316},"value":96.64},{"boyId":1,"date":"2021-06-16T22:18:31.359Z","location":{"longitude":10.217683359720859,"latitude":51.00707570657502},"value":61.92}]
+[
+  {
+    "boyId": 3,
+    "date": "2020-11-25T12:27:18.579Z",
+    "location": {
+      "longitude": 11.601649139879633,
+      "latitude": 48.81421638578157
+    },
+    "value": 51.24
+  },
+  {
+    "boyId": 0,
+    "date": "2020-12-16T06:00:13.783Z",
+    "location": {
+      "longitude": 8.07408719384962,
+      "latitude": 48.11108539000476
+    },
+    "value": 12.52
+  },
+  {
+    "boyId": 2,
+    "date": "2021-06-03T12:15:37.536Z",
+    "location": {
+      "longitude": 9.53049334340773,
+      "latitude": 47.80927504140969
+    },
+    "value": 15.2
+  },
+  {
+    "boyId": 6,
+    "date": "2021-07-20T07:11:55.077Z",
+    "location": {
+      "longitude": 10.54692339420518,
+      "latitude": 52.06944979631058
+    },
+    "value": 56.2
+  },
+  {
+    "boyId": 5,
+    "date": "2020-10-06T14:24:07.852Z",
+    "location": {
+      "longitude": 12.409870755504643,
+      "latitude": 49.58111225317076
+    },
+    "value": 75.38
+  },
+  {
+    "boyId": 2,
+    "date": "2021-06-28T05:20:14.243Z",
+    "location": {
+      "longitude": 10.770873418556008,
+      "latitude": 53.73567483198253
+    },
+    "value": 89.9
+  },
+  {
+    "boyId": 0,
+    "date": "2020-10-26T22:43:21.045Z",
+    "location": {
+      "longitude": 8.671044377742149,
+      "latitude": 52.55938528309879
+    },
+    "value": 90.42
+  },
+  {
+    "boyId": 5,
+    "date": "2020-12-15T08:25:26.407Z",
+    "location": {
+      "longitude": 12.334695327064848,
+      "latitude": 52.387408329772306
+    },
+    "value": 17.16
+  },
+  {
+    "boyId": 1,
+    "date": "2020-10-26T17:49:21.419Z",
+    "location": {
+      "longitude": 9.476990861056844,
+      "latitude": 50.919126440148354
+    },
+    "value": 75.42
+  },
+  {
+    "boyId": 3,
+    "date": "2021-02-24T05:08:26.801Z",
+    "location": {
+      "longitude": 11.397355889211521,
+      "latitude": 51.39204652203575
+    },
+    "value": 11.97
+  },
+  {
+    "boyId": 5,
+    "date": "2021-06-17T12:17:19.666Z",
+    "location": {
+      "longitude": 8.31262704712814,
+      "latitude": 51.649551017198206
+    },
+    "value": 88.69
+  },
+  {
+    "boyId": 0,
+    "date": "2021-06-20T14:38:07.920Z",
+    "location": {
+      "longitude": 8.998757832963394,
+      "latitude": 50.28645263482967
+    },
+    "value": 65.41
+  },
+  {
+    "boyId": 5,
+    "date": "2021-01-18T17:24:20.160Z",
+    "location": {
+      "longitude": 11.281910517466825,
+      "latitude": 53.89922525031148
+    },
+    "value": 66.51
+  },
+  {
+    "boyId": 5,
+    "date": "2020-10-15T18:12:25.409Z",
+    "location": {
+      "longitude": 8.162449197104227,
+      "latitude": 49.0731757523553
+    },
+    "value": 33.14
+  },
+  {
+    "boyId": 0,
+    "date": "2021-09-18T15:43:08.306Z",
+    "location": {
+      "longitude": 8.812585873300325,
+      "latitude": 53.067085941039714
+    },
+    "value": 18.86
+  },
+  {
+    "boyId": 1,
+    "date": "2021-01-18T14:21:43.747Z",
+    "location": {
+      "longitude": 12.172246136820847,
+      "latitude": 47.72240335353705
+    },
+    "value": 63.07
+  },
+  {
+    "boyId": 4,
+    "date": "2021-01-02T10:39:03.323Z",
+    "location": {
+      "longitude": 14.171215861284107,
+      "latitude": 47.8778303768778
+    },
+    "value": 79.98
+  },
+  {
+    "boyId": 2,
+    "date": "2021-08-26T19:51:58.877Z",
+    "location": {
+      "longitude": 6.656845374490609,
+      "latitude": 51.561218452807765
+    },
+    "value": 6.17
+  },
+  {
+    "boyId": 5,
+    "date": "2021-03-22T23:15:00.509Z",
+    "location": {
+      "longitude": 10.390109835379192,
+      "latitude": 49.38860834658854
+    },
+    "value": 0.09
+  },
+  {
+    "boyId": 2,
+    "date": "2021-09-19T04:41:45.345Z",
+    "location": {
+      "longitude": 9.29003387872778,
+      "latitude": 54.40654300475282
+    },
+    "value": 53.18
+  },
+  {
+    "boyId": 5,
+    "date": "2021-01-28T07:11:20.932Z",
+    "location": {
+      "longitude": 9.589831907794219,
+      "latitude": 53.41473398638599
+    },
+    "value": 11.9
+  },
+  {
+    "boyId": 6,
+    "date": "2021-03-02T21:01:54.664Z",
+    "location": {
+      "longitude": 11.707176145916481,
+      "latitude": 52.26233441875272
+    },
+    "value": 15.79
+  },
+  {
+    "boyId": 5,
+    "date": "2020-10-29T15:16:28.662Z",
+    "location": {
+      "longitude": 6.609089189550257,
+      "latitude": 52.566864503210056
+    },
+    "value": 87.81
+  },
+  {
+    "boyId": 1,
+    "date": "2021-03-25T07:10:31.796Z",
+    "location": {
+      "longitude": 8.256076976142005,
+      "latitude": 53.06787925984362
+    },
+    "value": 40.34
+  },
+  {
+    "boyId": 0,
+    "date": "2021-02-20T01:56:27.568Z",
+    "location": {
+      "longitude": 8.909382355652115,
+      "latitude": 53.42188205535427
+    },
+    "value": 96.09
+  },
+  {
+    "boyId": 2,
+    "date": "2021-05-15T20:00:32.584Z",
+    "location": {
+      "longitude": 8.720360392675424,
+      "latitude": 53.53063807228113
+    },
+    "value": 0.87
+  },
+  {
+    "boyId": 2,
+    "date": "2021-09-21T21:21:55.835Z",
+    "location": {
+      "longitude": 12.88850790803739,
+      "latitude": 48.02821139225066
+    },
+    "value": 27.52
+  },
+  {
+    "boyId": 5,
+    "date": "2021-06-24T14:44:58.573Z",
+    "location": {
+      "longitude": 11.031070892869852,
+      "latitude": 50.24232774891453
+    },
+    "value": 50.62
+  },
+  {
+    "boyId": 3,
+    "date": "2021-05-15T10:41:45.096Z",
+    "location": {
+      "longitude": 13.027446188109314,
+      "latitude": 48.93223927540111
+    },
+    "value": 4.24
+  },
+  {
+    "boyId": 1,
+    "date": "2021-07-01T01:09:36.773Z",
+    "location": {
+      "longitude": 9.638917579568366,
+      "latitude": 51.915411901741514
+    },
+    "value": 92.05
+  },
+  {
+    "boyId": 4,
+    "date": "2021-07-05T18:24:23.985Z",
+    "location": {
+      "longitude": 11.255743906245584,
+      "latitude": 48.932195825927884
+    },
+    "value": 82.46
+  },
+  {
+    "boyId": 4,
+    "date": "2021-08-12T23:59:51.784Z",
+    "location": {
+      "longitude": 11.388973712803564,
+      "latitude": 51.6921298266485
+    },
+    "value": 97.23
+  },
+  {
+    "boyId": 5,
+    "date": "2020-09-29T04:30:16.359Z",
+    "location": {
+      "longitude": 6.162557331067252,
+      "latitude": 50.352091978987325
+    },
+    "value": 17.66
+  },
+  {
+    "boyId": 3,
+    "date": "2020-10-26T13:31:19.897Z",
+    "location": {
+      "longitude": 7.899759349783963,
+      "latitude": 50.10045902734554
+    },
+    "value": 49.59
+  },
+  {
+    "boyId": 1,
+    "date": "2021-05-03T23:52:56.695Z",
+    "location": {
+      "longitude": 8.525184510232322,
+      "latitude": 47.830126164410125
+    },
+    "value": 80.56
+  },
+  {
+    "boyId": 5,
+    "date": "2021-07-30T07:06:27.313Z",
+    "location": {
+      "longitude": 7.015410752915299,
+      "latitude": 52.78798792832979
+    },
+    "value": 25.32
+  },
+  {
+    "boyId": 2,
+    "date": "2021-03-21T06:40:14.622Z",
+    "location": {
+      "longitude": 10.405344031638126,
+      "latitude": 54.323616467243625
+    },
+    "value": 13.09
+  },
+  {
+    "boyId": 6,
+    "date": "2021-02-13T00:36:18.783Z",
+    "location": {
+      "longitude": 10.061253291462442,
+      "latitude": 49.2306937537243
+    },
+    "value": 15.55
+  },
+  {
+    "boyId": 4,
+    "date": "2021-06-15T23:57:21.524Z",
+    "location": {
+      "longitude": 7.327037336730136,
+      "latitude": 51.432756808617796
+    },
+    "value": 18.97
+  },
+  {
+    "boyId": 2,
+    "date": "2020-10-17T11:16:09.031Z",
+    "location": {
+      "longitude": 12.627859528356904,
+      "latitude": 51.830066961191854
+    },
+    "value": 51.53
+  },
+  {
+    "boyId": 0,
+    "date": "2021-03-28T05:15:25.992Z",
+    "location": {
+      "longitude": 6.861003505764441,
+      "latitude": 51.63207398211004
+    },
+    "value": 15.4
+  },
+  {
+    "boyId": 3,
+    "date": "2021-02-11T22:38:41.894Z",
+    "location": {
+      "longitude": 10.906264144960524,
+      "latitude": 49.167057492498635
+    },
+    "value": 30.97
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-06T20:25:59.846Z",
+    "location": {
+      "longitude": 9.147194177003989,
+      "latitude": 51.32139515485028
+    },
+    "value": 78.25
+  },
+  {
+    "boyId": 4,
+    "date": "2021-06-19T06:58:19.482Z",
+    "location": {
+      "longitude": 12.562296641965252,
+      "latitude": 49.0177197656637
+    },
+    "value": 52.67
+  },
+  {
+    "boyId": 3,
+    "date": "2021-08-21T03:08:34.525Z",
+    "location": {
+      "longitude": 10.344867955319366,
+      "latitude": 51.31323019427426
+    },
+    "value": 71.69
+  },
+  {
+    "boyId": 4,
+    "date": "2020-11-26T15:53:08.940Z",
+    "location": {
+      "longitude": 11.034265005870779,
+      "latitude": 52.828988161397454
+    },
+    "value": 4.46
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-20T09:54:59.958Z",
+    "location": {
+      "longitude": 6.6634388753919005,
+      "latitude": 51.37641157537051
+    },
+    "value": 41.35
+  },
+  {
+    "boyId": 6,
+    "date": "2021-07-23T07:26:36.246Z",
+    "location": {
+      "longitude": 7.820260075172278,
+      "latitude": 50.58576647323764
+    },
+    "value": 23.72
+  },
+  {
+    "boyId": 3,
+    "date": "2021-01-16T15:37:00.150Z",
+    "location": {
+      "longitude": 6.791226880943619,
+      "latitude": 50.978327658334074
+    },
+    "value": 9.7
+  },
+  {
+    "boyId": 3,
+    "date": "2020-12-26T19:41:13.951Z",
+    "location": {
+      "longitude": 7.335299891182885,
+      "latitude": 47.765298524400215
+    },
+    "value": 35.35
+  },
+  {
+    "boyId": 2,
+    "date": "2020-11-25T07:29:09.587Z",
+    "location": {
+      "longitude": 13.123113005930737,
+      "latitude": 49.78418158544072
+    },
+    "value": 35.86
+  },
+  {
+    "boyId": 5,
+    "date": "2021-07-21T17:35:10.049Z",
+    "location": {
+      "longitude": 10.733840419472127,
+      "latitude": 50.391762132417995
+    },
+    "value": 8.83
+  },
+  {
+    "boyId": 1,
+    "date": "2020-10-03T04:07:38.572Z",
+    "location": {
+      "longitude": 9.313516450805242,
+      "latitude": 51.546358111421284
+    },
+    "value": 55.14
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-25T03:24:21.120Z",
+    "location": {
+      "longitude": 11.6159472479704,
+      "latitude": 52.11294987944781
+    },
+    "value": 8.13
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-31T17:23:21.836Z",
+    "location": {
+      "longitude": 12.985563861925112,
+      "latitude": 48.33299270142115
+    },
+    "value": 55.49
+  },
+  {
+    "boyId": 5,
+    "date": "2021-08-19T08:10:55.350Z",
+    "location": {
+      "longitude": 14.071876197324055,
+      "latitude": 53.507300124409696
+    },
+    "value": 52.89
+  },
+  {
+    "boyId": 2,
+    "date": "2021-09-16T22:06:26.138Z",
+    "location": {
+      "longitude": 9.648173040841897,
+      "latitude": 53.31973076082294
+    },
+    "value": 12.69
+  },
+  {
+    "boyId": 0,
+    "date": "2021-09-04T00:57:34.005Z",
+    "location": {
+      "longitude": 8.876387027653537,
+      "latitude": 50.49270556056868
+    },
+    "value": 58.28
+  },
+  {
+    "boyId": 3,
+    "date": "2020-11-07T14:20:27.185Z",
+    "location": {
+      "longitude": 9.332469247037428,
+      "latitude": 54.401457049458806
+    },
+    "value": 44.12
+  },
+  {
+    "boyId": 6,
+    "date": "2020-12-30T06:26:29.325Z",
+    "location": {
+      "longitude": 13.293123018823238,
+      "latitude": 54.06037770756804
+    },
+    "value": 83.7
+  },
+  {
+    "boyId": 5,
+    "date": "2021-01-17T00:59:31.562Z",
+    "location": {
+      "longitude": 12.624674206781414,
+      "latitude": 52.26820052151942
+    },
+    "value": 98.29
+  },
+  {
+    "boyId": 6,
+    "date": "2021-06-06T01:19:07.254Z",
+    "location": {
+      "longitude": 12.112519246325594,
+      "latitude": 47.63734622196529
+    },
+    "value": 75.62
+  },
+  {
+    "boyId": 2,
+    "date": "2021-05-15T10:56:53.335Z",
+    "location": {
+      "longitude": 10.830994131800892,
+      "latitude": 47.71091991406158
+    },
+    "value": 22.69
+  },
+  {
+    "boyId": 3,
+    "date": "2021-01-28T08:40:32.531Z",
+    "location": {
+      "longitude": 11.97197511389626,
+      "latitude": 49.62618738030283
+    },
+    "value": 5.7
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-27T03:35:34.459Z",
+    "location": {
+      "longitude": 10.363216866515515,
+      "latitude": 53.184176277358176
+    },
+    "value": 96.35
+  },
+  {
+    "boyId": 2,
+    "date": "2021-06-01T09:41:21.917Z",
+    "location": {
+      "longitude": 11.201175368670505,
+      "latitude": 51.34633694482589
+    },
+    "value": 55.72
+  },
+  {
+    "boyId": 1,
+    "date": "2021-04-16T09:02:05.266Z",
+    "location": {
+      "longitude": 8.963871722572744,
+      "latitude": 53.51388324928983
+    },
+    "value": 33.19
+  },
+  {
+    "boyId": 2,
+    "date": "2020-12-13T12:52:57.390Z",
+    "location": {
+      "longitude": 10.497885541334359,
+      "latitude": 52.792418011471725
+    },
+    "value": 33.36
+  },
+  {
+    "boyId": 3,
+    "date": "2021-02-23T08:22:27.595Z",
+    "location": {
+      "longitude": 8.067482126735475,
+      "latitude": 52.75040036384279
+    },
+    "value": 37.73
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-25T16:32:23.352Z",
+    "location": {
+      "longitude": 11.626989335241298,
+      "latitude": 47.75388140456355
+    },
+    "value": 71.27
+  },
+  {
+    "boyId": 3,
+    "date": "2020-11-25T22:25:38.869Z",
+    "location": {
+      "longitude": 13.950151392404173,
+      "latitude": 53.9938265761667
+    },
+    "value": 93.08
+  },
+  {
+    "boyId": 6,
+    "date": "2020-12-15T14:27:45.049Z",
+    "location": {
+      "longitude": 10.798403111112457,
+      "latitude": 48.33696948740581
+    },
+    "value": 99.03
+  },
+  {
+    "boyId": 5,
+    "date": "2021-06-07T14:11:08.555Z",
+    "location": {
+      "longitude": 12.028836548544167,
+      "latitude": 47.57838556917575
+    },
+    "value": 98.28
+  },
+  {
+    "boyId": 5,
+    "date": "2020-11-13T04:06:35.303Z",
+    "location": {
+      "longitude": 10.91508502468398,
+      "latitude": 51.606071786058195
+    },
+    "value": 39.95
+  },
+  {
+    "boyId": 2,
+    "date": "2020-10-27T07:21:10.289Z",
+    "location": {
+      "longitude": 8.276814446651237,
+      "latitude": 50.321843472303506
+    },
+    "value": 52.84
+  },
+  {
+    "boyId": 2,
+    "date": "2021-03-03T16:27:16.337Z",
+    "location": {
+      "longitude": 12.822020558558258,
+      "latitude": 52.224293110595816
+    },
+    "value": 46.17
+  },
+  {
+    "boyId": 5,
+    "date": "2021-06-21T12:36:23.845Z",
+    "location": {
+      "longitude": 14.295362653811974,
+      "latitude": 51.21900247483356
+    },
+    "value": 46.79
+  },
+  {
+    "boyId": 6,
+    "date": "2021-09-02T18:33:58.416Z",
+    "location": {
+      "longitude": 10.085063127925821,
+      "latitude": 49.986006753199256
+    },
+    "value": 66.57
+  },
+  {
+    "boyId": 3,
+    "date": "2021-02-12T22:37:49.462Z",
+    "location": {
+      "longitude": 11.588978501023327,
+      "latitude": 48.33167592651563
+    },
+    "value": 71.54
+  },
+  {
+    "boyId": 2,
+    "date": "2021-03-31T18:11:15.712Z",
+    "location": {
+      "longitude": 10.378227383563456,
+      "latitude": 51.164748899766145
+    },
+    "value": 27.69
+  },
+  {
+    "boyId": 2,
+    "date": "2020-12-02T14:03:54.554Z",
+    "location": {
+      "longitude": 9.313659408923591,
+      "latitude": 52.447273617441624
+    },
+    "value": 80.91
+  },
+  {
+    "boyId": 1,
+    "date": "2021-01-30T10:02:53.063Z",
+    "location": {
+      "longitude": 8.384156098630307,
+      "latitude": 51.198259691829676
+    },
+    "value": 65.04
+  },
+  {
+    "boyId": 5,
+    "date": "2021-04-20T14:11:13.053Z",
+    "location": {
+      "longitude": 8.196266003587134,
+      "latitude": 52.54785558392045
+    },
+    "value": 84.17
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-13T18:24:40.942Z",
+    "location": {
+      "longitude": 12.196981465074547,
+      "latitude": 53.52407302955595
+    },
+    "value": 35.97
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-06T11:06:46.816Z",
+    "location": {
+      "longitude": 6.815181512285586,
+      "latitude": 48.90234570693591
+    },
+    "value": 11.68
+  },
+  {
+    "boyId": 5,
+    "date": "2021-09-15T08:58:32.320Z",
+    "location": {
+      "longitude": 14.237410523917248,
+      "latitude": 48.36049257272949
+    },
+    "value": 69.26
+  },
+  {
+    "boyId": 1,
+    "date": "2020-11-12T00:25:22.553Z",
+    "location": {
+      "longitude": 10.66839990968722,
+      "latitude": 51.194014372296046
+    },
+    "value": 82.38
+  },
+  {
+    "boyId": 5,
+    "date": "2021-04-05T06:15:06.505Z",
+    "location": {
+      "longitude": 9.641828932035514,
+      "latitude": 52.93331158422123
+    },
+    "value": 3.41
+  },
+  {
+    "boyId": 6,
+    "date": "2020-10-17T01:03:38.881Z",
+    "location": {
+      "longitude": 8.279894997119197,
+      "latitude": 51.263854671710995
+    },
+    "value": 61.73
+  },
+  {
+    "boyId": 5,
+    "date": "2021-01-24T11:40:20.643Z",
+    "location": {
+      "longitude": 8.973983338379503,
+      "latitude": 51.34044587160159
+    },
+    "value": 33.74
+  },
+  {
+    "boyId": 4,
+    "date": "2020-11-17T23:55:22.177Z",
+    "location": {
+      "longitude": 10.819640902394646,
+      "latitude": 50.72867361117346
+    },
+    "value": 49.64
+  },
+  {
+    "boyId": 2,
+    "date": "2021-02-03T10:20:29.148Z",
+    "location": {
+      "longitude": 12.98770901002851,
+      "latitude": 49.51340017102931
+    },
+    "value": 87.36
+  },
+  {
+    "boyId": 4,
+    "date": "2021-04-22T11:16:42.337Z",
+    "location": {
+      "longitude": 7.308636993112578,
+      "latitude": 50.878143015348336
+    },
+    "value": 53.52
+  },
+  {
+    "boyId": 0,
+    "date": "2021-07-17T11:54:17.968Z",
+    "location": {
+      "longitude": 7.763834165034295,
+      "latitude": 52.090261620418275
+    },
+    "value": 45.13
+  },
+  {
+    "boyId": 4,
+    "date": "2021-08-27T20:25:17.797Z",
+    "location": {
+      "longitude": 10.399617991373294,
+      "latitude": 51.99374959938295
+    },
+    "value": 60.22
+  },
+  {
+    "boyId": 6,
+    "date": "2021-07-12T03:45:33.438Z",
+    "location": {
+      "longitude": 12.76943123081421,
+      "latitude": 53.310390105791484
+    },
+    "value": 18.51
+  },
+  {
+    "boyId": 3,
+    "date": "2021-02-04T09:17:34.451Z",
+    "location": {
+      "longitude": 12.261813234361538,
+      "latitude": 49.640184148769535
+    },
+    "value": 89.77
+  },
+  {
+    "boyId": 5,
+    "date": "2021-07-23T02:17:28.159Z",
+    "location": {
+      "longitude": 10.73295753564534,
+      "latitude": 47.92945162400338
+    },
+    "value": 84.34
+  },
+  {
+    "boyId": 5,
+    "date": "2020-10-21T12:17:22.317Z",
+    "location": {
+      "longitude": 9.439040181216981,
+      "latitude": 53.40367518059363
+    },
+    "value": 75.57
+  },
+  {
+    "boyId": 0,
+    "date": "2021-02-04T02:15:39.627Z",
+    "location": {
+      "longitude": 10.722085590550927,
+      "latitude": 48.159848004155094
+    },
+    "value": 52.24
+  },
+  {
+    "boyId": 4,
+    "date": "2021-09-18T01:08:52.844Z",
+    "location": {
+      "longitude": 8.791485187619678,
+      "latitude": 53.708800677738346
+    },
+    "value": 60.35
+  },
+  {
+    "boyId": 4,
+    "date": "2020-11-20T16:05:47.654Z",
+    "location": {
+      "longitude": 13.372347624698387,
+      "latitude": 54.489896774398765
+    },
+    "value": 82.68
+  },
+  {
+    "boyId": 1,
+    "date": "2020-12-16T11:32:47.282Z",
+    "location": {
+      "longitude": 7.568337110947368,
+      "latitude": 48.1488527337228
+    },
+    "value": 72.59
+  },
+  {
+    "boyId": 5,
+    "date": "2021-04-17T14:19:05.107Z",
+    "location": {
+      "longitude": 12.674818163807348,
+      "latitude": 51.19935321599199
+    },
+    "value": 95.26
+  },
+  {
+    "boyId": 3,
+    "date": "2021-05-21T13:10:53.632Z",
+    "location": {
+      "longitude": 13.04443256768645,
+      "latitude": 48.118525355933336
+    },
+    "value": 22.26
+  },
+  {
+    "boyId": 1,
+    "date": "2020-10-12T00:35:41.771Z",
+    "location": {
+      "longitude": 13.116828752000924,
+      "latitude": 49.31081353551246
+    },
+    "value": 95.78
+  },
+  {
+    "boyId": 2,
+    "date": "2020-10-19T13:07:02.450Z",
+    "location": {
+      "longitude": 13.207713795970344,
+      "latitude": 52.383546324453306
+    },
+    "value": 20.57
+  },
+  {
+    "boyId": 4,
+    "date": "2021-06-14T01:07:39.200Z",
+    "location": {
+      "longitude": 10.75040032684683,
+      "latitude": 51.39195545581969
+    },
+    "value": 40.48
+  },
+  {
+    "boyId": 5,
+    "date": "2020-12-12T13:10:38.959Z",
+    "location": {
+      "longitude": 11.74393823572106,
+      "latitude": 48.396345966885164
+    },
+    "value": 83.69
+  },
+  {
+    "boyId": 1,
+    "date": "2020-10-21T19:26:38.255Z",
+    "location": {
+      "longitude": 11.76440693510184,
+      "latitude": 51.76047757406426
+    },
+    "value": 8.54
+  },
+  {
+    "boyId": 4,
+    "date": "2021-02-02T23:30:27.717Z",
+    "location": {
+      "longitude": 9.042875084149468,
+      "latitude": 50.698313509652515
+    },
+    "value": 6.81
+  },
+  {
+    "boyId": 5,
+    "date": "2021-03-07T03:10:39.222Z",
+    "location": {
+      "longitude": 11.55914800962611,
+      "latitude": 49.969919329380545
+    },
+    "value": 1.68
+  },
+  {
+    "boyId": 0,
+    "date": "2021-04-17T00:12:34.629Z",
+    "location": {
+      "longitude": 7.891482795905102,
+      "latitude": 54.01211799770528
+    },
+    "value": 57.74
+  },
+  {
+    "boyId": 3,
+    "date": "2021-01-19T14:15:23.209Z",
+    "location": {
+      "longitude": 11.141821601023548,
+      "latitude": 53.6355054639432
+    },
+    "value": 21.2
+  },
+  {
+    "boyId": 1,
+    "date": "2021-05-15T13:43:22.928Z",
+    "location": {
+      "longitude": 9.78855572071161,
+      "latitude": 48.69195641942085
+    },
+    "value": 85.82
+  },
+  {
+    "boyId": 6,
+    "date": "2021-08-08T09:26:19.145Z",
+    "location": {
+      "longitude": 7.902693355417222,
+      "latitude": 51.636023545197155
+    },
+    "value": 86.7
+  },
+  {
+    "boyId": 3,
+    "date": "2020-11-06T08:34:36.858Z",
+    "location": {
+      "longitude": 12.024771293776329,
+      "latitude": 48.044411088280974
+    },
+    "value": 77.52
+  },
+  {
+    "boyId": 6,
+    "date": "2021-04-10T04:50:18.925Z",
+    "location": {
+      "longitude": 9.07880371961019,
+      "latitude": 49.48142901854914
+    },
+    "value": 55.75
+  },
+  {
+    "boyId": 1,
+    "date": "2021-09-11T11:46:47.223Z",
+    "location": {
+      "longitude": 13.487104277269673,
+      "latitude": 51.556299869399034
+    },
+    "value": 62.65
+  },
+  {
+    "boyId": 5,
+    "date": "2021-02-20T08:14:10.172Z",
+    "location": {
+      "longitude": 9.987762342286956,
+      "latitude": 52.26672880956219
+    },
+    "value": 67.39
+  },
+  {
+    "boyId": 1,
+    "date": "2021-08-12T17:16:59.033Z",
+    "location": {
+      "longitude": 10.535118636565564,
+      "latitude": 48.60080604605595
+    },
+    "value": 42.68
+  },
+  {
+    "boyId": 1,
+    "date": "2020-09-25T22:51:28.354Z",
+    "location": {
+      "longitude": 12.730120625056092,
+      "latitude": 51.48060119506526
+    },
+    "value": 64.01
+  },
+  {
+    "boyId": 4,
+    "date": "2021-04-30T09:51:10.876Z",
+    "location": {
+      "longitude": 11.705021105556934,
+      "latitude": 54.7828896960947
+    },
+    "value": 30.12
+  },
+  {
+    "boyId": 1,
+    "date": "2021-04-04T13:30:41.122Z",
+    "location": {
+      "longitude": 10.095955638621323,
+      "latitude": 53.59110856438943
+    },
+    "value": 93.11
+  },
+  {
+    "boyId": 2,
+    "date": "2021-03-03T09:50:46.525Z",
+    "location": {
+      "longitude": 9.05921382969304,
+      "latitude": 53.44038985327397
+    },
+    "value": 19.75
+  },
+  {
+    "boyId": 2,
+    "date": "2021-07-09T07:31:17.472Z",
+    "location": {
+      "longitude": 9.082901154793083,
+      "latitude": 53.48212727443504
+    },
+    "value": 72.65
+  },
+  {
+    "boyId": 5,
+    "date": "2020-11-29T16:12:28.708Z",
+    "location": {
+      "longitude": 8.596627818656621,
+      "latitude": 48.45430659948621
+    },
+    "value": 67.86
+  },
+  {
+    "boyId": 3,
+    "date": "2021-01-23T03:42:41.593Z",
+    "location": {
+      "longitude": 10.180236265902227,
+      "latitude": 53.538043607457915
+    },
+    "value": 68.05
+  },
+  {
+    "boyId": 0,
+    "date": "2021-02-01T22:05:30.063Z",
+    "location": {
+      "longitude": 12.712645951846373,
+      "latitude": 47.89129326089225
+    },
+    "value": 44.92
+  },
+  {
+    "boyId": 6,
+    "date": "2021-01-24T00:29:52.891Z",
+    "location": {
+      "longitude": 12.488584686097838,
+      "latitude": 53.155889320350454
+    },
+    "value": 82.64
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-23T22:25:34.723Z",
+    "location": {
+      "longitude": 10.088067770389358,
+      "latitude": 52.44074740068793
+    },
+    "value": 82.82
+  },
+  {
+    "boyId": 6,
+    "date": "2020-10-26T22:09:59.391Z",
+    "location": {
+      "longitude": 13.45854503643023,
+      "latitude": 53.12317746753335
+    },
+    "value": 2.22
+  },
+  {
+    "boyId": 1,
+    "date": "2021-03-14T17:22:57.334Z",
+    "location": {
+      "longitude": 13.575563191302598,
+      "latitude": 47.743915924535294
+    },
+    "value": 58.71
+  },
+  {
+    "boyId": 5,
+    "date": "2020-12-18T18:07:35.899Z",
+    "location": {
+      "longitude": 6.908905077206358,
+      "latitude": 50.3266749337507
+    },
+    "value": 54.91
+  },
+  {
+    "boyId": 2,
+    "date": "2021-09-20T03:12:56.105Z",
+    "location": {
+      "longitude": 7.328330249587215,
+      "latitude": 52.65564537056808
+    },
+    "value": 93.51
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-19T20:12:04.327Z",
+    "location": {
+      "longitude": 9.930175261626061,
+      "latitude": 50.29340146455804
+    },
+    "value": 90.96
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-24T09:49:43.534Z",
+    "location": {
+      "longitude": 10.329930956119895,
+      "latitude": 51.96600733318313
+    },
+    "value": 3.56
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-20T03:11:04.002Z",
+    "location": {
+      "longitude": 12.073095889380657,
+      "latitude": 51.96729537910608
+    },
+    "value": 4.5
+  },
+  {
+    "boyId": 0,
+    "date": "2021-05-31T12:00:34.038Z",
+    "location": {
+      "longitude": 12.210901612273432,
+      "latitude": 53.13479667151892
+    },
+    "value": 42.18
+  },
+  {
+    "boyId": 1,
+    "date": "2021-08-07T23:05:07.731Z",
+    "location": {
+      "longitude": 7.016662939474565,
+      "latitude": 49.12114995528832
+    },
+    "value": 28.13
+  },
+  {
+    "boyId": 2,
+    "date": "2020-10-22T19:26:37.157Z",
+    "location": {
+      "longitude": 10.491490521306158,
+      "latitude": 48.47495454458993
+    },
+    "value": 82.22
+  },
+  {
+    "boyId": 3,
+    "date": "2020-10-04T04:05:26.908Z",
+    "location": {
+      "longitude": 7.770456563180241,
+      "latitude": 48.50260202605859
+    },
+    "value": 8.92
+  },
+  {
+    "boyId": 2,
+    "date": "2021-05-25T09:19:54.500Z",
+    "location": {
+      "longitude": 8.079982121758075,
+      "latitude": 49.79181640585909
+    },
+    "value": 91.02
+  },
+  {
+    "boyId": 6,
+    "date": "2020-12-28T09:01:40.715Z",
+    "location": {
+      "longitude": 12.423221626361016,
+      "latitude": 52.80171574251672
+    },
+    "value": 96.13
+  },
+  {
+    "boyId": 5,
+    "date": "2021-03-20T11:48:28.468Z",
+    "location": {
+      "longitude": 11.018927064619561,
+      "latitude": 53.68605104732612
+    },
+    "value": 13.98
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-04T04:13:38.618Z",
+    "location": {
+      "longitude": 6.892621192883533,
+      "latitude": 53.76558525436039
+    },
+    "value": 1.78
+  },
+  {
+    "boyId": 4,
+    "date": "2021-09-07T21:33:19.703Z",
+    "location": {
+      "longitude": 9.937264907185678,
+      "latitude": 53.494292612780455
+    },
+    "value": 21.38
+  },
+  {
+    "boyId": 3,
+    "date": "2020-12-16T17:12:42.702Z",
+    "location": {
+      "longitude": 12.264925680818042,
+      "latitude": 49.237698915232514
+    },
+    "value": 13.4
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-05T21:06:53.296Z",
+    "location": {
+      "longitude": 11.713066267590804,
+      "latitude": 52.12279275113153
+    },
+    "value": 80.45
+  },
+  {
+    "boyId": 1,
+    "date": "2021-01-22T05:57:52.340Z",
+    "location": {
+      "longitude": 13.316667050103131,
+      "latitude": 47.903935693973665
+    },
+    "value": 39.12
+  },
+  {
+    "boyId": 4,
+    "date": "2021-04-13T11:01:24.255Z",
+    "location": {
+      "longitude": 12.789365535100252,
+      "latitude": 49.3062407457631
+    },
+    "value": 23.89
+  },
+  {
+    "boyId": 4,
+    "date": "2020-10-23T02:07:00.701Z",
+    "location": {
+      "longitude": 11.578710421211156,
+      "latitude": 50.90901039016715
+    },
+    "value": 56.38
+  },
+  {
+    "boyId": 2,
+    "date": "2021-02-28T01:57:57.192Z",
+    "location": {
+      "longitude": 12.189353724875874,
+      "latitude": 51.90975116323963
+    },
+    "value": 6.85
+  },
+  {
+    "boyId": 5,
+    "date": "2020-12-11T13:55:01.756Z",
+    "location": {
+      "longitude": 9.430626138332109,
+      "latitude": 53.612260606751136
+    },
+    "value": 2.66
+  },
+  {
+    "boyId": 3,
+    "date": "2021-04-01T01:58:12.686Z",
+    "location": {
+      "longitude": 12.53140760903769,
+      "latitude": 50.154197739420546
+    },
+    "value": 72.83
+  },
+  {
+    "boyId": 1,
+    "date": "2021-03-07T17:14:05.626Z",
+    "location": {
+      "longitude": 11.046446040009236,
+      "latitude": 52.90536095510043
+    },
+    "value": 79.98
+  },
+  {
+    "boyId": 3,
+    "date": "2021-09-10T23:44:49.055Z",
+    "location": {
+      "longitude": 12.303221904554038,
+      "latitude": 47.71933069005365
+    },
+    "value": 98.12
+  },
+  {
+    "boyId": 0,
+    "date": "2021-03-20T17:19:43.228Z",
+    "location": {
+      "longitude": 11.509091695096199,
+      "latitude": 49.431798502077626
+    },
+    "value": 91.94
+  },
+  {
+    "boyId": 2,
+    "date": "2021-07-30T16:46:54.297Z",
+    "location": {
+      "longitude": 8.007896479124117,
+      "latitude": 54.4247714380604
+    },
+    "value": 71.47
+  },
+  {
+    "boyId": 5,
+    "date": "2021-08-27T18:36:10.051Z",
+    "location": {
+      "longitude": 6.504050613919761,
+      "latitude": 51.314164882610456
+    },
+    "value": 24.48
+  },
+  {
+    "boyId": 1,
+    "date": "2020-09-28T14:36:00.677Z",
+    "location": {
+      "longitude": 11.562325427499054,
+      "latitude": 48.239495360074905
+    },
+    "value": 46.13
+  },
+  {
+    "boyId": 1,
+    "date": "2021-06-01T19:09:09.540Z",
+    "location": {
+      "longitude": 7.593442972120158,
+      "latitude": 50.25503220200729
+    },
+    "value": 96.02
+  },
+  {
+    "boyId": 4,
+    "date": "2020-11-24T18:21:06.328Z",
+    "location": {
+      "longitude": 8.511853340312808,
+      "latitude": 54.23985742253485
+    },
+    "value": 87.55
+  },
+  {
+    "boyId": 2,
+    "date": "2021-09-09T02:00:04.551Z",
+    "location": {
+      "longitude": 9.144934315702011,
+      "latitude": 51.28185270676553
+    },
+    "value": 0.07
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-22T21:10:58.687Z",
+    "location": {
+      "longitude": 9.46642986346369,
+      "latitude": 50.75748143414339
+    },
+    "value": 42.79
+  },
+  {
+    "boyId": 3,
+    "date": "2021-02-22T05:57:45.216Z",
+    "location": {
+      "longitude": 8.636184113568225,
+      "latitude": 52.93665473864289
+    },
+    "value": 69.16
+  },
+  {
+    "boyId": 2,
+    "date": "2021-07-22T01:01:36.997Z",
+    "location": {
+      "longitude": 11.65568175102013,
+      "latitude": 52.336189098255964
+    },
+    "value": 3.67
+  },
+  {
+    "boyId": 1,
+    "date": "2021-08-15T03:54:41.502Z",
+    "location": {
+      "longitude": 12.395117890501226,
+      "latitude": 54.115911332415465
+    },
+    "value": 29.3
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-13T20:09:06.275Z",
+    "location": {
+      "longitude": 11.620141811409146,
+      "latitude": 48.68135105196195
+    },
+    "value": 76.85
+  },
+  {
+    "boyId": 1,
+    "date": "2020-11-20T02:18:32.231Z",
+    "location": {
+      "longitude": 10.553244890763661,
+      "latitude": 50.011044887369266
+    },
+    "value": 31.75
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-28T08:33:00.257Z",
+    "location": {
+      "longitude": 10.091801476932336,
+      "latitude": 48.726537104365256
+    },
+    "value": 95.26
+  },
+  {
+    "boyId": 1,
+    "date": "2020-11-14T17:24:17.931Z",
+    "location": {
+      "longitude": 10.832078995750699,
+      "latitude": 52.90927867939231
+    },
+    "value": 41.56
+  },
+  {
+    "boyId": 1,
+    "date": "2020-10-04T21:49:47.534Z",
+    "location": {
+      "longitude": 8.384558467157614,
+      "latitude": 52.06170765549704
+    },
+    "value": 71.8
+  },
+  {
+    "boyId": 0,
+    "date": "2020-10-04T15:31:10.596Z",
+    "location": {
+      "longitude": 9.351113576180673,
+      "latitude": 53.57589337984865
+    },
+    "value": 13.86
+  },
+  {
+    "boyId": 3,
+    "date": "2021-04-20T19:26:08.644Z",
+    "location": {
+      "longitude": 12.524988898170271,
+      "latitude": 49.625159493646535
+    },
+    "value": 35.29
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-30T05:01:39.001Z",
+    "location": {
+      "longitude": 6.378342172214127,
+      "latitude": 52.40515268133312
+    },
+    "value": 9.73
+  },
+  {
+    "boyId": 2,
+    "date": "2020-09-24T03:55:29.727Z",
+    "location": {
+      "longitude": 7.082787737535146,
+      "latitude": 51.76920425505876
+    },
+    "value": 78.4
+  },
+  {
+    "boyId": 0,
+    "date": "2020-11-01T17:28:00.255Z",
+    "location": {
+      "longitude": 10.713353840894655,
+      "latitude": 52.27413867526593
+    },
+    "value": 98.26
+  },
+  {
+    "boyId": 0,
+    "date": "2021-02-12T02:54:58.550Z",
+    "location": {
+      "longitude": 8.719733441186726,
+      "latitude": 48.91371495348122
+    },
+    "value": 75.89
+  },
+  {
+    "boyId": 4,
+    "date": "2020-12-27T01:19:23.950Z",
+    "location": {
+      "longitude": 6.93601351910929,
+      "latitude": 50.48799765630284
+    },
+    "value": 62.43
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-14T07:02:44.105Z",
+    "location": {
+      "longitude": 11.895492871426626,
+      "latitude": 51.009956599675476
+    },
+    "value": 59.06
+  },
+  {
+    "boyId": 3,
+    "date": "2020-12-30T15:08:19.977Z",
+    "location": {
+      "longitude": 12.290161800093317,
+      "latitude": 49.68916258731675
+    },
+    "value": 70.01
+  },
+  {
+    "boyId": 4,
+    "date": "2021-09-14T06:19:43.631Z",
+    "location": {
+      "longitude": 10.816413729007923,
+      "latitude": 47.59431337456012
+    },
+    "value": 25.35
+  },
+  {
+    "boyId": 5,
+    "date": "2021-01-07T17:12:09.680Z",
+    "location": {
+      "longitude": 6.992290004395688,
+      "latitude": 47.86700175892455
+    },
+    "value": 96.98
+  },
+  {
+    "boyId": 3,
+    "date": "2020-11-30T03:43:18.047Z",
+    "location": {
+      "longitude": 11.257186556379022,
+      "latitude": 48.356118914594674
+    },
+    "value": 65.51
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-12T20:29:01.987Z",
+    "location": {
+      "longitude": 12.918173367732052,
+      "latitude": 49.92161496464927
+    },
+    "value": 65.56
+  },
+  {
+    "boyId": 5,
+    "date": "2020-11-01T12:56:46.084Z",
+    "location": {
+      "longitude": 13.084419756364063,
+      "latitude": 51.745995268104565
+    },
+    "value": 73.86
+  },
+  {
+    "boyId": 5,
+    "date": "2021-09-21T14:48:55.337Z",
+    "location": {
+      "longitude": 8.398710779019632,
+      "latitude": 52.9151723722672
+    },
+    "value": 43.25
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-18T07:48:01.727Z",
+    "location": {
+      "longitude": 8.283220500145621,
+      "latitude": 50.879781733275536
+    },
+    "value": 77.47
+  },
+  {
+    "boyId": 3,
+    "date": "2021-05-28T12:54:34.654Z",
+    "location": {
+      "longitude": 11.14886848738064,
+      "latitude": 51.04447866187761
+    },
+    "value": 54.57
+  },
+  {
+    "boyId": 1,
+    "date": "2021-07-10T20:06:04.353Z",
+    "location": {
+      "longitude": 8.090500804277852,
+      "latitude": 48.51709128870875
+    },
+    "value": 11.97
+  },
+  {
+    "boyId": 3,
+    "date": "2020-12-07T09:10:27.092Z",
+    "location": {
+      "longitude": 12.192149795700654,
+      "latitude": 51.32733930002486
+    },
+    "value": 90.06
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-04T04:38:48.258Z",
+    "location": {
+      "longitude": 9.210966115458142,
+      "latitude": 48.68091505418631
+    },
+    "value": 39.45
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-08T10:23:35.247Z",
+    "location": {
+      "longitude": 8.720450615238246,
+      "latitude": 50.77103897040175
+    },
+    "value": 99.67
+  },
+  {
+    "boyId": 1,
+    "date": "2020-12-15T14:17:46.333Z",
+    "location": {
+      "longitude": 10.15615180215169,
+      "latitude": 47.56309735558039
+    },
+    "value": 7.79
+  },
+  {
+    "boyId": 5,
+    "date": "2021-04-11T08:34:18.597Z",
+    "location": {
+      "longitude": 9.663142162325638,
+      "latitude": 49.541831934379225
+    },
+    "value": 94.02
+  },
+  {
+    "boyId": 3,
+    "date": "2021-09-06T15:34:51.836Z",
+    "location": {
+      "longitude": 6.562891703811649,
+      "latitude": 52.15695491379844
+    },
+    "value": 31.96
+  },
+  {
+    "boyId": 1,
+    "date": "2020-09-27T15:00:46.151Z",
+    "location": {
+      "longitude": 9.112856628674322,
+      "latitude": 48.74549409392008
+    },
+    "value": 8.72
+  },
+  {
+    "boyId": 4,
+    "date": "2020-10-02T00:48:33.743Z",
+    "location": {
+      "longitude": 11.897530005208012,
+      "latitude": 50.06965221520785
+    },
+    "value": 6.17
+  },
+  {
+    "boyId": 3,
+    "date": "2020-10-10T16:35:41.880Z",
+    "location": {
+      "longitude": 9.754367815875709,
+      "latitude": 50.49417453903619
+    },
+    "value": 81.9
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-22T02:38:09.927Z",
+    "location": {
+      "longitude": 11.41342457784362,
+      "latitude": 54.687307800280614
+    },
+    "value": 22.89
+  },
+  {
+    "boyId": 4,
+    "date": "2020-10-26T18:37:29.838Z",
+    "location": {
+      "longitude": 13.165560144466667,
+      "latitude": 49.00712164643552
+    },
+    "value": 64.31
+  },
+  {
+    "boyId": 0,
+    "date": "2020-10-29T11:10:15.744Z",
+    "location": {
+      "longitude": 8.1947423569353,
+      "latitude": 52.876045722069264
+    },
+    "value": 42.05
+  },
+  {
+    "boyId": 1,
+    "date": "2021-04-15T14:18:25.276Z",
+    "location": {
+      "longitude": 7.972594909328892,
+      "latitude": 50.71539029439317
+    },
+    "value": 30.83
+  },
+  {
+    "boyId": 0,
+    "date": "2020-12-30T22:12:42.404Z",
+    "location": {
+      "longitude": 9.579958250760871,
+      "latitude": 51.13775491313971
+    },
+    "value": 14.06
+  },
+  {
+    "boyId": 2,
+    "date": "2021-03-18T08:02:27.368Z",
+    "location": {
+      "longitude": 7.320711457594477,
+      "latitude": 53.60862711917245
+    },
+    "value": 56.89
+  },
+  {
+    "boyId": 4,
+    "date": "2021-08-15T16:55:31.497Z",
+    "location": {
+      "longitude": 9.750380737837466,
+      "latitude": 48.50975275476279
+    },
+    "value": 87.38
+  },
+  {
+    "boyId": 2,
+    "date": "2020-12-22T20:50:22.954Z",
+    "location": {
+      "longitude": 11.388271309964107,
+      "latitude": 50.7796039241968
+    },
+    "value": 70.37
+  },
+  {
+    "boyId": 5,
+    "date": "2020-11-05T02:27:46.628Z",
+    "location": {
+      "longitude": 6.614708118725208,
+      "latitude": 51.5946311538248
+    },
+    "value": 1.32
+  },
+  {
+    "boyId": 2,
+    "date": "2021-01-25T09:33:30.569Z",
+    "location": {
+      "longitude": 10.321845924620135,
+      "latitude": 50.33672737476946
+    },
+    "value": 29.67
+  },
+  {
+    "boyId": 6,
+    "date": "2021-03-10T14:24:38.610Z",
+    "location": {
+      "longitude": 10.110561836591781,
+      "latitude": 51.82155060071673
+    },
+    "value": 66.4
+  },
+  {
+    "boyId": 5,
+    "date": "2021-09-01T02:25:17.042Z",
+    "location": {
+      "longitude": 6.6592799525597455,
+      "latitude": 52.9636986847959
+    },
+    "value": 32.31
+  },
+  {
+    "boyId": 2,
+    "date": "2021-04-29T21:51:37.030Z",
+    "location": {
+      "longitude": 8.35418477910122,
+      "latitude": 49.711222002378726
+    },
+    "value": 42.32
+  },
+  {
+    "boyId": 2,
+    "date": "2021-08-08T07:45:40.733Z",
+    "location": {
+      "longitude": 7.352481828864327,
+      "latitude": 53.38994451508411
+    },
+    "value": 76.94
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-17T08:15:24.468Z",
+    "location": {
+      "longitude": 12.7396676161525,
+      "latitude": 51.524239452804125
+    },
+    "value": 28.09
+  },
+  {
+    "boyId": 2,
+    "date": "2020-10-26T02:54:13.918Z",
+    "location": {
+      "longitude": 8.603441243854302,
+      "latitude": 51.25769369694571
+    },
+    "value": 40.13
+  },
+  {
+    "boyId": 2,
+    "date": "2021-08-31T09:46:47.167Z",
+    "location": {
+      "longitude": 8.99480899832379,
+      "latitude": 52.167658533390664
+    },
+    "value": 86.86
+  },
+  {
+    "boyId": 4,
+    "date": "2020-10-28T01:41:33.255Z",
+    "location": {
+      "longitude": 11.81262628389575,
+      "latitude": 48.97486441512604
+    },
+    "value": 16.76
+  },
+  {
+    "boyId": 3,
+    "date": "2020-10-10T00:07:54.608Z",
+    "location": {
+      "longitude": 11.0112551019512,
+      "latitude": 50.50657944144884
+    },
+    "value": 14.82
+  },
+  {
+    "boyId": 4,
+    "date": "2020-10-29T16:30:04.439Z",
+    "location": {
+      "longitude": 6.308364541434279,
+      "latitude": 47.69318277424371
+    },
+    "value": 48.78
+  },
+  {
+    "boyId": 6,
+    "date": "2021-05-24T13:21:25.065Z",
+    "location": {
+      "longitude": 10.21575754445097,
+      "latitude": 49.42717478560619
+    },
+    "value": 79.19
+  },
+  {
+    "boyId": 0,
+    "date": "2021-07-10T06:56:13.516Z",
+    "location": {
+      "longitude": 12.270964366551445,
+      "latitude": 48.43817397117453
+    },
+    "value": 46.86
+  },
+  {
+    "boyId": 1,
+    "date": "2021-05-10T05:18:29.548Z",
+    "location": { "longitude": 7.387194875828955, "latitude": 47.796001396473 },
+    "value": 94.25
+  },
+  {
+    "boyId": 3,
+    "date": "2021-08-05T04:02:29.322Z",
+    "location": {
+      "longitude": 8.83244691606727,
+      "latitude": 47.63835261554753
+    },
+    "value": 76
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-06T07:56:41.845Z",
+    "location": {
+      "longitude": 9.282176713773909,
+      "latitude": 47.99237833045525
+    },
+    "value": 69.66
+  },
+  {
+    "boyId": 2,
+    "date": "2021-05-01T06:07:23.287Z",
+    "location": {
+      "longitude": 12.781954455482186,
+      "latitude": 47.85314949365977
+    },
+    "value": 50.94
+  },
+  {
+    "boyId": 3,
+    "date": "2021-01-22T06:43:06.898Z",
+    "location": {
+      "longitude": 12.66822018057906,
+      "latitude": 48.680037175906875
+    },
+    "value": 96.73
+  },
+  {
+    "boyId": 1,
+    "date": "2021-03-26T23:50:46.087Z",
+    "location": {
+      "longitude": 6.179374935254868,
+      "latitude": 48.457112845966336
+    },
+    "value": 21.5
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-15T16:31:31.338Z",
+    "location": {
+      "longitude": 9.291136458421343,
+      "latitude": 50.65553022992577
+    },
+    "value": 1.97
+  },
+  {
+    "boyId": 0,
+    "date": "2021-02-14T08:07:17.807Z",
+    "location": {
+      "longitude": 9.707085157778087,
+      "latitude": 51.62444703723942
+    },
+    "value": 70.72
+  },
+  {
+    "boyId": 4,
+    "date": "2020-12-28T05:18:02.619Z",
+    "location": {
+      "longitude": 10.974222945962634,
+      "latitude": 53.2865831921809
+    },
+    "value": 97.34
+  },
+  {
+    "boyId": 4,
+    "date": "2021-01-07T02:50:06.510Z",
+    "location": {
+      "longitude": 14.905347951476998,
+      "latitude": 51.28233791722988
+    },
+    "value": 26.69
+  },
+  {
+    "boyId": 0,
+    "date": "2021-03-12T02:51:22.229Z",
+    "location": {
+      "longitude": 12.60882678909136,
+      "latitude": 52.64306720497278
+    },
+    "value": 70.23
+  },
+  {
+    "boyId": 2,
+    "date": "2021-01-25T21:34:54.783Z",
+    "location": {
+      "longitude": 7.18773796180303,
+      "latitude": 51.275182249653774
+    },
+    "value": 96.04
+  },
+  {
+    "boyId": 6,
+    "date": "2021-01-15T18:02:53.092Z",
+    "location": {
+      "longitude": 8.989868944916626,
+      "latitude": 51.83577474116205
+    },
+    "value": 86.61
+  },
+  {
+    "boyId": 1,
+    "date": "2020-10-10T04:38:31.319Z",
+    "location": {
+      "longitude": 12.886145079061167,
+      "latitude": 53.354553690127055
+    },
+    "value": 73.44
+  },
+  {
+    "boyId": 0,
+    "date": "2020-10-23T13:21:25.245Z",
+    "location": {
+      "longitude": 9.679915128645725,
+      "latitude": 51.720654587908044
+    },
+    "value": 72.08
+  },
+  {
+    "boyId": 3,
+    "date": "2021-04-28T20:26:19.460Z",
+    "location": {
+      "longitude": 7.510931357968561,
+      "latitude": 50.417380546685976
+    },
+    "value": 39.05
+  },
+  {
+    "boyId": 4,
+    "date": "2020-10-07T23:22:14.237Z",
+    "location": {
+      "longitude": 9.58383578277953,
+      "latitude": 50.412472484096085
+    },
+    "value": 45.66
+  },
+  {
+    "boyId": 1,
+    "date": "2021-06-13T00:40:32.987Z",
+    "location": {
+      "longitude": 14.34441589023968,
+      "latitude": 51.695196584690706
+    },
+    "value": 8.45
+  },
+  {
+    "boyId": 4,
+    "date": "2021-09-13T12:44:59.749Z",
+    "location": {
+      "longitude": 8.974640808258343,
+      "latitude": 52.91304989536111
+    },
+    "value": 2.08
+  },
+  {
+    "boyId": 2,
+    "date": "2021-01-16T04:17:53.442Z",
+    "location": {
+      "longitude": 12.755834461574166,
+      "latitude": 51.42060140445557
+    },
+    "value": 29.59
+  },
+  {
+    "boyId": 6,
+    "date": "2021-04-18T14:38:32.710Z",
+    "location": {
+      "longitude": 10.803207325662989,
+      "latitude": 47.71223018375229
+    },
+    "value": 32.85
+  },
+  {
+    "boyId": 4,
+    "date": "2021-04-15T15:11:18.934Z",
+    "location": {
+      "longitude": 12.927986928476098,
+      "latitude": 52.0835400218321
+    },
+    "value": 30.02
+  },
+  {
+    "boyId": 4,
+    "date": "2020-12-03T09:55:18.134Z",
+    "location": {
+      "longitude": 12.85581995274895,
+      "latitude": 53.31920226930296
+    },
+    "value": 92.69
+  },
+  {
+    "boyId": 5,
+    "date": "2021-09-03T19:52:05.275Z",
+    "location": {
+      "longitude": 13.63711100876153,
+      "latitude": 50.92151933452643
+    },
+    "value": 42
+  },
+  {
+    "boyId": 4,
+    "date": "2020-10-27T04:06:08.841Z",
+    "location": {
+      "longitude": 12.265935228310378,
+      "latitude": 48.54140565705414
+    },
+    "value": 20.02
+  },
+  {
+    "boyId": 1,
+    "date": "2021-04-22T08:46:40.213Z",
+    "location": {
+      "longitude": 7.09607103122185,
+      "latitude": 48.569522437004345
+    },
+    "value": 79.5
+  },
+  {
+    "boyId": 0,
+    "date": "2021-03-30T11:21:41.991Z",
+    "location": {
+      "longitude": 7.30753932374922,
+      "latitude": 51.583109463174175
+    },
+    "value": 31.56
+  },
+  {
+    "boyId": 1,
+    "date": "2020-11-15T12:43:59.216Z",
+    "location": {
+      "longitude": 12.793951352429744,
+      "latitude": 51.701091557722684
+    },
+    "value": 51.27
+  },
+  {
+    "boyId": 3,
+    "date": "2021-02-27T17:19:42.038Z",
+    "location": {
+      "longitude": 12.607076786003105,
+      "latitude": 50.65749082168755
+    },
+    "value": 3.39
+  },
+  {
+    "boyId": 2,
+    "date": "2021-06-24T11:44:57.066Z",
+    "location": {
+      "longitude": 9.456810018718352,
+      "latitude": 51.819441045396374
+    },
+    "value": 22.39
+  },
+  {
+    "boyId": 6,
+    "date": "2021-06-27T01:05:19.263Z",
+    "location": {
+      "longitude": 7.352919378800314,
+      "latitude": 52.51527033393464
+    },
+    "value": 33.04
+  },
+  {
+    "boyId": 6,
+    "date": "2021-04-05T02:53:45.643Z",
+    "location": {
+      "longitude": 8.556415282204785,
+      "latitude": 48.07332111442183
+    },
+    "value": 81.4
+  },
+  {
+    "boyId": 3,
+    "date": "2020-12-18T22:06:29.063Z",
+    "location": {
+      "longitude": 8.74046227251826,
+      "latitude": 54.205484033222746
+    },
+    "value": 57.1
+  },
+  {
+    "boyId": 3,
+    "date": "2020-10-06T20:40:25.738Z",
+    "location": {
+      "longitude": 9.386861959933054,
+      "latitude": 49.40148100677882
+    },
+    "value": 84.57
+  },
+  {
+    "boyId": 3,
+    "date": "2021-08-27T03:51:38.804Z",
+    "location": {
+      "longitude": 12.145737016750996,
+      "latitude": 53.55747544591397
+    },
+    "value": 91.6
+  },
+  {
+    "boyId": 3,
+    "date": "2020-10-06T13:52:50.555Z",
+    "location": {
+      "longitude": 8.757346700845318,
+      "latitude": 52.39214698654324
+    },
+    "value": 47.59
+  },
+  {
+    "boyId": 5,
+    "date": "2021-04-04T22:04:10.864Z",
+    "location": {
+      "longitude": 8.88905857481484,
+      "latitude": 49.10468260731191
+    },
+    "value": 24.16
+  },
+  {
+    "boyId": 2,
+    "date": "2021-06-02T00:35:44.527Z",
+    "location": {
+      "longitude": 12.442231098859152,
+      "latitude": 50.977636383854566
+    },
+    "value": 94.37
+  },
+  {
+    "boyId": 4,
+    "date": "2021-03-10T01:31:51.189Z",
+    "location": {
+      "longitude": 12.145231997424839,
+      "latitude": 52.14179375190755
+    },
+    "value": 21.65
+  },
+  {
+    "boyId": 1,
+    "date": "2020-11-13T10:05:52.324Z",
+    "location": {
+      "longitude": 9.271950348973089,
+      "latitude": 50.42395445476283
+    },
+    "value": 13.9
+  },
+  {
+    "boyId": 1,
+    "date": "2021-02-08T13:13:51.285Z",
+    "location": {
+      "longitude": 6.854648640919934,
+      "latitude": 49.871462386778354
+    },
+    "value": 12.42
+  },
+  {
+    "boyId": 2,
+    "date": "2021-07-25T14:42:27.320Z",
+    "location": {
+      "longitude": 12.231470467654697,
+      "latitude": 52.92065769728668
+    },
+    "value": 12.88
+  },
+  {
+    "boyId": 0,
+    "date": "2021-07-11T07:58:17.287Z",
+    "location": {
+      "longitude": 10.09229543806804,
+      "latitude": 50.37794867702021
+    },
+    "value": 44.37
+  },
+  {
+    "boyId": 1,
+    "date": "2021-01-18T02:34:55.938Z",
+    "location": {
+      "longitude": 11.563505342078512,
+      "latitude": 50.908984673569954
+    },
+    "value": 95.64
+  },
+  {
+    "boyId": 3,
+    "date": "2021-07-15T21:09:42.081Z",
+    "location": {
+      "longitude": 10.386597782693148,
+      "latitude": 52.925280500596294
+    },
+    "value": 2.19
+  },
+  {
+    "boyId": 3,
+    "date": "2020-12-20T16:20:02.414Z",
+    "location": {
+      "longitude": 11.52451814214508,
+      "latitude": 50.430569042879036
+    },
+    "value": 37.07
+  },
+  {
+    "boyId": 3,
+    "date": "2021-06-30T10:44:13.256Z",
+    "location": {
+      "longitude": 11.581255541150174,
+      "latitude": 53.22372334766828
+    },
+    "value": 50.65
+  },
+  {
+    "boyId": 5,
+    "date": "2021-05-14T21:19:22.395Z",
+    "location": {
+      "longitude": 13.41438037474248,
+      "latitude": 47.84130645418691
+    },
+    "value": 5.08
+  },
+  {
+    "boyId": 4,
+    "date": "2021-08-28T12:36:22.036Z",
+    "location": {
+      "longitude": 14.327100982539896,
+      "latitude": 47.96570079486984
+    },
+    "value": 27.53
+  },
+  {
+    "boyId": 3,
+    "date": "2020-10-29T13:22:31.977Z",
+    "location": {
+      "longitude": 10.423242901888884,
+      "latitude": 51.91205759200618
+    },
+    "value": 23.08
+  },
+  {
+    "boyId": 1,
+    "date": "2021-09-06T06:51:48.709Z",
+    "location": {
+      "longitude": 10.550237501548057,
+      "latitude": 48.171536055980226
+    },
+    "value": 68.76
+  },
+  {
+    "boyId": 6,
+    "date": "2020-12-09T00:19:00.428Z",
+    "location": {
+      "longitude": 7.8880173043545545,
+      "latitude": 49.667842477124225
+    },
+    "value": 76.45
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-04T00:53:45.805Z",
+    "location": {
+      "longitude": 11.075408909349154,
+      "latitude": 49.465682017134284
+    },
+    "value": 38.07
+  },
+  {
+    "boyId": 0,
+    "date": "2021-01-12T14:43:48.768Z",
+    "location": {
+      "longitude": 12.172888154879251,
+      "latitude": 49.17790591190319
+    },
+    "value": 97.97
+  },
+  {
+    "boyId": 1,
+    "date": "2021-04-16T20:47:21.740Z",
+    "location": {
+      "longitude": 10.66435465229953,
+      "latitude": 48.87387672579897
+    },
+    "value": 12.49
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-31T18:04:47.554Z",
+    "location": {
+      "longitude": 12.738465188406956,
+      "latitude": 51.16562830330072
+    },
+    "value": 98.28
+  },
+  {
+    "boyId": 4,
+    "date": "2021-07-26T13:52:04.369Z",
+    "location": {
+      "longitude": 11.782705944753017,
+      "latitude": 51.18805574910323
+    },
+    "value": 33.41
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-30T23:05:52.583Z",
+    "location": {
+      "longitude": 9.455962317541706,
+      "latitude": 52.30721075786598
+    },
+    "value": 19.73
+  },
+  {
+    "boyId": 6,
+    "date": "2021-02-14T02:24:13.969Z",
+    "location": {
+      "longitude": 12.767397938207381,
+      "latitude": 51.909855085960565
+    },
+    "value": 25.32
+  },
+  {
+    "boyId": 5,
+    "date": "2021-08-08T01:13:54.204Z",
+    "location": {
+      "longitude": 13.209301550704517,
+      "latitude": 52.52011738632365
+    },
+    "value": 78.3
+  },
+  {
+    "boyId": 4,
+    "date": "2021-05-07T01:07:44.888Z",
+    "location": {
+      "longitude": 14.727528020722783,
+      "latitude": 53.55037370792927
+    },
+    "value": 40.84
+  },
+  {
+    "boyId": 2,
+    "date": "2021-01-23T05:15:07.609Z",
+    "location": {
+      "longitude": 9.157952875054827,
+      "latitude": 52.042604282662936
+    },
+    "value": 97.54
+  },
+  {
+    "boyId": 0,
+    "date": "2021-04-14T07:53:35.623Z",
+    "location": {
+      "longitude": 7.091934462639115,
+      "latitude": 49.29144504355907
+    },
+    "value": 30.2
+  },
+  {
+    "boyId": 0,
+    "date": "2021-08-19T13:59:14.030Z",
+    "location": {
+      "longitude": 7.092844750175882,
+      "latitude": 48.88346923124823
+    },
+    "value": 0.22
+  },
+  {
+    "boyId": 1,
+    "date": "2021-09-09T05:40:40.157Z",
+    "location": {
+      "longitude": 11.622000616467783,
+      "latitude": 50.41988274923823
+    },
+    "value": 85.46
+  },
+  {
+    "boyId": 4,
+    "date": "2021-04-02T18:37:33.231Z",
+    "location": {
+      "longitude": 11.194669094032065,
+      "latitude": 50.68810586661487
+    },
+    "value": 95.8
+  },
+  {
+    "boyId": 2,
+    "date": "2021-04-13T02:11:37.492Z",
+    "location": {
+      "longitude": 10.873690073555395,
+      "latitude": 52.78155654413173
+    },
+    "value": 1.3
+  },
+  {
+    "boyId": 1,
+    "date": "2021-01-02T13:27:35.227Z",
+    "location": {
+      "longitude": 8.52385397970786,
+      "latitude": 50.57923050971749
+    },
+    "value": 68.39
+  },
+  {
+    "boyId": 5,
+    "date": "2021-07-03T22:37:13.840Z",
+    "location": {
+      "longitude": 13.20716270186065,
+      "latitude": 54.34650447043643
+    },
+    "value": 44.89
+  },
+  {
+    "boyId": 6,
+    "date": "2021-03-19T13:17:26.166Z",
+    "location": {
+      "longitude": 8.237416988741929,
+      "latitude": 47.90778967863084
+    },
+    "value": 58.37
+  },
+  {
+    "boyId": 1,
+    "date": "2021-08-26T21:44:40.512Z",
+    "location": {
+      "longitude": 13.33305220895313,
+      "latitude": 54.107581990477286
+    },
+    "value": 20.89
+  },
+  {
+    "boyId": 5,
+    "date": "2021-06-14T11:02:04.332Z",
+    "location": {
+      "longitude": 12.580249004175403,
+      "latitude": 50.45917937670702
+    },
+    "value": 99.01
+  },
+  {
+    "boyId": 5,
+    "date": "2021-06-08T06:39:13.459Z",
+    "location": {
+      "longitude": 7.730853740201015,
+      "latitude": 51.84613151480219
+    },
+    "value": 73.73
+  },
+  {
+    "boyId": 3,
+    "date": "2021-03-09T00:50:15.763Z",
+    "location": {
+      "longitude": 13.117288324869545,
+      "latitude": 53.216004352141915
+    },
+    "value": 19.56
+  },
+  {
+    "boyId": 5,
+    "date": "2021-09-05T11:21:37.638Z",
+    "location": {
+      "longitude": 7.16964873717193,
+      "latitude": 49.89368930614976
+    },
+    "value": 18.14
+  },
+  {
+    "boyId": 5,
+    "date": "2021-02-18T17:20:58.650Z",
+    "location": {
+      "longitude": 8.787344552889438,
+      "latitude": 49.40192412089396
+    },
+    "value": 29.93
+  },
+  {
+    "boyId": 1,
+    "date": "2021-04-28T11:00:06.858Z",
+    "location": {
+      "longitude": 8.561879734380621,
+      "latitude": 53.234560951753316
+    },
+    "value": 96.64
+  },
+  {
+    "boyId": 1,
+    "date": "2021-06-16T22:18:31.359Z",
+    "location": {
+      "longitude": 10.217683359720859,
+      "latitude": 51.00707570657502
+    },
+    "value": 61.92
+  }
+]

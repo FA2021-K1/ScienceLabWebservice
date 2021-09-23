@@ -4,62 +4,55 @@ import Button from "@mui/material/Button";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Stack from "@mui/material/Stack";
-
+import { useSelector } from "react-redux";
 
 export const ValueList = () => {
-    const renderRow = (props)  => {
-        const { index, style, buoyID, measurementValue, timeStamp } = props;
-      
-        return (
-          <ListItem
-            style={style}
-            key={index}
-            buoy={buoyID}
-            measurement={measurementValue}
-            time={timeStamp}
-            component="div"
-            disablePadding
-          >
-            <ListItem>
-              <ListItemText
-                primary={`Sensor ${index + 1}`}
-                secondary={`Buoy ${buoyID}`}
-              />
-      
-              <ListItemText
-                align="right"
-                primary={`Value ${measurementValue}`}
-                secondary={`time ${timeStamp}`}
-              />
-            </ListItem>
-          </ListItem>
-        );
-      }
+  const jsonData = useSelector((state) => state.data.data);
+  const renderRow = ({ index }) => {
+    return (
+      <ListItem key={index} component="div" disablePadding>
+        <ListItem>
+          <ListItemText
+            primary={`Sensor ${1}`}
+            secondary={`Buoy ${jsonData[index].boyId}`}
+          />
+
+          <ListItemText
+            align="right"
+            primary={`Value ${jsonData[index].value}`}
+            secondary={`time ${jsonData[index].date}`}
+          />
+        </ListItem>
+      </ListItem>
+    );
+  };
 
   return (
-    <Box sx={{ width: "100%", height: '100%', bgcolor: "background.paper" }}>
-
+    <Box sx={{ width: "100%", height: "100%", bgcolor: "background.paper" }}>
       <Stack spacing={2} direction="row">
         <div id="latest-data-received">
           <div>
             <h2>Latest data received</h2>
           </div>
           <div id="more-data-button">
-            <Button height ='100' variant="contained" href="">
+            <Button height="100" variant="contained" href="">
               More data
             </Button>
           </div>
         </div>
       </Stack>
-
-      <FixedSizeList
-        height={400}
-        itemSize={50}
-        itemCount={200}
-        overscanCount={5}
-      >
-        {renderRow}
-      </FixedSizeList>
+      {jsonData ? (
+        <FixedSizeList
+          height={400}
+          itemSize={50}
+          itemCount={jsonData.length}
+          overscanCount={5}
+        >
+          {renderRow}
+        </FixedSizeList>
+      ) : (
+        "Data Loading"
+      )}
     </Box>
   );
 };
