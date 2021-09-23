@@ -40,10 +40,16 @@ export const ValueList = () => {
     <Box sx={{ width: "100%", height: 600, bgcolor: "background.paper" }}>
 
       <Stack spacing={2} direction="row">
-        <h2>Latest data received</h2>
-        <Button height="100" variant="contained" href="">
-          More data
-        </Button>
+        <div id="latest-data-received">
+          <div>
+            <h2>Latest data received</h2>
+          </div>
+          <div id="more-data-button">
+            <Button height ='100' variant="contained" href="">
+              More data
+            </Button>
+          </div>
+        </div>
       </Stack>
 
       <FixedSizeList
