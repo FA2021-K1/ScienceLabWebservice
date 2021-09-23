@@ -13,7 +13,6 @@ import { MapboxContainer } from "./features/mapbox/mapbox";
 import { SliderContainer } from "./features/slider/slider";
 import { Boxplot } from "./features/boxplot/Boxplot";
 import {ValueList} from "./features/valueList/ValueList";
-
 import { getJsonData } from "./dataSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -21,6 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
 }));
+
 
 export const App = ()  => {
   const dispatch = useDispatch();
