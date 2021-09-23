@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
+import SensorToggleButton from "./ToggleButton";
 
 export const Boxplot = () => {
   const [series,] = useState([
@@ -44,7 +45,17 @@ export const Boxplot = () => {
   const [options,] = useState({
     chart: {
       type: "boxPlot",
-      width: '400'
+      width: '400',
+      toolbar: {
+        tools: {
+          download: true,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false
+        },
+      },
     },
     colors: ["#008FFB", "#FEB019"],
     title: {
@@ -71,6 +82,7 @@ export const Boxplot = () => {
   });
 
   return (
+    <div>
     <div id="chart">
       <Chart
         options={options}
@@ -78,6 +90,8 @@ export const Boxplot = () => {
         type="boxPlot"
         height={'350'}
       />
+    </div>
+    <div> <SensorToggleButton size="large"/> </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-export default function ColorToggleButton() {
+export default function SensorToggleButton() {
   const [alignment, setAlignment] = React.useState('web');
 
   const handleChange = (event, newAlignment) => {
