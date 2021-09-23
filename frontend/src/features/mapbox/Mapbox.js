@@ -103,7 +103,57 @@ export const Mapbox = () => {
           },
         });
       }
-
+      /*
+      map.current.addLayer({
+        id: "heatmap",
+        type: "heatmap",
+        source: null,
+        paint: {
+          "heatmap-weight": {
+            property: "dbh",
+            type: "exponential",
+            stops: [
+              [1, 0],
+              [62, 1],
+            ],
+          },
+          'heatmap-intensity': {
+            stops: [
+              [11, 1],
+              [15, 3]
+            ]
+          },
+          'heatmap-color': [
+            'interpolate',
+            ['linear'],
+            ['heatmap-density'],
+            0,
+            'rgba(236,222,239,0)',
+            0.2,
+            'rgb(208,209,230)',
+            0.4,
+            'rgb(166,189,219)',
+            0.6,
+            'rgb(103,169,207)',
+            0.8,
+            'rgb(28,144,153)'
+          ],
+          'heatmap-radius': {
+            stops: [
+              [11, 15],
+              [15, 20]
+            ]
+          },
+          'heatmap-opacity': {
+            default: 1,
+            stops: [
+              [14, 1],
+              [15, 0]
+            ]
+          }
+        },
+      });
+      */
       map.current.addLayer({
         id: "circles",
         type: "circle",
@@ -121,7 +171,8 @@ export const Mapbox = () => {
     <div>
       <div className="sidebar top">
         {dateFormatter(selectedTime)}
-        {selectedTime.toLocaleString() === new Date().toLocaleString() ? null : (
+        {selectedTime.toLocaleString() ===
+        new Date().toLocaleString() ? null : (
           <Button
             onClick={() => {
               const date = new Date();
