@@ -19,13 +19,15 @@ import { getJsonData } from "./dataSlice";
 export const App = ()  => {
   const dispatch = useDispatch();
   const dataState = useSelector((state) => state.data.dataState);
+  const style = useSelector((state) => state.style)
   //const data = useSelector((state) => state.data.data);
 
   useEffect(() => {
+    console.log(style)
     if (dataState === "idle") {
       dispatch(getJsonData());
     }
-  }, [dispatch, dataState]);
+  }, [dispatch, dataState, style]);
   return (
     <React.StrictMode>
       <Header />
