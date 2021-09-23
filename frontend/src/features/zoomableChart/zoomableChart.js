@@ -1,11 +1,13 @@
 import Chart from "react-apexcharts";
-import dummyData from "data_context";
+import React, { useEffect, useState } from "react";
 
-export const zoomableChart = () => {
+//import dummyData from "data_context";
+
+export const ZoomableChart = () => {
   const [series, setSeries] = useState([
     {
       name: "XYZ MOTORS",
-      data: dummyData,
+      data: [0,1,2,3,4,5,6,7,8,9],//dummyData,
     },
   ]);
 
@@ -72,7 +74,7 @@ export const zoomableChart = () => {
         options={options}
         series={series}
         type="area"
-        height={350}
+        height={450}
       />
     </div>
   );

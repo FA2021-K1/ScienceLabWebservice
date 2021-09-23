@@ -53,7 +53,7 @@ export const ValueList = () => {
       </Stack>
 
       <FixedSizeList
-        height={500}
+        height={400}
         itemSize={50}
         itemCount={200}
         overscanCount={5}

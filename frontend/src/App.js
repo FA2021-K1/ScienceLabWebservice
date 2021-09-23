@@ -10,9 +10,10 @@ import { Header } from "./features/header/Header.js";
 
 import { LineChart } from "./features/lineChart/LineChart";
 import { MapboxContainer } from "./features/mapbox/mapbox";
-import { SliderContainer } from "./features/slider/slider";
 import { Boxplot } from "./features/boxplot/Boxplot";
 import {ValueList} from "./features/valueList/ValueList";
+import {ZoomableChart} from "./features/zoomableChart/zoomableChart";
+import {ColumnChart} from "./features/columnChart/ColumnChart";
 
 import { getJsonData } from "./dataSlice";
 
@@ -54,28 +55,28 @@ export const App = ()  => {
 
           <Grid item xs={4} xl={4} >
           <Item>
+            <ColumnChart />
+            </Item>
+          </Grid>
+          <Grid item xs={4} xl={4}>
+          <Item>
+            <Boxplot />
+            </Item>
+          </Grid>
+          <Grid item xs={4} xl={4}>
+          <Item>
             <LineChart />
-            </Item>
-          </Grid>
-          <Grid item xs={4} xl={4} className = 'App-GridItem'>
-          <Item>
-            <Boxplot />
-            </Item>
-          </Grid>
-          <Grid item xs={4} xl={4} className = 'App-GridItem'>
-          <Item>
-            <Boxplot />
             </Item>
           </Grid>
 
-          <Grid item xs={4} xl={4} >
-            <Item className = 'App-GridItem'>
+          <Grid item xs={3} xl={3}>
+            <Item>
             <ValueList />
             </Item>
           </Grid>
-          <Grid item xs={8} xl={8}className = 'App-GridItem'>
+          <Grid item xs={9} xl={9} >
           <Item>
-            <LineChart />
+            <ZoomableChart />
             </Item>
           </Grid>
         </Grid>
