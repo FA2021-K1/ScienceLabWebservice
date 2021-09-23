@@ -60,3 +60,7 @@
 #more-data-button {
   margin-left: auto;
 }
+
+a, a:visited, a:hover, a:active {
+  color: #ffffff;
+}

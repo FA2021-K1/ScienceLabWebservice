@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Stack from "@mui/material/Stack";
 
+import { Link } from 'react-router-dom';
 
 export const ValueList = () => {
     const renderRow = (props)  => {
@@ -45,9 +46,11 @@ export const ValueList = () => {
             <h2>Latest data received</h2>
           </div>
           <div id="more-data-button">
-            <Button height ='100' variant="contained" href="">
-              More data
-            </Button>
+            <Link to="/export">
+              <Button height ='100' variant="contained" href="">
+                More data
+              </Button>
+            </Link>
           </div>
         </div>
       </Stack>

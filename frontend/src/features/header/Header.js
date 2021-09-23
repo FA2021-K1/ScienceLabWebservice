@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from "@material-ui/icons/Home";
 import "./header.css";
+import { Link } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,14 +28,16 @@ export const Header = () => {
     <div className={classes.root}>
       <AppBar position= 'sticky'>
         <Toolbar className="toolbar" variant="dense">
-          <IconButton
-            edge="start"
-            className={classes.homeButton}
-            color="inherit"
-            aria-label="home"
-          >
-            <HomeIcon onClick={refreshPage} />
-          </IconButton>
+          <Link to="/home">
+            <IconButton
+              edge="start"
+              className={classes.homeButton}
+              color="inherit"
+              aria-label="home"
+            >
+              <HomeIcon />
+            </IconButton>
+          </Link>
           <Typography variant="h6" color="inherit">
             Sciencelab @ FA 2021
           </Typography>
