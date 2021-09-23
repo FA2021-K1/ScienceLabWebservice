@@ -12,7 +12,7 @@ import { MapboxContainer } from "./features/mapbox/mapbox";
 import { SliderContainer } from "./features/slider/slider";
 import { Boxplot } from "./features/boxplot/Boxplot";
 
-import ListContainer from "./listComponent/list";
+import ListContainer from "./features/list/list";
 
 import { getJsonData, selectData } from "./dataSlice";
 

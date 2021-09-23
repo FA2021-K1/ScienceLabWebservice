@@ -20,7 +20,6 @@ export const MapboxContainer = ()  => {
           center: [lng, lat],
           zoom: zoom
         });
-        
     });
     
     
@@ -63,7 +62,7 @@ export const MapboxContainer = ()  => {
             }));
 
 
-            map.current.addSource('circles', {
+            map.current.addSource('circlesPosition', {
                 'type': 'geojson',
                 'data': {
                     'type': 'FeatureCollection',
@@ -96,7 +95,7 @@ export const MapboxContainer = ()  => {
             map.current.addLayer({
                 'id': 'circles',
                 'type': 'circle',
-                'source': 'circles',
+                'source': 'circlesPosition',
                 'paint': {
                     'circle-color': '#4264fb',
                     'circle-radius': 20,
