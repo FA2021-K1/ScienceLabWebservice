@@ -37,17 +37,23 @@ export const ValueList = () => {
       }
 
   return (
-    <Box sx={{ width: "100%", height: 600, bgcolor: "background.paper" }}>
+    <Box sx={{ width: "100%", height: '100%', bgcolor: "background.paper" }}>
 
       <Stack spacing={2} direction="row">
-        <h2>Latest data received</h2>
-        <Button height="100" variant="contained" href="">
-          More data
-        </Button>
+        <div id="latest-data-received">
+          <div>
+            <h2>Latest data received</h2>
+          </div>
+          <div id="more-data-button">
+            <Button height ='100' variant="contained" href="">
+              More data
+            </Button>
+          </div>
+        </div>
       </Stack>
 
       <FixedSizeList
-        height={400}
+        height={500}
         itemSize={50}
         itemCount={200}
         overscanCount={5}
