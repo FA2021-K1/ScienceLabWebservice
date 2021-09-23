@@ -1,32 +1,24 @@
-name: Build and Test
-
-on:
-  push:
-    branches:
-      - develop
-  pull_request:
-    branches:
-      - develop
+name: Build and Test (deprecated)
 
 jobs:
   # Doesn't work since MacOS12 is required, not available via GitHub Actions yet
-#  macoswebservices:
-#    name: macOS WebService
-#    runs-on: macos-11
-#    defaults:
-#      run:
-#        working-directory: ./WebService
-#    steps:
-#    - uses: actions/checkout@v2
-#    - uses: maxim-lobanov/setup-xcode@v1.1
-#      with:
-#        xcode-version: latest
-#    - name: Check Xcode version
-#      run: xcodebuild -version
-#    - name: Check Swift version
-#      run: swift --version
-#    - name: Build and test
-#      run: swift test
+  #  macoswebservices:
+  #    name: macOS WebService
+  #    runs-on: macos-11
+  #    defaults:
+  #      run:
+  #        working-directory: ./WebService
+  #    steps:
+  #    - uses: actions/checkout@v2
+  #    - uses: maxim-lobanov/setup-xcode@v1.1
+  #      with:
+  #        xcode-version: latest
+  #    - name: Check Xcode version
+  #      run: xcodebuild -version
+  #    - name: Check Swift version
+  #      run: swift --version
+  #    - name: Build and test
+  #      run: swift test
   linuxwebservices:
     name: Linux WebService ${{ matrix.linux }}
     runs-on: ubuntu-latest
@@ -39,17 +31,17 @@ jobs:
       run:
         working-directory: ./WebService
     steps:
-    - uses: actions/checkout@v2
-    - name: Install libsqlite3
-      if: ${{ !(startsWith( matrix.linux, 'centos' ) || startsWith( matrix.linux, 'amazonlinux' )) }}
-      run: apt-get update && apt-get install -y --no-install-recommends libsqlite3-dev
-    - name: Install libsqlite3
-      if: startsWith( matrix.linux, 'amazonlinux' )
-      run: yum update -y && yum install -y sqlite-devel
-    - name: Install libsqlite3
-      if: startsWith( matrix.linux, 'centos' )
-      run: yum update -y --nobest && yum install -y sqlite-devel
-    - name: Check Swift version
-      run: swift --version
-    - name: Build and test
-      run: swift test -Xswiftc -Xfrontend -Xswiftc -sil-verify-none
+      - uses: actions/checkout@v2
+      - name: Install libsqlite3
+        if: ${{ !(startsWith( matrix.linux, 'centos' ) || startsWith( matrix.linux, 'amazonlinux' )) }}
+        run: apt-get update && apt-get install -y --no-install-recommends libsqlite3-dev
+      - name: Install libsqlite3
+        if: startsWith( matrix.linux, 'amazonlinux' )
+        run: yum update -y && yum install -y sqlite-devel
+      - name: Install libsqlite3
+        if: startsWith( matrix.linux, 'centos' )
+        run: yum update -y --nobest && yum install -y sqlite-devel
+      - name: Check Swift version
+        run: swift --version
+      - name: Build and test
+        run: swift test -Xswiftc -Xfrontend -Xswiftc -sil-verify-none
