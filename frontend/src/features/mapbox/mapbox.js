@@ -21,7 +21,7 @@ export const MapboxContainer = () => {
             zoom: zoom
         });
 
-
+        map.current.addControl(new mapboxgl.NavigationControl({}));
 
     });
     if (map.current) {
@@ -61,9 +61,7 @@ export const MapboxContainer = () => {
                 .setPopup(popup3)
                 .addTo(map.current);
 
-            map.current.addControl(new mapboxgl.NavigationControl({
-                showCompass: true,
-            }));
+            
 
             if (!map.current.getSource('circlesPosition')) {
 
