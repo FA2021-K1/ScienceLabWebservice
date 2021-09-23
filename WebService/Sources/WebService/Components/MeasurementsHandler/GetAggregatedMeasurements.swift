@@ -76,8 +76,7 @@ struct GetAggregatedMeasurements: Handler {
                 JOIN "measurementsData" d ON (m."measurementID" = d."measurementID")
                 JOIN "sensors" s             ON (d."sensorID" = s."sensorID")
                 JOIN "sensorTypes" t         ON (s."sensorTypeID" = t."sensorTypeID")
-                    
-            WHERE t."name" = '\(sensorTyp)' AND s."buoyID" = \(buoyID) AND m."measuredAt" BETWEEN '\(startDate)' AND '\(endDate)'
+            WHERE t."name" = '\(sensorTyp)' AND s."buoyID" = \(buoyID) AND m."measuredAt" BETWEEN '\(startDate.ISO8601Format(.init(dateSeparator: .dash, dateTimeSeparator: .space, timeZone: .current)))' AND '\(endDate.ISO8601Format(.init(dateSeparator: .dash, dateTimeSeparator: .space, timeZone: .current)))'
             GROUP BY s."buoyID", date
             )
             SELECT v."buoyID", v."date", v."value",
