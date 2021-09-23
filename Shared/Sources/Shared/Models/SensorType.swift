@@ -20,8 +20,8 @@ public final class SensorType: Model {
     @Field(key: "unit")
     public var unit: String
     
-    //@Children(for: \.$sensorType)
-    //public var sensorAssignment: [SensorAssignment]
+    @Children(for: \.$sensorType)
+    public var sensorAssignment: [Sensor]
     
     public init() { }
     

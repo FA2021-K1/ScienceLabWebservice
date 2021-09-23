@@ -14,8 +14,8 @@ public final class Measurement: Model {
     @Timestamp(key: "updatedAt", on: .update, format: .iso8601(withMilliseconds: true))
     public var updatedAt: Date?
 
-    @Field(key: "measuredAt")
-    public var measuredAt: Date
+    @Timestamp(key: "measuredAt", on: .none)
+    public var measuredAt: Date?
 
     @Field(key: "coordinate")
     public var coordinate: Coordinate
@@ -46,7 +46,12 @@ extension Measurement: Equatable {
 // MARK: Measurement: Comparable
 extension Measurement: Comparable {
     public static func < (lhs: Measurement, rhs: Measurement) -> Bool {
-        lhs.measuredAt < rhs.measuredAt
+        guard let lhsMeasuredAt = lhs.measuredAt,
+              let rhsMeasuredAt = rhs.measuredAt else {
+                  return false
+          }
+        
+        return lhsMeasuredAt < rhsMeasuredAt
     }
 }
 

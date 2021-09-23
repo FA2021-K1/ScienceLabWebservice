@@ -7,7 +7,7 @@ public struct MeasurementMigration: Migration {
         database.schema(Measurement.schema)
             .field("measurementID", .uuid, .identifier(auto: false))
             .field("measuredAt", .datetime, .required)
-            .field("coordinate", .dictionary, .required)
+            .field("coordinate", .json, .required)
             .field("buoyID", .int, .required)
             .field("createdAt", .string, .required)
             .field("updatedAt", .string, .required)

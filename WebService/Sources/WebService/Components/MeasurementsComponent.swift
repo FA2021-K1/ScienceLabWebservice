@@ -12,6 +12,15 @@ struct MeasurementsComponent: Component {
             
             GetMeasurements()
             
+            Group("aggregated") {
+                GetAggregatedMeasurements()
+            }
+            
+            Group("test") {
+                GetTestMeasurement()
+                    .operation(.create)
+            }
+            
             Group($measurementId) {
                 GetMeasurement(measurementId: $measurementId)
                 
