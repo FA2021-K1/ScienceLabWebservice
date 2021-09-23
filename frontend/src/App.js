@@ -13,6 +13,7 @@ import { MapboxContainer } from "./features/mapbox/mapbox";
 import { SliderContainer } from "./features/slider/slider";
 import { Boxplot } from "./features/boxplot/Boxplot";
 import {ValueList} from "./features/valueList/ValueList";
+
 import { getJsonData } from "./dataSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -20,7 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
 }));
-
 
 export const App = ()  => {
   const dispatch = useDispatch();
@@ -37,11 +37,12 @@ export const App = ()  => {
       
       <Header />
       <body className="App-background">
-      <span >
         <Grid
           container
           spacing={2}
           alignItems="center"
+          className = 'App-Grid'
+          autoWidth = 'true'
         >
           <Grid item xs={12} xl={12}>
               <Item>
@@ -49,36 +50,33 @@ export const App = ()  => {
               </Item>
           </Grid>
 
-          <Grid item xs={4} xl={4}>
+          <Grid item xs={4} xl={4} >
           <Item>
             <LineChart />
             </Item>
           </Grid>
-          <Grid item xs={4} xl={4}>
+          <Grid item xs={4} xl={4} className = 'App-GridItem'>
           <Item>
             <Boxplot />
             </Item>
           </Grid>
-          <Grid item xs={4} xl={4}>
+          <Grid item xs={4} xl={4} className = 'App-GridItem'>
           <Item>
             <Boxplot />
             </Item>
           </Grid>
 
-          <Grid item xs={4} xl={4}>
-            <Item>
+          <Grid item xs={4} xl={4} >
+            <Item className = 'App-GridItem'>
             <ValueList />
             </Item>
           </Grid>
-          <Grid item xs={8} xl={8}>
+          <Grid item xs={8} xl={8}className = 'App-GridItem'>
           <Item>
             <LineChart />
             </Item>
           </Grid>
         </Grid>
-      </span>
-
-      <SliderContainer />
     </body>
     </React.StrictMode>
   );
