@@ -1,11 +1,15 @@
+import { useDispatch } from "react-redux";
+
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { subDays, startOfToday, format } from "date-fns";
-import "./slider.css";
 
-export const SliderContainer = () => {
+import { updateSelectedTime } from "../../dataSlice";
+
+export const SliderContainer = ({ selectedTime, setSelectedTime }) => {
   const stepSize = 3 * 60 * 60 * 1000;
   const todayStart = startOfToday();
+  const dispatch = useDispatch();
 
   const marks = [
     {
@@ -37,9 +41,8 @@ export const SliderContainer = () => {
   const currentTimeRounded = roundHours(new Date());
 
   return (
-    <Box sx={{ m: 4, width: 550, border: "1px solid red" , px: 4, py: 2}}>
+    <Box sx={{ width: 550, px: 2, py: 1 }}>
       <Slider
-        //className="slider"
         aria-label="Always visible"
         defaultValue={currentTimeRounded}
         valueLabelFormat={(value) => <div>{dateFormatter(value)}</div>}
@@ -49,7 +52,13 @@ export const SliderContainer = () => {
         marks={marks}
         valueLabelDisplay="auto"
         size="medium"
-       
+        onChange={(e) => {
+          setSelectedTime(new Date(e.target.value));
+          console.log(e.target.value);
+        }}
+        onChangeCommitted={() => {
+          dispatch(updateSelectedTime(selectedTime));
+        }}
       />
     </Box>
   );

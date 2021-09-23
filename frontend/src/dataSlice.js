@@ -11,13 +11,13 @@ async (thunkAPI) => {
 export const dataSlice = createSlice({
     name:'data',
     initialState: {
-        // currentTime: new Date(),
+        selectedTime: new Date(),
         data: null,
         dataState: "idle"
     },
     reducers : {
-        updateCurrentTime: (state, action) => {
-            // state.currentTime = action.payload
+        updateSelectedTime: (state, action) => {
+            state.selectedTime = action.payload
         }
     },
     extraReducers: {
@@ -35,6 +35,6 @@ export const dataSlice = createSlice({
     }
 })
 
-export const { updateCurrentTime } = dataSlice.actions
+export const { updateSelectedTime } = dataSlice.actions
 
 export default dataSlice.reducer

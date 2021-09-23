@@ -1,11 +1,32 @@
 .map-container {
-    height: 600px;
+  height: 600px;
 }
 
 .mapboxgl-popup {
-    max-width: 200px;
+  max-width: 200px;
 }
 
 .mapboxgl-marker {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.sidebar {
+  background-color: #FFFFFF;
+  color: #555555;
+    font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 40px;
+  border-radius: 4px;
+}
+
+.top {
+  margin-top: 88px;
+  padding: 6px 12px;
+}
+.bottom {
+  margin-top: 600px;
+  padding: 0px ;
 }
