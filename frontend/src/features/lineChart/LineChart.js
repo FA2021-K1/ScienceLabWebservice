@@ -91,7 +91,7 @@ export const LineChart = () => {
     },
     xaxis: {
       categories: [format(subDays(yesterday, 6), "EEE"), format(subDays(yesterday, 5), "EEE"), format(subDays(yesterday, 4), "EEE"),
-      format(subDays(yesterday, 3), "EEE"), format(subDays(yesterday, 2), "EEE"), "Fri", format(subDays(yesterday, 1), "EEE"), format(yesterday, "EEE")],
+      format(subDays(yesterday, 3), "EEE"), format(subDays(yesterday, 2), "EEE"), format(subDays(yesterday, 1), "EEE"), format(yesterday, "EEE")],
       tooltip: {
         enabled: false,
       },
@@ -103,13 +103,6 @@ export const LineChart = () => {
     },
   });
 
-  useEffect(() => {
-    const dates = [6, 5, 4, 3, 2, 1, 0]
-    let optionsCarry = options
-    optionsCarry.xaxis.categories = dates.map((dateDifference) => new Date(new Date().setDate(currentDate.getDate() - dateDifference)).toLocaleDateString())
-    setOptions(optionsCarry)
-    console.log(options.xaxis.categories)
-  }, [currentDate])
   return (
     <div id="chart">
       <Chart options={options} series={series} type="line"
