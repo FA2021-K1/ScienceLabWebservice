@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { optionsConfig } from "./lineChartConfig";
 
 export const LineChart = () => {
   const style = useSelector((state) => state.style);
+  const currentDate = useSelector((state) => state.data.selectedTime)
+  const data = useSelector(state => state.data.data) 
 
-  const [series, ] = useState([
+  const [series,setSeries] = useState([
     {
       name: "pHS",
       data: [28, 29, 33, 36, 32, 32, 33],
@@ -15,69 +18,19 @@ export const LineChart = () => {
       data: [12, 11, 14, 18, 17, 13, 13],
     },
   ]);
-  const [options, ] = useState({
-    chart: {
-      height: 400,
-      type: "line",
-      dropShadow: {
-        enabled: true,
-        color: "#000",
-        top: 18,
-        left: 7,
-        blur: 10,
-        opacity: 0.2,
-      },
-      toolbar: {
-        show: false,
-      },
-    },
-    colors: [style.Green, style.Blue],
-    dataLabels: {
-      enabled: true,
-    },
-    stroke: {
-      curve: "smooth",
-    },
-    title: {
-      text: "Average measurements",
-      align: "left",
-    },
-    grid: {
-      borderColor: "#e7e7e7",
-      row: {
-        colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-        opacity: 0.5,
-      },
-    },
-    markers: {
-      size: 1,
-    },
-    xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-      title: {
-        text: "Month",
-      },
-    },
-    yaxis: {
-      title: {
-        text: "[ppm]",
-      },
-      min: 5,
-      max: 40,
-    },
-    legend: {
-      position: "top",
-      horizontalAlign: "right",
-      floating: true,
-      offsetY: -25,
-      offsetX: -5,
-    },
-  });
+  const [options, setOptions] = useState(optionsConfig(style));
 
+  useEffect(() => {
+    const dates = [6, 5, 4, 3, 2, 1, 0]
+    let optionsCarry = options
+    optionsCarry.xaxis.categories = dates.map((dateDifference) => new Date(new Date().setDate(currentDate.getDate() - dateDifference)).toLocaleDateString())
+    setOptions(optionsCarry)
+    console.log(options.xaxis.categories)
+  }, [currentDate])
   return (
     <div id="chart">
-      <Chart options={options} series={series} type="line" 
-      height={'350'}/>
+      <Chart options={options} series={series} type="line"
+        height={'350'} />
     </div>
   );
 };

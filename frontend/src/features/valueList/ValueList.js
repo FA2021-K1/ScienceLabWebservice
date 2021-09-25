@@ -5,9 +5,12 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Stack from "@mui/material/Stack";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
-  const jsonData = useSelector((state) => state.data.data);
+  const jsonDataAll = useSelector((state) => state.data.data);
+  const jsonData = jsonDataAll ? jsonDataAll[0] : null 
   const renderRow = ({ index }) => {
     return (
       <ListItem key={index} component="div" disablePadding>

@@ -13,6 +13,8 @@ mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
 export const Mapbox = () => {
     const style = useSelector((state) => state.style)
+    const data = useSelector(state => state.data.data)
+
     const dispatch = useDispatch();
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -35,22 +37,46 @@ export const Mapbox = () => {
             center: [lng, lat],
             zoom: zoom,
         });
-
         map.current.addControl(new mapboxgl.NavigationControl({}));
     });
-    if (map.current) {
+
+    let markers = []
+    let circleJson = {
+        type: "geojson",
+        data: {
+            type: "FeatureCollection",
+            features: []
+        }
     }
-
-    const popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
-        "Construction on the Washington Monument began in 1848."
-    );
-    const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
-        "Construction on the Washington Monument began in 1848."
-    );
-    const popup3 = new mapboxgl.Popup({ offset: 25 }).setText(
-        "Construction on the Washington Monument began in 1848."
-    );
-
+    if (data) {
+        for (let key in data) {
+            const longitude = data[key][0].location.longitude
+            const latitude = data[key][0].location.latitude
+            
+            const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+            `   <h3>Buoy: ${key} aka BERND</h3>
+                <div class="info"> 
+                    <h4>ph-Value:</h4>
+                    <p>${data[key][0]["value"]} NTU</p>
+                </div>
+                <div class="info"> 
+                    <h4>Total Dissolved Solids:</h4>
+                    <p>ppm</p>
+                </div>`
+            )
+            markers.push(new mapboxgl.Marker({ "color": style.accentColor1 })
+                .setLngLat([longitude, latitude])
+                .setPopup(popup))
+            circleJson.data.features.push({
+                type: "Feature",
+                geometry: {
+                    type: "Point",
+                    coordinates: [longitude, latitude],
+                },
+            })
+        }
+        console.log(circleJson)
+    }
     useEffect(() => {
         if (!map.current) return; // wait for map to initialize
         map.current.on("move", () => {
@@ -60,52 +86,14 @@ export const Mapbox = () => {
         });
 
         map.current.on("load", () => {
-            const marker1 = new mapboxgl.Marker({ "color": style.accentColor1 })
-                .setLngLat([11.4451, 46.743])
-                .setPopup(popup1)
-                .addTo(map.current);
-            const marker2 = new mapboxgl.Marker({ "color": style.accentColor1 })
-                .setLngLat([11.4471, 46.7426])
-                .setPopup(popup2)
-                .addTo(map.current);
-            const marker3 = new mapboxgl.Marker({ "color": style.accentColor1 })
-                .setLngLat([11.442, 46.7407])
-                .setPopup(popup3)
-                .addTo(map.current);
-
+            markers.forEach(element => element.addTo(map.current))
             if (!map.current.getSource("circlesPosition")) {
-                map.current.addSource("circlesPosition", {
-                    type: "geojson",
-                    data: {
-                        type: "FeatureCollection",
-                        features: [
-                            {
-                                type: "Feature",
-                                geometry: {
-                                    type: "Point",
-                                    coordinates: [11.4451, 46.743],
-                                },
-                            },
-                            {
-                                type: "Feature",
-                                geometry: {
-                                    type: "Point",
-                                    coordinates: [11.4471, 46.7426],
-                                },
-                            },
-                            {
-                                type: "Feature",
-                                geometry: {
-                                    type: "Point",
-                                    coordinates: [11.442, 46.7407],
-                                },
-                            },
-                        ],
-                    },
-                });
+                map.current.addSource("circlesPosition", circleJson);
             }
-
-            map.current.addLayer({
+            if(map.current.getLayer("circles")){
+                map.current.removeLayer("circles")
+            }
+           map.current.addLayer({
                 id: "circles",
                 type: "circle",
                 source: "circlesPosition",
@@ -115,6 +103,7 @@ export const Mapbox = () => {
                     "circle-opacity": 0.5,
                 },
             });
+            console.log(map.current.getLayer("circles"))
         });
     });
 

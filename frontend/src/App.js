@@ -32,7 +32,6 @@ export const App = () => {
   //const data = useSelector((state) => state.data.data);
 
   useEffect(() => {
-    console.log(style)
     if (dataState === "idle") {
       dispatch(getJsonData());
     }
@@ -55,32 +54,35 @@ export const App = () => {
           </Grid>
 
           <Grid item xs={4} xl={4} >
-          <Item>
-            <ColumnChart />
+            <Item>
+              <ColumnChart />
             </Item>
           </Grid>
           <Grid item xs={4} xl={4}>
-          <Item>
-            <Boxplot />
+            <Item>
+              <Boxplot />
             </Item>
           </Grid>
           <Grid item xs={4} xl={4}>
-          <Item>
-            <LineChart />
+            <Item>
+              <LineChart />
             </Item>
           </Grid>
 
           <Grid item xs={3} xl={3}>
             <Item>
-            <ValueList />
+              <ValueList />
             </Item>
           </Grid>
           <Grid item xs={9} xl={9} >
-          <Item>
-            <ZoomableChart />
+            <Item>
+              <ZoomableChart />
 
             </Item>
           </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <h5 align='center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
         </Grid>
       </body>
     </React.StrictMode>
