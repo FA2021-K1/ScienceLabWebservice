@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
+import "./Boxplot.css"
 
 export const Boxplot = () => {
 
 
   const [series,] = useState([
     {
-      name: "pH Value",
+      name: "BoxPlot",
       type: "boxPlot",
       data: [
         {
@@ -24,7 +25,7 @@ export const Boxplot = () => {
       ],
     },
     {
-      name: "Dissolved Solids",
+      name: "Outliers",
       type: "scatter",
       data: [
         {
@@ -63,9 +64,22 @@ export const Boxplot = () => {
             click: function (chart, options, e) {
               console.log("clicked custom-icon")
             }
-            }]
+            },
+            {
+              icon: '<img src="TDS.png" width="20">',
+              index: 2,
+              title: 'TDS',
+              class: 'custom-icon',
+              click: function (chart, options, e) {
+                console.log("clicked custom-icon")
+              }
+              },
+          ]
         },
       },
+    },
+    legend: {
+      show: false
     },
     colors: ["#008FFB", "#FEB019"],
     title: {
@@ -93,7 +107,7 @@ export const Boxplot = () => {
 
   return (
     <div id="chart">
-      <Chart
+      <Chart 
         options={options}
         series={series}
         type="boxPlot"
