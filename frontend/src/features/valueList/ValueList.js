@@ -12,22 +12,31 @@ import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
   const jsonDataAll = useSelector((state) => state.data.data);
-  const jsonData = jsonDataAll ? jsonDataAll[0] : null 
+  const jsonData = jsonDataAll ? jsonDataAll[0] : null
+  const style = useSelector((state) => state.style);
   const renderRow = ({ index }) => {
+    let color = "white"
+    if (jsonData[index].value >= 50) {
+      color = style.warningColor;
+    }
     return (
       <ListItem key={index} component="div" disablePadding>
-        <ListItem>
-          <ListItemText
-            primary={`Sensor ${1}`}
-            secondary={`Buoy ${jsonData[index].boyId}`}
-          />
+        <Box sx={{ width: "100%", height: "100%", bgcolor: color }}>
+          <ListItem>
+            <ListItemText
+              primary={`Sensor ${1}`}
+              secondary={`Buoy ${jsonData[index].boyId}`}
+            />
 
-          <ListItemText
-            align="right"
-            primary={`Value ${jsonData[index].value}`}
-            secondary={`time ${jsonData[index].date}`}
-          />
-        </ListItem>
+            <ListItemText
+              align="right"
+              primary={`Value ${jsonData[index].value}`}
+              secondary={`time ${jsonData[index].date}`}
+            />
+          </ListItem>
+        </Box>
+
+
       </ListItem>
     );
   };
