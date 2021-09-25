@@ -1,13 +1,47 @@
 import Chart from "react-apexcharts";
 import React, { useEffect, useState } from "react";
+import { subDays, format } from "date-fns";
 
 //import dummyData from "data_context";
 
 export const ZoomableChart = () => {
-  const [series, setSeries] = useState([
+
+  const currentTime = new Date();
+  
+  const [series,] = useState([
     {
-      name: "XYZ MOTORS",
-      data: [0,1,2,3,4,5,6,7,8,9],//dummyData,
+      name: "pH-Value",
+      data: [
+        {
+          x: currentTime,
+          y: 54
+        },
+        {
+          x: subDays(currentTime, 1),
+          y: 43,
+        },
+        {
+          x: subDays(currentTime, 2),
+          y: 31,
+        },
+      ],
+    },
+    {
+      name: "Dissolved Solids",
+      data: [
+        {
+          x: currentTime,
+          y: 84
+        },
+        {
+          x: subDays(currentTime, 1),
+          y: 73,
+        },
+        {
+          x: subDays(currentTime, 2),
+          y: 82,
+        },
+      ],
     },
   ]);
 
@@ -45,37 +79,42 @@ export const ZoomableChart = () => {
         stops: [0, 90, 100],
       },
     },
-    yaxis: {
-      labels: {
-        formatter: function (val) {
-          return (val / 1000000).toFixed(0);
-        },
-      },
+    yaxis: [{
       title: {
-        text: "pH",
-      },
+        text: 'pH Value [-]'
+      }
     },
+    {
+      opposite: true,
+      title: {
+        text: 'Dissolved Solids [ppm]'
+      }
+    }
+    ],
     xaxis: {
-      type: "datetime",
-    },
+    type: "datetime",
     tooltip: {
-      shared: false,
-      y: {
-        formatter: function (val) {
-          return (val / 1000000).toFixed(0);
-        },
+      enabled: false,
+    },
+  },
+    tooltip: {
+    shared: true,
+    y: {
+      formatter: function (val) {
+        return (val / 1000000).toFixed(0);
       },
     },
+  },
   });
 
-  return (
-    <div id="chart">
-      <Chart
-        options={options}
-        series={series}
-        type="area"
-        height={450}
-      />
-    </div>
-  );
+return (
+  <div id="chart">
+    <Chart
+      options={options}
+      series={series}
+      type="area"
+      height={450}
+    />
+  </div>
+);
 };
