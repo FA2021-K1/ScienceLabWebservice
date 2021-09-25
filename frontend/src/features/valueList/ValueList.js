@@ -11,10 +11,11 @@ import { sortByBouy } from "../../sorting";
 export const ValueList = () => {
   const jsonDataAll = useSelector((state) => state.data.data);
   const jsonData = jsonDataAll ? jsonDataAll[0] : null
+  const style = useSelector((state) => state.style);
   const renderRow = ({ index }) => {
     let color = "white"
     if (jsonData[index].value >= 50) {
-      color = "red";
+      color = style.warningColor;
     }
     return (
       <ListItem key={index} component="div" disablePadding>
