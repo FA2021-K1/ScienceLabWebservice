@@ -39,6 +39,77 @@ export const Mapbox = () => {
         });
         map.current.addControl(new mapboxgl.NavigationControl({}));
     });
+    const size = 200;
+
+    // This implements `StyleImageInterface`
+    // to draw a pulsing dot icon on the map.
+    const pulsingDot = {
+        width: size,
+        height: size,
+        data: new Uint8Array(size * size * 4),
+
+        // When the layer is added to the map,
+        // get the rendering context for the map canvas.
+        onAdd: function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = this.width;
+            canvas.height = this.height;
+            this.context = canvas.getContext('2d');
+        },
+
+        // Call once before every frame where the icon will be used.
+        render: function () {
+            const duration = 1000;
+            const t = (performance.now() % duration) / duration;
+
+            const radius = (size / 2) * 0.3;
+            const outerRadius = (size / 2) * 0.7 * t + radius;
+            const context = this.context;
+
+            // Draw the outer circle.
+            context.clearRect(0, 0, this.width, this.height);
+            context.beginPath();
+            context.arc(
+                this.width / 2,
+                this.height / 2,
+                outerRadius,
+                0,
+                Math.PI * 2
+            );
+            context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
+            context.fill();
+
+            // Draw the inner circle.
+            context.beginPath();
+            context.arc(
+                this.width / 2,
+                this.height / 2,
+                radius,
+                0,
+                Math.PI * 2
+            );
+            context.fillStyle = 'rgba(255, 100, 100, 1)';
+            context.strokeStyle = 'white';
+            context.lineWidth = 2 + 4 * (1 - t);
+            context.fill();
+            context.stroke();
+
+            // Update this image's data with data from the canvas.
+            this.data = context.getImageData(
+                0,
+                0,
+                this.width,
+                this.height
+            ).data;
+
+            // Continuously repaint the map, resulting
+            // in the smooth animation of the dot.
+            map.triggerRepaint();
+
+            // Return `true` to let the map know that the image was updated.
+            return true;
+        }
+    };
 
     let markers = []
     let circleJson = {
@@ -52,9 +123,9 @@ export const Mapbox = () => {
         for (let key in data) {
             const longitude = data[key][0].location.longitude
             const latitude = data[key][0].location.latitude
-            
+
             const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-            `   <h3>Buoy: ${key} aka BERND</h3>
+                `   <h3>Buoy: ${key} aka BERND</h3>
                 <div class="info"> 
                     <h4>ph-Value:</h4>
                     <p>${data[key][0]["value"]} NTU</p>
@@ -90,17 +161,15 @@ export const Mapbox = () => {
             if (!map.current.getSource("circlesPosition")) {
                 map.current.addSource("circlesPosition", circleJson);
             }
-            if(map.current.getLayer("circles")){
+            if (map.current.getLayer("circles")) {
                 map.current.removeLayer("circles")
             }
-           map.current.addLayer({
+            map.current.addLayer({
                 id: "circles",
-                type: "circle",
+                type: "symbol",
                 source: "circlesPosition",
-                paint: {
-                    "circle-color": style.grey,
-                    "circle-radius": 30,
-                    "circle-opacity": 0.5,
+                layout: {
+                    "icon-image": "pulsing-dot",
                 },
             });
             console.log(map.current.getLayer("circles"))
