@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getJsonData } from "./dataSlice";
+import { getJsonData } from "../../dataSlice";
 
 export const Export = () => {
   const dispatch = useDispatch();

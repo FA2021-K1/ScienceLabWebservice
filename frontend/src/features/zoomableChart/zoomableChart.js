@@ -1,6 +1,6 @@
 import Chart from "react-apexcharts";
-import React, { useEffect, useState } from "react";
-import { subDays, format } from "date-fns";
+import React, { useState } from "react";
+import { subDays } from "date-fns";
 
 //import dummyData from "data_context";
 
