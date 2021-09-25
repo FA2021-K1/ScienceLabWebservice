@@ -6,7 +6,6 @@ import Paper from '@mui/material/Paper';
 import { Header } from "./features/header/Header.js";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import routes from "./routes";
-import Home from "./home";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -14,18 +13,37 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export const App = ()  => {
-    return (
+export const App = () => {
+  return (
     <React.StrictMode>
       <Router>
-        <Header />
         <Switch>
           <Route exact path="/" render={() => {
             return (<Redirect to="/home" />)
           }} />
-          <Route path="/home" component={Home} />
           {routes.map(({ path, Component }, key) => (
-            <Route exact path={path} key={key} component={Component} />
+            <Route exact path={path} key={key} render={props => {
+              const crumbs = routes
+                .filter(({ path }) => props.match.path.includes(path))
+                // replace id placeholders in parameterized routes
+                .map(({ path, ...rest }) => ({
+                  path: Object.keys(props.match.params).length
+                    ? Object.keys(props.match.params).reduce(
+                      (path, param) => path.replace(`:${param}`, props.match.params[param]), path)
+                    : path,
+                  ...rest
+                }));
+              return (
+                <div>
+                  <div id="content-container">
+                    <Component {...props} />
+                  </div>
+                  <div id="header-container">
+                    <Header crumbs={crumbs} />
+                  </div>
+                </div>
+              );
+            }} />
           ))}
         </Switch>
       </Router>

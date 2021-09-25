@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from "@material-ui/icons/Home";
 import "./header.css";
 import { Link } from "react-router-dom"
+import { Breadcrumbs } from "./../breadcrumbs/Breadcrumbs";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Header = () => {
+export const Header = (crumbs) => {
   const classes = useStyles();
 
   const refreshPage = () => {
@@ -26,21 +27,14 @@ export const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position= 'sticky'>
+      <AppBar>
         <Toolbar className="toolbar" variant="dense">
           <Link to="/home">
-            <IconButton
-              edge="start"
-              className={classes.homeButton}
-              color="inherit"
-              aria-label="home"
-            >
-              <HomeIcon />
-            </IconButton>
+            <Typography variant="h6" color="inherit">
+              ScienceLab @ FA 2021
+            </Typography>
           </Link>
-          <Typography variant="h6" color="inherit">
-            Sciencelab @ FA 2021
-          </Typography>
+          <Breadcrumbs crumbs={crumbs}/>
         </Toolbar>
       </AppBar>
     </div>
