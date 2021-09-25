@@ -1,98 +1,117 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
+import "./Boxplot.css";
 
 export const Boxplot = () => {
-  const [series, ] = useState([
+
+  const [series1,] = useState([
     {
-      name: "box",
+      name: "BoxPlot",
       type: "boxPlot",
       data: [
         {
-          x: new Date("2017-01-01").getTime(),
+          x: 'Bouy 1',
           y: [54, 66, 69, 75, 88],
         },
         {
-          x: new Date("2018-01-01").getTime(),
+          x: 'Bouy 2',
           y: [43, 65, 69, 76, 81],
         },
         {
-          x: new Date("2019-01-01").getTime(),
+          x: 'Bouy 3',
           y: [31, 39, 45, 51, 59],
         },
-        {
-          x: new Date("2020-01-01").getTime(),
-          y: [39, 46, 55, 65, 71],
-        },
-        {
-          x: new Date("2021-01-01").getTime(),
-          y: [29, 31, 35, 39, 44],
-        },
       ],
-    },
+    }
+  ]);
+  const [series2,] = useState([
     {
-      name: "outliers",
+      name: "Outliers",
       type: "scatter",
       data: [
         {
-          x: new Date("2017-01-01").getTime(),
+          x: 'Bouy 1',
           y: 32,
         },
         {
-          x: new Date("2018-01-01").getTime(),
+          x: 'Bouy 2',
           y: 25,
         },
         {
-          x: new Date("2019-01-01").getTime(),
+          x: 'Bouy 3',
           y: 64,
-        },
-        {
-          x: new Date("2020-01-01").getTime(),
-          y: 27,
-        },
-        {
-          x: new Date("2020-01-01").getTime(),
-          y: 78,
-        },
-        {
-          x: new Date("2021-01-01").getTime(),
-          y: 15,
         },
       ],
     },
   ]);
 
-  const [options, ] = useState({
+  var series = series1;
+
+  const [options,] = useState({
     chart: {
       type: "boxPlot",
-      width: '400'
-    },
-    colors: ["#008FFB", "#FEB019"],
-    title: {
-      text: "BoxPlot - Scatter Chart",
-      align: "left",
-    },
-    xaxis: {
-      type: "datetime",
-      tooltip: {
-        formatter: function (val) {
-          return new Date(val).getFullYear();
+      width: '400',
+      toolbar: {
+        tools: {
+          download: true,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false,
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 1,
+            title: 'pH',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              chart.updateSeries(series2, true);
+              console.log("button clicked")
+            }
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 2,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+          },
+          ]
         },
       },
     },
-    tooltip: {
-      shared: false,
-      intersect: true,
+    legend: {
+      show: false
+    },
+    colors: ["#008FFB", "#FEB019"],
+    title: {
+      text: "BoxPlot - Last 24 h",
+      align: "left",
+    },
+    xaxis: {
+      type: "categories",
+      tooltip: {
+        enabled: false,
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'pH Value [-]'
+      }
     },
   });
-  
+
   return (
     <div id="chart">
       <Chart
         options={options}
         series={series}
         type="boxPlot"
-        height={'350'}
-      />
+        height={'350'}>
+      </Chart>
+
     </div>
   );
 };

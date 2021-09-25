@@ -6,7 +6,6 @@ import FluentKit
 public final class Residence: Model {
     public static let schema = "residencies"
     
-    
     @ID
     public var id: UUID?
     

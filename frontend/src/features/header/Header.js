@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import { Breadcrumbs } from "./../breadcrumbs/Breadcrumbs";
 import { updateSidebar } from "../../sidebarSlice"
 import store from "../../app/store";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,11 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = (crumbs) => {
   const classes = useStyles();
-
-  const refreshPage = () => {
-    window.location.reload();
-    window.scrollTo(0, 0);
-  }
+  const style = useSelector((state) => state.style)
 
   const openDrawer = () => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -36,8 +33,8 @@ export const Header = (crumbs) => {
 
   return (
     <div className={classes.root}>
-      <AppBar>
-        <Toolbar className="toolbar" variant="dense">
+      <AppBar style = {{background: style.secondaryColor}}>
+        <Toolbar variant="dense">
           <IconButton
             color="inherit"
             aria-label="open drawer"

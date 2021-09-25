@@ -1,21 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import { useDispatch, useSelector } from "react-redux";
+import { subDays, format } from "date-fns";
 
 export const LineChart = () => {
-  const [series, ] = useState([
+  const style = useSelector((state) => state.style);
+  const currentTime = new Date();
+  const yesterday = subDays(currentTime, 1);
+
+  const [series,] = useState([
     {
-      name: "pHS",
+      name: "Bouy 1",
       data: [28, 29, 33, 36, 32, 32, 33],
     },
     {
-      name: "Dissolved solids",
+      name: "Bouy 2",
       data: [12, 11, 14, 18, 17, 13, 13],
     },
+    {
+      name: "Bouy 3",
+      data: [14, 14, 18, 23, 22, 17, 13],
+    },
   ]);
-  const [options, ] = useState({
+  const [options,] = useState({
     chart: {
       height: 400,
       type: "line",
+      toolbar: {
+        tools: {
+          download: true,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false,
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 1,
+            title: 'pH',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("button clicked")
+            }
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 2,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+          },
+          ]
+        }
+      },
       dropShadow: {
         enabled: true,
         color: "#000",
@@ -24,11 +63,12 @@ export const LineChart = () => {
         blur: 10,
         opacity: 0.2,
       },
-      toolbar: {
-        show: false,
+      legend: {
+        position: 'bottom',
+        horizontalAlign: 'center',
       },
     },
-    colors: ["#77B6EA", "#545454"],
+    colors: [style.Green, style.Blue],
     dataLabels: {
       enabled: true,
     },
@@ -50,31 +90,23 @@ export const LineChart = () => {
       size: 1,
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-      title: {
-        text: "Month",
+      categories: [format(subDays(yesterday, 6), "EEE"), format(subDays(yesterday, 5), "EEE"), format(subDays(yesterday, 4), "EEE"),
+      format(subDays(yesterday, 3), "EEE"), format(subDays(yesterday, 2), "EEE"), format(subDays(yesterday, 1), "EEE"), format(yesterday, "EEE")],
+      tooltip: {
+        enabled: false,
       },
     },
     yaxis: {
       title: {
-        text: "[ppm]",
+        text: "pH-Value [-]",
       },
-      min: 5,
-      max: 40,
-    },
-    legend: {
-      position: "top",
-      horizontalAlign: "right",
-      floating: true,
-      offsetY: -25,
-      offsetX: -5,
     },
   });
 
   return (
     <div id="chart">
-      <Chart options={options} series={series} type="line" 
-      height={'350'}/>
+      <Chart options={options} series={series} type="line"
+        height={'350'} />
     </div>
   );
 };

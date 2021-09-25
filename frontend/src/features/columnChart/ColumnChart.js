@@ -1,7 +1,9 @@
 import { useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ColumnChart = () => {
+    const style = useSelector((state) => state.style);
 
     const [series,] = useState([
         {
@@ -17,6 +19,7 @@ export const ColumnChart = () => {
             type: 'bar',
             height: 350
         },
+        colors: [style.Blue, style.Green],
         plotOptions: {
             bar: {
                 horizontal: false,
@@ -50,16 +53,6 @@ export const ColumnChart = () => {
         fill: {
             opacity: 1
         },
-        tooltip: {
-            y: [{
-                formatter: undefined
-            },
-            {
-                formatter: function (val) {
-                    return val + " ppm"
-                }
-            }]
-        }
     });
 
 

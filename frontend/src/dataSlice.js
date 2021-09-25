@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import data from './mockData.json';
 import axios from "axios"
+import { sortByBouy } from './sorting';
 
 export const getJsonData = createAsyncThunk("data/getJsonData",
 async (thunkAPI) => {
@@ -11,13 +13,16 @@ async (thunkAPI) => {
 export const dataSlice = createSlice({
     name:'data',
     initialState: {
-        // currentTime: new Date(),
+        selectedTime: new Date(),
         data: null,
+        dataAverageByDay: null,
         dataState: "idle"
     },
     reducers : {
-        updateCurrentTime: (state, action) => {
-            // state.currentTime = action.payload
+        updateSelectedTime: (state, action) => {
+            state.selectedTime = action.payload
+            console.log("Date change dto")
+            console.log(action.payload)
         }
     },
     extraReducers: {
@@ -30,11 +35,11 @@ export const dataSlice = createSlice({
         },
         [getJsonData.rejected]: (state, action) => {
             state.dataState = "rejected";
-            // TODO: provide some dummy data until the backend works
+            state.data = sortByBouy(data);
         }
     }
 })
 
-export const { updateCurrentTime } = dataSlice.actions
+export const { updateSelectedTime } = dataSlice.actions
 
 export default dataSlice.reducer

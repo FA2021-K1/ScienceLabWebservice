@@ -2,8 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import "./App.css";
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 import { Header } from "./features/header/Header.js";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom"
@@ -20,9 +20,11 @@ import store from "./app/store";
 import { updateSidebar } from "./sidebarSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
+  height: "400px",
+  justifyContent: "center",
+  alignItems: "center"
 }));
 
 export const App = () => {
@@ -92,6 +94,6 @@ export const App = () => {
       </Router>
     </React.StrictMode>
   );
-}
+};
 
 export default App;

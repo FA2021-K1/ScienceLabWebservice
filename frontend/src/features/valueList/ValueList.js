@@ -6,40 +6,34 @@ import { FixedSizeList } from "react-window";
 import Stack from "@mui/material/Stack";
 
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
-    const renderRow = (props)  => {
-        const { index, style, buoyID, measurementValue, timeStamp } = props;
-      
-        return (
-          <ListItem
-            style={style}
-            key={index}
-            buoy={buoyID}
-            measurement={measurementValue}
-            time={timeStamp}
-            component="div"
-            disablePadding
-          >
-            <ListItem>
-              <ListItemText
-                primary={`Sensor ${index + 1}`}
-                secondary={`Buoy ${buoyID}`}
-              />
-      
-              <ListItemText
-                align="right"
-                primary={`Value ${measurementValue}`}
-                secondary={`time ${timeStamp}`}
-              />
-            </ListItem>
-          </ListItem>
-        );
-      }
+  const jsonDataAll = useSelector((state) => state.data.data);
+  const jsonData = jsonDataAll ? jsonDataAll[0] : null 
+  const renderRow = ({ index }) => {
+    return (
+      <ListItem key={index} component="div" disablePadding>
+        <ListItem>
+          <ListItemText
+            primary={`Sensor ${1}`}
+            secondary={`Buoy ${jsonData[index].boyId}`}
+          />
+
+          <ListItemText
+            align="right"
+            primary={`Value ${jsonData[index].value}`}
+            secondary={`time ${jsonData[index].date}`}
+          />
+        </ListItem>
+      </ListItem>
+    );
+  };
 
   return (
-    <Box sx={{ width: "100%", height: '100%', bgcolor: "background.paper" }}>
-
+    <Box sx={{ width: "100%", height: "100%", bgcolor: "background.paper" }}>
       <Stack spacing={2} direction="row">
         <div id="latest-data-received">
           <div>
@@ -54,15 +48,18 @@ export const ValueList = () => {
           </div>
         </div>
       </Stack>
-
-      <FixedSizeList
-        height={400}
-        itemSize={50}
-        itemCount={200}
-        overscanCount={5}
-      >
-        {renderRow}
-      </FixedSizeList>
+      {jsonData ? (
+        <FixedSizeList
+          height={400}
+          itemSize={50}
+          itemCount={jsonData.length}
+          overscanCount={5}
+        >
+          {renderRow}
+        </FixedSizeList>
+      ) : (
+        "Data Loading"
+      )}
     </Box>
   );
 };
