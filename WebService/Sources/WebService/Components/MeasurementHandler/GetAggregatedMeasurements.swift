@@ -51,24 +51,25 @@ struct GetAggregatedMeasurements: Handler {
         
         let measurementFrontendContent = try? await (postgres
         .simpleQuery("""
-         With Values ("buoyID", "date", "value") as
+         With Values ("buoyID", "sensorTypeID", "date", "value") as
          (
-         SELECT s."buoyID",
+         SELECT s."buoyID", s."sensorTypeID",
          (TO_TIMESTAMP((cast(extract(epoch from TO_TIMESTAMP(m."measuredAt",'YYYY-MM-DD HH24:MI:SS')) as integer) / \(aggregationLevel)) * \(aggregationLevel))) as date,
          avg(d."value")
          FROM "measurements" m
              JOIN "measurementsData" d ON (m."measurementID" = d."measurementID")
              JOIN "sensors" s             ON (d."sensorID" = s."sensorID")
-             JOIN "sensorTypes" t         ON (s."sensorTypeID" = t."sensorTypeID")
-         WHERE t."name" = '\(sensorTyp)' AND s."buoyID" = \(buoyID) AND m."measuredAt" BETWEEN '\(dateFormatter.string(from: startDate))' AND '\(dateFormatter.string(from: endDate))'
-         GROUP BY s."buoyID", date
+         WHERE (\(sensorTyp) = -1 OR s."sensorTypeID" = \(sensorTyp))
+            AND (\(buoyID) = -1 OR s."buoyID" = \(buoyID))
+            AND m."measuredAt" BETWEEN '\(dateFormatter.string(from: startDate))' AND '\(dateFormatter.string(from: endDate))'
+         GROUP BY s."buoyID", s."sensorTypeID", date
          )
-         SELECT v."buoyID", v."date", v."value",
+         SELECT v."buoyID", v."sensorTypeID", v."date", v."value",
          (
              SELECT m."coordinate" FROM "measurements" m WHERE m."buoyID" = v."buoyID" AND TO_TIMESTAMP(m."measuredAt",'YYYY-MM-DD HH24:MI:SS') >= v."date" ORDER BY m."measuredAt" ASC LIMIT 1
          ) as position
          FROM Values v
-         ORDER BY v."date" DESC, v."buoyID" ASC;
+         ORDER BY v."buoyID" ASC, v."date" DESC, v."sensorTypeID" ASC;
         """)
         .map { rows -> MeasurementFrontendContent in
             let measurementData = rows.compactMap { row -> MeasurementFrontendValueContent? in
