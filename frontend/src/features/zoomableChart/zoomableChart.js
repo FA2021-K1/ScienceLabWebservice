@@ -7,10 +7,10 @@ import { subDays, format } from "date-fns";
 export const ZoomableChart = () => {
 
   const currentTime = new Date();
-  
+
   const [series,] = useState([
     {
-      name: "pH-Value",
+      name: "Bouy 1",
       data: [
         {
           x: currentTime,
@@ -27,7 +27,7 @@ export const ZoomableChart = () => {
       ],
     },
     {
-      name: "Dissolved Solids",
+      name: "Bouy 2",
       data: [
         {
           x: currentTime,
@@ -40,6 +40,23 @@ export const ZoomableChart = () => {
         {
           x: subDays(currentTime, 2),
           y: 82,
+        },
+      ],
+    },
+    {
+      name: "Bouy 3",
+      data: [
+        {
+          x: currentTime,
+          y: 75
+        },
+        {
+          x: subDays(currentTime, 1),
+          y: 68,
+        },
+        {
+          x: subDays(currentTime, 2),
+          y: 75,
         },
       ],
     },
@@ -57,6 +74,27 @@ export const ZoomableChart = () => {
       },
       toolbar: {
         autoSelected: "zoom",
+        tools: {
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 6,
+            title: 'pH',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("button clicked")
+            }
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 7,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+          },
+          ]
+        }
       },
     },
     dataLabels: {
@@ -79,42 +117,35 @@ export const ZoomableChart = () => {
         stops: [0, 90, 100],
       },
     },
-    yaxis: [{
+    yaxis: {
       title: {
         text: 'pH Value [-]'
       }
     },
-    {
-      opposite: true,
-      title: {
-        text: 'Dissolved Solids [ppm]'
-      }
-    }
-    ],
     xaxis: {
-    type: "datetime",
-    tooltip: {
-      enabled: false,
-    },
-  },
-    tooltip: {
-    shared: true,
-    y: {
-      formatter: function (val) {
-        return (val / 1000000).toFixed(0);
+      type: "datetime",
+      tooltip: {
+        enabled: false,
       },
     },
-  },
+    tooltip: {
+      shared: true,
+      y: {
+        formatter: function (val) {
+          return (val / 1000000).toFixed(0);
+        },
+      },
+    },
   });
 
-return (
-  <div id="chart">
-    <Chart
-      options={options}
-      series={series}
-      type="area"
-      height={450}
-    />
-  </div>
-);
+  return (
+    <div id="chart">
+      <Chart
+        options={options}
+        series={series}
+        type="area"
+        height={450}
+      />
+    </div>
+  );
 };

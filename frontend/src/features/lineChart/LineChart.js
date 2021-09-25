@@ -10,12 +10,16 @@ export const LineChart = () => {
 
   const [series,] = useState([
     {
-      name: "pH-Value",
+      name: "Bouy 1",
       data: [28, 29, 33, 36, 32, 32, 33],
     },
     {
-      name: "Dissolved Solids",
+      name: "Bouy 2",
       data: [12, 11, 14, 18, 17, 13, 13],
+    },
+    {
+      name: "Bouy 3",
+      data: [14, 14, 18, 23, 22, 17, 13],
     },
   ]);
   const [options,] = useState({
@@ -29,7 +33,26 @@ export const LineChart = () => {
           zoomin: false,
           zoomout: false,
           pan: false,
-          reset: false
+          reset: false,
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 1,
+            title: 'pH',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("button clicked")
+            }
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 2,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+          },
+          ]
         }
       },
       dropShadow: {
@@ -67,23 +90,17 @@ export const LineChart = () => {
       size: 1,
     },
     xaxis: {
-      categories: [format(subDays(yesterday, 6), "EEE"), format(subDays(yesterday, 5), "EEE"), format(subDays(yesterday, 4), "EEE"), 
+      categories: [format(subDays(yesterday, 6), "EEE"), format(subDays(yesterday, 5), "EEE"), format(subDays(yesterday, 4), "EEE"),
       format(subDays(yesterday, 3), "EEE"), format(subDays(yesterday, 2), "EEE"), "Fri", format(subDays(yesterday, 1), "EEE"), format(yesterday, "EEE")],
       tooltip: {
         enabled: false,
       },
     },
-    yaxis: [{
+    yaxis: {
       title: {
         text: "pH-Value [-]",
       },
     },
-    {
-      opposite: true,
-      title: {
-          text: 'Dissolved Solids [ppm]'
-      }
-  }]
   });
 
   return (
