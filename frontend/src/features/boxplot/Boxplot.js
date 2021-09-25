@@ -1,11 +1,10 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
-import "./Boxplot.css"
+import "./Boxplot.css";
 
 export const Boxplot = () => {
 
-
-  const [series,] = useState([
+  const [series1, ] = useState([
     {
       name: "BoxPlot",
       type: "boxPlot",
@@ -23,7 +22,9 @@ export const Boxplot = () => {
           y: [31, 39, 45, 51, 59],
         },
       ],
-    },
+    }
+  ]);
+  const [series2,] = useState([
     {
       name: "Outliers",
       type: "scatter",
@@ -44,6 +45,8 @@ export const Boxplot = () => {
     },
   ]);
 
+  var series = series1;
+
   const [options,] = useState({
     chart: {
       type: "boxPlot",
@@ -62,7 +65,8 @@ export const Boxplot = () => {
             title: 'pH',
             class: 'custom-icon',
             click: function (chart, options, e) {
-              console.log("clicked custom-icon")
+              chart.updateSeries(series2, true);
+              console.log("button clicked")
             }
             },
             {
