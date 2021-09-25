@@ -80,7 +80,7 @@ export const ZoomableChart = () => {
             index: 6,
             title: 'pH',
             class: 'custom-icon',
-            click: function (chart, options, e) {
+            click: (chart, options, e) =>{
               console.log("button clicked")
             }
           },
@@ -89,7 +89,7 @@ export const ZoomableChart = () => {
             index: 7,
             title: 'TDS',
             class: 'custom-icon',
-            click: function (chart, options, e) {
+            click: (chart, options, e) => {
               console.log("clicked custom-icon")
             }
           },
