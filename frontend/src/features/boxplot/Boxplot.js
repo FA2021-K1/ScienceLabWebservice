@@ -4,7 +4,7 @@ import "./Boxplot.css";
 
 export const Boxplot = () => {
 
-  const [series1, ] = useState([
+  const [series1,] = useState([
     {
       name: "BoxPlot",
       type: "boxPlot",
@@ -68,16 +68,16 @@ export const Boxplot = () => {
               chart.updateSeries(series2, true);
               console.log("button clicked")
             }
-            },
-            {
-              icon: '<img src="TDS.png" width="20">',
-              index: 2,
-              title: 'TDS',
-              class: 'custom-icon',
-              click: function (chart, options, e) {
-                console.log("clicked custom-icon")
-              }
-              },
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 2,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+          },
           ]
         },
       },
@@ -101,17 +101,11 @@ export const Boxplot = () => {
         text: 'pH Value [-]'
       }
     },
-
-
-    tooltip: {
-      shared: false,
-      intersect: true,
-    },
   });
 
   return (
     <div id="chart">
-      <Chart 
+      <Chart
         options={options}
         series={series}
         type="boxPlot"
