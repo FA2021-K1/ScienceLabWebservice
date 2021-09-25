@@ -13,6 +13,8 @@ mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
 export const Mapbox = () => {
     const style = useSelector((state) => state.style)
+    const dataState = useSelector((state) => state.data.dataState);
+
     const dispatch = useDispatch();
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -41,8 +43,16 @@ export const Mapbox = () => {
     if (map.current) {
     }
 
-    const popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
-        "Construction on the Washington Monument began in 1848."
+    const popup1 = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<h3>'Buoy: ' ${dataState}</h3>
+        <div class="info"> 
+          <h4>'Total Suspended Solids'</h4>
+          <p>' NTU'</p>
+        </div>
+        <div class="info"> 
+          <h4>'Total Dissolved Solids'</h4>
+          <p>' ppm'</p>
+        </div>`
     );
     const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
         "Construction on the Washington Monument began in 1848."
