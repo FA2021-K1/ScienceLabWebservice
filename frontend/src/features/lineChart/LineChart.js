@@ -6,9 +6,9 @@ import { optionsConfig } from "./lineChartConfig";
 export const LineChart = () => {
   const style = useSelector((state) => state.style);
   const currentDate = useSelector((state) => state.data.selectedTime)
-  const data = useSelector(state => state.data.data) 
+  // const data = useSelector(state => state.data.data) 
 
-  const [series,setSeries] = useState([
+  const [series,] = useState([
     {
       name: "pHS",
       data: [28, 29, 33, 36, 32, 32, 33],

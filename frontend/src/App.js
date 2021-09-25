@@ -29,12 +29,13 @@ export const App = () => {
   const dispatch = useDispatch();
   const dataState = useSelector((state) => state.data.dataState);
   const style = useSelector((state) => state.style)
-  //const data = useSelector((state) => state.data.data);
+  const data = useSelector((state) => state.data.data);
 
   useEffect(() => {
     if (dataState === "idle") {
       dispatch(getJsonData());
     }
+    console.log(data)
   }, [dispatch, dataState, style]);
   return (
     <React.StrictMode>

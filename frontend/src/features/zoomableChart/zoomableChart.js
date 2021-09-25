@@ -7,7 +7,31 @@ export const ZoomableChart = () => {
   const [series, setSeries] = useState([
     {
       name: "XYZ MOTORS",
-      data: [0,1,2,3,4,5,6,7,8,9],//dummyData,
+      data: [
+        [1532396593, 0],
+        [1532397593, 1],
+        [1532398593, 2],
+        [1532399593, 3],
+        [1532400593, 4],
+        [1532401593, 5],
+        [1532402593, 6],
+        [1532403593, 7],
+        [1532404593, 8],
+      ], //dummyData,
+    },
+    {
+      name: "ABC MOTORS",
+      data: [
+        [1532396593, 10],
+        [1532397593, 9],
+        [1532398593, 8],
+        [1532399593, 7],
+        [1532400593, 6],
+        [1532401593, 5],
+        [1532402593, 4],
+        [1532403593, 3],
+        [1532404593, 2],
+      ], //dummyData,
     },
   ]);
 
@@ -70,12 +94,7 @@ export const ZoomableChart = () => {
 
   return (
     <div id="chart">
-      <Chart
-        options={options}
-        series={series}
-        type="area"
-        height={450}
-      />
+      <Chart options={options} series={series} type="area" height={450} />
     </div>
   );
 };
