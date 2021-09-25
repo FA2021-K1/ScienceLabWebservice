@@ -1,13 +1,64 @@
 import Chart from "react-apexcharts";
 import React, { useEffect, useState } from "react";
+import { subDays, format } from "date-fns";
 
 //import dummyData from "data_context";
 
 export const ZoomableChart = () => {
-  const [series, setSeries] = useState([
+
+  const currentTime = new Date();
+
+  const [series,] = useState([
     {
-      name: "XYZ MOTORS",
-      data: [0,1,2,3,4,5,6,7,8,9],//dummyData,
+      name: "Bouy 1",
+      data: [
+        {
+          x: currentTime,
+          y: 54
+        },
+        {
+          x: subDays(currentTime, 1),
+          y: 43,
+        },
+        {
+          x: subDays(currentTime, 2),
+          y: 31,
+        },
+      ],
+    },
+    {
+      name: "Bouy 2",
+      data: [
+        {
+          x: currentTime,
+          y: 84
+        },
+        {
+          x: subDays(currentTime, 1),
+          y: 73,
+        },
+        {
+          x: subDays(currentTime, 2),
+          y: 82,
+        },
+      ],
+    },
+    {
+      name: "Bouy 3",
+      data: [
+        {
+          x: currentTime,
+          y: 75
+        },
+        {
+          x: subDays(currentTime, 1),
+          y: 68,
+        },
+        {
+          x: subDays(currentTime, 2),
+          y: 75,
+        },
+      ],
     },
   ]);
 
@@ -23,6 +74,27 @@ export const ZoomableChart = () => {
       },
       toolbar: {
         autoSelected: "zoom",
+        tools: {
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 6,
+            title: 'pH',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("button clicked")
+            }
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 7,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+          },
+          ]
+        }
       },
     },
     dataLabels: {
@@ -46,20 +118,18 @@ export const ZoomableChart = () => {
       },
     },
     yaxis: {
-      labels: {
-        formatter: function (val) {
-          return (val / 1000000).toFixed(0);
-        },
-      },
       title: {
-        text: "pH",
-      },
+        text: 'pH Value [-]'
+      }
     },
     xaxis: {
       type: "datetime",
+      tooltip: {
+        enabled: false,
+      },
     },
     tooltip: {
-      shared: false,
+      shared: true,
       y: {
         formatter: function (val) {
           return (val / 1000000).toFixed(0);
