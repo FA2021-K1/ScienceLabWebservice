@@ -35,21 +35,29 @@ export const LineChart = () => {
           pan: false,
           reset: false,
           customIcons: [{
-            icon: '<img src="ph.png" width="20">',
+            icon: '<div> pH</div>',
+            text: "pH",
+            color: style.warningColor,
             index: 1,
             title: 'pH',
             class: 'custom-icon',
             click: function (chart, options, e) {
               console.log("button clicked")
+              chart.updateOptions({
+                colors: style.pHShades
+              })
             }
           },
           {
-            icon: '<img src="TDS.png" width="20">',
+            icon: '<div> TDS </div>',
             index: 2,
             title: 'TDS',
             class: 'custom-icon',
             click: function (chart, options, e) {
               console.log("clicked custom-icon")
+              chart.updateOptions({
+                colors: style.TDSShades
+              })
             }
           },
           ]
@@ -68,7 +76,7 @@ export const LineChart = () => {
         horizontalAlign: 'center',
       },
     },
-    colors: [style.Green, style.Blue],
+    colors: style.pHShades,
     dataLabels: {
       enabled: true,
     },

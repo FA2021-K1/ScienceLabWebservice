@@ -15,7 +15,7 @@ import { Boxplot } from "./features/boxplot/Boxplot";
 import { ValueList } from "./features/valueList/ValueList";
 import { ZoomableChart } from "./features/zoomableChart/zoomableChart";
 import { ColumnChart } from "./features/columnChart/ColumnChart";
-import GaugeChart from 'react-gauge-chart'
+import { Gauge } from "./features/Gauge/Gauge";
 
 
 
@@ -59,10 +59,7 @@ export const App = () => {
           </Grid>
           <Grid item xs={3} xl={3} alignItems = "center">
             <Item >
-              <h4 align = 'left'> Overall current water quality </h4>
-          <GaugeChart id="gauge-chart1" 
-          nrOfLevels = '4'
-          colors={[style.warningColor, style.accentColor2,style.accentColor1, style.primaryColor]}/>
+          <Gauge/>
           </Item>
           </Grid>
           <Grid item xs={3} xl={3} >
