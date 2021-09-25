@@ -5,17 +5,6 @@ import FluentPostgresDriver
 import Shared
 import Foundation
 
-extension Date: LosslessStringConvertible {
-    public init?(_ description: String) {
-        if let timeInterval = Double(description) {
-            self.init(timeIntervalSince1970: timeInterval)
-        }
-        
-        return nil
-    }
-}
-
-
 struct GetAggregatedMeasurements: Handler {
     @Environment(\.databaseModel)
     var databaseModel: DatabaseModel
@@ -56,6 +45,10 @@ struct GetAggregatedMeasurements: Handler {
             throw aggregationLevelError
         }
         
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withTimeZone, .withFullDate, .withFullTime]
+        dateFormatter.timeZone = .current
+        
         let measurementFrontendContent = try? await (postgres
         .simpleQuery("""
          With Values ("buoyID", "date", "value") as
@@ -67,7 +60,7 @@ struct GetAggregatedMeasurements: Handler {
              JOIN "measurementsData" d ON (m."measurementID" = d."measurementID")
              JOIN "sensors" s             ON (d."sensorID" = s."sensorID")
              JOIN "sensorTypes" t         ON (s."sensorTypeID" = t."sensorTypeID")
-         WHERE t."name" = '\(sensorTyp)' AND s."buoyID" = \(buoyID) AND m."measuredAt" BETWEEN '\(startDate.ISO8601Format(.init(dateSeparator: .dash, dateTimeSeparator: .space, timeZone: .current)))' AND '\(endDate.ISO8601Format(.init(dateSeparator: .dash, dateTimeSeparator: .space, timeZone: .current)))'
+         WHERE t."name" = '\(sensorTyp)' AND s."buoyID" = \(buoyID) AND m."measuredAt" BETWEEN '\(dateFormatter.string(from: startDate))' AND '\(dateFormatter.string(from: endDate))'
          GROUP BY s."buoyID", date
          )
          SELECT v."buoyID", v."date", v."value",
@@ -78,11 +71,6 @@ struct GetAggregatedMeasurements: Handler {
          ORDER BY v."date" DESC, v."buoyID" ASC;
         """)
         .map { rows -> MeasurementFrontendContent in
-            let jsonDecoder = JSONDecoder()
-            let dateFormatter = ISO8601DateFormatter()
-            dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withTimeZone, .withFullDate, .withFullTime]
-            dateFormatter.timeZone = .current
-            
             let measurementData = rows.compactMap { row -> MeasurementFrontendValueContent? in
                 let data = row
                     .rowDescription
@@ -105,7 +93,7 @@ struct GetAggregatedMeasurements: Handler {
                       let date = dateFormatter.date(from: dateString),
                       let locationString = data["position"],
                       let locationData = locationString.data(using: .utf8),
-                      let location = try? jsonDecoder.decode(Coordinate.self, from: locationData),
+                      let location = try? JSONDecoder().decode(Coordinate.self, from: locationData),
                       let valueData = data["value"],
                       let value = Double(valueData) else {
                     return nil
