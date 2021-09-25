@@ -16,8 +16,21 @@ struct MeasurementDataContent: Content, Decodable {
     public var measurement: Double
 }
 
-enum SensorTypeContent: Int, Content, Decodable {
+enum SensorTypeContent: Int, Content, Decodable, LosslessStringConvertible {
+    case all = -1
     case temperaturSensor
     case conductivitySensor
     case phSensor
+    
+    var description: String {
+        String(self.rawValue)
+    }
+    
+    init?(_ description: String) {
+        guard let intDescription = Int(description) else {
+            return nil
+        }
+        
+        self.init(rawValue: intDescription)
+    }
 }

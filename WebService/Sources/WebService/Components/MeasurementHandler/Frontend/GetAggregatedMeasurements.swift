@@ -6,20 +6,17 @@ import Shared
 import Foundation
 
 struct GetAggregatedMeasurements: Handler {
-    @Environment(\.databaseModel)
-    var databaseModel: DatabaseModel
-    
     @Environment(\.database)
     var database: Database
     
     @Parameter(.http(.query))
-    var sensorTyp: String
+    var sensorTyp: SensorTypeContent = .all
     
     @Parameter(.http(.query))
-    var buoyID: Int
+    var buoyID: Int = -1
     
     @Parameter(.http(.query))
-    var aggregationLevel: Int
+    var aggregationLevel: Int = 1
     
     @Parameter(.http(.query))
     var startDate: Date
@@ -49,6 +46,7 @@ struct GetAggregatedMeasurements: Handler {
         dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withTimeZone, .withFullDate, .withFullTime]
         dateFormatter.timeZone = .current
         
+        // buoyID, sensorTypeID, date, value, position
         let measurementFrontendContent = try? await (postgres
         .simpleQuery("""
          With Values ("buoyID", "sensorTypeID", "date", "value") as
@@ -90,6 +88,9 @@ struct GetAggregatedMeasurements: Handler {
                 
                 guard let buoyIDString = data["buoyID"],
                       let buoyID = Int(buoyIDString),
+                      let sensorTypeIDString = data["sensorTypeID"],
+                      let sensorTypeID = Int(sensorTypeIDString),
+                      let sensorTypeIDEnum = SensorTypeContent(rawValue: sensorTypeID),
                       let dateString = data["date"],
                       let date = dateFormatter.date(from: dateString),
                       let locationString = data["position"],
@@ -101,6 +102,7 @@ struct GetAggregatedMeasurements: Handler {
                 }
                 
                 return MeasurementFrontendValueContent(buoyId: buoyID,
+                                                       sensorTypeId: sensorTypeIDEnum,
                                                        date: date,
                                                        location: location,
                                                        value: value)

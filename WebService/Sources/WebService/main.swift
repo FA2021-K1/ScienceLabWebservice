@@ -63,6 +63,8 @@ struct ExampleWebService: WebService {
                 .addMigrations(SensorTypeMigration())
                 .addMigrations(SensorMigration())
                 .addMigrations(MeasurementDataMigration())
+                .addMigrations(UserMigration())
+                .addMigrations(TokenMigration())
                 
     }
 
