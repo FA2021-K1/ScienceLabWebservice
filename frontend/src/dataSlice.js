@@ -15,11 +15,14 @@ export const dataSlice = createSlice({
     initialState: {
         selectedTime: new Date(),
         data: null,
+        dataAverageByDay: null,
         dataState: "idle"
     },
     reducers : {
         updateSelectedTime: (state, action) => {
             state.selectedTime = action.payload
+            console.log("Date change dto")
+            console.log(action.payload)
         }
     },
     extraReducers: {

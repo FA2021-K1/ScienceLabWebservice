@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
 import { subDays, format } from "date-fns";
@@ -103,6 +103,13 @@ export const LineChart = () => {
     },
   });
 
+  useEffect(() => {
+    const dates = [6, 5, 4, 3, 2, 1, 0]
+    let optionsCarry = options
+    optionsCarry.xaxis.categories = dates.map((dateDifference) => new Date(new Date().setDate(currentDate.getDate() - dateDifference)).toLocaleDateString())
+    setOptions(optionsCarry)
+    console.log(options.xaxis.categories)
+  }, [currentDate])
   return (
     <div id="chart">
       <Chart options={options} series={series} type="line"
