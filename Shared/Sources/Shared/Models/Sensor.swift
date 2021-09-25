@@ -28,7 +28,7 @@ public final class Sensor: Model {
     
     public init() { }
     
-    public init(id: UUID? = nil, sensorSlot: Int? = nil, buoyID: Int? = nil, sensorTypeID: Int) {
+    public init(id: UUID? = nil, sensorSlot: Int? = nil, buoyID: Int? = nil, sensorTypeID: SensorType.IDValue) {
         self.id = id
         self.sensorSlot = sensorSlot
         self.buoyID = buoyID

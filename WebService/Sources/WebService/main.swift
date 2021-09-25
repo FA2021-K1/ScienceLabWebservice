@@ -71,6 +71,8 @@ struct ExampleWebService: WebService {
             .record(.all)
         SensorTypeComponent()
             .record(.all)
+        AuthComponent()
+            .record(.all)
     }
 }
 
