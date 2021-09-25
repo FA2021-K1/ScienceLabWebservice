@@ -45,12 +45,6 @@ export const Header = () => {
           <Typography variant="h6" color="inherit">
             Sciencelab @ FA 2021
           </Typography>
-
-          <Button onClick={(e) => {
-            if (selectedData === "TDS") {
-              dispatch(updateSelectedData("pH"))
-            } else if (selectedData === "pH") { dispatch(updateSelectedData("TDS")) }
-          }} >switch selector</Button>
         </Toolbar>
       </AppBar>
     </div>
