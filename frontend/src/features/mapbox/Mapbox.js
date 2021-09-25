@@ -29,6 +29,17 @@ export const Mapbox = () => {
         return format(time, "MMM dd h a");
     };
 
+    let markers = []
+    let circleJson = {
+        type: "geojson",
+        data: {
+            type: "FeatureCollection",
+            features: []
+        }
+    }
+
+
+
     useEffect(() => {
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
@@ -39,7 +50,7 @@ export const Mapbox = () => {
         });
         map.current.addControl(new mapboxgl.NavigationControl({}));
     });
-    const size = 200;
+    const size = 150;
 
     // This implements `StyleImageInterface`
     // to draw a pulsing dot icon on the map.
@@ -63,7 +74,7 @@ export const Mapbox = () => {
             const t = (performance.now() % duration) / duration;
 
             const radius = (size / 2) * 0.3;
-            const outerRadius = (size / 2) * 0.7 * t + radius;
+            const outerRadius = (size / 2) * 0.5 * t + radius;
             const context = this.context;
 
             // Draw the outer circle.
@@ -104,50 +115,14 @@ export const Mapbox = () => {
 
             // Continuously repaint the map, resulting
             // in the smooth animation of the dot.
-            map.triggerRepaint();
+            map.current.triggerRepaint();
 
             // Return `true` to let the map know that the image was updated.
             return true;
         }
     };
 
-    let markers = []
-    let circleJson = {
-        type: "geojson",
-        data: {
-            type: "FeatureCollection",
-            features: []
-        }
-    }
-    if (data) {
-        for (let key in data) {
-            const longitude = data[key][0].location.longitude
-            const latitude = data[key][0].location.latitude
 
-            const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-                `   <h3>Buoy: ${key} aka BERND</h3>
-                <div class="info"> 
-                    <h4>ph-Value:</h4>
-                    <p>${data[key][0]["value"]} NTU</p>
-                </div>
-                <div class="info"> 
-                    <h4>Total Dissolved Solids:</h4>
-                    <p>ppm</p>
-                </div>`
-            )
-            markers.push(new mapboxgl.Marker({ "color": style.accentColor1 })
-                .setLngLat([longitude, latitude])
-                .setPopup(popup))
-            circleJson.data.features.push({
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [longitude, latitude],
-                },
-            })
-        }
-        console.log(circleJson)
-    }
     useEffect(() => {
         if (!map.current) return; // wait for map to initialize
         map.current.on("move", () => {
@@ -156,23 +131,63 @@ export const Mapbox = () => {
             setZoom(map.current.getZoom().toFixed(2));
         });
 
+
+
         map.current.on("load", () => {
-            markers.forEach(element => element.addTo(map.current))
-            if (!map.current.getSource("circlesPosition")) {
-                map.current.addSource("circlesPosition", circleJson);
+
+            //markers.forEach(element => element.addTo(map.current))
+
+            if (data) {
+                for (let key in data) {
+                    console.log(circleJson);
+                    const longitude = data[key][0].location.longitude
+                    const latitude = data[key][0].location.latitude
+
+                    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+                        `   <h3>Buoy: ${key} aka BERND</h3>
+                    <div class="info"> 
+                        <h4>ph-Value:</h4>
+                        <p>${data[key][0]["value"]} NTU</p>
+                    </div>
+                    <div class="info"> 
+                        <h4>Total Dissolved Solids:</h4>
+                        <p>ppm</p>
+                    </div>`
+                    )
+                    new mapboxgl.Marker({ "color": style.accentColor1 })
+                        .setLngLat([longitude, latitude])
+                        .setPopup(popup)
+                        .addTo(map.current)
+                    circleJson.data.features.push({
+                        type: "Feature",
+                        geometry: {
+                            type: "Point",
+                            coordinates: [longitude, latitude],
+                        },
+                    })
+                }
+                
+                if (map.current.hasImage("pulsing-dot")) {
+                    map.current.removeImage("pulsing-dot")
+                }
+                map.current.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+            
+                if (!map.current.getSource("circlesPosition")) {
+                    console.log(circleJson)
+                    map.current.addSource('circlesPosition', circleJson);
+                }
+                if (map.current.getLayer("circles")) {
+                    map.current.removeLayer("circles")
+                }
+                map.current.addLayer({
+                    id: "circles",
+                    type: "symbol",
+                    source: "circlesPosition",
+                    layout: {
+                        "icon-image": "pulsing-dot",
+                    },
+                })
             }
-            if (map.current.getLayer("circles")) {
-                map.current.removeLayer("circles")
-            }
-            map.current.addLayer({
-                id: "circles",
-                type: "symbol",
-                source: "circlesPosition",
-                layout: {
-                    "icon-image": "pulsing-dot",
-                },
-            });
-            console.log(map.current.getLayer("circles"))
         });
     });
 
