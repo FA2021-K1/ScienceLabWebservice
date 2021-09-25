@@ -67,11 +67,9 @@ struct ExampleWebService: WebService {
     }
 
     var content: some Component {
-        ContactComponent()
+        MeasurementComponent()
             .record(.all)
-        ResidenceComponent()
-            .record(.all)
-        MeasurementsComponent()
+        SensorTypeComponent()
             .record(.all)
     }
 }
