@@ -53,16 +53,6 @@ export const ColumnChart = () => {
         fill: {
             opacity: 1
         },
-        tooltip: {
-            y: [{
-                formatter: undefined
-            },
-            {
-                formatter: function (val) {
-                    return val + " ppm"
-                }
-            }]
-        }
     });
 
 

@@ -93,8 +93,9 @@ export const App = () => {
             </Item>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <h5 align='center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
+        <Grid item xs = {12}>
+        <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
+          <p align = 'center' style={{'font-size': '12px'}}>Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></p>
         </Grid>
       </body>
     </React.StrictMode>
