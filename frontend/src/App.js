@@ -82,6 +82,9 @@ export const App = () => {
             </Item>
           </Grid>
         </Grid>
+        <Grid item xs = {12}>
+        <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
+        </Grid>
       </body>
     </React.StrictMode>
   );

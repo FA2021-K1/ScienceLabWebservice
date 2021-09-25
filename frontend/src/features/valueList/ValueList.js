@@ -9,8 +9,8 @@ import { useEffect } from "react";
 import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
-  const jsonData = useSelector((state) => state.data.data)[0];
-  
+  const jsonDataAll = useSelector((state) => state.data.data);
+  const jsonData = jsonDataAll ? jsonDataAll[0] : null 
   const renderRow = ({ index }) => {
     return (
       <ListItem key={index} component="div" disablePadding>
