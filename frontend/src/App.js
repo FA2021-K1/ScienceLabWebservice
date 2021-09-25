@@ -22,9 +22,11 @@ import GaugeChart from 'react-gauge-chart'
 import { getJsonData } from "./dataSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
   padding: theme.spacing(1),
-  color: theme.palette.text.secondary
+  color: theme.palette.text.secondary,
+  height: "400px",
+  justifyContent: "center",
+  alignItems: "center"
 }));
 
 export const App = () => {
@@ -51,13 +53,13 @@ export const App = () => {
           autoHeight = "true"
         >
           <Grid item xs={12} xl={12} >
-            <Item>
+            <Item style ={{ height :"525px"}}>
               <Mapbox />
             </Item>
           </Grid>
-          <Grid item xs={3} xl={3} >
-            <Item height ="100%">
-              <h3 align = 'left'> Overall current water quality </h3>
+          <Grid item xs={3} xl={3} alignItems = "center">
+            <Item >
+              <h4 align = 'left'> Overall current water quality </h4>
           <GaugeChart id="gauge-chart1" 
           nrOfLevels = '4'
           colors={[style.warningColor, style.accentColor2,style.accentColor1, style.primaryColor]}/>
@@ -80,12 +82,12 @@ export const App = () => {
           </Grid>
 
           <Grid item xs={3} xl={3}>
-            <Item>
+            <Item style={{ height :"550px"}} >
               <ValueList />
             </Item>
           </Grid>
           <Grid item xs={9} xl={9} >
-            <Item>
+            <Item style ={{ height :"550px"}} >
               <ZoomableChart />
 
             </Item>
