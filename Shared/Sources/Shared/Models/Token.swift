@@ -1,8 +1,7 @@
 import FluentKit
 import Foundation
-import ApodiniAuthorization
 
-struct Token: Authenticatable, Codable {
+public final class Token: Model {
     public static let schema = "tokens"
     
     @ID(custom: .string("tokenID"))
@@ -15,13 +14,13 @@ struct Token: Authenticatable, Codable {
     public var updatedAt: Date?
     
     @Field(key: "value")
-    let value: String
+    public var value: String
     
     @Field(key: "username")
-    let username: String
+    public var username: String
     
     @Parent(key: "userID")
-    var user: User
+    public var user: User
 
     public init() { }
     

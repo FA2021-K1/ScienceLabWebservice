@@ -1,7 +1,7 @@
 import Apodini
 import Shared
 
-struct MeasurementComponent: Component {
+struct AuthComponent: Component {
     var content: some Component {
         Group("auth") {
             LoginHandler()

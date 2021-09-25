@@ -1,8 +1,7 @@
 import FluentKit
 import Foundation
-import ApodiniAuthorization
 
-struct User: Authenticatable: Model {
+public final class User: Model {
     public static let schema = "users"
     
     @ID(custom: .string("userID"))
@@ -21,13 +20,13 @@ struct User: Authenticatable: Model {
     public var password_hash: String
     
     @Children(for: \.$user)
-    var tokens: [Token]
+    public var tokens: [Token]
     
     public init() { }
     
-    public init(id: UUID? = nil, username: String, password: String) {
+    public init(id: UUID? = nil, username: String, password_hash: String) {
         self.id = id
         self.username = username
-        self.password = password
+        self.password_hash = password_hash
     }
 }

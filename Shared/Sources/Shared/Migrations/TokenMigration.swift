@@ -1,6 +1,6 @@
 import FluentKit
 
-public struct MeasurementMigration: Migration {
+public struct TokenMigration: Migration {
     public init() {}
     
     public func prepare(on database: Database) -> EventLoopFuture<Void> {
