@@ -4,25 +4,27 @@ import axios from "axios"
 import { sortByBouy } from './sorting';
 
 export const getJsonData = createAsyncThunk("data/getJsonData",
-async (thunkAPI) => {
-    const path = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + 'measurements'
-    const response = await axios.get(path);
-    return response;
-});
+    async (thunkAPI) => {
+        const path = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + 'measurements'
+        const response = await axios.get(path);
+        return response;
+    });
 
 export const dataSlice = createSlice({
-    name:'data',
+    name: 'data',
     initialState: {
         selectedTime: new Date(),
+        selectedData: "pH",
         data: null,
         dataAverageByDay: null,
         dataState: "idle"
     },
-    reducers : {
+    reducers: {
         updateSelectedTime: (state, action) => {
             state.selectedTime = action.payload
-            console.log("Date change dto")
-            console.log(action.payload)
+        },
+        updateSelectedData: (state, action) => {
+            state.selectedData = action.payload
         }
     },
     extraReducers: {
@@ -40,6 +42,6 @@ export const dataSlice = createSlice({
     }
 })
 
-export const { updateSelectedTime } = dataSlice.actions
+export const { updateSelectedTime, updateSelectedData } = dataSlice.actions
 
 export default dataSlice.reducer

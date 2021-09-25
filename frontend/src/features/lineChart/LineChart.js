@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
 import { subDays, format } from "date-fns";
+import { Button } from "semantic-ui-react";
+import { areIntervalsOverlappingWithOptions } from "date-fns/fp";
 
 export const LineChart = () => {
   const style = useSelector((state) => state.style);
+  const selectedData = useSelector(state => state.data.selectedData)
   const currentTime = new Date();
   const yesterday = subDays(currentTime, 1);
+  const [chartObj, setChartObj] = useState(null)
 
-  const [series,] = useState([
+  const [series,setSeries] = useState([
     {
       name: "Bouy 1",
       data: [28, 29, 33, 36, 32, 32, 33],
@@ -22,7 +26,7 @@ export const LineChart = () => {
       data: [14, 14, 18, 23, 22, 17, 13],
     },
   ]);
-  const [options,] = useState({
+  const [options,setOptions] = useState({
     chart: {
       height: 400,
       type: "line",
@@ -41,7 +45,8 @@ export const LineChart = () => {
             index: 1,
             title: 'pH',
             class: 'custom-icon',
-            click: function (chart, options, e) {
+            click:  (chart, options, e) =>{
+              setChartObj(chart)
               console.log("button clicked")
               chart.updateOptions({
                 colors: style.pHShades
@@ -110,6 +115,14 @@ export const LineChart = () => {
       },
     },
   });
+
+  useEffect(() => {
+    if(selectedData === "pH"){
+      setOptions({...options, colors: style.pHShades})
+    }else if(selectedData === "TDS"){
+      setOptions({...options, colors: style.TDSShades})
+    }
+  }, [selectedData])
 
   return (
     <div id="chart">
