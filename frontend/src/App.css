@@ -61,9 +61,18 @@
   margin-left: auto;
 }
 
-a, a:visited, a:hover, a:active {
+#header-container a, a:visited, a:hover, a:active {
   color: #ffffff;
   text-decoration: none;
+}
+
+#sidebar a, a:hover, a:active {
+  color: #000000;
+  text-decoration: none;
+}
+
+#sidebar a:visited {
+ color: #000000; 
 }
 
 .breadcrumbs-container {
