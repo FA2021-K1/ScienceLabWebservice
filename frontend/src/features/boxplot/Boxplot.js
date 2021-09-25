@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
-import SensorToggleButton from "./ToggleButton";
 
 export const Boxplot = () => {
+
+
   const [series,] = useState([
     {
       name: "pH Value",
@@ -53,7 +54,16 @@ export const Boxplot = () => {
           zoomin: false,
           zoomout: false,
           pan: false,
-          reset: false
+          reset: false,
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 1,
+            title: 'pH',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+            }]
         },
       },
     },
@@ -70,10 +80,10 @@ export const Boxplot = () => {
     },
     yaxis: {
       title: {
-          text: 'pH Value [-]'
+        text: 'pH Value [-]'
       }
-  },
-    
+    },
+
 
     tooltip: {
       shared: false,
@@ -82,16 +92,14 @@ export const Boxplot = () => {
   });
 
   return (
-    <div>
     <div id="chart">
       <Chart
         options={options}
         series={series}
         type="boxPlot"
-        height={'350'}
-      />
-    </div>
-    <div> <SensorToggleButton size="large"/> </div>
+        height={'350'}>
+      </Chart>
+
     </div>
   );
 };
