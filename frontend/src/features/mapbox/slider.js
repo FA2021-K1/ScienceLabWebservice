@@ -40,17 +40,14 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
   const style = useSelector((state) => state.style)
   const handleValueChange = (event, newAlignment) => {
     if (newAlignment !== null) { //enforce selection
-      setAlignment(newAlignment);
-    }
-    if (selectedData === "TDS") {
-      dispatch(updateSelectedData("pH"))
-    } else if (selectedData === "pH") { dispatch(updateSelectedData("TDS")) }
-
+      setAlignment(newAlignment);}
+    dispatch(updateSelectedData(newAlignment))
   };
   const [alignment, setAlignment] = React.useState('web');
   return (
+    <div>
     <Box sx={{ width: 350, px: 2, py: 1 }}>
-      <ToggleButtonGroup
+    <ToggleButtonGroup
       size = "small"
         color='primary'
         value={alignment}
@@ -60,6 +57,7 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
         <ToggleButton value="pH">pH</ToggleButton>
         <ToggleButton value="TDS">TDS</ToggleButton>
       </ToggleButtonGroup>
+      <hr style={{color:style.lightGray, opacity: "50%"}}/>
       <Slider
         sx={{ color: style.primaryColor }}
         aria-label="Always visible"
@@ -74,12 +72,12 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
         size="medium"
         onChange={(e) => {
           setSelectedTime(new Date(e.target.value));
-          console.log(e.target.value);
         }}
         onChangeCommitted={() => {
           dispatch(updateSelectedTime(selectedTime));
         }}
       />
     </Box>
+    </div>
   );
 };

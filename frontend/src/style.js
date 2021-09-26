@@ -6,6 +6,7 @@ export const styles = {
     TDS: '#729682',
     pH: '#4668B0',
     grey: "#f3fbfb",
+    lightGray:"#BFBFBF",
     lightGreen: '#88C61E',
     warningColor: "#CE4D45",
     confettiEffect: true,

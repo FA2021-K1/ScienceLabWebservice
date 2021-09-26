@@ -38,34 +38,7 @@ export const LineChart = () => {
           zoomout: false,
           pan: false,
           reset: false,
-          customIcons: [{
-            icon: '<div> pH</div>',
-            text: "pH",
-            color: style.warningColor,
-            index: 1,
-            title: 'pH',
-            class: 'custom-icon',
-            click:  (chart, options, e) =>{
-              setChartObj(chart)
-              console.log("button clicked")
-              chart.updateOptions({
-                colors: style.pHShades
-              })
-            }
-          },
-          {
-            icon: '<div> TDS </div>',
-            index: 2,
-            title: 'TDS',
-            class: 'custom-icon',
-            click: function (chart, options, e) {
-              console.log("clicked custom-icon")
-              chart.updateOptions({
-                colors: style.TDSShades
-              })
-            }
-          },
-          ]
+          customIcons: []
         }
       },
       dropShadow: {
@@ -118,9 +91,11 @@ export const LineChart = () => {
 
   useEffect(() => {
     if(selectedData === "pH"){
-      setOptions({...options, colors: style.pHShades})
+      setOptions({...options, colors: style.pHShades, title: {
+        text: "Means per day of last 7 days - "+ selectedData}})
     }else if(selectedData === "TDS"){
-      setOptions({...options, colors: style.TDSShades})
+      setOptions({...options, colors: style.TDSShades,title: {
+        text: "Means per day of last 7 days - "+ selectedData}})
     }
   }, [selectedData])
 
