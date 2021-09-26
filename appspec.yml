@@ -1,14 +1,16 @@
 version: 0.0
 os: linux
 files:
-  - source: .
-    destination: /home/ec2-user/webservice/
+  - source: ./deployment/docker-compose-deploy.yml
+    destination: /home/ec2-user/webservice/docker-compose.yml
+  - source: ./env
+    destination: /home/ec2-user/webservice/.env
 hooks:
   AfterInstall:
-    - location: setup.sh
+    - location: deployment/setup.sh
       timeout: 1800
-      runas: root
+      runas: ec2-user
   ApplicationStart:
-    - location: run.sh
+    - location: deployment/run.sh
       timeout: 1800
-      runas: root
+      runas: ec2-user
