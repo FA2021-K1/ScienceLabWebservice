@@ -42,7 +42,7 @@ jobs:
               echo "::set-output name=rebuild_webservice::true"
               break
             else
-              echo "::set-output name=rebuild_webservice::true"
+              echo "::set-output name=rebuild_webservice::false"
             fi
           done < files.txt
   build-and-push-webservice:
