@@ -4,5 +4,5 @@ import Shared
 import Foundation
 
 struct SensorsByBuoyContent: Content {
-    public var data: [Int:[Int]]
+    public var sensorsByBuoy: [Int:[Int]]
 }

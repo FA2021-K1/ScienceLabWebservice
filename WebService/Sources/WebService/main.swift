@@ -5,6 +5,8 @@ import ApodiniObserveMetricsPrometheus
 import ApodiniOpenAPI
 import ApodiniREST
 import ApodiniDatabase
+import ApodiniAuthorization
+import ApodiniAuthorizationJWT
 import Shared
 import ArgumentParser
 import FluentPostgresDriver
@@ -48,6 +50,8 @@ struct ExampleWebService: WebService {
         MetricsConfiguration(handlerConfiguration: MetricPullHandlerConfiguration.defaultPrometheus,
                              systemMetricsConfiguration: .default)
         
+        JWTSigner(.hs256(key: "secret"))
+        
         // Setup of database and add migrations to create the respective tables
         DatabaseConfiguration(
             .postgres(
@@ -74,6 +78,8 @@ struct ExampleWebService: WebService {
         SensorTypeComponent()
             .record(.all)
         AuthComponent()
+            .record(.all)
+        DummyComponent()
             .record(.all)
     }
 }

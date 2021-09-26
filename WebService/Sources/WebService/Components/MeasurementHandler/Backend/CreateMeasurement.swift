@@ -19,7 +19,7 @@ struct CreateMeasurement: Handler {
     func handle() async throws -> Shared.Measurement {
         let measurement = Measurement(measuredAt: measurementContent.date,
                                       coordinate: measurementContent.location,
-                                      buoyID: measurementContent.buoyId)
+                                      buoyID: measurementContent.buoyID)
         
         guard let measurement = try? await databaseModel.createMeasurement(measurement),
               let measurementID = measurement.id else {
@@ -36,11 +36,11 @@ struct CreateMeasurement: Handler {
                 
                 // Check if sensor exists
                 var sensorID: UUID
-                if await !databaseModel.isSensorConfigured(buoyID: measurementContent.buoyId,
-                                                           sensorSlot: measurementDataContent.sensorSlot) {
+                if await !databaseModel.isSensorConfigured(buoyID: measurementContent.buoyID,
+                                                           sensorSlot: measurementDataContent.sensorID) {
                     // Create sensor
-                    let sensor = Sensor(sensorSlot: measurementDataContent.sensorSlot,
-                                        buoyID: measurementContent.buoyId,
+                    let sensor = Sensor(sensorSlot: measurementDataContent.sensorID,
+                                        buoyID: measurementContent.buoyID,
                                         sensorTypeID: measurementDataContent.sensorType.rawValue)
                     
                     guard let _ = try? await databaseModel.createSensor(sensor),
@@ -51,8 +51,8 @@ struct CreateMeasurement: Handler {
                     sensorID = tempSensorID
                 } else {
                     // Get ID of existing sensor
-                    guard let tempSensorID = await databaseModel.getSensorID(buoyID: measurementContent.buoyId,
-                                                                             sensorSlot: measurementDataContent.sensorSlot) else {
+                    guard let tempSensorID = await databaseModel.getSensorID(buoyID: measurementContent.buoyID,
+                                                                             sensorSlot: measurementDataContent.sensorID) else {
                         throw serverError
                     }
                     

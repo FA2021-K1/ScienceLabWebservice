@@ -88,7 +88,7 @@ struct GetBuoyAggregatedMeasurements: Handler {
                         return nil
                     }
                     
-                    return .init(sensorTypeId: sensorTypeIDEnum,
+                    return .init(sensorTypeID: sensorTypeIDEnum,
                                  date: date,
                                  value: value)
                 }

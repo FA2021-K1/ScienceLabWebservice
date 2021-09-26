@@ -8,7 +8,7 @@ struct MeasurementBuoyFrontendContent: Content, Decodable {
 }
 
 struct MeasurementFrontendBuoyValueContent: Content, Decodable {
-    public var sensorTypeId: SensorTypeContent
+    public var sensorTypeID: SensorTypeContent
     public var date: Date
     public var value: Double
 }

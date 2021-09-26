@@ -28,7 +28,7 @@ struct GetSensors: Handler {
         """
         )
         .map { rows -> SensorsByBuoyContent in
-            .init(data:
+            .init(sensorsByBuoy:
                 rows.reduce(into: [Int: [Int]]()) { partialResult, row in
                     if let rawBuoyID = row.column("buoyID"),
                        let buoyID = rawBuoyID.int,

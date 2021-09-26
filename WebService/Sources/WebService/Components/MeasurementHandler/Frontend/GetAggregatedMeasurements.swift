@@ -70,45 +70,45 @@ struct GetAggregatedMeasurements: Handler {
          ORDER BY v."buoyID" ASC, v."date" DESC, v."sensorTypeID" ASC;
         """)
         .map { rows -> MeasurementFrontendContent in
-            let measurementData = rows.compactMap { row -> MeasurementFrontendValueContent? in
-                let data = row
-                    .rowDescription
-                    .fields
-                    .reduce(into: [String: String](), { partialResult, field in
-                        let columnName = field.name
-                        if let rawResult = row.column(columnName) {
-                            if let rawJSONResult = rawResult.jsonb {
-                                partialResult[columnName] = String(decoding: rawJSONResult, as: UTF8.self)
-                            } else if let rawStringResult = rawResult.string {
-                                partialResult[columnName] = rawStringResult
+            return .init(measurements:
+                rows.compactMap { row -> MeasurementFrontendValueContent? in
+                    let data = row
+                        .rowDescription
+                        .fields
+                        .reduce(into: [String: String](), { partialResult, field in
+                            let columnName = field.name
+                            if let rawResult = row.column(columnName) {
+                                if let rawJSONResult = rawResult.jsonb {
+                                    partialResult[columnName] = String(decoding: rawJSONResult, as: UTF8.self)
+                                } else if let rawStringResult = rawResult.string {
+                                    partialResult[columnName] = rawStringResult
+                                }
+                                
                             }
-                            
-                        }
-                    })
-                
-                guard let buoyIDString = data["buoyID"],
-                      let buoyID = Int(buoyIDString),
-                      let sensorTypeIDString = data["sensorTypeID"],
-                      let sensorTypeID = Int(sensorTypeIDString),
-                      let sensorTypeIDEnum = SensorTypeContent(rawValue: sensorTypeID),
-                      let dateString = data["date"],
-                      let date = dateFormatter.date(from: dateString),
-                      let locationString = data["position"],
-                      let locationData = locationString.data(using: .utf8),
-                      let location = try? JSONDecoder().decode(Coordinate.self, from: locationData),
-                      let valueData = data["value"],
-                      let value = Double(valueData) else {
-                    return nil
+                        })
+                    
+                    guard let buoyIDString = data["buoyID"],
+                          let buoyID = Int(buoyIDString),
+                          let sensorTypeIDString = data["sensorTypeID"],
+                          let sensorTypeID = Int(sensorTypeIDString),
+                          let sensorTypeIDEnum = SensorTypeContent(rawValue: sensorTypeID),
+                          let dateString = data["date"],
+                          let date = dateFormatter.date(from: dateString),
+                          let locationString = data["position"],
+                          let locationData = locationString.data(using: .utf8),
+                          let location = try? JSONDecoder().decode(Coordinate.self, from: locationData),
+                          let valueData = data["value"],
+                          let value = Double(valueData) else {
+                        return nil
+                    }
+                    
+                    return .init(buoyID: buoyID,
+                                 sensorTypeID: sensorTypeIDEnum,
+                                 date: date,
+                                 location: location,
+                                 value: value)
                 }
-                
-                return MeasurementFrontendValueContent(buoyId: buoyID,
-                                                       sensorTypeId: sensorTypeIDEnum,
-                                                       date: date,
-                                                       location: location,
-                                                       value: value)
-            }
-            
-            return MeasurementFrontendContent(measurements: measurementData)
+            )
         })
         .get()
         
