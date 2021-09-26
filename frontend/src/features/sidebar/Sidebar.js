@@ -17,14 +17,14 @@ export const Sidebar = withRouter(props => {
   return (<div id="sidebar">
     <List>
       {routes.map(({ path, name, Icon }, key) => {
-        const color = path.localeCompare(props.location.pathname) === 0 ? style.secondaryColor : "#000000";
+        const color = path.localeCompare(props.location.pathname) === 0 ? style.secondaryColor : style.lightGray;
         return (
           <Link key={`nav-item-${key}`} to={path}>
-            <ListItem key={`nav-list-item-${key}`} style={{ color: color }}>
+            <ListItem key={`nav-list-item-${key}`} >
               <ListItemIcon style={{ color: color }}>
                 <Icon />
               </ListItemIcon>
-              <ListItemText primary={name} />
+              <ListItemText primary={name} style={{ color: color }}/>
             </ListItem>
           </Link>
         );
