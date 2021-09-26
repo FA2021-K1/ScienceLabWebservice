@@ -9,6 +9,7 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
     && apt-get -q dist-upgrade -y \
     && apt-get install -y libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y openssl libssl-dev
 
 # Set up a build area
 WORKDIR /build
