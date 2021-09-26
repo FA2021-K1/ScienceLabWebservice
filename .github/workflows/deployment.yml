@@ -18,7 +18,7 @@ jobs:
   check:
     name: Check files
     outputs:
-      run_job: ${{ steps.check_files.outputs.rebuild_webservice }}
+      rebuild_webservice: ${{ steps.check_files.outputs.rebuild_webservice }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
