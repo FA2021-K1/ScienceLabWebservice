@@ -57,6 +57,31 @@ export const App = () => {
           wrap="wrap"
           style={{ overflow: "auto" }}
         >
+          <Grid item xs={12} md ={3} >
+            <Item style ={{ height :"100px"}}>
+              <div> Cool
+              </div>
+            </Item>
+          </Grid>
+          <Grid item xs={12} md ={3} >
+            <Item style ={{ height :"100px"}}>
+              <div> Cool
+              </div>
+            </Item>
+          </Grid>
+          <Grid item xs={12} md ={3} >
+            <Item style ={{ height :"100px"}}>
+              <div> Cool
+              </div>
+            </Item>
+          </Grid>
+          <Grid item xs={12} md ={3} >
+            <Item style ={{ height :"100px"}}>
+              <div> Cool
+              </div>
+            </Item>
+          </Grid>
+          
           <Grid item xs={12} >
             <Item style ={{ height :"525px"}}>
               <Mapbox />
