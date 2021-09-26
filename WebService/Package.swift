@@ -16,7 +16,10 @@ let package = Package(
         //.package(path: "../../Apodini"),
         .package(path: "../Shared"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
-        .package(url: "https://github.com/Apodini/swift-log-elk.git", from: "0.2.0")
+        .package(url: "https://github.com/Apodini/swift-log-elk.git", from: "0.2.0"),
+        .package(url: "https://github.com/vapor-community/bcrypt.git", from: "1.1.0")
+        //.package(url: "https://github.com/Kitura/Swift-JWT.git", from: "3.6.0")
+
     ],
     targets: [
         .executableTarget(
@@ -29,9 +32,12 @@ let package = Package(
                 .product(name: "ApodiniOpenAPI", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
                 .product(name: "ApodiniAuthorization", package: "Apodini"),
+                .product(name: "ApodiniAuthorizationJWT", package: "Apodini"),
                 .product(name: "Shared", package: "Shared"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
-                .product(name: "LoggingELK", package: "swift-log-elk")
+                .product(name: "LoggingELK", package: "swift-log-elk"),
+                .product(name: "BCrypt", package: "bcrypt")
+                //.product(name: "SwiftJWT", package: "Swift-JWT")
             ]
         ),
         /*

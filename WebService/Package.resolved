@@ -65,12 +65,75 @@
         }
       },
       {
+        "package": "BCrypt",
+        "repositoryURL": "https://github.com/vapor-community/bcrypt.git",
+        "state": {
+          "branch": null,
+          "revision": "a36b6f0381f2edb9fb32b8882ebc801ba8db10ef",
+          "version": "1.1.1"
+        }
+      },
+      {
+        "package": "Bits",
+        "repositoryURL": "https://github.com/vapor/bits.git",
+        "state": {
+          "branch": null,
+          "revision": "03079476b04139a8b744ad96f975176df5ae12bc",
+          "version": "1.1.1"
+        }
+      },
+      {
+        "package": "Cryptor",
+        "repositoryURL": "https://github.com/Kitura/BlueCryptor.git",
+        "state": {
+          "branch": null,
+          "revision": "ee5880e031da4c609f372cf7472476ab51d5dd19",
+          "version": "1.0.200"
+        }
+      },
+      {
+        "package": "CryptorECC",
+        "repositoryURL": "https://github.com/Kitura/BlueECC.git",
+        "state": {
+          "branch": null,
+          "revision": "baf6ed3fc1a622675f0041b4aff7c02dd1a93818",
+          "version": "1.2.200"
+        }
+      },
+      {
+        "package": "CryptorRSA",
+        "repositoryURL": "https://github.com/Kitura/BlueRSA.git",
+        "state": {
+          "branch": null,
+          "revision": "440f78db26d8bb073f29590f1c7bd31004da09ae",
+          "version": "1.0.201"
+        }
+      },
+      {
         "package": "console-kit",
         "repositoryURL": "https://github.com/vapor/console-kit.git",
         "state": {
           "branch": null,
           "revision": "75ea3b627d88221440b878e5dfccc73fd06842ed",
           "version": "4.2.7"
+        }
+      },
+      {
+        "package": "Core",
+        "repositoryURL": "https://github.com/vapor/core.git",
+        "state": {
+          "branch": null,
+          "revision": "aa15871311b497a24a7f0e96b1ae6865dd600818",
+          "version": "2.2.1"
+        }
+      },
+      {
+        "package": "Debugging",
+        "repositoryURL": "https://github.com/vapor/debugging.git",
+        "state": {
+          "branch": null,
+          "revision": "fc5a27d6eb236141dc24e5f14eedaa2e035ae7b3",
+          "version": "1.1.1"
         }
       },
       {
@@ -137,6 +200,24 @@
         }
       },
       {
+        "package": "KituraContracts",
+        "repositoryURL": "https://github.com/Kitura/KituraContracts.git",
+        "state": {
+          "branch": null,
+          "revision": "8418006e39e2efae9b31ae92721cb597ac29c617",
+          "version": "1.2.200"
+        }
+      },
+      {
+        "package": "LoggerAPI",
+        "repositoryURL": "https://github.com/Kitura/LoggerAPI.git",
+        "state": {
+          "branch": null,
+          "revision": "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
+          "version": "1.9.200"
+        }
+      },
+      {
         "package": "MetadataSystem",
         "repositoryURL": "https://github.com/Apodini/MetadataSystem.git",
         "state": {
@@ -188,6 +269,15 @@
           "branch": null,
           "revision": "046d3ba1a40c5d2e2457177f4311b0b9c97f8945",
           "version": "1.6.2"
+        }
+      },
+      {
+        "package": "Random",
+        "repositoryURL": "https://github.com/vapor/random.git",
+        "state": {
+          "branch": null,
+          "revision": "d7c4397d125caba795d14d956efacfe2a27a63d0",
+          "version": "1.2.0"
         }
       },
       {
@@ -323,6 +413,15 @@
           "branch": null,
           "revision": "97237cf1bc1feebaeb0febec91c1e1b9e4d839b3",
           "version": "0.7.0"
+        }
+      },
+      {
+        "package": "SwiftJWT",
+        "repositoryURL": "https://github.com/Kitura/Swift-JWT.git",
+        "state": {
+          "branch": null,
+          "revision": "2f2fc12ae88660e0760b04d9e6c341517b31ad7b",
+          "version": "3.6.200"
         }
       },
       {

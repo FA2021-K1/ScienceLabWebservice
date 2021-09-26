@@ -11,9 +11,10 @@ services:
       - "./frontend:/app"
       - "/usr/app/node_modules"
     expose:
-      - "80"
+      - "3000"
     labels:
       - "traefik.enable=true"
+      - "traefik.port=3000"
       - "traefik.http.routers.frontend.rule=Host(`localhost`)"
       - "traefik.http.routers.frontend.entrypoints=web"
     depends_on:
