@@ -25,6 +25,8 @@ WORKDIR /staging
 
 # Copy main executable to staging area
 RUN cp "$(swift build --package-path /build/WebService -c release --show-bin-path)/WebService" ./
+RUN cp /build/WebService/query_measurement_data.sql ./
+RUN cp /build/WebService/query_measurements.sql ./
 
 # Copy resources from the resources directory if the directories exist
 # Ensure that by default, neither the directory nor any of its contents are writable.
@@ -55,7 +57,7 @@ RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /app
 WORKDIR /app
 
 # Copy built executable and any staged resources from builder
-COPY --from=build --chown=apodini:apodini /staging /app
+COPY --from=build --chown=apodini:apodini /staging /app 
 
 # Ensure all further commands run as the apodini user
 USER apodini:apodini
