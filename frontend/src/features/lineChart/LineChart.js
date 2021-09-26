@@ -4,7 +4,6 @@ import { getDataAverageByDay } from "../../dataSlice";
 import { optionsConfig } from "./lineChartConfig";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "semantic-ui-react";
 
 
 export const LineChart = () => {
@@ -45,7 +44,7 @@ export const LineChart = () => {
         [1532403593, 3],
         [1532404593, 2],
       ],
-]);
+    }]);
 
   const [options, setOptions] = useState(optionsConfig(style));
 
