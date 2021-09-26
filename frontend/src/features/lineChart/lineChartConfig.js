@@ -12,7 +12,14 @@ export const optionsConfig = (style) => {
                 opacity: 0.2,
             },
             toolbar: {
-                show: false,
+                tools: {
+                    download: true,
+                    zoom: false,
+                    zoomin: false,
+                    zoomout: false,
+                    pan: false,
+                    reset: false,
+                  },
             },
         },
         
@@ -51,11 +58,8 @@ export const optionsConfig = (style) => {
             max: 40,
         },
         legend: {
-            position: "top",
-            horizontalAlign: "right",
-            floating: true,
-            offsetY: -25,
-            offsetX: -5,
+            position: "bottom",
+            horizontalAlign: "center",
         },
     }
 }
