@@ -1,5 +1,8 @@
 import FluentKit
+import BCrypt
 import Foundation
+import SwiftJWT
+import JWTKit
 
 public final class User: Model {
     public static let schema = "users"
@@ -16,17 +19,41 @@ public final class User: Model {
     @Field(key: "username")
     public var username: String
 
-    @Field(key: "password_hash")
-    public var password_hash: String
+    @Field(key: "passwordHash")
+    public var passwordHash: String
+    
+    @Field(key: "userType")
+    public var userType: UserType
     
     @Children(for: \.$user)
     public var tokens: [Token]
     
     public init() { }
     
-    public init(id: UUID? = nil, username: String, password_hash: String) {
+    public init(id: UUID? = nil, username: String, password: String, userType: UserType) throws {
         self.id = id
         self.username = username
-        self.password_hash = password_hash
+        self.passwordHash = try BCrypt.Hash.make(message: password).makeString()
+        self.userType = userType
+    }
+    
+    public func generateToken(signers: JWTSigners) throws -> Token {
+        let token = Token(expiration: .init(value: .init(timeIntervalSinceNow: 3600)),
+                          subject: .init(value: "apodini"),
+                          isAdmin: false,
+                          userID: try self.requireID())
+        let jwt = try signers.sign(token)
+        token.value = jwt
+        return token
+    }
+    
+    public func verify(password: String) throws -> Bool {
+        try BCrypt.Hash.verify(message: password, matches: self.passwordHash)
     }
 }
+
+public enum UserType: Int, Codable {
+    case drone
+    case frontend
+}
+

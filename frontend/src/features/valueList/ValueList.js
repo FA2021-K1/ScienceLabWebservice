@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Stack from "@mui/material/Stack";
+
+import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { sortByBouy } from "../../sorting";
@@ -47,10 +49,12 @@ export const ValueList = () => {
           <div style={{fontSize: "14px", fontWeight: "bold", color: "#263238", marginTop: "-13px", marginLeft: "8px"}}>
             Latest data received
           </div>
-          <div id="more-data-button" style={{height: "40px"}}>
-            <Button style={{height: "30px"}} height="100" variant="contained" href="">
-              More data
-            </Button>
+          <div id="more-data-button">
+            <Link to="/export">
+              <Button height ='100' variant="contained" href="">
+                More data
+              </Button>
+            </Link>
           </div>
         </div>
       </Stack>

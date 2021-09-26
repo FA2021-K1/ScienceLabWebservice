@@ -1,7 +1,5 @@
 .map-container {
-
-    height: 525px;
-
+    height: 508px;
 }
 
 .mapboxgl-popup {
@@ -25,11 +23,11 @@
 }
 
 .top {
-  margin-top: 88px;
+  margin-top: 48px;
   padding: 6px 12px;
 }
 .bottom {
-  margin-top: 440px;
+  margin-top: 370px;
   padding: 0px ;
 }
 .info {
