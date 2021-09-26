@@ -120,7 +120,7 @@ export const App = () => {
       <Router>
         <CssBaseline />
         <div id="header-container">
-          <AppBar position="fixed" open={open} style={{ background: style.secondaryColor }}>
+          <AppBar position="fixed" open={open} style={{ background: style.secondaryColor, color: "#ffffff" }}>
             <Toolbar>
               <IconButton
                 color="inherit"
