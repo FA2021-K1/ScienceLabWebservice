@@ -7,7 +7,7 @@ name: Deploy webservice and frontend to AWS
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["develop", "feature/deployment-optimizations"]
 
 env:
   REGISTRY: ghcr.io
@@ -15,8 +15,40 @@ env:
   FRONTEND_IMAGE_NAME: fa21-collaborative-drone-interactions/sciencelabfrontend
 
 jobs:
+  check:
+    name: Check files
+    outputs:
+      rebuild_webservice: ${{ steps.check_files.outputs.rebuild_webservice }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: check modified files
+        id: check_files
+        run: |
+          echo "=============== list modified files ==============="
+          git diff --name-only HEAD^ HEAD
+
+          echo "========== check paths of modified files =========="
+          git diff --name-only HEAD^ HEAD > files.txt
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file != WebService/* ]]; then
+              echo "This modified file is not under the 'WebService' folder."
+              echo "::set-output name=rebuild_webservice::false"
+              break
+            else
+              echo "::set-output name=rebuild_webservice::true"
+            fi
+          done < files.txt
   build-and-push-webservice:
     runs-on: ubuntu-latest
+    needs: check
+    if: needs.check.outputs.rebuild_webservice == 'true'
     permissions:
       contents: read
       packages: write
