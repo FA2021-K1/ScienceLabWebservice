@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom"
 import routes from "./routes";
 import { Breadcrumbs } from "./features/breadcrumbs/Breadcrumbs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -99,6 +99,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export const App = () => {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -111,6 +112,8 @@ export const App = () => {
   };
 
   const style = useSelector((state) => state.style);
+
+  useEffect(() => { }, [dispatch, style]);
 
   return (
     <Box sx={{ display: 'flex', padding: 0 }}>
