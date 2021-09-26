@@ -15,11 +15,10 @@ import { Boxplot } from "./features/boxplot/Boxplot";
 import { ValueList } from "./features/valueList/ValueList";
 import { ZoomableChart } from "./features/zoomableChart/zoomableChart";
 import { ColumnChart } from "./features/columnChart/ColumnChart";
-import { Gauge } from "./features/Gauge/Gauge";
+import { Gauge } from "./features/gauge/Gauge";
 
 
-
-import { getJsonData } from "./dataSlice";
+import { getLatestData } from "./dataSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
@@ -31,15 +30,20 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const App = () => {
   const dispatch = useDispatch();
-  const dataState = useSelector((state) => state.data.dataState);
-  const style = useSelector((state) => state.style)
-  //const data = useSelector((state) => state.data.data);
+  const latestDataState = useSelector((state) => state.data.latestDataState);
+  const selectedTime = useSelector((state) => state.data.selectedTime);
 
   useEffect(() => {
-    if (dataState === "idle") {
-      dispatch(getJsonData());
+    if (latestDataState === "idle") {
+      dispatch(getLatestData({ selectedTime }));
     }
-  }, [dispatch, dataState, style]);
+  }, [dispatch, latestDataState]);
+
+  useEffect(() => {
+    if (latestDataState !== "idle") {
+      dispatch(getLatestData({ selectedTime }));
+    }
+  }, [selectedTime])
   return (
     <React.StrictMode>
       <Header />
@@ -86,14 +90,15 @@ export const App = () => {
           </Grid>
           <Grid item md={9} xs = {12}>
             <Item style ={{ height :"550px"}} >
-              <ZoomableChart />
 
+              <ZoomableChart />
             </Item>
           </Grid>
         </Grid>
         <Grid item md = {12} xs = {12}>
         <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
           <p align = 'center' style={{'font-size': '12px'}}>Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></p>
+
         </Grid>
       </body>
     </React.StrictMode>
