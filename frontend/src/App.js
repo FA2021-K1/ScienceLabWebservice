@@ -17,10 +17,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import { makeStyles } from "@material-ui/core/styles";
+import { Sidebar } from "./features/sidebar/Sidebar";
 
 const drawerWidth = 240;
 
@@ -146,20 +144,7 @@ export const App = () => {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <div id="sidebar">
-            <List>
-              {routes.map(({ path, name, Icon }, key) => (
-                <Link key={`nav-item-${key}`} to={path} onClick={handleDrawerClose}>
-                  <ListItem key={`nav-list-item-${key}`}>
-                    <ListItemIcon>
-                      <Icon />
-                    </ListItemIcon>
-                    <ListItemText primary={name} />
-                  </ListItem>
-                </Link>
-              ))}
-            </List>
-          </div>
+          <Sidebar />
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3, padding: 0 }}>
           <DrawerHeader />
