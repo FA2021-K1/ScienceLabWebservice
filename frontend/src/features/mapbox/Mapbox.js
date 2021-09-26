@@ -141,7 +141,6 @@ export const Mapbox = () => {
 
             if (data) {
                 for (let key in data) {
-                    console.log(circleJson);
                     const longitude = data[key][0].location.longitude
                     const latitude = data[key][0].location.latitude
 
@@ -175,7 +174,6 @@ export const Mapbox = () => {
                 map.current.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
             
                 if (!map.current.getSource("circlesPosition")) {
-                    console.log(circleJson)
                     map.current.addSource('circlesPosition', circleJson);
                 }
                 if (map.current.getLayer("circles")) {
@@ -199,12 +197,12 @@ export const Mapbox = () => {
   return (
     <div>
       <div className="sidebar top">
-        {dateFormatter(selectedTime)}
-        {selectedTime.toLocaleString() ===
+        {dateFormatter(new Date(selectedTime))}
+        {(new Date(selectedTime)).toLocaleString() ===
         new Date().toLocaleString() ? null : (
           <Button
             onClick={() => {
-              const date = new Date();
+              const date = (new Date()).getTime();
               setSelectedTime(date);
               dispatch(updateSelectedTime(date));
             }}

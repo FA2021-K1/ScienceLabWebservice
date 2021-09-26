@@ -12,7 +12,6 @@ export const LineChart = () => {
   const data = useSelector((state) => state.data.dataAverageByDay);
   const dataState = useSelector((state) => state.data.dataAverageByDayState);
   const selectedData = useSelector((state) => state.data.selectedData);
-  const [chartObj, setChartObj] = useState(null);
 
   const [series, setSeries] = useState([
     {
@@ -46,7 +45,7 @@ export const LineChart = () => {
   ]);
 
   const [options, setOptions] = useState(optionsConfig(style));
-
+  
   useEffect(() => {
     // Load when the Sides first loads
     if (dataState === "idle") {

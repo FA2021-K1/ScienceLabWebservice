@@ -8,8 +8,8 @@ export const Gauge = () => {
         <div>
         <h3 align = 'left'> Current water quality </h3>
         <GaugeChart id="gauge-chart1" 
-        nrOfLevels = '10'
-        hideText = "true"
+        nrOfLevels = {10}
+        hideText = {true}
         colors={[style.warningColor, 
             style.accentColor1,
             style.lightGreen]}
