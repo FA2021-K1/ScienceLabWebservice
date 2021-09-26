@@ -194,7 +194,7 @@ export const Mapbox = () => {
         });
 
     });
-  });
+
 
   return (
     <div>
@@ -224,4 +224,4 @@ export const Mapbox = () => {
       <div ref={mapContainer} className="map-container" />
     </div>
   );
-};
+}
