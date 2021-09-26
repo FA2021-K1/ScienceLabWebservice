@@ -19,6 +19,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles } from "@material-ui/core/styles";
 import { Sidebar } from "./features/sidebar/Sidebar";
+import { updateSidebar } from "./sidebarSlice";
 
 const drawerWidth = 240;
 
@@ -37,9 +38,9 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(5)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(9)} + 1px)`,
+    width: `calc(${theme.spacing(7)} + 1px)`,
   },
 });
 
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+const DrawerCreator = style => styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
     flexShrink: 0,
@@ -87,11 +88,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     boxSizing: 'border-box',
     ...(open && {
       ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
+      '& .MuiDrawer-paper': { ...openedMixin(theme), backgroundColor: style.sidebarColor },
     }),
     ...(!open && {
       ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
+      '& .MuiDrawer-paper': { ...closedMixin(theme), backgroundColor: style.sidebarColor },
     }),
   }),
 );
@@ -99,19 +100,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export const App = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    dispatch(updateSidebar(true));
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    dispatch(updateSidebar(false));
   };
 
   const style = useSelector((state) => state.style);
+  const open = useSelector((state) => state.sidebar.open);
 
-  useEffect(() => { }, [dispatch, style]);
+  useEffect(() => { }, [dispatch, style, open]);
+
+  const Drawer = DrawerCreator(style);
 
   return (
     <Box sx={{ display: 'flex', padding: 0 }}>
