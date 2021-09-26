@@ -6,6 +6,8 @@ import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from "@material-ui/icons/Home";
 import "./header.css";
 import { useDispatch, useSelector } from "react-redux";
+import { Button } from "semantic-ui-react";
+import { updateSelectedData } from "../../dataSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Header = () => {
+  const dispatch = useDispatch()
   const classes = useStyles();
+  const selectedData = useSelector(state => state.data.selectedData)
   const style = useSelector((state) => state.style)
 
   const refreshPage = () => {
@@ -27,7 +31,7 @@ export const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position= 'sticky' style = {{background: style.secondaryColor}}>
+      <AppBar position='sticky' style={{ background: style.secondaryColor }}>
         <Toolbar variant="dense" >
           <IconButton
             edge="start"
@@ -35,6 +39,7 @@ export const Header = () => {
             color="inherit"
             aria-label="home"
           >
+
             <HomeIcon onClick={refreshPage} />
           </IconButton>
           <Typography variant="h6" color="inherit">

@@ -19,7 +19,7 @@ export const ColumnChart = () => {
             type: 'bar',
             height: 350
         },
-        colors: [style.Blue, style.Green],
+        colors: [style.pH, style.TDS],
         plotOptions: {
             bar: {
                 horizontal: false,
@@ -53,16 +53,6 @@ export const ColumnChart = () => {
         fill: {
             opacity: 1
         },
-        tooltip: {
-            y: [{
-                formatter: undefined
-            },
-            {
-                formatter: function (val) {
-                    return val + " ppm"
-                }
-            }]
-        }
     });
 
 

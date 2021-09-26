@@ -28,6 +28,7 @@ let package = Package(
                 .product(name: "ApodiniObserveMetricsPrometheus", package: "Apodini"),
                 .product(name: "ApodiniOpenAPI", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
+                .product(name: "ApodiniAuthorization", package: "Apodini"),
                 .product(name: "Shared", package: "Shared"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "LoggingELK", package: "swift-log-elk")

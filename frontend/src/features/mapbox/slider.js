@@ -2,13 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { subDays, startOfToday, format } from "date-fns";
+import * as React from 'react';
 
-import { updateSelectedTime } from "../../dataSlice";
+import { updateSelectedTime, updateSelectedData } from "../../dataSlice";
+import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }) => {
   const stepSize = 3 * 60 * 60 * 1000;
   const todayStart = startOfToday();
   const dispatch = useDispatch();
+  const selectedData = useSelector(state => state.data.selectedData)
 
   const marks = [
     {
@@ -35,11 +38,28 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
   };
   const currentTimeRounded = roundHours(new Date());
   const style = useSelector((state) => state.style)
-
+  const handleValueChange = (event, newAlignment) => {
+    if (newAlignment !== null) { //enforce selection
+      setAlignment(newAlignment);}
+    dispatch(updateSelectedData(newAlignment))
+  };
+  const [alignment, setAlignment] = React.useState('web');
   return (
+    <div>
     <Box sx={{ width: 350, px: 2, py: 1 }}>
+    <ToggleButtonGroup
+      size = "small"
+        color='primary'
+        value={alignment}
+        exclusive
+        onChange={handleValueChange}
+      >
+        <ToggleButton value="pH">pH</ToggleButton>
+        <ToggleButton value="TDS">TDS</ToggleButton>
+      </ToggleButtonGroup>
+      <hr style={{color:style.lightGray, opacity: "50%"}}/>
       <Slider
-        sx = {{color: style.primaryColor}}
+        sx={{ color: style.primaryColor }}
         aria-label="Always visible"
         defaultValue={currentTimeRounded}
         valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}
@@ -52,12 +72,12 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
         size="medium"
         onChange={(e) => {
           setSelectedTime(new Date(e.target.value));
-          console.log(e.target.value);
         }}
         onChangeCommitted={() => {
           dispatch(updateSelectedTime(selectedTime));
         }}
       />
     </Box>
+    </div>
   );
 };

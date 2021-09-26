@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
+import { useSelector } from "react-redux";
 
 export const Boxplot = () => {
-  const [series,] = useState([
+  const style = useSelector((state) => state.style);
+  const [series1,] = useState([
     {
-      name: "pH Value",
+      name: "BoxPlot",
       type: "boxPlot",
       data: [
         {
@@ -20,9 +22,11 @@ export const Boxplot = () => {
           y: [31, 39, 45, 51, 59],
         },
       ],
-    },
+    }
+  ]);
+  const [series2,] = useState([
     {
-      name: "Dissolved Solids",
+      name: "Outliers",
       type: "scatter",
       data: [
         {
@@ -41,12 +45,55 @@ export const Boxplot = () => {
     },
   ]);
 
+  var series = series1;
+
   const [options,] = useState({
     chart: {
       type: "boxPlot",
-      width: '400'
+      width: '400',
+      toolbar: {
+        tools: {
+          download: true,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false,
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 1,
+            title: 'pH',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              chart.updateSeries(series2, true);
+              console.log("button clicked")
+            }
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 2,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: function (chart, options, e) {
+              console.log("clicked custom-icon")
+            }
+          },
+          ]
+        },
+      },
     },
-    colors: ["#008FFB", "#FEB019"],
+    legend: {
+      show: false
+    },
+    plotOptions: {
+      boxPlot: {
+        colors: {
+          upper: '#00E396',
+          lower: '#008FFB'
+        }
+      }
+    },
+    colors: [style.primaryColor, style.warningColor],
     title: {
       text: "BoxPlot - Last 24 h",
       align: "left",
@@ -57,16 +104,18 @@ export const Boxplot = () => {
         enabled: false,
       },
     },
-    yaxis: {
-      title: {
-          text: 'pH Value [-]'
+    plotOptions: {
+      boxPlot: {
+        colors: {
+          upper: style.primaryColor,
+          lower: style.secondaryColors
+        }
       }
   },
-    
-
-    tooltip: {
-      shared: false,
-      intersect: true,
+    yaxis: {
+      title: {
+        text: 'pH Value [-]'
+      }
     },
   });
 
@@ -76,8 +125,9 @@ export const Boxplot = () => {
         options={options}
         series={series}
         type="boxPlot"
-        height={'350'}
-      />
+        height={'350'}>
+      </Chart>
+
     </div>
   );
 };

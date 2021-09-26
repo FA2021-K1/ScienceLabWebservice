@@ -1,3 +1,4 @@
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import data from "./mockData.json";
 import axios from "axios";
@@ -70,6 +71,7 @@ export const dataSlice = createSlice({
   name: "data",
   initialState: {
     selectedTime: new Date(),
+    selectedData: "pH",
     latestData: null,
     latestDataState: "idle",
     dataAverageByDay: null,
@@ -81,6 +83,9 @@ export const dataSlice = createSlice({
     updateSelectedTime: (state, action) => {
       state.selectedTime = action.payload;
     },
+    updateSelectedData: (state, action) => {
+            state.selectedData = action.payload
+        }
   },
   extraReducers: {
     [getLatestData.fulfilled]: (state, action) => {
@@ -123,6 +128,7 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { updateSelectedTime } = dataSlice.actions;
+export const { updateSelectedTime, updateSelectedData } = dataSlice.actions;
 
 export default dataSlice.reducer;
+

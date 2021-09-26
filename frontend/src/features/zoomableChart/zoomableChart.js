@@ -3,12 +3,15 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 import React, { useEffect, useState } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { getDataBySpan } from "../../dataSlice";
+import { subDays, format } from "date-fns";
 
-//import dummyData from "data_context";
+
 
 export const ZoomableChart = () => {
+
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data.dataBySpan);
   const dataState = useSelector((state) => state.data.dataBySpanState);
@@ -43,6 +46,7 @@ export const ZoomableChart = () => {
         [1532403593, 3],
         [1532404593, 2],
       ], //dummyData,
+
     },
   ]);
 
@@ -58,6 +62,27 @@ export const ZoomableChart = () => {
       },
       toolbar: {
         autoSelected: "zoom",
+        tools: {
+          customIcons: [{
+            icon: '<img src="ph.png" width="20">',
+            index: 6,
+            title: 'pH',
+            class: 'custom-icon',
+            click: (chart, options, e) =>{
+              console.log("button clicked")
+            }
+          },
+          {
+            icon: '<img src="TDS.png" width="20">',
+            index: 7,
+            title: 'TDS',
+            class: 'custom-icon',
+            click: (chart, options, e) => {
+              console.log("clicked custom-icon")
+            }
+          },
+          ]
+        }
       },
     },
     dataLabels: {
@@ -81,20 +106,18 @@ export const ZoomableChart = () => {
       },
     },
     yaxis: {
-      labels: {
-        formatter: function (val) {
-          return (val / 1000000).toFixed(0);
-        },
-      },
       title: {
-        text: "pH",
-      },
+        text: 'pH Value [-]'
+      }
     },
     xaxis: {
       type: "datetime",
+      tooltip: {
+        enabled: false,
+      },
     },
     tooltip: {
-      shared: false,
+      shared: true,
       y: {
         formatter: function (val) {
           return (val / 1000000).toFixed(0);

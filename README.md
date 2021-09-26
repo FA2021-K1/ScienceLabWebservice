@@ -36,10 +36,10 @@ make start-verbose
 
 ### Production Environment
 DataScience Service
-https://drones.zack-bumm.com/
+https://fa.ase.in.tum.de/
 
 DataManagement Service
-https://data.zack-bumm.com/
+https://data.fa.ase.in.tum.de/
 
 ### Development Environment
 To reach the frontend open
