@@ -15,7 +15,7 @@ import { Boxplot } from "./features/boxplot/Boxplot";
 import { ValueList } from "./features/valueList/ValueList";
 import { ZoomableChart } from "./features/zoomableChart/zoomableChart";
 import { ColumnChart } from "./features/columnChart/ColumnChart";
-import { Gauge } from "./features/Gauge/Gauge";
+import { Gauge } from "./features/gauge/Gauge";
 
 
 
