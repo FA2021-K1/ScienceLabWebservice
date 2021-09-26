@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: ./deployment/docker-compose-deploy.yml
-    destination: /home/ec2-user/webservice/docker-compose.yml
+  - source: ./deployment/docker-compose.yml
+    destination: /home/ec2-user/webservice/
 hooks:
   AfterInstall:
     - location: deployment/setup.sh
