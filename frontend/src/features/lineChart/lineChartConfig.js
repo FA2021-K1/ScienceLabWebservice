@@ -37,7 +37,7 @@ export const optionsConfig = (style) => {
             size: 1,
         },
         xaxis: {
-            categories: [],
+            type: "datetime",
             title: {
                 text: "Date",
             },

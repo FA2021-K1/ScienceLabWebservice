@@ -12,22 +12,23 @@ require("dotenv").config();
 mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
 export const Mapbox = () => {
-    const style = useSelector((state) => state.style)
-    const data = useSelector(state => state.data.data)
+  const style = useSelector((state) => state.style);
+  const data = useSelector((state) => state.data.latestData);
 
-    const dispatch = useDispatch();
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const selectedTimeStatic = useSelector((state) => state.data.selectedTime);
-    const [selectedTime, setSelectedTime] = useState(selectedTimeStatic);
+  const dispatch = useDispatch();
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const selectedTimeStatic = useSelector((state) => state.data.selectedTime);
+  const [selectedTime, setSelectedTime] = useState(selectedTimeStatic);
 
-    const [lng, setLng] = useState(11.444);
-    const [lat, setLat] = useState(46.7419041);
-    const [zoom, setZoom] = useState(15.7);
+  const [lng, setLng] = useState(11.444);
+  const [lat, setLat] = useState(46.7419041);
+  const [zoom, setZoom] = useState(15.7);
 
-    const dateFormatter = (time) => {
-        return format(time, "MMM dd h a");
-    };
+  const dateFormatter = (time) => {
+    return format(time, "MMM dd h a");
+  };
+
 
     let circleJson = {
         type: "geojson",
@@ -191,33 +192,36 @@ export const Mapbox = () => {
                 })
             }
         });
+
     });
 
-    return (
-        <div>
-            <div className="sidebar top">
-                {dateFormatter(selectedTime)}
-                {selectedTime.toLocaleString() === new Date().toLocaleString() ? null : (
-                    <Button
-                        onClick={() => {
-                            const date = new Date();
-                            setSelectedTime(date);
-                            dispatch(updateSelectedTime(date));
-                        }}
-                        size="small"
-                    >
-                        Reset
-                    </Button>
-                )}
-            </div>
-            <div className="sidebar bottom">
-                <SliderContainer
-                    selectedTime={selectedTime}
-                    setSelectedTime={setSelectedTime}
-                    dateFormatter={dateFormatter}
-                />
-            </div>
-            <div ref={mapContainer} className="map-container" />
-        </div>
-    );
-};
+
+  return (
+    <div>
+      <div className="sidebar top">
+        {dateFormatter(selectedTime)}
+        {selectedTime.toLocaleString() ===
+        new Date().toLocaleString() ? null : (
+          <Button
+            onClick={() => {
+              const date = new Date();
+              setSelectedTime(date);
+              dispatch(updateSelectedTime(date));
+            }}
+            size="small"
+          >
+            Reset
+          </Button>
+        )}
+      </div>
+      <div className="sidebar bottom">
+        <SliderContainer
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
+          dateFormatter={dateFormatter}
+        />
+      </div>
+      <div ref={mapContainer} className="map-container" />
+    </div>
+  );
+}

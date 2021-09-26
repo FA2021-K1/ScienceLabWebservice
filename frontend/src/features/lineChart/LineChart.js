@@ -1,108 +1,104 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import { getDataAverageByDay } from "../../dataSlice";
+import { optionsConfig } from "./lineChartConfig";
+
 import { useDispatch, useSelector } from "react-redux";
-import { subDays, format } from "date-fns";
-import { Button } from "semantic-ui-react";
-import { areIntervalsOverlappingWithOptions } from "date-fns/fp";
+
 
 export const LineChart = () => {
+  const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
+  const selectedTime = useSelector((state) => state.data.selectedTime);
+  const data = useSelector((state) => state.data.dataAverageByDay);
+  const dataState = useSelector((state) => state.data.dataAverageByDayState);
   const selectedData = useSelector(state => state.data.selectedData)
-  const currentTime = new Date();
-  const yesterday = subDays(currentTime, 1);
   const [chartObj, setChartObj] = useState(null)
 
-  const [series,setSeries] = useState([
+  const [series, setSeries] = useState([
     {
-      name: "Bouy 1",
-      data: [28, 29, 33, 36, 32, 32, 33],
+
+      name: "Buoy2",
+      data: [
+        [1532396593, 0],
+        [1532397593, 1],
+        [1532398593, 2],
+        [1532399593, 3],
+        [1532400593, 4],
+        [1532401593, 5],
+        [1532402593, 6],
+        [1532403593, 7],
+        [1532404593, 8],
+      ],
     },
     {
-      name: "Bouy 2",
-      data: [12, 11, 14, 18, 17, 13, 13],
-    },
-    {
-      name: "Bouy 3",
-      data: [14, 14, 18, 23, 22, 17, 13],
-    },
-  ]);
-  const [options,setOptions] = useState({
-    chart: {
-      height: 400,
-      type: "line",
-      toolbar: {
-        tools: {
-          download: true,
-          zoom: false,
-          zoomin: false,
-          zoomout: false,
-          pan: false,
-          reset: false,
-          customIcons: []
-        }
-      },
-      dropShadow: {
-        enabled: true,
-        color: "#000",
-        top: 18,
-        left: 7,
-        blur: 10,
-        opacity: 0.2,
-      },
-      legend: {
-        position: 'bottom',
-        horizontalAlign: 'center',
-      },
-    },
-    colors: style.pHShades,
-    dataLabels: {
-      enabled: true,
-    },
-    stroke: {
-      curve: "smooth",
-    },
-    title: {
-      text: "Average measurements",
-      align: "left",
-    },
-    grid: {
-      borderColor: "#e7e7e7",
-      row: {
-        colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-        opacity: 0.5,
-      },
-    },
-    markers: {
-      size: 1,
-    },
-    xaxis: {
-      categories: [format(subDays(yesterday, 6), "EEE"), format(subDays(yesterday, 5), "EEE"), format(subDays(yesterday, 4), "EEE"),
-      format(subDays(yesterday, 3), "EEE"), format(subDays(yesterday, 2), "EEE"), format(subDays(yesterday, 1), "EEE"), format(yesterday, "EEE")],
-      tooltip: {
-        enabled: false,
-      },
-    },
-    yaxis: {
-      title: {
-        text: "pH-Value [-]",
-      },
-    },
-  });
+      name: "Buoy1",
+      data: [
+        [1532396593, 10],
+        [1532397593, 9],
+        [1532398593, 8],
+        [1532399593, 7],
+        [1532400593, 6],
+        [1532401593, 5],
+        [1532402593, 4],
+        [1532403593, 3],
+        [1532404593, 2],
+      ],
+    }]);
+
+  const [options, setOptions] = useState(optionsConfig(style));
+
+  useEffect(() => {
+    // Load when the Sides first loads
+    if (dataState === "idle") {
+      dispatch(getDataAverageByDay({ selectedTime, selectedData: "TDS" }));
+      // TODO: Make selected Data dependet of the selected Value
+    }
+  }, [dataState]);
+
+  useEffect(() => {
+    // Change Series to refresh chart data as soon as the data changes
+    if(data){
+      //setSeries(data)
+      // TODO: Wait for backend to finish their shit
+    }
+  }, [data])
+
+  useEffect(() => {
+    // When the selected Time Changes and there is already Data: Load new Data
+    if(data){
+      dispatch(getDataAverageByDay({ selectedTime, selectedData: "TDS" }));
+    }
+  }, [selectedTime])
 
   useEffect(() => {
     if(selectedData === "pH"){
-      setOptions({...options, colors: style.pHShades, title: {
-        text: "Means per day of last 7 days - "+ selectedData}})
+      setOptions({...options, colors: style.pHShades, 
+        title: {text: "Means per day of last 7 days - "+ selectedData},
+        yaxis: {
+          title: {
+              text: "[-]",
+          },
+          min: 0,
+          max: 14,
+      }})
     }else if(selectedData === "TDS"){
-      setOptions({...options, colors: style.TDSShades,title: {
-        text: "Means per day of last 7 days - "+ selectedData}})
+      setOptions({...options, colors: style.TDSShades,
+        title: {text: "Means per day of last 7 days - "+ selectedData},
+        yaxis: {
+          title: {
+              text: "[ppm]",
+          },
+          min: 100,
+          max: 1000,
+      }})
     }
   }, [selectedData])
 
+
   return (
     <div id="chart">
-      <Chart options={options} series={series} type="line"
-        height={'350'} />
+      <Chart options={options} series={series} type="line" height={"350"} />
     </div>
   );
 };
