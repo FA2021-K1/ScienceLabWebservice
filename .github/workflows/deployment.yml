@@ -37,12 +37,12 @@ jobs:
           while IFS= read -r file
           do
             echo $file
-            if [[ $file != WebService/* ]]; then
+            if [[ $file == WebService/* ]]; then
               echo "This modified file is not under the 'WebService' folder."
-              echo "::set-output name=rebuild_webservice::false"
-            else
               echo "::set-output name=rebuild_webservice::true"
               break
+            else
+              echo "::set-output name=rebuild_webservice::false"
             fi
           done < files.txt
   build-and-push-webservice:
