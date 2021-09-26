@@ -51,17 +51,6 @@
   }
 }
 
-#latest-data-received {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-}
-
-#more-data-button {
-  margin-left: auto;
-}
-
 #header-container a, a:visited, a:hover, a:active {
   color: #ffffff;
   text-decoration: none;
@@ -80,18 +69,6 @@
   margin-left: 10px;
 }
 
-#header-container {
-  position: sticky;
-  /*
-  (hacky) solution to make sure that the header is always
-  in the foreground and not overlayed by any mapbox components
-  */
-  z-index: 1000;
-  top: 0px;
-}
-
 #content-container {
   position: relative;
-  /* size of header toolbar */
-  top: 48px;
 }

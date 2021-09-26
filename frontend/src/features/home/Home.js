@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
 import "./home.css";
+import "../../App.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-
-import { Header } from "../../features/header/Header.js";
 
 import { LineChart } from "../../features/lineChart/LineChart";
 
