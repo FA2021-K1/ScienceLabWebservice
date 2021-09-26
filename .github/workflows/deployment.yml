@@ -40,9 +40,9 @@ jobs:
             if [[ $file != WebService/* ]]; then
               echo "This modified file is not under the 'WebService' folder."
               echo "::set-output name=rebuild_webservice::false"
-              break
             else
               echo "::set-output name=rebuild_webservice::true"
+              break
             fi
           done < files.txt
   build-and-push-webservice:
