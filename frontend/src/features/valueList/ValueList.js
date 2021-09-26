@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
-  const jsonDataAll = useSelector((state) => state.data.data);
+  const jsonDataAll = useSelector((state) => state.data.latestData);
   const jsonData = jsonDataAll ? jsonDataAll[0] : null
   const style = useSelector((state) => state.style);
   const renderRow = ({ index }) => {

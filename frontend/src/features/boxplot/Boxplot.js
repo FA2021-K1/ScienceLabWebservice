@@ -1,123 +1,81 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { optionsConfig } from "./boxplotConfig";
 
 export const Boxplot = () => {
+  const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
-  const [series1,] = useState([
+  const selectedTime = useSelector((state) => state.data.selectedTime);
+  const data = useSelector((state) => state.data.dataAverageByDay);
+  const dataState = useSelector((state) => state.data.dataAverageByDayState);
+  const selectedData = useSelector(state => state.data.selectedData)
+  const [chartObj, setChartObj] = useState(null)
+
+  const [series,] = useState([
     {
       name: "BoxPlot",
       type: "boxPlot",
       data: [
         {
           x: 'Bouy 1',
-          y: [54, 66, 69, 75, 88],
+          y: [5, 6, 4.7, 5, 4, 4, 4.8],
         },
         {
           x: 'Bouy 2',
-          y: [43, 65, 69, 76, 81],
+          y: [3.9, 5, 4.9, 6.1, 5.2, 6, 4.8],
         },
         {
           x: 'Bouy 3',
-          y: [31, 39, 45, 51, 59],
+          y: [5.8, 4, 5.2, 6.7, 4.9, 3.9, 5.2],
         },
       ],
-    }
-  ]);
-  const [series2,] = useState([
+    },
     {
       name: "Outliers",
       type: "scatter",
       data: [
         {
           x: 'Bouy 1',
-          y: 32,
+          y: 2,
         },
         {
           x: 'Bouy 2',
-          y: 25,
+          y: 1
         },
         {
           x: 'Bouy 3',
-          y: 64,
+          y: 1.2,
         },
       ],
     },
   ]);
 
-  var series = series1;
+  const [options, setOptions] = useState(optionsConfig(style));
 
-  const [options,] = useState({
-    chart: {
-      type: "boxPlot",
-      width: '400',
-      toolbar: {
-        tools: {
-          download: true,
-          zoom: false,
-          zoomin: false,
-          zoomout: false,
-          pan: false,
-          reset: false,
-          customIcons: [{
-            icon: '<img src="ph.png" width="20">',
-            index: 1,
-            title: 'pH',
-            class: 'custom-icon',
-            click: function (chart, options, e) {
-              chart.updateSeries(series2, true);
-              console.log("button clicked")
-            }
+  useEffect(() => {
+    if(selectedData === "pH"){
+      setOptions({...options, 
+        title: {text: "Data of last 24 h - "+ selectedData},
+        yaxis: {
+          title: {
+              text: "[-]",
           },
-          {
-            icon: '<img src="TDS.png" width="20">',
-            index: 2,
-            title: 'TDS',
-            class: 'custom-icon',
-            click: function (chart, options, e) {
-              console.log("clicked custom-icon")
-            }
+          min: 0,
+          max: 14,
+      }})
+    }else if(selectedData === "TDS"){
+      setOptions({...options,
+        title: {text: "Data of last 24 h - "+ selectedData},
+        yaxis: {
+          title: {
+              text: "[ppm]",
           },
-          ]
-        },
-      },
-    },
-    legend: {
-      show: false
-    },
-    plotOptions: {
-      boxPlot: {
-        colors: {
-          upper: '#00E396',
-          lower: '#008FFB'
-        }
-      }
-    },
-    colors: [style.primaryColor, style.warningColor],
-    title: {
-      text: "BoxPlot - Last 24 h",
-      align: "left",
-    },
-    xaxis: {
-      type: "categories",
-      tooltip: {
-        enabled: false,
-      },
-    },
-    plotOptions: {
-      boxPlot: {
-        colors: {
-          upper: style.primaryColor,
-          lower: style.secondaryColors
-        }
-      }
-  },
-    yaxis: {
-      title: {
-        text: 'pH Value [-]'
-      }
-    },
-  });
+          min: 100,
+          max: 1000,
+      }})
+    }
+  }, [selectedData])
 
   return (
     <div id="chart">
