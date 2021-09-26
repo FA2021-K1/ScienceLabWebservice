@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { subDays, startOfToday, format } from "date-fns";
-import * as React from 'react';
+import {useState}from 'react';
 
 import { updateSelectedTime, updateSelectedData } from "../../dataSlice";
 import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material'
@@ -11,7 +11,7 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
   const stepSize = 3 * 60 * 60 * 1000;
   const todayStart = startOfToday();
   const dispatch = useDispatch();
-  const selectedData = useSelector(state => state.data.selectedData)
+  // const selectedData = useSelector(state => state.data.selectedData)
 
   const marks = [
     {
@@ -43,7 +43,7 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
       setAlignment(newAlignment);}
     dispatch(updateSelectedData(newAlignment))
   };
-  const [alignment, setAlignment] = React.useState('web');
+  const [alignment, setAlignment] = useState('pH');
   return (
     <div>
     <Box sx={{ width: 350, px: 2, py: 1 }}>
@@ -61,17 +61,16 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
       <Slider
         sx={{ color: style.primaryColor }}
         aria-label="Always visible"
-        defaultValue={currentTimeRounded}
         valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}
         min={subDays(currentTimeRounded, 7).getTime()}
         max={currentTimeRounded.getTime()}
         step={stepSize}
         marks={marks}
-        value={selectedTime.getTime()}
+        value={selectedTime}
         valueLabelDisplay="auto"
         size="medium"
         onChange={(e) => {
-          setSelectedTime(new Date(e.target.value));
+          setSelectedTime(new Date(e.target.value).getTime());
         }}
         onChangeCommitted={() => {
           dispatch(updateSelectedTime(selectedTime));
