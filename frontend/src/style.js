@@ -12,6 +12,7 @@ export const styles = {
     warningColor: "#CE4D45",
     warningColorLight: "#ebb8b5",
     confettiEffect: true,
+    textColor: "#555555",
     pHShades: ['#6d89c5', '#afbedf', '#dee4f2'],
     TDSShades: ["#7d9e8b", "#c3d2ca", '#e6ede9'],
 };

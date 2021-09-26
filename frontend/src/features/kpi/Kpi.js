@@ -36,7 +36,7 @@ export const Kpi = () => {
                                 <img src="Buoy.svg" width="40" height="40" style={{ color: style.accentColor1 }} />
                             </Avatar>
                             <Stack direction="column" spacing={-1} style={{ verticalAlign: "center" }}>
-                                <div style={{ fontSize: "30px", fontWeight: "bold", color: "#263238" }}>
+                                <div style={{ fontSize: "30px", fontWeight: "bold", color: style.textColor }}>
                                     3
                                 </div>
                                 <div style={{ fontSize: "14px", color: style.lightGray }}>
@@ -48,20 +48,53 @@ export const Kpi = () => {
                 </Grid>
                 <Grid item xs={12} md={3} >
                     <Item style={{ height: "100px" }}>
-                        <div> Cool
-                        </div>
+                    <Stack direction="row" spacing={3} style={{ paddingTop: "15px", paddingLeft: "15px" }}>
+                            <Avatar alt="" sx={{ width: 56, height: 56, bgcolor: style.accentColor1light, paddingTop: "10px" }}>
+                                <img src="Drone.svg" width="40" height="40" style={{ color: style.accentColor1 }} />
+                            </Avatar>
+                            <Stack direction="column" spacing={-1} style={{ verticalAlign: "center" }}>
+                                <div style={{ fontSize: "30px", fontWeight: "bold", color: style.textColor }}>
+                                    2
+                                </div>
+                                <div style={{ fontSize: "14px", color: style.lightGray }}>
+                                    Current active drones
+                                </div>
+                            </Stack>
+                        </Stack>
                     </Item>
                 </Grid>
                 <Grid item xs={12} md={3} >
                     <Item style={{ height: "100px" }}>
-                        <div> Cool
-                        </div>
+                    <Stack direction="row" spacing={3} style={{ paddingTop: "15px", paddingLeft: "15px" }}>
+                            <Avatar alt="" sx={{ width: 56, height: 56, bgcolor: style.accentColor1light, paddingTop: "10px" }}>
+                                <img src="Data.svg" width="40" height="40" style={{ color: style.accentColor1 }} />
+                            </Avatar>
+                            <Stack direction="column" spacing={-1} style={{ verticalAlign: "center" }}>
+                                <div style={{ fontSize: "30px", fontWeight: "bold", color: style.textColor }}>
+                                    1500076
+                                </div>
+                                <div style={{ fontSize: "14px", color: style.lightGray }}>
+                                    Collected measurements
+                                </div>
+                            </Stack>
+                        </Stack>
                     </Item>
                 </Grid>
                 <Grid item xs={12} md={3} >
                     <Item style={{ height: "100px" }}>
-                        <div> Cool
-                        </div>
+                    <Stack direction="row" spacing={3} style={{ paddingTop: "15px", paddingLeft: "15px" }}>
+                            <Avatar alt="" sx={{ width: 56, height: 56, bgcolor: style.accentColor1light, paddingTop: "10px" }}>
+                                <img src="Date.svg" width="40" height="40" style={{ color: style.accentColor1 }} />
+                            </Avatar>
+                            <Stack direction="column" spacing={-1} style={{ verticalAlign: "center" }}>
+                                <div style={{ fontSize: "30px", fontWeight: "bold", color: style.textColor}}>
+                                    12
+                                </div>
+                                <div style={{ fontSize: "14px", color: style.lightGray }}>
+                                    days of running system
+                                </div>
+                            </Stack>
+                        </Stack>
                     </Item>
                 </Grid>
             </Grid>
