@@ -29,7 +29,6 @@ export const Mapbox = () => {
         return format(time, "MMM dd h a");
     };
 
-    let markers = []
     let circleJson = {
         type: "geojson",
         data: {
@@ -87,7 +86,8 @@ export const Mapbox = () => {
                 0,
                 Math.PI * 2
             );
-            context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
+            context.fillStyle = style.Green;
+            context.globalAlpha = 1 - t;
             context.fill();
 
             // Draw the inner circle.
@@ -99,7 +99,8 @@ export const Mapbox = () => {
                 0,
                 Math.PI * 2
             );
-            context.fillStyle = 'rgba(255, 100, 100, 1)';
+            context.fillStyle = style.Green;
+            context.globalAlpha = 1;
             context.strokeStyle = 'white';
             context.lineWidth = 2 + 4 * (1 - t);
             context.fill();
@@ -185,6 +186,7 @@ export const Mapbox = () => {
                     source: "circlesPosition",
                     layout: {
                         "icon-image": "pulsing-dot",
+                        "icon-allow-overlap": true,
                     },
                 })
             }
