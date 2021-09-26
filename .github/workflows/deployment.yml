@@ -55,7 +55,7 @@ jobs:
 
     steps:
       - name: Install dependencies
-        run:  sudo apt-get install openssl libssl-dev libressl
+        run:  sudo apt-get update && sudo apt-get install openssl libssl-dev libressl
       - name: Checkout repository
         uses: actions/checkout@v2
 
