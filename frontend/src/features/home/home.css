@@ -1,0 +1,10 @@
+#latest-data-received {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+#more-data-button {
+  margin-left: auto;
+}

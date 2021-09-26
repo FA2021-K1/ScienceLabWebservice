@@ -51,13 +51,24 @@
   }
 }
 
-#latest-data-received {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
+#header-container a, a:visited, a:hover, a:active {
+  color: #ffffff;
+  text-decoration: none;
 }
 
-#more-data-button {
-  margin-left: auto;
+#sidebar a, a:hover, a:active {
+  color: #000000;
+  text-decoration: none;
+}
+
+#sidebar a:visited {
+ color: #000000; 
+}
+
+.breadcrumbs-container {
+  margin-left: 10px;
+}
+
+#content-container {
+  position: relative;
 }
