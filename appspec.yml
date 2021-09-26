@@ -3,8 +3,6 @@ os: linux
 files:
   - source: ./deployment/docker-compose-deploy.yml
     destination: /home/ec2-user/webservice/docker-compose.yml
-  - source: ./env
-    destination: /home/ec2-user/webservice/.env
 hooks:
   AfterInstall:
     - location: deployment/setup.sh
