@@ -54,6 +54,8 @@ jobs:
       packages: write
 
     steps:
+      - name: Install dependencies
+        run:  sudo apt-get install openssl libssl-dev libressl
       - name: Checkout repository
         uses: actions/checkout@v2
 
