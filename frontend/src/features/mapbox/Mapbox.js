@@ -13,7 +13,7 @@ mapboxgl.accessToken = process.env.REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN;
 
 export const Mapbox = () => {
   const style = useSelector((state) => state.style);
-  const data = useSelector((state) => state.data.data);
+  const data = useSelector((state) => state.data.latestData);
 
   const dispatch = useDispatch();
   const mapContainer = useRef(null);

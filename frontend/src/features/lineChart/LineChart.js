@@ -1,36 +1,74 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getDataAverageByDay } from "../../dataSlice";
 import { optionsConfig } from "./lineChartConfig";
 
 export const LineChart = () => {
+  const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
-  const currentDate = useSelector((state) => state.data.selectedTime)
-  // const data = useSelector(state => state.data.data) 
+  const selectedTime = useSelector((state) => state.data.selectedTime);
+  const data = useSelector((state) => state.data.dataAverageByDay);
+  const dataState = useSelector((state) => state.data.dataAverageByDayState);
 
-  const [series,] = useState([
+  const [series, setSeries] = useState([
     {
-      name: "pHS",
-      data: [28, 29, 33, 36, 32, 32, 33],
+      name: "Buoy2",
+      data: [
+        [1532396593, 0],
+        [1532397593, 1],
+        [1532398593, 2],
+        [1532399593, 3],
+        [1532400593, 4],
+        [1532401593, 5],
+        [1532402593, 6],
+        [1532403593, 7],
+        [1532404593, 8],
+      ],
     },
     {
-      name: "Dissolved solids",
-      data: [12, 11, 14, 18, 17, 13, 13],
+      name: "Buoy1",
+      data: [
+        [1532396593, 10],
+        [1532397593, 9],
+        [1532398593, 8],
+        [1532399593, 7],
+        [1532400593, 6],
+        [1532401593, 5],
+        [1532402593, 4],
+        [1532403593, 3],
+        [1532404593, 2],
+      ],
     },
   ]);
-  const [options, setOptions] = useState(optionsConfig(style));
+  const [options] = useState(optionsConfig(style));
 
   useEffect(() => {
-    const dates = [6, 5, 4, 3, 2, 1, 0]
-    let optionsCarry = options
-    optionsCarry.xaxis.categories = dates.map((dateDifference) => new Date(new Date().setDate(currentDate.getDate() - dateDifference)).toLocaleDateString())
-    setOptions(optionsCarry)
-    console.log(options.xaxis.categories)
-  }, [currentDate])
+    // Load when the Sides first loads
+    if (dataState === "idle") {
+      dispatch(getDataAverageByDay({ selectedTime, selectedData: "TDS" }));
+      // TODO: Make selected Data dependet of the selected Value
+    }
+  }, [dataState]);
+
+  useEffect(() => {
+    // Change Series to refresh chart data as soon as the data changes
+    if(data){
+      //setSeries(data)
+      // TODO: Wait for backend to finish their shit
+    }
+  }, [data])
+
+  useEffect(() => {
+    // When the selected Time Changes and there is already Data: Load new Data
+    if(data){
+      dispatch(getDataAverageByDay({ selectedTime, selectedData: "TDS" }));
+    }
+  }, [selectedTime])
+
   return (
     <div id="chart">
-      <Chart options={options} series={series} type="line"
-        height={'350'} />
+      <Chart options={options} series={series} type="line" height={"350"} />
     </div>
   );
 };

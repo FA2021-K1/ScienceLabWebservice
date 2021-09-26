@@ -16,8 +16,7 @@ import { ValueList } from "./features/valueList/ValueList";
 import { ZoomableChart } from "./features/zoomableChart/zoomableChart";
 import { ColumnChart } from "./features/columnChart/ColumnChart";
 
-
-import { getJsonData } from "./dataSlice";
+import { getLatestData } from "./dataSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -27,16 +26,20 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const App = () => {
   const dispatch = useDispatch();
-  const dataState = useSelector((state) => state.data.dataState);
-  const style = useSelector((state) => state.style)
-  const data = useSelector((state) => state.data.data);
+  const latestDataState = useSelector((state) => state.data.latestDataState);
+  const selectedTime = useSelector((state) => state.data.selectedTime);
 
   useEffect(() => {
-    if (dataState === "idle") {
-      dispatch(getJsonData());
+    if (latestDataState === "idle") {
+      dispatch(getLatestData({ selectedTime }));
     }
-    console.log(data)
-  }, [dispatch, dataState, style]);
+  }, [dispatch, latestDataState]);
+
+  useEffect(() => {
+    if (latestDataState !== "idle") {
+      dispatch(getLatestData({ selectedTime }));
+    }
+  }, [selectedTime])
   return (
     <React.StrictMode>
       <Header />
@@ -54,7 +57,7 @@ export const App = () => {
             </Item>
           </Grid>
 
-          <Grid item xs={4} xl={4} >
+          <Grid item xs={4} xl={4}>
             <Item>
               <ColumnChart />
             </Item>
@@ -75,15 +78,21 @@ export const App = () => {
               <ValueList />
             </Item>
           </Grid>
-          <Grid item xs={9} xl={9} >
+          <Grid item xs={9} xl={9}>
             <Item>
               <ZoomableChart />
-
             </Item>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <h5 align='center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
+          <h5 align="center">
+            {" "}
+            © Ferienakdemie 2021, Ferienakademie Inc. Made with{" "}
+            <span role="img" aria-label="heart">
+              ❤️️
+            </span>{" "}
+            in Sarntal!
+          </h5>
         </Grid>
       </body>
     </React.StrictMode>
