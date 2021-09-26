@@ -42,7 +42,7 @@ jobs:
               echo "::set-output name=rebuild_webservice::true"
               break
             else
-              echo "::set-output name=rebuild_webservice::false"
+              echo "::set-output name=rebuild_webservice::true"
             fi
           done < files.txt
   build-and-push-webservice:
@@ -55,7 +55,7 @@ jobs:
 
     steps:
       - name: Install dependencies
-        run:  sudo apt-get update && sudo apt-get install openssl libssl-dev libressl
+        run:  sudo apt-get update && sudo apt-get install openssl libssl-dev
       - name: Checkout repository
         uses: actions/checkout@v2
 
