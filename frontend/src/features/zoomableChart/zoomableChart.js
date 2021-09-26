@@ -17,7 +17,6 @@ export const ZoomableChart = () => {
   const selectedData = useSelector((state) => state.data.selectedData)
 
   const [selectedSpan, setSelectedSpan] = useState("fiveYears");
-  const [selectedData, setSelectedData] = useState("pH")
 
   const [series, setSeries] = useState([
     {

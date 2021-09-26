@@ -15,6 +15,7 @@ import { ValueList } from "../../features/valueList/ValueList";
 import { ZoomableChart } from "../../features/zoomableChart/zoomableChart";
 import { ColumnChart } from "../../features/columnChart/ColumnChart";
 import { Gauge } from "../../features/gauge/Gauge";
+import { Kpi } from "../../features/kpi/Kpi";
 
 import { getLatestData } from "../../dataSlice";
 
@@ -55,8 +56,11 @@ export const Home = () => {
           wrap="wrap"
           style={{ overflow: "auto" }}
         >
+          <Grid item xs={12}>
+            <Kpi/>
+          </Grid>
           <Grid item xs={12} >
-            <Item style ={{ height :"525px"}}>
+            <Item style ={{ height :"545px"}}>
               <Mapbox />
             </Item>
           </Grid>
@@ -99,7 +103,7 @@ export const Home = () => {
         <Grid item md = {12} xs = {12}>
         <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
           <p align = 'center' style={{'font-size': '12px'}}>Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></p>
-
+        <h7>Buoy by Andrejs Kirma from the Noun Project, camera drone by Larea from the Noun Project,Data by Icon Master from the Noun Project,date by Zky Icon from the Noun Project</h7>
         </Grid>
       </div>
     </React.StrictMode>

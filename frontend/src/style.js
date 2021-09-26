@@ -2,6 +2,7 @@ export const styles = {
     secondaryColor: "#41574b",
     primaryColor: "#729682",
     accentColor1: "#f0c661",
+    accentColor1light: "#ffdb84",
     accentColor2: "#F19C65",
     TDS: '#729682',
     pH: '#4668B0',
