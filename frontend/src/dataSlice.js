@@ -16,7 +16,7 @@ const spanOptions = {
 export const getLatestData = createAsyncThunk(
   "data/getLatestData",
   async ({ selectedTime }) => {
-    const endDate = selectedTime.getTime();
+    const endDate = selectedTime;
     const startDate = endDate - 10000000;
     const path = "https://data.fa.ase.in.tum.de:6969/data/aggregated";
     const request = path + `?startDate=${startDate}&endDate=${endDate}`;
@@ -28,8 +28,8 @@ export const getLatestData = createAsyncThunk(
 export const getDataAverageByDay = createAsyncThunk(
   "data/getDataAverageByDay",
   async ({ selectedTime, selectedData }) => {
-    const endDate = selectedTime.getTime();
-    const startDate = subDays(selectedTime, 7).getTime();
+    const endDate = selectedTime;
+    const startDate = subDays(new Date(selectedTime), 7).getTime();
     const aggregationLevel = 60 * 60 * 2;
     console.log(new Date(startDate));
     const path = "https://data.fa.ase.in.tum.de:6969/data/aggregated";
@@ -54,7 +54,6 @@ export const getDataBySpan = createAsyncThunk(
       spanOptions[span].dateDifference
     ).getTime();
     const aggregationLevel = spanOptions[span].aggregationLevel;
-    console.log(new Date(startDate));
     const path = "https://data.fa.ase.in.tum.de:6969/data/aggregated";
     const request =
       path +
@@ -70,7 +69,7 @@ export const getDataBySpan = createAsyncThunk(
 export const dataSlice = createSlice({
   name: "data",
   initialState: {
-    selectedTime: new Date(),
+    selectedTime: (new Date()).getTime(),
     selectedData: "pH",
     latestData: null,
     latestDataState: "idle",

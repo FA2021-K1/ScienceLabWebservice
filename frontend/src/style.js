@@ -9,6 +9,7 @@ export const styles = {
     lightGray:"#BFBFBF",
     lightGreen: '#88C61E',
     warningColor: "#CE4D45",
+    warningColorLight: "#ebb8b5",
     confettiEffect: true,
     pHShades: ['#6d89c5', '#afbedf', '#dee4f2'],
     TDSShades: ["#7d9e8b", "#c3d2ca", '#e6ede9'],
