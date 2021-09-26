@@ -7,28 +7,35 @@ struct MeasurementComponent: Component {
 
     var content: some Component {
         Group("measurements") {
-            CreateMeasurement()
-                .operation(.create)
-            
-            GetMeasurements()
-            
-            Group("aggregated") {
-                GetAggregatedMeasurements()
-            }
-            
-            Group("test") {
-                GetTestMeasurement()
+            Group("drone") {
+                CreateMeasurement()
                     .operation(.create)
+                
+                GetMeasurements()
+                
+                Group($measurementId) {
+                    GetMeasurement(measurementId: $measurementId)
+                    
+                    UpdateMeasurement(measurementId: $measurementId)
+                        .operation(.update)
+                    
+                    DeleteMeasurement(measurementId: $measurementId)
+                        .operation(.delete)
+                }
             }
             
-            Group($measurementId) {
-                GetMeasurement(measurementId: $measurementId)
+            Group("frontend") {
+                Group("aggregated") {
+                    Group("buoy") {
+                        GetBuoyAggregatedMeasurements()
+                    }
+                    
+                    GetAggregatedMeasurements()
+                }
                 
-                UpdateMeasurement(measurementId: $measurementId)
-                    .operation(.update)
-                
-                DeleteMeasurement(measurementId: $measurementId)
-                    .operation(.delete)
+                Group("sensors") {
+                    GetSensors()
+                }
             }
         }
     }

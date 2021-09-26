@@ -6,8 +6,11 @@ public struct TokenMigration: Migration {
     public func prepare(on database: Database) -> EventLoopFuture<Void> {
         database.schema(Token.schema)
             .field("tokenID", .uuid, .identifier(auto: false))
-            .field("value", .string, .required)
-            .field("username", .string, .required)
+            .field("value", .string)
+            .field("expiration", .string, .required)
+            .field("subject", .string, .required)
+            .field("isAdmin", .bool, .required)
+            .field("measuredAt", .string, .required)
             .field("createdAt", .string, .required)
             .field("updatedAt", .string, .required)
             .field("userID", .uuid)

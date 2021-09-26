@@ -1,7 +1,8 @@
 import FluentKit
 import Foundation
+import JWTKit
 
-public final class Token: Model {
+public final class Token: Model, JWTPayload, Equatable {
     public static let schema = "tokens"
     
     @ID(custom: .string("tokenID"))
@@ -14,27 +15,36 @@ public final class Token: Model {
     public var updatedAt: Date?
     
     @Field(key: "value")
-    public var value: String
+    public var value: String?
     
-    @Field(key: "username")
-    public var username: String
+    @Field(key: "expiration")
+    public var expiration: ExpirationClaim
+    
+    @Field(key: "subject")
+    public var subject: SubjectClaim
+    
+    @Field(key: "isAdmin")
+    public var isAdmin: Bool
     
     @Parent(key: "userID")
     public var user: User
 
     public init() { }
     
-    public init(id: UUID? = nil, value: String, username: String, userID: User.IDValue) {
+    public init(id: UUID? = nil, value: String? = nil, expiration: ExpirationClaim, subject: SubjectClaim, isAdmin: Bool, userID: User.IDValue) {
         self.id = id
         self.value = value
-        self.username = username
+        self.expiration = expiration
+        self.subject = subject
+        self.isAdmin = isAdmin
         self.$user.id = userID
     }
     
-    func toJson() throws -> String {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.withoutEscapingSlashes]
-        let data = try encoder.encode(self)
-        return String(data: data, encoding: .utf8) ?? "ERR"
+    public func verify(using signer: JWTSigner) throws {
+        try self.expiration.verifyNotExpired()
+    }
+    
+    public static func == (lhs: Token, rhs: Token) -> Bool {
+        lhs.value == rhs.value
     }
 }
