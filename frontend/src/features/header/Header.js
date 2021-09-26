@@ -10,6 +10,9 @@ import { Breadcrumbs } from "./../breadcrumbs/Breadcrumbs";
 import { updateSidebar } from "../../sidebarSlice"
 import store from "../../app/store";
 import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "semantic-ui-react";
+import { updateSelectedData } from "../../dataSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Header = (crumbs) => {
+  const dispatch = useDispatch()
   const classes = useStyles();
+  const selectedData = useSelector(state => state.data.selectedData)
   const style = useSelector((state) => state.style)
 
   const openDrawer = () => event => {

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
-import "./Boxplot.css";
+import { useSelector } from "react-redux";
 
 export const Boxplot = () => {
-
+  const style = useSelector((state) => state.style);
   const [series1,] = useState([
     {
       name: "BoxPlot",
@@ -85,7 +85,15 @@ export const Boxplot = () => {
     legend: {
       show: false
     },
-    colors: ["#008FFB", "#FEB019"],
+    plotOptions: {
+      boxPlot: {
+        colors: {
+          upper: '#00E396',
+          lower: '#008FFB'
+        }
+      }
+    },
+    colors: [style.primaryColor, style.warningColor],
     title: {
       text: "BoxPlot - Last 24 h",
       align: "left",
@@ -96,6 +104,14 @@ export const Boxplot = () => {
         enabled: false,
       },
     },
+    plotOptions: {
+      boxPlot: {
+        colors: {
+          upper: style.primaryColor,
+          lower: style.secondaryColors
+        }
+      }
+  },
     yaxis: {
       title: {
         text: 'pH Value [-]'
