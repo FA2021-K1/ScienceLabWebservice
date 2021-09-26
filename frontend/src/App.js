@@ -49,48 +49,49 @@ export const App = () => {
           spacing={2}
           alignItems="center"
           className="App-Grid"
-          autoWidth="true"
-          autoHeight = "true"
+          justifyContent="center"
+          wrap="wrap"
+          style={{ overflow: "auto" }}
         >
-          <Grid item xs={12} xl={12} >
+          <Grid item xs={12} >
             <Item style ={{ height :"525px"}}>
               <Mapbox />
             </Item>
           </Grid>
-          <Grid item xs={3} xl={3} alignItems = "center">
+          <Grid item md={3} xs = {12} >
             <Item >
           <Gauge/>
           </Item>
           </Grid>
-          <Grid item xs={3} xl={3} >
+          <Grid item md={3} xs = {12}>
             <Item>
               <ColumnChart />
             </Item>
           </Grid>
-          <Grid item xs={3} xl={3}>
+          <Grid item md={3} xs ={12}>
             <Item>
               <Boxplot />
             </Item>
           </Grid>
-          <Grid item xs={3} xl={3}>
+          <Grid item md={3} xs ={12}>
             <Item>
               <LineChart />
             </Item>
           </Grid>
 
-          <Grid item xs={3} xl={3}>
+          <Grid item md={3} xs = {12}>
             <Item style={{ height :"550px"}} >
               <ValueList />
             </Item>
           </Grid>
-          <Grid item xs={9} xl={9} >
+          <Grid item md={9} xs = {12}>
             <Item style ={{ height :"550px"}} >
               <ZoomableChart />
 
             </Item>
           </Grid>
         </Grid>
-        <Grid item xs = {12}>
+        <Grid item md = {12} xs = {12}>
         <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
           <p align = 'center' style={{'font-size': '12px'}}>Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></p>
         </Grid>

@@ -91,11 +91,25 @@ export const LineChart = () => {
 
   useEffect(() => {
     if(selectedData === "pH"){
-      setOptions({...options, colors: style.pHShades, title: {
-        text: "Means per day of last 7 days - "+ selectedData}})
+      setOptions({...options, colors: style.pHShades, 
+        title: {text: "Means per day of last 7 days - "+ selectedData},
+        yaxis: {
+          title: {
+              text: "[-]",
+          },
+          min: 0,
+          max: 14,
+      }})
     }else if(selectedData === "TDS"){
-      setOptions({...options, colors: style.TDSShades,title: {
-        text: "Means per day of last 7 days - "+ selectedData}})
+      setOptions({...options, colors: style.TDSShades,
+        title: {text: "Means per day of last 7 days - "+ selectedData},
+        yaxis: {
+          title: {
+              text: "[ppm]",
+          },
+          min: 100,
+          max: 1000,
+      }})
     }
   }, [selectedData])
 
