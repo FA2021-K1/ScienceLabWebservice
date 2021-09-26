@@ -5,19 +5,16 @@ import { optionsConfig } from "./lineChartConfig";
 
 import { useDispatch, useSelector } from "react-redux";
 
-
 export const LineChart = () => {
   const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
   const selectedTime = useSelector((state) => state.data.selectedTime);
   const data = useSelector((state) => state.data.dataAverageByDay);
   const dataState = useSelector((state) => state.data.dataAverageByDayState);
-  const selectedData = useSelector(state => state.data.selectedData)
-  const [chartObj, setChartObj] = useState(null)
+  const selectedData = useSelector((state) => state.data.selectedData);
 
   const [series, setSeries] = useState([
     {
-
       name: "Buoy2",
       data: [
         [1532396593, 0],
@@ -44,10 +41,11 @@ export const LineChart = () => {
         [1532403593, 3],
         [1532404593, 2],
       ],
-    }]);
+    },
+  ]);
 
   const [options, setOptions] = useState(optionsConfig(style));
-
+  
   useEffect(() => {
     // Load when the Sides first loads
     if (dataState === "idle") {
@@ -58,20 +56,21 @@ export const LineChart = () => {
 
   useEffect(() => {
     // Change Series to refresh chart data as soon as the data changes
-    if(data){
+    if (data) {
       //setSeries(data)
       // TODO: Wait for backend to finish their shit
     }
-  }, [data])
+  }, [data]);
 
   useEffect(() => {
     // When the selected Time Changes and there is already Data: Load new Data
-    if(data){
-      dispatch(getDataAverageByDay({ selectedTime, selectedData: "TDS" }));
+    if (data) {
+      dispatch(getDataAverageByDay({ selectedTime, selectedData }));
     }
-  }, [selectedTime])
+  }, [selectedTime, selectedData]);
 
   useEffect(() => {
+
     if(selectedData === "pH"){
       setOptions({...options, colors: style.pHShades, 
         title: {text: "Means per day of last 7 days - "+ selectedData},
@@ -92,9 +91,9 @@ export const LineChart = () => {
           min: 100,
           max: 1000,
       }})
-    }
-  }, [selectedData])
 
+    }
+  }, [selectedData]);
 
   return (
     <div id="chart">

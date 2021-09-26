@@ -22,13 +22,14 @@ export const optionsConfig = (style) => {
                   },
             },
         },
-        colors: [style.Green, style.Blue],
+        
+        colors: [style.TDS, style.pH],
         dataLabels: {
             enabled: true,
-        },
+        },/*
         stroke: {
             curve: "smooth",
-        },
+        },*/
         title: {
             text: "Average measurements",
             align: "left",

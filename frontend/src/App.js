@@ -17,7 +17,6 @@ import { ZoomableChart } from "./features/zoomableChart/zoomableChart";
 import { ColumnChart } from "./features/columnChart/ColumnChart";
 import { Gauge } from "./features/gauge/Gauge";
 
-
 import { getLatestData } from "./dataSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -25,7 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
   height: "400px",
   justifyContent: "center",
-  alignItems: "center"
+  alignItems: "center",
 }));
 
 export const App = () => {
@@ -43,16 +42,17 @@ export const App = () => {
     if (latestDataState !== "idle") {
       dispatch(getLatestData({ selectedTime }));
     }
-  }, [selectedTime])
+  }, [selectedTime]);
   return (
     <React.StrictMode>
       <Header />
-      <body className="App-background">
+      <div className="App-background">
         <Grid
           container
           spacing={2}
-          alignItems="center"
+         // alignItems="center"
           className="App-Grid"
+
           justifyContent="center"
           wrap="wrap"
           style={{ overflow: "auto" }}
@@ -93,6 +93,7 @@ export const App = () => {
           </Item>
           </Grid>
           <Grid item md={3} xs = {12}>
+
             <Item>
               <ColumnChart />
             </Item>
@@ -104,9 +105,10 @@ export const App = () => {
           </Grid>
           <Grid item md={3} xs ={12}>
             <Item>
-              <LineChart />
+            <LineChart />
             </Item>
           </Grid>
+
 
           <Grid item md={3} xs = {12}>
             <Item style={{ height :"550px"}} >
@@ -120,10 +122,11 @@ export const App = () => {
             </Item>
           </Grid>
         </Grid>
+
         <Grid item md = {12} xs = {12}>
         <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
         </Grid>
-      </body>
+      </div>
     </React.StrictMode>
   );
 };

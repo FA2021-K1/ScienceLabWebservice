@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getDataBySpan } from "../../dataSlice";
-import { subDays, format } from "date-fns";
 
 
 
@@ -15,6 +14,7 @@ export const ZoomableChart = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data.dataBySpan);
   const dataState = useSelector((state) => state.data.dataBySpanState);
+  const selectedData = useSelector((state) => state.data.selectedData)
 
   const [selectedSpan, setSelectedSpan] = useState("fiveYears");
   const [selectedData, setSelectedData] = useState("pH")
@@ -103,7 +103,7 @@ export const ZoomableChart = () => {
     tooltip: {
       shared: true,
       y: {
-        formatter: function (val) {
+        formatter:  (val) => {
           return (val / 1000000).toFixed(0);
         },
       },
@@ -113,10 +113,18 @@ export const ZoomableChart = () => {
   useEffect(() => {
     if (dataState === "idle") {
       dispatch(
-        getDataBySpan({ selectedData: "TDS", selectedSpan: selectedSpan })
+        getDataBySpan({ selectedData: selectedData, selectedSpan: selectedSpan })
       );
     }
-  }, [selectedSpan, dataState]);
+  }, [selectedSpan, dataState, selectedData]);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        getDataBySpan({ selectedData: selectedData, selectedSpan: selectedSpan })
+      );
+    }
+  }, [selectedSpan, selectedData]);
 
   useEffect(() => {
     if (data) {
@@ -130,9 +138,6 @@ export const ZoomableChart = () => {
         value={selectedSpan}
         onChange={(e) => {
           setSelectedSpan(e.target.value);
-          dispatch(
-            getDataBySpan({ selectedData: "TDS", selectedSpan: selectedSpan })
-          );
         }}
         size="small"
         aria-label="spanSelection"

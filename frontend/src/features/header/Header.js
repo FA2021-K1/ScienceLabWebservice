@@ -38,9 +38,10 @@ export const Header = () => {
             className={classes.homeButton}
             color="inherit"
             aria-label="home"
+            onClick={refreshPage}
           >
 
-            <HomeIcon onClick={refreshPage} />
+            <HomeIcon />
           </IconButton>
           <Typography variant="h6" color="inherit">
             Sciencelab @ FA 2021
