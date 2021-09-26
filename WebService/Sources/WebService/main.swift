@@ -10,7 +10,6 @@ import ArgumentParser
 import FluentPostgresDriver
 import LoggingELK
 
-//Test comment
 struct ExampleWebService: WebService {
     @Option(help: "The port the web service should bind to")
     var port: Int = 80
