@@ -9,10 +9,7 @@ import { Link } from "react-router-dom"
 import { Breadcrumbs } from "./../breadcrumbs/Breadcrumbs";
 import { updateSidebar } from "../../sidebarSlice"
 import store from "../../app/store";
-import { useSelector } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "semantic-ui-react";
-import { updateSelectedData } from "../../dataSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
