@@ -1,7 +1,6 @@
 import FluentKit
 import BCrypt
 import Foundation
-import SwiftJWT
 import JWTKit
 
 public final class User: Model {
