@@ -17,11 +17,13 @@ public final class Token: Model, JWTPayload, Equatable {
     @Field(key: "value")
     public var value: String?
     
+    /*
     @Field(key: "expiration")
     public var expiration: ExpirationClaim
     
     @Field(key: "subject")
     public var subject: SubjectClaim
+     */
     
     @Field(key: "isAdmin")
     public var isAdmin: Bool
@@ -31,17 +33,18 @@ public final class Token: Model, JWTPayload, Equatable {
 
     public init() { }
     
-    public init(id: UUID? = nil, value: String? = nil, expiration: ExpirationClaim, subject: SubjectClaim, isAdmin: Bool, userID: User.IDValue) {
+    //public init(id: UUID? = nil, value: String? = nil, expiration: ExpirationClaim, subject: SubjectClaim, isAdmin: Bool, userID: User.IDValue) {
+    public init(id: UUID? = nil, value: String? = nil, isAdmin: Bool, userID: User.IDValue) {
         self.id = id
         self.value = value
-        self.expiration = expiration
-        self.subject = subject
+        //self.expiration = expiration
+        //self.subject = subject
         self.isAdmin = isAdmin
         self.$user.id = userID
     }
     
     public func verify(using signer: JWTSigner) throws {
-        try self.expiration.verifyNotExpired()
+        //try self.expiration.verifyNotExpired()
     }
     
     public static func == (lhs: Token, rhs: Token) -> Bool {
