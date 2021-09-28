@@ -112,18 +112,21 @@ export const LineChart = () => {
   }, [selectedTime, selectedData]);
 
   useEffect(() => {
+
     if (selectedData === 0) {
       // PH Selected
       setOptions({
         ...options,
         colors: style.pHShades,
         title: { text: "Means per day of last 7 days - " + selectedData },
+
         yaxis: {
           title: {
             text: "[-]",
           },
           min: 0,
           max: 14,
+
         },
       });
     } else if (selectedData === 1) {
@@ -132,6 +135,7 @@ export const LineChart = () => {
         ...options,
         colors: style.TDSShades,
         title: { text: "Means per day of last 7 days - " + selectedData },
+
         yaxis: {
           title: {
             text: "[ppm]",

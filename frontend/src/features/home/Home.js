@@ -63,12 +63,15 @@ export const Home = () => {
               <Mapbox />
             </Item>
           </Grid>
+
           <Grid item md={3} xs={12}>
             <Item>
+
               <Gauge />
             </Item>
           </Grid>
           <Grid item md={3} xs={12}>
+
             <Item>
               <ColumnChart />
             </Item>
@@ -84,21 +87,26 @@ export const Home = () => {
             </Item>
           </Grid>
 
+
           <Grid item md={3} xs={12}>
             <Item style={{ height: "550px" }}>
+
               <ValueList />
             </Item>
           </Grid>
           <Grid item md={9} xs={12}>
+
             <Item style={{ height: "550px" }}>
+
               <ZoomableChart />
             </Item>
           </Grid>
         </Grid>
 
+
         <Grid item md={12} xs={12}>
           <h5 align="center">
-            © Ferienakdemie 2021, Ferienakademie Inc. Made with{" "}
+            © Ferienakdemie 2021, Ferienakademie Inc. Made with
             <span role="img" aria-label="heart">
               ❤️️
             </span>
@@ -108,8 +116,8 @@ export const Home = () => {
             Icons erstellt von{" "}
             <a href="https://www.freepik.com" title="Freepik">
               Freepik
-            </a>{" "}
-            from{" "}
+            </a>
+            from
             <a href="https://www.flaticon.com/de/" title="Flaticon">
               www.flaticon.com
             </a>
@@ -119,6 +127,7 @@ export const Home = () => {
             from the Noun Project,Data by Icon Master from the Noun Project,date
             by Zky Icon from the Noun Project
           </p>
+
         </Grid>
       </div>
     </React.StrictMode>

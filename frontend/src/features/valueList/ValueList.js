@@ -14,6 +14,7 @@ export const ValueList = () => {
   const jsonDataAll = useSelector((state) => state.data.latestData);
   const jsonData = jsonDataAll ? jsonDataAll[0] : null
   const style = useSelector((state) => state.style);
+  
   const renderRow = ({ index }) => {
     let color = "white"
     if (jsonData[index].value >= 50) {
@@ -21,9 +22,9 @@ export const ValueList = () => {
     }
     return (
       <ListItem key={index} component="div" disablePadding>
-        <Box sx={{ width: "100%", height: "100%", bgcolor: color}}>
+        <Box sx={{ width: "100%", height: "100%", bgcolor: color }}>
           <ListItem>
-            <ListItemText 
+            <ListItemText
               primary={`Sensor ${1}`}
               secondary={`Buoy ${jsonData[index].boyId}`}
             />
@@ -45,12 +46,12 @@ export const ValueList = () => {
     <Box sx={{ width: "100%", height: "100%", bgcolor: "background.paper" }}>
       <Stack spacing={2} direction="row">
         <div id="latest-data-received">
-          <div style={{fontSize: "14px", fontWeight: "bold", color: "#263238", marginTop: "-13px", marginLeft: "8px"}}>
+          <div style={{ fontSize: "14px", fontWeight: "bold", color: style.textColor, marginTop: "-13px", marginLeft: "8px" }}>
             Latest data received
           </div>
           <div id="more-data-button">
             <Link to="/export">
-              <Button height ='100' variant="contained" href="">
+              <Button height='100' variant="contained" href="">
                 More data
               </Button>
             </Link>
@@ -58,7 +59,7 @@ export const ValueList = () => {
         </div>
       </Stack>
       {jsonData ? (
-        <FixedSizeList style={{height: "500px"}}
+        <FixedSizeList style={{ height: "500px" }}
           height={400}
           itemSize={50}
           itemCount={jsonData.length}

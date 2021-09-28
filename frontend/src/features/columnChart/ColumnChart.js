@@ -3,8 +3,9 @@ import ReactApexChart from "react-apexcharts";
 import { useSelector } from "react-redux";
 
 export const ColumnChart = () => {
-  const style = useSelector((state) => state.style);
-  const data = useSelector((state) => state.data.latestData);
+    const style = useSelector((state) => state.style);
+    const data = useSelector((state) => state.data.latestData);
+
 
   const [series, setSeries] = useState([]);
 
@@ -35,13 +36,16 @@ export const ColumnChart = () => {
       {
         title: {
           text: "pH Value [-]",
+
         },
-      },
-      {
-        opposite: true,
         title: {
-          text: "Dissolved Solids [ppm]",
+            text: "Latest measurements per buoy",
+            align: "left",
+            style: {
+                color: style.textColor,
+            }
         },
+
       },
     ],
     fill: {
@@ -71,14 +75,15 @@ export const ColumnChart = () => {
     }
   }, [data]);
 
-  return (
-    <div id="chart">
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={350}
-      />
-    </div>
-  );
+
+    return (
+        <div id="chart">
+            <ReactApexChart
+                options={options}
+                series={series}
+                type="bar"
+                height={350}
+            />
+        </div>
+    );
 };

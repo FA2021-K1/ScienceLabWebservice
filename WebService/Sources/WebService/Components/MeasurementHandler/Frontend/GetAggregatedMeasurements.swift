@@ -1,5 +1,6 @@
 import Apodini
 import ApodiniDatabase
+import ApodiniHTTPProtocol
 import FluentKit
 import FluentPostgresDriver
 import Shared
@@ -33,7 +34,7 @@ struct GetAggregatedMeasurements: Handler {
     @Throws(.serverError, reason: "Please use a PostgreSQL database")
     var databaseError: ApodiniError
     
-    func handle() async throws -> MeasurementFrontendContent {
+    func handle() async throws -> Response<MeasurementFrontendContent> {
         guard let postgres = database as? PostgresDatabase else {
             throw databaseError
         }
@@ -43,7 +44,7 @@ struct GetAggregatedMeasurements: Handler {
         }
         
         let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withTimeZone, .withFullDate, .withFullTime]
+        dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withFullDate, .withFullTime, .withTimeZone]
         dateFormatter.timeZone = .current
         
         // buoyID, sensorTypeID, date, value, position
@@ -116,7 +117,10 @@ struct GetAggregatedMeasurements: Handler {
             throw aggregationError
         }
         
-        return measurementFrontendContent
+        return .final(
+                    measurementFrontendContent,
+                    information: AnyHTTPInformation(key: "Access-Control-Allow-Origin", rawValue: "*")
+                )
     }
      
 }

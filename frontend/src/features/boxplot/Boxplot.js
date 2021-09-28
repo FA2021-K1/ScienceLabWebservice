@@ -14,41 +14,45 @@ export const Boxplot = () => {
 
   const [series,] = useState([
     {
-      name: "BoxPlot",
-      type: "boxPlot",
+      name: 'box',
+      type: 'boxPlot',
       data: [
         {
-          x: 'Bouy 1',
-          y: [5, 6, 4.7, 5, 4, 4, 4.8],
+          x: 1,
+          y: [31, 39, 45, 51, 59]
         },
         {
-          x: 'Bouy 2',
-          y: [3.9, 5, 4.9, 6.1, 5.2, 6, 4.8],
+          x: 2,
+          y: [39, 46, 55, 65, 71]
         },
         {
-          x: 'Bouy 3',
-          y: [5.8, 4, 5.2, 6.7, 4.9, 3.9, 5.2],
-        },
-      ],
+          x: 3,
+          y: [29, 31, 35, 39, 44]
+        }
+      ]
     },
     {
-      name: "Outliers",
-      type: "scatter",
+      name: 'outliers',
+      type: 'scatter',
       data: [
         {
-          x: 'Bouy 1',
-          y: 2,
+          x: 1,
+          y: 64
         },
         {
-          x: 'Bouy 2',
-          y: 1
+          x: 2,
+          y: 27
         },
         {
-          x: 'Bouy 3',
-          y: 1.2,
+          x: 2,
+          y: 78
         },
-      ],
-    },
+        {
+          x: 3,
+          y: 15
+        }
+      ]
+    }
   ]);
 
   const [options, setOptions] = useState(optionsConfig(style));
@@ -56,24 +60,41 @@ export const Boxplot = () => {
   useEffect(() => {
     if(selectedData === "pH"){
       setOptions({...options, 
-        title: {text: "Data of last 24 h - "+ selectedData},
+        title: {text: "Data of last 24 h - "+ selectedData,style:{
+          color: style.textColor,
+      }},
         yaxis: {
           title: {
               text: "[-]",
           },
-          min: 0,
-          max: 14,
-      }})
+      },
+      plotOptions: {
+        boxPlot: {
+            colors: {
+                upper: style.pH,
+                lower: style.pH
+            },
+        }
+    },
+    })
     }else if(selectedData === "TDS"){
       setOptions({...options,
-        title: {text: "Data of last 24 h - "+ selectedData},
+        title: {text: "Data of last 24 h - "+ selectedData,style:{
+          color: style.textColor,
+      }},
         yaxis: {
           title: {
               text: "[ppm]",
           },
-          min: 100,
-          max: 1000,
-      }})
+      },
+      plotOptions: {
+        boxPlot: {
+            colors: {
+                upper: style.TDS,
+                lower: style.TDS
+            },
+        }
+    },})
     }
   }, [selectedData])
 
