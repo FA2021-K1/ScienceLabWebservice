@@ -62,27 +62,6 @@ export const ZoomableChart = () => {
       },
       toolbar: {
         autoSelected: "zoom",
-        tools: {
-          customIcons: [{
-            icon: '<img src="ph.png" width="20">',
-            index: 6,
-            title: 'pH',
-            class: 'custom-icon',
-            click: (chart, options, e) =>{
-              console.log("button clicked")
-            }
-          },
-          {
-            icon: '<img src="TDS.png" width="20">',
-            index: 7,
-            title: 'TDS',
-            class: 'custom-icon',
-            click: (chart, options, e) => {
-              console.log("clicked custom-icon")
-            }
-          },
-          ]
-        }
       },
     },
     dataLabels: {
@@ -119,7 +98,7 @@ export const ZoomableChart = () => {
     tooltip: {
       shared: true,
       y: {
-        formatter:  (val) => {
+        formatter: (val) => {
           return (val / 1000000).toFixed(0);
         },
       },
@@ -157,6 +136,7 @@ export const ZoomableChart = () => {
         }}
         size="small"
         aria-label="spanSelection"
+        sx={{ paddingRight: '10px' }}
       >
         <ToggleButton value="fiveYears" aria-label="fiveYears">
           5y
@@ -173,6 +153,16 @@ export const ZoomableChart = () => {
         <ToggleButton value="oneDay" aria-label="oneDay">
           1d
         </ToggleButton>
+      </ToggleButtonGroup>
+      <ToggleButtonGroup
+        size="small"
+        color='primary'
+        value={"pH"}
+        exclusive
+        onChange={(e) => { }}
+      >
+        <ToggleButton value="pH">pH</ToggleButton>
+        <ToggleButton value="TDS">TDS</ToggleButton>
       </ToggleButtonGroup>
       <Chart options={options} series={series} type="area" height={450} />
     </div>

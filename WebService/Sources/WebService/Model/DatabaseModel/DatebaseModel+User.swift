@@ -48,4 +48,12 @@ extension DatabaseModel {
         
         return token
     }
+    
+    func verifyToken(_ token: String, signers: JWTSigners) async throws -> User {
+        let token = try signers.verify(token, as: Token.self)
+        guard let user = try? await User.find(token.$user.id, on: database) else {
+            throw ApodiniError(type: .badInput, reason: "Couldn't verify token")
+        }
+        return user
+    }
 }

@@ -1,5 +1,6 @@
 import Apodini
 import ApodiniDatabase
+import ApodiniHTTPProtocol
 import FluentKit
 import FluentPostgresDriver
 import Shared
@@ -15,7 +16,7 @@ struct GetSensors: Handler {
     @Throws(.serverError, reason: "Please use a PostgreSQL database")
     var databaseError: ApodiniError
     
-    func handle() async throws -> SensorsByBuoyContent {
+    func handle() async throws -> Response<SensorsByBuoyContent> {
         guard let postgres = database as? PostgresDatabase else {
             throw databaseError
         }
@@ -53,6 +54,9 @@ struct GetSensors: Handler {
             throw readError
         }
         
-        return sensorsByBuoyContent
+        return .final(
+                    sensorsByBuoyContent,
+                    information: AnyHTTPInformation(key: "Access-Control-Allow-Origin", rawValue: "*")
+                )
    }
 }

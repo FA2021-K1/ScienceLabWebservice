@@ -12,6 +12,7 @@ struct MeasurementComponent: Component {
                     .operation(.create)
                 
                 GetMeasurements()
+                    .guard(AuthGuardHandler())
                 
                 Group($measurementId) {
                     GetMeasurement(measurementId: $measurementId)
@@ -35,6 +36,13 @@ struct MeasurementComponent: Component {
                 
                 Group("sensors") {
                     GetSensors()
+                }
+            }
+            
+            Group("admin") {
+                Group("removeAll") {
+                    DeleteAllMeasurements()
+                        .operation(.delete)
                 }
             }
         }

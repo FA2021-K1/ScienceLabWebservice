@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.12.0"),
         .package(url: "https://github.com/vapor-community/bcrypt.git", from: "1.1.0"),
-        .package(url: "https://github.com/Kitura/Swift-JWT.git", from: "3.6.0")
+        .package(url: "https://github.com/vapor/jwt-kit.git", from: "4.0.0")
     ],
     targets: [
         .target(
@@ -26,7 +26,7 @@ let package = Package(
             dependencies: [
                 .product(name: "FluentKit", package: "fluent-kit"),
                 .product(name: "BCrypt", package: "bcrypt"),
-                .product(name: "SwiftJWT", package: "Swift-JWT")
+                .product(name: "JWTKit", package: "jwt-kit")
             ]
         ),
         .testTarget(
