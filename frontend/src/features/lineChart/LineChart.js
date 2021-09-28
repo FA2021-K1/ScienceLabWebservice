@@ -49,7 +49,7 @@ export const LineChart = () => {
   useEffect(() => {
     // Load when the Sides first loads
     if (dataState === "idle") {
-      dispatch(getDataAverageByDay({ selectedTime, selectedData: "TDS" }));
+      dispatch(getDataAverageByDay({ selectedTime, selectedData }));
       // TODO: Make selected Data dependet of the selected Value
     }
   }, [dataState]);
@@ -71,7 +71,7 @@ export const LineChart = () => {
 
   useEffect(() => {
 
-    if(selectedData === "pH"){
+    if(selectedData === 0){ // PH Selected
       setOptions({...options, colors: style.pHShades, 
         title: {text: "Means per day of last 7 days - "+ selectedData},
         yaxis: {
@@ -81,7 +81,7 @@ export const LineChart = () => {
           min: 0,
           max: 14,
       }})
-    }else if(selectedData === "TDS"){
+    }else if(selectedData === 1){ // TDS Selected
       setOptions({...options, colors: style.TDSShades,
         title: {text: "Means per day of last 7 days - "+ selectedData},
         yaxis: {
