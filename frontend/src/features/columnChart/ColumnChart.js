@@ -6,16 +6,7 @@ export const ColumnChart = () => {
   const style = useSelector((state) => state.style);
   const data = useSelector((state) => state.data.latestData);
 
-  const [series, setSeries] = useState([
-    {
-      name: "pH Value",
-      data: [44, 55, 34],
-    },
-    {
-      name: "Dissolved Solids",
-      data: [76, 85, 69],
-    },
-  ]);
+  const [series, setSeries] = useState([]);
 
   const [options, setOptions] = useState({
     chart: {
@@ -39,7 +30,6 @@ export const ColumnChart = () => {
       colors: ["transparent"],
     },
     xaxis: {
-      categories: ["Bouy 1", "Bouy 2", "Bouy 3"],
     },
     yaxis: [
       {
@@ -71,6 +61,7 @@ export const ColumnChart = () => {
           name: "pH-Value",
           data: list.map((element) => data[element][0].value),
         },
+    
         // TODO: Add other Sensor Values accordingly
       ]);
     }

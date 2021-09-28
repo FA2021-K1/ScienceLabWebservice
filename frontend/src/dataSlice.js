@@ -18,8 +18,8 @@ const spanOptions = {
 export const getLatestData = createAsyncThunk(
   "data/getLatestData",
   async ({ selectedTime }) => {
-    const endDate = selectedTime;
-    const startDate = endDate - 10000000;
+    const endDate = Math.round(selectedTime/1000);
+    const startDate = endDate - 10000;
     const path = apiAdress + "aggregated";
     const request = path + `?startDate=${startDate}&endDate=${endDate}`;
     const response = await axios.get(request);
@@ -30,9 +30,9 @@ export const getLatestData = createAsyncThunk(
 export const getDataAverageByDay = createAsyncThunk(
   "data/getDataAverageByDay",
   async ({ selectedTime, selectedData }) => {
-    const endDate = selectedTime;
-    const startDate = subDays(new Date(selectedTime), 7).getTime();
-    const aggregationLevel = 60 * 60 * 2;
+    const endDate = Math.round(selectedTime/1000);
+    const startDate = Math.round(subDays(new Date(selectedTime), 7).getTime()/1000);
+    const aggregationLevel = 60 * 60 * 24;
     console.log(new Date(startDate));
     const path = apiAdress + "aggregated";
     const request =
@@ -40,7 +40,7 @@ export const getDataAverageByDay = createAsyncThunk(
       `?startDate=${startDate}` +
       `&endDate=${endDate}` +
       `&aggregationLevel=${aggregationLevel}` +
-      `?sensorType=${selectedData}`;
+      `&sensorTyp=${selectedData}`;
     const response = await axios.get(request);
     return response;
   }
@@ -50,11 +50,11 @@ export const getDataBySpan = createAsyncThunk(
   "data/getDataBySpan",
   async ({ selectedData, selectedSpan }) => {
     const span = selectedSpan ? selectedSpan : "fiveYears";
-    const endDate = new Date().getTime();
-    const startDate = subDays(
+    const endDate = Math.round(new Date().getTime()/1000);
+    const startDate = Math.round(subDays(
       new Date(),
       spanOptions[span].dateDifference
-    ).getTime();
+    ).getTime()/1000);
     const aggregationLevel = spanOptions[span].aggregationLevel;
     const path = apiAdress + "aggregated";
     const request =
@@ -62,7 +62,7 @@ export const getDataBySpan = createAsyncThunk(
       `?startDate=${startDate}` +
       `&endDate=${endDate}` +
       `&aggregationLevel=${aggregationLevel}` +
-      `?sensorType=${selectedData}`;
+      `&sensorTyp=${selectedData}`;
     const response = await axios.get(request);
     return response;
   }
@@ -71,8 +71,9 @@ export const getDataBySpan = createAsyncThunk(
 export const dataSlice = createSlice({
   name: "data",
   initialState: {
-    selectedTime: new Date().getTime(),
+    selectedTime: (new Date().getTime()),
     selectedData: 0,
+    bouyCount: 0,
     latestData: null,
     latestDataState: "idle",
     dataAverageByDay: null,
@@ -100,27 +101,32 @@ export const dataSlice = createSlice({
   },
   extraReducers: {
     [getLatestData.fulfilled]: (state, action) => {
-      const latestDataUnformatted = action.payload;
-      const relevantItems = {};
+      console.log(action.payload)
+      const latestDataUnformatted = action.payload.data.data.measurements;
+      let relevantItems = {};
+      let bouys = 0;
 
       latestDataUnformatted.forEach((element) => {
         if (
-          relevantItems[element.bouyId] &&
-          !relevantItems[element.bouyId][element.sensorTypeID]
+          relevantItems[element.buoyID] &&
+          !relevantItems[element.buoyID][element.sensorTypeID]
         ) {
-          relevantItems[element.bouyId][element.sensorTypeID] = {
+          relevantItems[element.buoyID][element.sensorTypeID] = {
             value: element.value,
             location: element.location,
             date: element.date,
           };
-        } else if (!relevantItems[element.bouyId]) {
-          relevantItems[element.bouyId][element.sensorTypeID] = {
+        } else if (!relevantItems[element.buoyID]) {
+          relevantItems[element.buoyID] = {}
+          relevantItems[element.buoyID][element.sensorTypeID] = {
             value: element.value,
             location: element.location,
             date: element.date,
           };
+          bouys++;
         }
       });
+      state.bouyCount = bouys;
       state.latestData = relevantItems;
       state.latestDataState = "loaded";
     },
@@ -133,12 +139,12 @@ export const dataSlice = createSlice({
     },
 
     [getDataAverageByDay.fulfilled]: (state, action) => {
-      const averageDataUnformatted = action.payload;
-      const relevantItems = {};
+      const averageDataUnformatted = action.payload.data.data.measurements;
+      let relevantItems = {};
       averageDataUnformatted.forEach((element) => {
-        relevantItems[element.bouyId]
-          ? relevantItems[element.bouyId].push([element.date, element.value])
-          : (relevantItems[element.bouyId] = [[element.date, element.value]]);
+        relevantItems[element.buoyID]
+          ? relevantItems[element.buoyID].push([element.date, element.value])
+          : (relevantItems[element.buoyID] = [[element.date, element.value]]);
       });
       state.dataAverageByDay = relevantItems;
       state.dataAverageByDayState = "loaded";
@@ -152,12 +158,12 @@ export const dataSlice = createSlice({
     },
 
     [getDataBySpan.fulfilled]: (state, action) => {
-      const averageDataUnformatted = action.payload;
-      const relevantItems = {};
+      const averageDataUnformatted = action.payload.data.data.measurements;
+      let relevantItems = {};
       averageDataUnformatted.forEach((element) => {
-        relevantItems[element.bouyId]
-          ? relevantItems[element.bouyId].push([element.date, element.value])
-          : (relevantItems[element.bouyId] = [[element.date, element.value]]);
+        relevantItems[element.buoyID]
+          ? relevantItems[element.buoyID].push([element.date, element.value])
+          : (relevantItems[element.buoyID] = [[element.date, element.value]]);
       });
       state.dataBySpan = relevantItems;
       state.dataBySpanState = "loaded";
