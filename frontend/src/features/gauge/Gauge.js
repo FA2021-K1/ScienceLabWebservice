@@ -7,7 +7,7 @@ export const Gauge = () => {
     return (
         <div>
 
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: "#263238", marginTop: "5px", marginLeft: "8px" }}>
+            <div style={{ fontSize: "14px", fontWeight: "bold", color: style.textColor, marginTop: "5px", marginLeft: "8px" }}>
                 Current Water Quality
             </div>
             <GaugeChart id="gauge-chart1"
