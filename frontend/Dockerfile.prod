@@ -20,6 +20,8 @@ COPY . ./
 # start app
 RUN REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=$MAPBOX_API_KEY npm run build
 
+COPY ./nginx.config /usr/share/nginx/conf.d/default.conf
+
 # production environment
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
