@@ -17,10 +17,10 @@ RUN npm install --silent
 # add app
 COPY . ./
 
+CMD cat /app/nginx.config
+
 # start app
 RUN REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=$MAPBOX_API_KEY npm run build
-
-COPY ./nginx.config /app/
 
 # production environment
 FROM nginx:stable-alpine
