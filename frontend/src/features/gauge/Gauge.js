@@ -1,7 +1,6 @@
 import GaugeChart from 'react-gauge-chart'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
-import { ColorScalePH } from '../colorScale/ColorScalePH';
 
 export const Gauge = () => {
     const style = useSelector((state) => state.style)
