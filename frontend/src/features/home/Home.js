@@ -51,21 +51,22 @@ export const Home = () => {
           spacing={2}
           // alignItems="center"
           className="App-Grid"
-
           justifyContent="center"
           wrap="wrap"
           style={{ overflow: "auto" }}
         >
           <Grid item xs={12}>
-            <Kpi/>
+            <Kpi />
           </Grid>
-          <Grid item xs={12} >
-            <Item style ={{ height :"545px"}}>
+          <Grid item xs={12}>
+            <Item style={{ height: "545px" }}>
               <Mapbox />
             </Item>
           </Grid>
-          <Grid item md={3} xs={12} >
-            <Item >
+
+          <Grid item md={3} xs={12}>
+            <Item>
+
               <Gauge />
             </Item>
           </Grid>
@@ -88,22 +89,45 @@ export const Home = () => {
 
 
           <Grid item md={3} xs={12}>
-            <Item style={{ height: "550px" }} >
+            <Item style={{ height: "550px" }}>
+
               <ValueList />
             </Item>
           </Grid>
           <Grid item md={9} xs={12}>
-            <Item style={{ height: "550px" }} >
+
+            <Item style={{ height: "550px" }}>
 
               <ZoomableChart />
             </Item>
           </Grid>
         </Grid>
 
-        <Grid item md = {12} xs = {12}>
-        <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
-          <p align = 'center' style={{'font-size': '12px'}}>Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></p>
-        <p align = "center" style = {{"font-size": "10px"}}>Buoy by Andrejs Kirma from the Noun Project, camera drone by Larea from the Noun Project,Data by Icon Master from the Noun Project,date by Zky Icon from the Noun Project</p>
+
+        <Grid item md={12} xs={12}>
+          <h5 align="center">
+            © Ferienakdemie 2021, Ferienakademie Inc. Made with
+            <span role="img" aria-label="heart">
+              ❤️️
+            </span>
+            in Sarntal!
+          </h5>
+          <p align="center" style={{ fontSize: "12px" }}>
+            Icons erstellt von{" "}
+            <a href="https://www.freepik.com" title="Freepik">
+              Freepik
+            </a>
+            from
+            <a href="https://www.flaticon.com/de/" title="Flaticon">
+              www.flaticon.com
+            </a>
+          </p>
+          <p>
+            Buoy by Andrejs Kirma from the Noun Project, camera drone by Larea
+            from the Noun Project,Data by Icon Master from the Noun Project,date
+            by Zky Icon from the Noun Project
+          </p>
+
         </Grid>
       </div>
     </React.StrictMode>
