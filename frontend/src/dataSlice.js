@@ -112,14 +112,14 @@ export const dataSlice = createSlice({
           !relevantItems[element.buoyID][element.sensorTypeID]
         ) {
           relevantItems[element.buoyID][element.sensorTypeID] = {
-            value: element.value,
+            value: Math.round(element.value*100)/100,
             location: element.location,
             date: element.date,
           };
         } else if (!relevantItems[element.buoyID]) {
           relevantItems[element.buoyID] = {}
           relevantItems[element.buoyID][element.sensorTypeID] = {
-            value: element.value,
+            value: Math.round(element.value*100)/100,
             location: element.location,
             date: element.date,
           };
@@ -135,7 +135,6 @@ export const dataSlice = createSlice({
     },
     [getLatestData.rejected]: (state, action) => {
       state.latestDataState = "rejected";
-      state.latestData = sortByBouy(data);
     },
 
     [getDataAverageByDay.fulfilled]: (state, action) => {
@@ -143,8 +142,8 @@ export const dataSlice = createSlice({
       let relevantItems = {};
       averageDataUnformatted.forEach((element) => {
         relevantItems[element.buoyID]
-          ? relevantItems[element.buoyID].push([element.date, element.value])
-          : (relevantItems[element.buoyID] = [[element.date, element.value]]);
+          ? relevantItems[element.buoyID].push([element.date, Math.round(element.value*100)/100])
+          : (relevantItems[element.buoyID] = [[element.date, Math.round(element.value*100)/100]]);
       });
       state.dataAverageByDay = relevantItems;
       state.dataAverageByDayState = "loaded";
@@ -154,7 +153,6 @@ export const dataSlice = createSlice({
     },
     [getDataAverageByDay.rejected]: (state, action) => {
       state.dataAverageByDayState = "rejected";
-      state.dataAverageByDay = sortByBouy(data);
     },
 
     [getDataBySpan.fulfilled]: (state, action) => {
@@ -173,7 +171,6 @@ export const dataSlice = createSlice({
     },
     [getDataBySpan.rejected]: (state, action) => {
       state.dataBySpanState = "rejected";
-      state.dataBySpan = sortByBouy(data);
     },
   },
 });

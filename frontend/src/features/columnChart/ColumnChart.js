@@ -59,8 +59,12 @@ export const ColumnChart = () => {
       setSeries([
         {
           name: "pH-Value",
-          data: list.map((element) => data[element][0].value),
+          data: list.map((element) => data[element]["0"].value),
         },
+        {
+          me: "TDS-Value",
+          data: list.map((element) => data[element]["1"].value),
+        }
     
         // TODO: Add other Sensor Values accordingly
       ]);

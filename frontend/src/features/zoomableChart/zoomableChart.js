@@ -13,7 +13,7 @@ export const ZoomableChart = () => {
   const dataState = useSelector((state) => state.data.dataBySpanState);
 
   const [selectedSpan, setSelectedSpan] = useState("fiveYears");
-  const [selectedData, setSelectedData] = useState(0);
+  const [selectedData, setSelectedData] = useState("0");
 
   const [series, setSeries] = useState([ ]);
 
@@ -57,6 +57,11 @@ export const ZoomableChart = () => {
     yaxis: {
       title: {
         text: "pH Value [-]",
+      },
+      labels: {
+        formatter: (value) => {
+          return Math.round(value);
+        },
       },
     },
     xaxis: {
