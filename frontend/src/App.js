@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom"
 import routes from "./routes";
 import { Breadcrumbs } from "./features/breadcrumbs/Breadcrumbs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -17,10 +17,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import { makeStyles } from "@material-ui/core/styles";
+import { Sidebar } from "./features/sidebar/Sidebar";
+import { updateSidebar } from "./sidebarSlice";
 
 const drawerWidth = 240;
 
@@ -39,9 +38,9 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(5)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(9)} + 1px)`,
+    width: `calc(${theme.spacing(7)} + 1px)`,
   },
 });
 
@@ -81,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+const DrawerCreator = style => styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
     flexShrink: 0,
@@ -89,35 +88,40 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     boxSizing: 'border-box',
     ...(open && {
       ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
+      '& .MuiDrawer-paper': { ...openedMixin(theme), backgroundColor: style.sidebarColor },
     }),
     ...(!open && {
       ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
+      '& .MuiDrawer-paper': { ...closedMixin(theme), backgroundColor: style.sidebarColor },
     }),
   }),
 );
 
 export const App = () => {
+  const dispatch = useDispatch();
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    dispatch(updateSidebar(true));
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    dispatch(updateSidebar(false));
   };
 
   const style = useSelector((state) => state.style);
+  const open = useSelector((state) => state.sidebar.open);
+
+  useEffect(() => { }, [dispatch, style, open]);
+
+  const Drawer = DrawerCreator(style);
 
   return (
     <Box sx={{ display: 'flex', padding: 0 }}>
       <Router>
         <CssBaseline />
         <div id="header-container">
-          <AppBar position="fixed" open={open} style={{ background: style.secondaryColor }}>
+          <AppBar position="fixed" open={open} style={{ background: style.secondaryColor, color: "#ffffff" }}>
             <Toolbar>
               <IconButton
                 color="inherit"
@@ -143,20 +147,7 @@ export const App = () => {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <div id="sidebar">
-            <List>
-              {routes.map(({ path, name, Icon }, key) => (
-                <Link key={`nav-item-${key}`} to={path} onClick={handleDrawerClose}>
-                  <ListItem key={`nav-list-item-${key}`}>
-                    <ListItemIcon>
-                      <Icon />
-                    </ListItemIcon>
-                    <ListItemText primary={name} />
-                  </ListItem>
-                </Link>
-              ))}
-            </List>
-          </div>
+          <Sidebar />
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3, padding: 0 }}>
           <DrawerHeader />

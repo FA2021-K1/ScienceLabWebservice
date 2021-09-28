@@ -60,7 +60,9 @@ export const Boxplot = () => {
   useEffect(() => {
     if(selectedData === "pH"){
       setOptions({...options, 
-        title: {text: "Data of last 24 h - "+ selectedData},
+        title: {text: "Data of last 24 h - "+ selectedData,style:{
+          color: style.textColor,
+      }},
         yaxis: {
           title: {
               text: "[-]",
@@ -77,7 +79,9 @@ export const Boxplot = () => {
     })
     }else if(selectedData === "TDS"){
       setOptions({...options,
-        title: {text: "Data of last 24 h - "+ selectedData},
+        title: {text: "Data of last 24 h - "+ selectedData,style:{
+          color: style.textColor,
+      }},
         yaxis: {
           title: {
               text: "[ppm]",

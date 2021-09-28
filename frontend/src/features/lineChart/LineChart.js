@@ -73,7 +73,9 @@ export const LineChart = () => {
 
     if(selectedData === "pH"){
       setOptions({...options, colors: style.pHShades, 
-        title: {text: "Means per day of last 7 days - "+ selectedData},
+        title: {text: "Means per day of last 7 days - "+ selectedData,style:{
+          color: style.textColor,
+      }},
         yaxis: {
           title: {
               text: "[-]",
@@ -83,7 +85,9 @@ export const LineChart = () => {
       }})
     }else if(selectedData === "TDS"){
       setOptions({...options, colors: style.TDSShades,
-        title: {text: "Means per day of last 7 days - "+ selectedData},
+        title: {text: "Means per day of last 7 days - "+ selectedData,style:{
+          color: style.textColor,
+      }},
         yaxis: {
           title: {
               text: "[ppm]",

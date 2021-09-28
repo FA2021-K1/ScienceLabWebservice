@@ -1,7 +1,23 @@
-import { DataGrid, GridToolbar } from "@mui/x-data-grid"
+import { useEffect } from "react";
+import { DataGrid, GridToolbar as MuiGridToolbar } from "@mui/x-data-grid"
 import { mockData } from "./mockData";
+import { styled } from '@mui/material/styles';
+
+import { useDispatch, useSelector } from "react-redux";
 
 export const Export = () => {
+  const dispatch = useDispatch();
+  const style = useSelector((state) => state.style);
+  useEffect(() => { }, [dispatch, style]);
+
+  const GridToolbar = styled(MuiGridToolbar)(
+    ({ theme }) => ({
+      '& .MuiButton-textPrimary': {
+        color: style.secondaryColor
+      }
+    })
+  );
+
   const columns = [
     {
       field: 'measuredAt', headerName: 'Measured At', minWidth: 180, type: "date",
@@ -38,12 +54,12 @@ const getMeasurementData = measurement => {
   const buoyId = measurement.buoyID;
 
   return measurement.measurementData.map(data => ({
-      id: data.id,
-      measuredAt: measuredAt,
-      longitude: longitude,
-      latitude: latitude,
-      buoyId: buoyId,
-      sensorId: data.sensor.id,
-      value: data.value
+    id: data.id,
+    measuredAt: measuredAt,
+    longitude: longitude,
+    latitude: latitude,
+    buoyId: buoyId,
+    sensorId: data.sensor.id,
+    value: data.value
   }));
 }

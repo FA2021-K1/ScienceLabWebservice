@@ -4,6 +4,7 @@ export const styles = {
     accentColor1: "#f0c661",
     accentColor1light: "#ffdb84",
     accentColor2: "#F19C65",
+    sidebarColor: "#cedad3",
     TDS: '#729682',
     pH: '#4668B0',
     grey: "#f3fbfb",
