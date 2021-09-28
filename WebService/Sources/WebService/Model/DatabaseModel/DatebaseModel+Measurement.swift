@@ -58,4 +58,12 @@ extension DatabaseModel {
         
         try await measurement.delete(on: self.database)
     }
+    
+    func deleteMeasurements() async throws -> Void {
+        if (try? await Measurement
+                    .query(on: database)
+                    .delete()) == nil {
+            throw DatabaseError.internalError
+        }
+    }
 }

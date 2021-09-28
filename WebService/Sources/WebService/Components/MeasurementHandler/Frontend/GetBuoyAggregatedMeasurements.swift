@@ -1,5 +1,6 @@
 import Apodini
 import ApodiniDatabase
+import ApodiniHTTPProtocol
 import FluentKit
 import FluentPostgresDriver
 import Shared
@@ -30,7 +31,7 @@ struct GetBuoyAggregatedMeasurements: Handler {
     @Throws(.serverError, reason: "Please use a PostgreSQL database")
     var databaseError: ApodiniError
     
-    func handle() async throws -> MeasurementBuoyFrontendContent {
+    func handle() async throws -> Response<MeasurementBuoyFrontendContent> {
         guard let postgres = database as? PostgresDatabase else {
             throw databaseError
         }
@@ -100,7 +101,10 @@ struct GetBuoyAggregatedMeasurements: Handler {
             throw aggregationError
         }
         
-        return measurementBuoyFrontendContent
+        return .final(
+                    measurementBuoyFrontendContent,
+                    information: AnyHTTPInformation(key: "Access-Control-Allow-Origin", rawValue: "*")
+                )
     }
      
 }

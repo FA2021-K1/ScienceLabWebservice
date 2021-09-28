@@ -17,13 +17,18 @@ public final class Token: Model, JWTPayload, Equatable {
     @Field(key: "value")
     public var value: String?
     
-    /*
-    @Field(key: "expiration")
-    public var expiration: ExpirationClaim
     
-    @Field(key: "subject")
-    public var subject: SubjectClaim
-     */
+    @Field(key: "expirationRaw")
+    //public var expiration: ExpirationClaim
+    public var expirationRaw: Date
+    
+    public var expiration: ExpirationClaim?
+    
+    @Field(key: "subjectRaw")
+    //public var subject: SubjectClaim
+    public var subjectRaw: String
+     
+    public var subject: SubjectClaim?
     
     @Field(key: "isAdmin")
     public var isAdmin: Bool
@@ -33,18 +38,22 @@ public final class Token: Model, JWTPayload, Equatable {
 
     public init() { }
     
-    //public init(id: UUID? = nil, value: String? = nil, expiration: ExpirationClaim, subject: SubjectClaim, isAdmin: Bool, userID: User.IDValue) {
-    public init(id: UUID? = nil, value: String? = nil, isAdmin: Bool, userID: User.IDValue) {
+    public init(id: UUID? = nil, value: String? = nil, expiration: ExpirationClaim, subject: SubjectClaim, isAdmin: Bool, userID: User.IDValue) {
+    //public init(id: UUID? = nil, value: String? = nil, isAdmin: Bool, userID: User.IDValue) {
         self.id = id
         self.value = value
-        //self.expiration = expiration
-        //self.subject = subject
+        self.expiration = expiration
+        self.expirationRaw = expiration.value
+        self.subject = subject
+        self.subjectRaw = subject.value
         self.isAdmin = isAdmin
         self.$user.id = userID
     }
     
     public func verify(using signer: JWTSigner) throws {
-        //try self.expiration.verifyNotExpired()
+        self.expiration = .init(value: self.expirationRaw)
+        self.subject = .init(value: self.subjectRaw)
+        try self.expiration?.verifyNotExpired()
     }
     
     public static func == (lhs: Token, rhs: Token) -> Bool {
