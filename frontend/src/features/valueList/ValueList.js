@@ -59,8 +59,8 @@ export const ValueList = () => {
         </div>
       </Stack>
       {jsonData ? (
-        <FixedSizeList style={{height: "500px"}}
-          height={400}
+        <FixedSizeList
+          height={450}
           itemSize={50}
           itemCount={jsonData.length}
           overscanCount={5}

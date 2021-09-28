@@ -48,7 +48,7 @@ export const Home = () => {
         <Grid
           container
           spacing={2}
-         // alignItems="center"
+          // alignItems="center"
           className="App-Grid"
 
           justifyContent="center"
@@ -56,49 +56,49 @@ export const Home = () => {
           style={{ overflow: "auto" }}
         >
           <Grid item xs={12} >
-            <Item style ={{ height :"525px"}}>
+            <Item style={{ height: "525px" }}>
               <Mapbox />
             </Item>
           </Grid>
-          <Grid item md={3} xs = {12} >
+          <Grid item md={3} xs={12} >
             <Item >
-          <Gauge/>
-          </Item>
+              <Gauge />
+            </Item>
           </Grid>
-          <Grid item md={3} xs = {12}>
+          <Grid item md={3} xs={12}>
 
             <Item>
               <ColumnChart />
             </Item>
           </Grid>
-          <Grid item md={3} xs ={12}>
+          <Grid item md={3} xs={12}>
             <Item>
               <Boxplot />
             </Item>
           </Grid>
-          <Grid item md={3} xs ={12}>
+          <Grid item md={3} xs={12}>
             <Item>
-            <LineChart />
+              <LineChart />
             </Item>
           </Grid>
 
 
-          <Grid item md={3} xs = {12}>
-            <Item style={{ height :"550px"}} >
+          <Grid item md={3} xs={12}>
+            <Item style={{ height: "550px" }} >
               <ValueList />
             </Item>
           </Grid>
-          <Grid item md={9} xs = {12}>
-            <Item style ={{ height :"550px"}} >
+          <Grid item md={9} xs={12}>
+            <Item style={{ height: "550px" }} >
 
               <ZoomableChart />
             </Item>
           </Grid>
         </Grid>
-
-        <Grid item md = {12} xs = {12}>
-        <h5 align = 'center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
-          <p align = 'center' style={{'font-size': '12px'}}>Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></p>
+        
+        <Grid item md={12} xs={12}>
+          <h5 align='center'> © Ferienakdemie 2021, Ferienakademie Inc. Made with <span role="img" aria-label="heart">❤️️</span> in Sarntal!</h5>
+          <p align='center' style={{ 'font-size': '12px' }}>Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></p>
 
         </Grid>
       </div>
