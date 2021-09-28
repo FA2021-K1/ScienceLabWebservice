@@ -49,7 +49,7 @@ export const Home = () => {
         <Grid
           container
           spacing={2}
-         // alignItems="center"
+          // alignItems="center"
           className="App-Grid"
 
           justifyContent="center"
@@ -64,36 +64,36 @@ export const Home = () => {
               <Mapbox />
             </Item>
           </Grid>
-          <Grid item md={3} xs = {12} >
+          <Grid item md={3} xs={12} >
             <Item >
-          <Gauge/>
-          </Item>
+              <Gauge />
+            </Item>
           </Grid>
-          <Grid item md={3} xs = {12}>
+          <Grid item md={3} xs={12}>
 
             <Item>
               <ColumnChart />
             </Item>
           </Grid>
-          <Grid item md={3} xs ={12}>
+          <Grid item md={3} xs={12}>
             <Item>
               <Boxplot />
             </Item>
           </Grid>
-          <Grid item md={3} xs ={12}>
+          <Grid item md={3} xs={12}>
             <Item>
-            <LineChart />
+              <LineChart />
             </Item>
           </Grid>
 
 
-          <Grid item md={3} xs = {12}>
-            <Item style={{ height :"550px"}} >
+          <Grid item md={3} xs={12}>
+            <Item style={{ height: "550px" }} >
               <ValueList />
             </Item>
           </Grid>
-          <Grid item md={9} xs = {12}>
-            <Item style ={{ height :"550px"}} >
+          <Grid item md={9} xs={12}>
+            <Item style={{ height: "550px" }} >
 
               <ZoomableChart />
             </Item>

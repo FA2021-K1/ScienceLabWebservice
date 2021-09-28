@@ -4,50 +4,44 @@ export const optionsConfig = (style) => {
             type: "boxPlot",
             width: '400',
             toolbar: {
-              tools: {
-                download: true,
-                zoom: false,
-                zoomin: false,
-                zoomout: false,
-                pan: false,
-                reset: false,
-              },
+                tools: {
+                    download: true,
+                    zoom: false,
+                    zoomin: false,
+                    zoomout: false,
+                    pan: false,
+                    reset: false,
+                },
             },
-          },
-          legend: {
+        },
+        legend: {
             show: false
-          },
-          plotOptions: {
-            boxPlot: {
-              colors: {
-                upper: '#00E396',
-                lower: '#008FFB'
-              }
-            }
-          },
-          colors: [style.primaryColor, style.warningColor],
-          title: {
+        },
+        colors: [style.pH, style.warningColor],
+        title: {
             text: "BoxPlot - Last 24 h",
             align: "left",
-          },
-          xaxis: {
-            type: "categories",
+        },
+        xaxis: {
+            type: "numeric",
             tooltip: {
-              enabled: false,
+                enabled: false,
             },
-          },
-          plotOptions: {
+            tickPlacement: 'between',
+            overwriteCategories: ["Bouy 1", "Bouy 2", "Bouy 3"]
+        },
+        plotOptions: {
             boxPlot: {
-              colors: {
-                upper: style.primaryColor,
-                lower: style.secondaryColors
-              }
+                colors: {
+                    upper: style.pH,
+                    lower: style.pH
+                },
             }
         },
-          yaxis: {
+        yaxis: {
             title: {
-              text: 'pH Value [-]'
+                text: 'pH Value [-]'
             }
-          },
-        }
+        },
     }
+}
