@@ -38,8 +38,8 @@ public final class User: Model {
     
     public func generateToken(signers: JWTSigners) throws -> Token {
         let token = Token(
-            //expiration: .init(value: .init(timeIntervalSinceNow: 3600)),
-            //subject: .init(value: "apodini"),
+            expiration: .init(value: .init(timeIntervalSinceNow: 3600)),
+            subject: .init(value: "apodini"),
             isAdmin: false,
             userID: try self.requireID()
         )
