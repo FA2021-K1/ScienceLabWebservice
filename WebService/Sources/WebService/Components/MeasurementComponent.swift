@@ -12,7 +12,7 @@ struct MeasurementComponent: Component {
                     .operation(.create)
                 
                 GetMeasurements()
-                    .guard(AuthGuardHandler())
+                    //.guard(AuthGuardHandler())
                 
                 Group($measurementId) {
                     GetMeasurement(measurementId: $measurementId)
