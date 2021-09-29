@@ -18,7 +18,7 @@ const spanOptions = {
 export const getLatestData = createAsyncThunk(
   "data/getLatestData",
   async ({ selectedTime }) => {
-    const endDate = Math.round(selectedTime/1000);
+    const endDate = Math.round(selectedTime / 1000);
     const startDate = endDate - 10000;
     const path = apiAdress + "aggregated";
     const request = path + `?startDate=${startDate}&endDate=${endDate}`;
@@ -27,11 +27,31 @@ export const getLatestData = createAsyncThunk(
   }
 );
 
+export const getDataOfLastDay = createAsyncThunk(
+  "data/getDataOfLastDay",
+  async ({ selectedTime, selectedData }) => {
+    const endDate = Math.round(selectedTime / 1000);
+    const startDate = Math.round(
+      subDays(new Date(selectedTime), 1).getTime() / 1000
+    );
+    const path = apiAdress + "aggregated";
+    const request =
+      path +
+      `?startDate=${startDate}` +
+      `&endDate=${endDate}` +
+      `&sensorTyp=${selectedData}`;
+    const response = await axios.get(request);
+    return response;
+  }
+);
+
 export const getDataAverageByDay = createAsyncThunk(
   "data/getDataAverageByDay",
   async ({ selectedTime, selectedData }) => {
-    const endDate = Math.round(selectedTime/1000);
-    const startDate = Math.round(subDays(new Date(selectedTime), 7).getTime()/1000);
+    const endDate = Math.round(selectedTime / 1000);
+    const startDate = Math.round(
+      subDays(new Date(selectedTime), 7).getTime() / 1000
+    );
     const aggregationLevel = 60 * 60 * 24;
     console.log(new Date(startDate));
     const path = apiAdress + "aggregated";
@@ -50,11 +70,10 @@ export const getDataBySpan = createAsyncThunk(
   "data/getDataBySpan",
   async ({ selectedData, selectedSpan }) => {
     const span = selectedSpan ? selectedSpan : "fiveYears";
-    const endDate = Math.round(new Date().getTime()/1000);
-    const startDate = Math.round(subDays(
-      new Date(),
-      spanOptions[span].dateDifference
-    ).getTime()/1000);
+    const endDate = Math.round(new Date().getTime() / 1000);
+    const startDate = Math.round(
+      subDays(new Date(), spanOptions[span].dateDifference).getTime() / 1000
+    );
     const aggregationLevel = spanOptions[span].aggregationLevel;
     const path = apiAdress + "aggregated";
     const request =
@@ -71,11 +90,13 @@ export const getDataBySpan = createAsyncThunk(
 export const dataSlice = createSlice({
   name: "data",
   initialState: {
-    selectedTime: (new Date().getTime()),
+    selectedTime: new Date().getTime(),
     selectedData: 0,
     bouyCount: 0,
     latestData: null,
     latestDataState: "idle",
+    dataOfLastDay: null,
+    dataOfLastDayStatus: "idle",
     dataAverageByDay: null,
     dataAverageByDayState: "idle",
     dataBySpan: null,
@@ -101,7 +122,7 @@ export const dataSlice = createSlice({
   },
   extraReducers: {
     [getLatestData.fulfilled]: (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       const latestDataUnformatted = action.payload.data.data.measurements;
       let relevantItems = {};
       let bouys = 0;
@@ -112,14 +133,14 @@ export const dataSlice = createSlice({
           !relevantItems[element.buoyID][element.sensorTypeID]
         ) {
           relevantItems[element.buoyID][element.sensorTypeID] = {
-            value: Math.round(element.value*100)/100,
+            value: Math.round(element.value * 100) / 100,
             location: element.location,
             date: element.date,
           };
         } else if (!relevantItems[element.buoyID]) {
-          relevantItems[element.buoyID] = {}
+          relevantItems[element.buoyID] = {};
           relevantItems[element.buoyID][element.sensorTypeID] = {
-            value: Math.round(element.value*100)/100,
+            value: Math.round(element.value * 100) / 100,
             location: element.location,
             date: element.date,
           };
@@ -142,8 +163,13 @@ export const dataSlice = createSlice({
       let relevantItems = {};
       averageDataUnformatted.forEach((element) => {
         relevantItems[element.buoyID]
-          ? relevantItems[element.buoyID].push([element.date, Math.round(element.value*100)/100])
-          : (relevantItems[element.buoyID] = [[element.date, Math.round(element.value*100)/100]]);
+          ? relevantItems[element.buoyID].push([
+              element.date,
+              Math.round(element.value * 100) / 100,
+            ])
+          : (relevantItems[element.buoyID] = [
+              [element.date, Math.round(element.value * 100) / 100],
+            ]);
       });
       state.dataAverageByDay = relevantItems;
       state.dataAverageByDayState = "loaded";
@@ -171,6 +197,28 @@ export const dataSlice = createSlice({
     },
     [getDataBySpan.rejected]: (state, action) => {
       state.dataBySpanState = "rejected";
+    },
+
+    [getDataOfLastDay.fulfilled]: (state, action) => {
+      const averageDataUnformatted = action.payload.data.data.measurements;
+      let relevantItems = {};
+      averageDataUnformatted.forEach((element) => {
+        relevantItems[element.buoyID]
+          ? relevantItems[element.buoyID].push(element.value)
+          : (relevantItems[element.buoyID] = [element.value]);
+      });
+      let list = [];
+      for (let key in relevantItems) {
+        list.push({ x: key, y: relevantItems[key] });
+      }
+      state.dataOfLastDay = list;
+      state.dataOfLastDayStatus = "loaded";
+    },
+    [getDataOfLastDay.pending]: (state, action) => {
+      state.dataOfLastDayStatus = "pending";
+    },
+    [getDataOfLastDay.rejected]: (state, action) => {
+      state.dataOfLastDayStatus = "rejected";
     },
   },
 });
