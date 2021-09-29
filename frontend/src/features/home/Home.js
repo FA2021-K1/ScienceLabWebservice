@@ -64,31 +64,31 @@ export const Home = () => {
             </Item>
           </Grid>
 
-          <Grid item md={3} xs={12}>
+          <Grid item md={3}sm = {6}xs={12} style= {{height:"100%"}}>
             <Item>
 
               <Gauge />
             </Item>
           </Grid>
-          <Grid item md={3} xs={12}>
+          <Grid item md={3} sm = {6}xs={12}>
 
             <Item>
               <ColumnChart />
             </Item>
           </Grid>
-          <Grid item md={3} xs={12}>
+          <Grid item md={3} sm = {6}xs={12}>
             <Item>
               <Boxplot />
             </Item>
           </Grid>
-          <Grid item md={3} xs={12}>
+          <Grid item md={3}sm = {6} xs={12}>
             <Item>
               <LineChart />
             </Item>
           </Grid>
 
 
-          <Grid item md={3} xs={12}>
+          <Grid item md={3}   xs={12}>
             <Item style={{ height: "550px" }}>
 
               <ValueList />

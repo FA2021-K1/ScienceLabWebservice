@@ -75,7 +75,7 @@ export const Gauge = () => {
 
 
     return (
-        <div>
+        <div style={{height:"100%"}}>
 
             <div style={{ fontSize: "14px", fontWeight: "bold", color: style.textColor, marginTop: "2.5px", marginLeft: "8px" }}>
                 Current Water Quality
@@ -86,8 +86,9 @@ export const Gauge = () => {
                 colors={[style.warningColor,
                 style.accentColor1,
                 style.lightGreen]}
-                percent={percentValue} />
-            <h4 align="left" style={{ fontSize: "14px", marginLeft: "8px", color: style.textColor }}> Latest measurement means of buoys</h4>
+                percent={percentValue} 
+                style = {{height:"50%"}}/>
+            <h4 align="left" style={{ fontSize: "14px", marginLeft: "8px", color: style.textColor, marginTop:"-10px"}}> Latest measurement means of buoys</h4>
             <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> ph-Value: {pHAverage ? roundToOne(pHAverage) : null} </h5> 
             <div style={{ marginTop: "-10px", marginLeft: "17px" }}>
                 <img src="pHColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
@@ -96,7 +97,7 @@ export const Gauge = () => {
                 </div>
             </div>
 
-            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> TDS: {TDSAverage ? roundToTwo(TDSAverage) : null} ppm</h5> 
+            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor, marginTop:"-5px" }}> TDS: {TDSAverage ? roundToTwo(TDSAverage) : null} ppm</h5> 
             <div style={{ marginTop: "-10px", marginLeft: "17px"  }}>
                 <img src="TDSColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
                 <div style={{ marginTop: "-17px", marginLeft: TDSAverageMargin + "px" }}>
