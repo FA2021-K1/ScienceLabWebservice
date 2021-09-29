@@ -4,6 +4,7 @@ import ApodiniObserve
 import ApodiniObserveMetricsPrometheus
 import ApodiniOpenAPI
 import ApodiniREST
+import Apodini
 import ApodiniDatabase
 import ApodiniAuthorization
 import ApodiniAuthorizationJWT

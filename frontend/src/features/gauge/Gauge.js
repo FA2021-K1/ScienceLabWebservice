@@ -34,7 +34,7 @@ export const Gauge = () => {
     return (
         <div>
 
-            <div style={{ fontSize: "14px", fontWeight: "bold", color: style.textColor, marginTop: "2.5px", marginLeft: "8px" }}>
+            <div style={{ fontSize: "14px", fontWeight: "bold", color: style.textColor, marginTop: "5px", marginLeft: "8px" }}>
                 Current Water Quality
             </div>
             <GaugeChart id="gauge-chart1"
@@ -45,7 +45,7 @@ export const Gauge = () => {
                 style.lightGreen]}
                 percent={percentValue} />
             <h4 align="left" style={{ fontSize: "14px", marginLeft: "8px", color: style.textColor }}> Latest measurement means of buoys</h4>
-            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> ph-Value: {data ? data['0'][0]["value"] : null} </h5>
+            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> ph-Value: {data ? 0.5 : null} </h5> //TODO Add value to gauge
             <div style={{ marginTop: "-10px", marginLeft: "17px" }}>
                 <img src="pHColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
                 <div style={{ marginTop: "-17px", marginLeft: pHAverage + "px" }}>
@@ -53,7 +53,7 @@ export const Gauge = () => {
                 </div>
             </div>
 
-            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> TDS: {data ? data['0'][0]["value"] : null} ppm</h5>
+            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> TDS: {data ? 0.5 : null} ppm</h5> //TODO Add value to gauge
             <div style={{ marginTop: "-10px", marginLeft: "17px"  }}>
                 <img src="TDSColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
                 <div style={{ marginTop: "-17px", marginLeft: TDSAverage + "px" }}>
