@@ -12,8 +12,8 @@ import { useEffect } from "react";
 import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
-  const jsonDataAll = useSelector((state) => state.data.latestData);
-  const jsonData = jsonDataAll ? jsonDataAll[0] : null
+  const data = useSelector((state) => state.data.dataOfLastDayRaw);
+  console.log(data);
   const style = useSelector((state) => state.style);
 
   const dateFormatter = (time) => {
@@ -22,20 +22,31 @@ export const ValueList = () => {
   
   const renderRow = ({ index }) => {
     let color = "white"
-    if (jsonData[index].value >= 50) {
-      color = style.warningColorLight;
+    let sensor;
+    if (data[index].sensorTypeID === 0) {
+      sensor = "pH-Value"
+      if (data[index].value <= 5.5 || data[index].value >= 9) {
+        color = style.warningColorLight;
+      }
     }
+    if (data[index].sensorTypeID === 1) {
+      sensor = "TDS-Value"
+      if (data[index].value >= 800) {
+        color = style.warningColorLight;
+      }
+    }
+    
     return (
       <ListItem key={index} component="div" disablePadding>
         <Box sx={{ width: "100%", height: "100%", bgcolor: color }}>
           <ListItem>
             <ListItemText 
-              primary={`Sensor ${1}`}
+              primary={sensor}
               primaryTypographyProps={{
                 color: style.textColor,
                 fontSize: '12px'
               }}
-              secondary={`Buoy ${jsonData[index].boyId}`}
+              secondary={`Buoy ${data[index].bouyID}`}
               secondaryTypographyProps={{
                 color: style.textColor,
                 fontSize: '12px'
@@ -44,12 +55,12 @@ export const ValueList = () => {
 
             <ListItemText
               align="right"
-              primary={`Value ${jsonData[index].value}`}
+              primary={data[index].value}
               primaryTypographyProps={{
                 color: style.textColor,
                 fontSize: '12px'
               }}
-              secondary={dateFormatter(new Date(jsonData[index].date))}
+              secondary={dateFormatter(new Date(data[index].date))}
               secondaryTypographyProps={{
                 color: style.textColor,
                 fontSize: '12px'
@@ -79,11 +90,11 @@ export const ValueList = () => {
           </div>
         </div>
       </Stack>
-      {jsonData ? (
+      {data ? (
         <FixedSizeList style={{ marginTop: "20px", height: "450px" }}
           height={400}
           itemSize={50}
-          itemCount={jsonData.length}
+          itemCount={data.length}
           overscanCount={5}
         >
           {renderRow}
