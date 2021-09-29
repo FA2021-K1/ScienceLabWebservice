@@ -3,8 +3,8 @@ import ReactApexChart from "react-apexcharts";
 import { useSelector } from "react-redux";
 
 export const ColumnChart = () => {
-    const style = useSelector((state) => state.style);
-    const data = useSelector((state) => state.data.latestData);
+  const style = useSelector((state) => state.style);
+  const data = useSelector((state) => state.data.latestData);
 
 
   const [series, setSeries] = useState([]);
@@ -31,27 +31,33 @@ export const ColumnChart = () => {
       colors: ["transparent"],
     },
     xaxis: {
+      categories: ["Bouy 1", "Bouy 2", "Bouy 3"],
     },
     yaxis: [
       {
         title: {
           text: "pH Value [-]",
-
         },
+      },
+      {
+        opposite: true,
         title: {
-            text: "Latest measurements per buoy",
-            align: "left",
-            style: {
-                color: style.textColor,
-            }
+          text: "Dissolved Solids [ppm]",
         },
-
       },
     ],
-    fill: {
-      opacity: 1,
+    title: {
+      text: "Latest measurements per buoy",
+      align: "left",
+      style: {
+        color: style.textColor,
+      }
+    },
+fill: {
+  opacity: 1,
     },
   });
+
 
   useEffect(() => {
     if (data) {
@@ -71,19 +77,18 @@ export const ColumnChart = () => {
         }
     
         // TODO: Add other Sensor Values accordingly
-      ]);
-    }
-  }, [data]);
+      ],[name]);
 
 
-    return (
-        <div id="chart">
-            <ReactApexChart
-                options={options}
-                series={series}
-                type="bar"
-                height={350}
-            />
-        </div>
-    );
+
+return (
+  <div id="chart">
+    <ReactApexChart
+      options={options}
+      series={series}
+      type="bar"
+      height={350}
+    />
+  </div>
+);
 };

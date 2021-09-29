@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { getDataAverageByDay } from "../../dataSlice";
-import { optionsConfig } from "./lineChartConfig";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -49,6 +48,7 @@ export const LineChart = () => {
     title: {
       text: "Average measurements",
       align: "left",
+      color: style.textColor,
     },
     grid: {
       borderColor: "#e7e7e7",
@@ -62,9 +62,6 @@ export const LineChart = () => {
     },
     xaxis: {
       type: "datetime",
-      title: {
-        text: "Date",
-      },
     },
     yaxis: {
       title: {
@@ -81,6 +78,9 @@ export const LineChart = () => {
     legend: {
       position: "bottom",
       horizontalAlign: "center",
+      formatter: (value) => {
+        return "Bouy " + value;
+      }
     },
   });
 
@@ -118,7 +118,7 @@ export const LineChart = () => {
       setOptions({
         ...options,
         colors: style.pHShades,
-        title: { text: "Means per day of last 7 days - " + selectedData },
+        title: { text: "Means per day of last 7 days - pH", style:{color:style.textColor }},
 
         yaxis: {
           title: {
@@ -134,7 +134,7 @@ export const LineChart = () => {
       setOptions({
         ...options,
         colors: style.TDSShades,
-        title: { text: "Means per day of last 7 days - " + selectedData },
+        title: { text: "Means per day of last 7 days - TDS", style:{color: style.textColor }},
 
         yaxis: {
           title: {
