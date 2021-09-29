@@ -3,6 +3,7 @@ import Chart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
 import { optionsConfig } from "./boxplotConfig";
 import { getDataOfLastDay } from "../../dataSlice";
+import { roundToOne, roundToTwo } from "../../helperFunctions";
 
 export const Boxplot = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,13 @@ export const Boxplot = () => {
         },
       },
     },
+    tooltip: {
+      y: {
+          formatter: function(value) {
+              return roundToOne(value)
+          }
+      }
+    }
   });
 
   useEffect(() => {
@@ -91,6 +99,13 @@ export const Boxplot = () => {
               return Math.round(value);
             },
           },
+        },
+        tooltip: {
+          y: {
+              formatter: function(value) {
+                  return roundToOne(value)
+              }
+          }
         },
         plotOptions: {
           boxPlot: {
@@ -119,6 +134,13 @@ export const Boxplot = () => {
               return Math.round(value);
             },
           },
+        },
+        tooltip: {
+          y: {
+              formatter: function(value) {
+                  return roundToTwo(value)
+              }
+          }
         },
         plotOptions: {
           boxPlot: {

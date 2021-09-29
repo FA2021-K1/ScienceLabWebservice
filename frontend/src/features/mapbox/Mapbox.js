@@ -149,14 +149,14 @@ export const Mapbox = () => {
                     const latitude = data[key][0].location.latitude
 
                     const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-                        `   <h3>Buoy: ${key} aka BERND</h3>
+                        `   <h3>Buoy: ${key}</h3>
                     <div class="info"> 
                         <h4>ph-Value:</h4>
-                        <p>${data[key][0]["value"]} NTU</p>
+                        <p>${data[key][0]["value"]} </p>
                     </div>
                     <div class="info"> 
                         <h4>Total Dissolved Solids:</h4>
-                        <p>ppm</p>
+                        <p>${data[key][1]["value"]} ppm</p>
                     </div>`
                     )
                     new mapboxgl.Marker({ "color": style.accentColor1 })
