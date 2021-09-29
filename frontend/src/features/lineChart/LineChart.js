@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { getDataAverageByDay } from "../../dataSlice";
+import { roundToOne, roundToTwo } from "../../helperFunctions";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -39,12 +40,6 @@ export const LineChart = () => {
     },
 
     colors: [style.TDS, style.pH],
-    dataLabels: {
-      enabled: true,
-    } /*
-        stroke: {
-            curve: "smooth",
-        },*/,
     title: {
       text: "Average measurements",
       align: "left",
@@ -67,20 +62,22 @@ export const LineChart = () => {
       title: {
         text: "[ppm]",
       },
-      min: 5,
-      max: 40,
       labels: {
         formatter: (value) => {
           return Math.round(value);
         },
       },
     },
+    tooltip: {
+      y: {
+          formatter: function(value) {
+              return roundToOne(value)
+          }
+      },
+    },
     legend: {
       position: "bottom",
-      horizontalAlign: "center",
-      formatter: (value) => {
-        return "Bouy " + value;
-      }
+      horizontalAlign: "center"
     },
   });
 
@@ -124,9 +121,19 @@ export const LineChart = () => {
           title: {
             text: "[-]",
           },
-          min: 0,
-          max: 14,
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
+            },
+          },
 
+        },
+        tooltip: {
+          y: {
+              formatter: function(value) {
+                  return roundToOne(value)
+              }
+          },
         },
       });
     } else if (selectedData === 1) {
@@ -140,8 +147,18 @@ export const LineChart = () => {
           title: {
             text: "[ppm]",
           },
-          min: 100,
-          max: 1000,
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
+            },
+          },
+        },
+        tooltip: {
+          y: {
+              formatter: function(value) {
+                  return roundToTwo(value)
+              }
+          },
         },
       });
     }

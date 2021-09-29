@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useSelector } from "react-redux";
+import { roundToOne } from "../../helperFunctions";
 
 export const ColumnChart = () => {
 
     const style = useSelector((state) => state.style);
     const data = useSelector((state) => state.data.latestData);
-
-    function roundToOne(num) {
-        return +(Math.round(num + "e+1") + "e-1")
-    }
 
     const [series, setSeries] = useState([]);
 
