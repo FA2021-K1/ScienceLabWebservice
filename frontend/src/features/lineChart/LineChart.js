@@ -70,9 +70,9 @@ export const LineChart = () => {
     },
     tooltip: {
       y: {
-          formatter: function(value) {
-              return roundToOne(value)
-          }
+        formatter: function (value) {
+          return roundToOne(value)
+        }
       },
     },
     legend: {
@@ -115,7 +115,7 @@ export const LineChart = () => {
       setOptions({
         ...options,
         colors: style.pHShades,
-        title: { text: "Means per day of last 7 days - pH", style:{color:style.textColor }},
+        title: { text: "Means per day of last 7 days - pH", style: { color: style.textColor } },
 
         yaxis: {
           title: {
@@ -130,18 +130,38 @@ export const LineChart = () => {
         },
         tooltip: {
           y: {
-              formatter: function(value) {
-                  return roundToOne(value)
-              }
+            formatter: function (value) {
+              return roundToOne(value)
+            }
           },
         },
+        annotations: {
+          yaxis: [
+            {
+              y: 6.5,
+              y2: 7.5,
+              borderColor: style.lightGreen,
+              fillColor: style.lightGreen,
+              opacity: 0.075,
+              label: {
+                borderColor: style.lightGreen,
+                style: {
+                  color: style.textColor,
+                  fontSize: 9,
+                  background: style.lightGreen
+                },
+                text: 'Optimal'
+              }
+            }
+          ]
+        }
       });
     } else if (selectedData === 1) {
       // TDS Selected
       setOptions({
         ...options,
         colors: style.TDSShades,
-        title: { text: "Means per day of last 7 days - TDS", style:{color: style.textColor }},
+        title: { text: "Means per day of last 7 days - TDS", style: { color: style.textColor } },
 
         yaxis: {
           title: {
@@ -155,11 +175,28 @@ export const LineChart = () => {
         },
         tooltip: {
           y: {
-              formatter: function(value) {
-                  return roundToTwo(value)
-              }
+            formatter: function (value) {
+              return roundToTwo(value)
+            }
           },
         },
+        annotations: {
+          yaxis: [
+            {
+              y: 500,
+              borderColor: style.warningColor,
+              label: {
+                borderColor: style.warningColor,
+                style: {
+                  color: '#fff',
+                  fontSize: 9,
+                  background: style.warningColor
+                },
+                text: 'Critical above'
+              }
+            }
+          ]
+        }
       });
     }
   }, [selectedData]);
