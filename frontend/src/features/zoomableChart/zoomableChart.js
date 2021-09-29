@@ -13,7 +13,7 @@ export const ZoomableChart = () => {
   const dataState = useSelector((state) => state.data.dataBySpanState);
   const style = useSelector((state) => state.style);
 
-  const [selectedSpan, setSelectedSpan] = useState("fiveYears");
+  const [selectedSpan, setSelectedSpan] = useState("oneMonth");
   const [selectedData, setSelectedData] = useState("0");
 
   const [series, setSeries] = useState([ ]);
