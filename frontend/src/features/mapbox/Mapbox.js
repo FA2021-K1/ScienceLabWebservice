@@ -61,7 +61,7 @@ export const Mapbox = () => {
 
         // When the layer is added to the map,
         // get the rendering context for the map canvas.
-        onAdd: () => {
+        onAdd: function () {
             const canvas = document.createElement('canvas');
             canvas.width = this.width;
             canvas.height = this.height;
@@ -69,7 +69,7 @@ export const Mapbox = () => {
         },
 
         // Call once before every frame where the icon will be used.
-        render: () => {
+        render: function () {
             const duration = 1000;
             const t = (performance.now() % duration) / duration;
 

@@ -7,16 +7,49 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDataBySpan } from "../../dataSlice";
 
+
+
 export const ZoomableChart = () => {
+
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data.dataBySpan);
   const dataState = useSelector((state) => state.data.dataBySpanState);
+  const selectedData = useSelector((state) => state.data.selectedData)
   const style = useSelector((state) => state.style);
 
   const [selectedSpan, setSelectedSpan] = useState("fiveYears");
-  const [selectedData, setSelectedData] = useState("0");
 
-  const [series, setSeries] = useState([ ]);
+  const [series, setSeries] = useState([
+    {
+      name: "XYZ MOTORS",
+      data: [
+        [1532396593, 0],
+        [1532397593, 1],
+        [1532398593, 2],
+        [1532399593, 3],
+        [1532400593, 4],
+        [1532401593, 5],
+        [1532402593, 6],
+        [1532403593, 7],
+        [1532404593, 8],
+      ], //dummyData,
+    },
+    {
+      name: "ABC MOTORS",
+      data: [
+        [1532396593, 10],
+        [1532397593, 9],
+        [1532398593, 8],
+        [1532399593, 7],
+        [1532400593, 6],
+        [1532401593, 5],
+        [1532402593, 4],
+        [1532403593, 3],
+        [1532404593, 2],
+      ], //dummyData,
+
+    },
+  ]);
 
   const [options, setOptions] = useState({
     chart: {
@@ -30,10 +63,6 @@ export const ZoomableChart = () => {
       },
       toolbar: {
         autoSelected: "zoom",
-
-        tools: {
-          customIcons: [],
-        },
       },
     },
     dataLabels: {
@@ -61,13 +90,8 @@ export const ZoomableChart = () => {
     },
     yaxis: {
       title: {
-        text: "pH Value [-]",
-      },
-      labels: {
-        formatter: (value) => {
-          return Math.round(value);
-        },
-      },
+        text: 'pH Value [-]'
+      }
     },
     xaxis: {
       type: "datetime",
@@ -88,10 +112,7 @@ export const ZoomableChart = () => {
   useEffect(() => {
     if (dataState === "idle") {
       dispatch(
-        getDataBySpan({
-          selectedData: selectedData,
-          selectedSpan: selectedSpan,
-        })
+        getDataBySpan({ selectedData: selectedData, selectedSpan: selectedSpan })
       );
     }
   }, [selectedSpan, dataState, selectedData]);
@@ -99,25 +120,17 @@ export const ZoomableChart = () => {
   useEffect(() => {
     if (data) {
       dispatch(
-        getDataBySpan({
-          selectedData: selectedData,
-          selectedSpan: selectedSpan,
-        })
+        getDataBySpan({ selectedData: selectedData, selectedSpan: selectedSpan })
       );
     }
   }, [selectedSpan, selectedData]);
 
   useEffect(() => {
     if (data) {
-      let list = []
-      for(let key in data){
-        list.push({name: key, data: data[key]})
-      }
-      setSeries(list)
+      //setSeries(data)
       // TODO: Add Data as soon as backend is done
     }
   }, [data]);
-  
   return (
     <div id="chart">
       <ToggleButtonGroup
@@ -127,9 +140,7 @@ export const ZoomableChart = () => {
         }}
         size="small"
         aria-label="spanSelection"
-
-        sx={{ paddingRight: "10px" }}
-
+        sx={{ paddingRight: '10px' }}
       >
         <ToggleButton value="fiveYears" aria-label="fiveYears" sx={{ height: "30px", fontSize: 12 }}>
           5y
@@ -149,17 +160,13 @@ export const ZoomableChart = () => {
       </ToggleButtonGroup>
       <ToggleButtonGroup
         size="small"
-        color="primary"
-        value={selectedData}
+        color='primary'
+        value={"pH"}
         exclusive
-
-        onChange={(e) => {
-          setSelectedData(e.target.value);
-        }}
+        onChange={(e) => { }}
       >
-        <ToggleButton value="0" sx={{ height: "30px", fontSize: 12 }}>pH</ToggleButton>
-        <ToggleButton value="1" sx={{ height: "30px", fontSize: 12 }}>TDS</ToggleButton>
-
+        <ToggleButton value="pH" sx={{ height: "30px", fontSize: 12 }}>pH</ToggleButton>
+        <ToggleButton value="TDS" sx={{ height: "30px", fontSize: 12 }}>TDS</ToggleButton>
       </ToggleButtonGroup>
       <Chart options={options} series={series} type="area" height={450} />
     </div>
