@@ -9,27 +9,68 @@ export const Gauge = () => {
     const [percentValue, setPercentValue] = useState(0);
     const [pHAverage, setpHAverage] = useState(0);
     const [TDSAverage, setTDSAverage] = useState(0);
+    const [pHAverageMargin, setpHAverageMargin] = useState(0);
+    const [TDSAverageMargin, setTDSAverageMargin] = useState(0);
+      
 
     useEffect(() => {
         if (data) {
-            let list = [];
+            let pHList = [];
+            let TDSList = [];
             for (let key in data) {
-                list.push(data[key][0].value);
+                pHList.push(data[key]["0"].value);
+                TDSList.push(data[key]["1"].value);
             }
-            var sum = list.reduce(function (a, b) {
+            const pHSum = pHList.reduce(function (a, b) {
                 return a + b;
             }, 0);
-            let percentValue = calculatePercent(sum);
+            const TDSSum = TDSList.reduce(function (a, b) {
+                return a + b;
+            }, 0);
+            
+            const pHAvg = (pHSum / pHList.length);
+            const TDSAvg = (TDSSum / TDSList.length);
+            const percentValue = calculatePercent(pHAvg, TDSAvg);
             setPercentValue(percentValue)
-            setpHAverage(7 * 18.05 + 1);
-            setTDSAverage(600 * 0.246 + 5);
+            setpHAverage(pHAvg);
+            setTDSAverage(TDSAvg);
+            setpHAverageMargin(pHAvg * 18.05 + 1);
+            setTDSAverageMargin(TDSAvg * 0.246 + 5);
 
         }
     }, [data])
 
-    function calculatePercent(sum) {
-        return sum / 400;
+    function calculatePercent(pHAvg, TDSAvg) {
+
+        //100% = ph:7
+        
+        var pH = Math.abs(pHAvg - 7);
+        var pHPercent = 1 - pH/7;
+        console.log("pHPercent"+pHPercent);
+
+        var TDSThreshold = 400;
+        var TDSMax = 1200;
+        var TDSPercent;
+        console.log("TDSvg"+ TDSAvg);
+        console.log("(TDSAvg)/(TDSMax - TDSThreshold)"+(TDSAvg)/(TDSMax - TDSThreshold));
+        if (TDSAvg > TDSThreshold)
+        {
+            TDSPercent = 1 - (TDSAvg-TDSThreshold)/(TDSMax);
+        }
+        else 
+            TDSPercent = 1;
+        console.log("TDSPercent" +TDSPercent);
+        return (pHPercent+TDSPercent)/2;
     }
+
+    function roundToTwo(num) {
+        return +(Math.round(num + "e+2")  + "e-2");
+    }
+
+    function roundToOne(num) {
+        return +(Math.round(num + "e+1")  + "e-1");
+    }
+
 
     return (
         <div>
@@ -45,18 +86,18 @@ export const Gauge = () => {
                 style.lightGreen]}
                 percent={percentValue} />
             <h4 align="left" style={{ fontSize: "14px", marginLeft: "8px", color: style.textColor }}> Latest measurement means of buoys</h4>
-            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> ph-Value: {data ? 0.5 : null} </h5> 
+            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> ph-Value: {pHAverage ? roundToOne(pHAverage) : null} </h5> 
             <div style={{ marginTop: "-10px", marginLeft: "17px" }}>
                 <img src="pHColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
-                <div style={{ marginTop: "-17px", marginLeft: pHAverage + "px" }}>
+                <div style={{ marginTop: "-17px", marginLeft: pHAverageMargin + "px" }}>
                     <img src="arrow_fill.png" style={{ opacity: "0.85", width: "15px" }} />
                 </div>
             </div>
 
-            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> TDS: {data ? 0.5 : null} ppm</h5> 
+            <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> TDS: {TDSAverage ? roundToTwo(TDSAverage) : null} ppm</h5> 
             <div style={{ marginTop: "-10px", marginLeft: "17px"  }}>
                 <img src="TDSColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
-                <div style={{ marginTop: "-17px", marginLeft: TDSAverage + "px" }}>
+                <div style={{ marginTop: "-17px", marginLeft: TDSAverageMargin + "px" }}>
                     <img src="arrow_fill.png" style={{ opacity: "0.85", width: "15px" }} />
                 </div>
             </div>
