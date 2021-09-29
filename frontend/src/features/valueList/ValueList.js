@@ -14,41 +14,41 @@ import { sortByBouy } from "../../sorting";
 export const ValueList = () => {
   const data = useSelector((state) => state.data.dataOfLastDayRaw);
   console.log(data);
-  const style = useSelector((state) => state.style);
+  const styleColor = useSelector((state) => state.style);
 
   const dateFormatter = (time) => {
     return format(time, "MMM dd HH:mm:ss");
   }
   
-  const renderRow = ({ index }) => {
+  const renderRow = ({ index, style }) => {
     let color = "white"
     let sensor;
     if (data[index].sensorTypeID === 0) {
       sensor = "pH-Value"
-      if (data[index].value <= 5.5 || data[index].value >= 9) {
-        color = style.warningColorLight;
+      if (data[index].value <= 5 || data[index].value >= 9) {
+        color = styleColor.warningColorLight;
       }
     }
     if (data[index].sensorTypeID === 1) {
       sensor = "TDS-Value"
       if (data[index].value >= 800) {
-        color = style.warningColorLight;
+        color = styleColor.warningColorLight;
       }
     }
     
     return (
-      <ListItem key={index} component="div" disablePadding>
-        <Box sx={{ width: "100%", height: "100%", bgcolor: color }}>
+      <ListItem key={index} style={style} component="div" disablePadding>
+        <Box sx={{ width: "100%", height: "100%", bgcolor:color}}>
           <ListItem>
             <ListItemText 
               primary={sensor}
               primaryTypographyProps={{
-                color: style.textColor,
+                color: styleColor.textColor,
                 fontSize: '12px'
               }}
-              secondary={`Buoy ${data[index].bouyID}`}
+              secondary={`Buoy ${data[index].buoyID}`}
               secondaryTypographyProps={{
-                color: style.textColor,
+                color: styleColor.textColor,
                 fontSize: '12px'
               }}
             />
@@ -57,12 +57,12 @@ export const ValueList = () => {
               align="right"
               primary={data[index].value}
               primaryTypographyProps={{
-                color: style.textColor,
+                color: styleColor.textColor,
                 fontSize: '12px'
               }}
               secondary={dateFormatter(new Date(data[index].date))}
               secondaryTypographyProps={{
-                color: style.textColor,
+                color: styleColor.textColor,
                 fontSize: '12px'
               }}
             />
@@ -78,12 +78,12 @@ export const ValueList = () => {
     <Box sx={{ width: "100%", height: "100%", bgcolor: "background.paper" }}>
       <Stack spacing={2} direction="row">
         <div id="latest-data-received">
-          <div style={{ fontSize: "14px", fontWeight: "bold", color: style.textColor, marginTop: "-13px", marginLeft: "8px" }}>
+          <div style={{ fontSize: "14px", fontWeight: "bold", color: styleColor.textColor, marginTop: "-13px", marginLeft: "8px" }}>
             Latest data received
           </div>
           <div id="more-data-button">
             <Link to="/export">
-            <Button style={{ fontSize: "12px", backgroundColor: style.primaryColor}} variant="contained" href="">
+            <Button style={{ fontSize: "12px", backgroundColor: styleColor.primaryColor}} variant="contained" href="">
                   More data
                 </Button>
             </Link>
@@ -94,8 +94,7 @@ export const ValueList = () => {
         <FixedSizeList style={{ marginTop: "20px", height: "450px" }}
           height={400}
           itemSize={50}
-          itemCount={data.length}
-          overscanCount={5}
+          itemCount={100}
         >
           {renderRow}
         </FixedSizeList>
