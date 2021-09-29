@@ -76,3 +76,7 @@
 .date-range-picker {
   position: absolute;
 }
+
+a:hover {
+  cursor: pointer;
+}

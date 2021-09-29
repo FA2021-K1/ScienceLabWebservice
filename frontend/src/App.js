@@ -155,17 +155,21 @@ export const App = () => {
             <Route exact path="/" render={() => {
               return (<Redirect to="/home" />)
             }} />
-            {routes.map(({ path, Component }, key) => (
-              <Route exact path={path} key={key} render={props => {
+            {routes.map(({ path, Component, externalUrl }, key) => {
+              if (!externalUrl) {
                 return (
-                  <div>
-                    <div id="content-container">
-                      <Component {...props} />
-                    </div>
-                  </div>
-                );
-              }} />
-            ))}
+                  <Route exact path={path} key={key} render={props => {
+                    return (
+                      <div>
+                        <div id="content-container">
+                          <Component {...props} />
+                        </div>
+                      </div>
+                    );
+                  }} />
+                )
+              }
+            })}
           </Switch>
         </Box>
       </Router>

@@ -1,75 +1,102 @@
 import { useEffect, useState } from "react";
 import { DataGrid, GridToolbar as MuiGridToolbar, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbar } from "@mui/x-data-grid"
 import { styled } from '@mui/material/styles';
-// import { DateRangePicker } from "materialui-daterange-picker";
+import { DateRangePicker } from "materialui-daterange-picker";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import IconButton from '@mui/material/IconButton';
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { getLatestData } from "../../dataSlice";
+import { getData, getSensorTypes } from "../../dataSlice";
 
 export const Export = () => {
   const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
-  const latestDataUnformatted = useSelector((state) => state.data.latestDataUnformatted);
-  const latestDataState = useSelector((state) => state.data.latestDataState);
+  const data = useSelector((state) => state.data.data);
+  const dataState = useSelector((state) => state.data.dataState);
+  const sensorTypes = useSelector((state) => state.data.sensorTypes);
+  const sensorTypesState = useSelector((state) => state.data.sensorTypesState);
   useEffect(() => { }, [dispatch, style]);
 
   const [open, setOpen] = useState(false);
   let startDate = new Date();
-  startDate.setMonth(startDate.getMonth() - 1);
-  // console.log(startDate);
+  startDate.setHours(0, 0, 0, 0);
+  let endDate = new Date();
+  endDate.setHours(23, 59, 59, 0);
   const [dateRange, setDateRange] = useState({
     startDate: startDate,
-    endDate: new Date()
+    endDate: endDate
   });
 
   const GridToolbar = styled(MuiGridToolbar)(
     ({ theme }) => ({
       '& .MuiButton-textPrimary': {
         color: style.secondaryColor
+      },
+      '& .MuiBadge-colorPrimary': {
+        backgroundColor: style.secondaryColor
       }
     })
   );
+
+  const loadData = () => {
+    const startDate = dateRange.startDate.getTime();
+    const endDate = dateRange.endDate.getTime();
+    dispatch(getData({ startDate, endDate }));
+  }
 
   const CustomizedGridToolbar = () => {
     return (
       <div>
         <GridToolbarContainer>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-            {/* <div>
-              From <b>{dateToString(dateRange.startDate)}</b> to <b>{dateToString(dateRange.endDate)}</b>
-            </div>
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center", width: "100%" }}>
             <div>
+              Selected date range: <b>{dateRange.startDate.toLocaleDateString()}</b> to <b>{dateRange.endDate.toLocaleDateString()}</b>
+            </div>
+            <div style={{ flexGrow: 1 }}>
               <IconButton aria-label="Pick date range" onClick={toggle}>
                 <DateRangeIcon />
               </IconButton>
-            </div> */}
+            </div>
             <div>
               <GridToolbar />
             </div>
           </div>
         </GridToolbarContainer>
-        {/* <div className="date-range-picker">
+        <div className="date-range-picker">
           <DateRangePicker
             open={open}
             toggle={toggle}
-            onChange={(range) => setDateRange(range)}
+            onChange={(range) => {
+              toggle();
+              range.startDate.setHours(0, 0, 0, 0);
+              range.endDate.setHours(23, 59, 59, 0);
+              setDateRange({
+                startDate: range.startDate,
+                endDate: range.endDate
+              });
+              const startDate = range.startDate.getTime();
+              const endDate = range.endDate.getTime();
+              dispatch(getData({ startDate, endDate }));
+            }}
             wrapperClassName="date-range-picker"
           />
-        </div> */}
+        </div>
       </div>
     );
   }
-
-  const dateToString = date => `${date.toLocaleDateString()} ${date.toLocaleTimeString().split(' ')[0]}`
 
   const columns = [
     {
       field: 'date', headerName: 'Measured At', minWidth: 200,
       valueGetter: params => new Date(Date.parse(params.value)),
-      valueFormatter: params => dateToString(params.value)
+      valueFormatter: params => {
+        let hours = params.value.getHours();
+        let hoursStr = hours < 10 ? `0${hours}` : hours.toString();
+        let mins = params.value.getMinutes();
+        let minsStr = mins < 10 ? `0${mins}` : mins.toString();
+        return `${params.value.toLocaleDateString()} ${hoursStr}:${minsStr}`;
+      }, filterable: false
     },
     { field: 'buoyID', headerName: 'Buoy', type: 'number', minWidth: 110 },
     {
@@ -80,28 +107,33 @@ export const Export = () => {
         return `${longitude} ${latitude}`;
       }
     },
-    { field: 'sensorTypeID', headerName: 'Sensor', minWidth: 130 },
-    { field: 'value', headerName: 'Value', type: 'number', minWidth: 120 }
+    {
+      field: 'sensorTypeID', headerName: 'Sensor', minWidth: 130,
+      valueGetter: params => sensorTypes.find(sensorType => sensorType.id === params.value).name
+    },
+    { field: 'value', headerName: 'Value', type: 'number', minWidth: 120 },
+    {
+      field: 'unit', headerName: 'Unit', minWidth: 130, filterable: false, sortable: false,
+      valueGetter: params => sensorTypes.find(sensorType => sensorType.id === params.row.sensorTypeID).unit
+    }
   ];
 
   useEffect(() => {
-    if (latestDataState === "idle") {
-      const date = new Date();
-      const selectedTime = date.getTime();
-      dispatch(getLatestData({ selectedTime }));
+    if (dataState === "idle") {
+      loadData();
     }
-    if (latestDataUnformatted) {
-      console.log(latestDataUnformatted);
+    if (sensorTypesState === "idle") {
+      dispatch(getSensorTypes());
     }
-  }, [dispatch, latestDataUnformatted, latestDataState])
+  }, [dispatch, dataState, sensorTypesState, data])
 
   const toggle = () => setOpen(!open);
 
-  if (latestDataUnformatted) {
-    return (<div style={{ height: 560, width: '100%', padding: 20, paddingTop:20, boxSizing: "border-box"}}>
-      <DataGrid rows={latestDataUnformatted} columns={columns} components={{
+  if (sensorTypes) {
+    return (<div style={{ height: 560, width: '100%', padding: 20, paddingTop: 20, boxSizing: "border-box" }}>
+      <DataGrid rows={data} columns={columns} components={{
         Toolbar: CustomizedGridToolbar
-      }} />
+      }} loading={dataState !== "loaded"} disableSelectionOnClick={true}/>
     </div>);
   }
   return (<div>Waiting for data ...</div>)
