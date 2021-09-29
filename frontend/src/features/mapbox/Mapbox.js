@@ -62,14 +62,17 @@ export const Mapbox = () => {
         // When the layer is added to the map,
         // get the rendering context for the map canvas.
         onAdd: () => {
+            if (this!= null){
             const canvas = document.createElement('canvas');
             canvas.width = this.width;
             canvas.height = this.height;
             this.context = canvas.getContext('2d');
+            }
         },
 
         // Call once before every frame where the icon will be used.
         render: () => {
+            if(this!=null){
             const duration = 1000;
             const t = (performance.now() % duration) / duration;
 
@@ -121,6 +124,7 @@ export const Mapbox = () => {
 
             // Return `true` to let the map know that the image was updated.
             return true;
+            }
         }
     };
 
