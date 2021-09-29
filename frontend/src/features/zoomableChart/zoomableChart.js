@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getDataBySpan } from "../../dataSlice";
+import { roundToTwo } from "../../helperFunctions";
+import { roundToOne } from "../../helperFunctions";
 
 export const ZoomableChart = () => {
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ export const ZoomableChart = () => {
   const [selectedSpan, setSelectedSpan] = useState("oneMonth");
   const [selectedData, setSelectedData] = useState("0");
 
-  const [series, setSeries] = useState([ ]);
+  const [series, setSeries] = useState([]);
 
   const [options, setOptions] = useState({
     chart: {
@@ -115,14 +117,105 @@ export const ZoomableChart = () => {
   useEffect(() => {
     if (data) {
       let list = []
-      for(let key in data){
-        list.push({name: key, data: data[key]})
+      for (let key in data) {
+        list.push({ name: key, data: data[key] })
       }
       setSeries(list)
-      // TODO: Add Data as soon as backend is done
+      console.log("selectedData" + selectedData)
+      if (selectedData === "0") {
+        // PH Selected
+        setOptions({
+          ...options,
+          colors: style.pHShades,
+          title: { text: "Measurement development over time - pH", style: { color: style.textColor } },
+
+          yaxis: {
+            title: {
+              text: "[-]",
+            },
+            labels: {
+              formatter: (value) => {
+                return Math.round(value);
+              },
+            },
+
+          },
+          tooltip: {
+            y: {
+              formatter: function (value) {
+                return roundToOne(value)
+              }
+            },
+          },
+          annotations: {
+            yaxis: [
+              {
+                y: 6.5,
+                y2: 7.5,
+                borderColor: style.lightGreen,
+                fillColor: style.lightGreen,
+                opacity: 0.075,
+                label: {
+                  borderColor: style.lightGreen,
+                  style: {
+                    color: style.textColor,
+                    fontSize: 9,
+                    background: style.lightGreen
+                  },
+                  text: 'Optimal',
+                }
+              }
+            ]
+          }
+        });
+        // TODO: Add Data as soon as backend is done
+      }
+      else if (selectedData === "1") {
+        // TDS Selected
+        setOptions({
+          ...options,
+          colors: style.TDSShades,
+          title: { text: "Measurement development over time - TDS", style: { color: style.textColor } },
+
+          yaxis: {
+            title: {
+              text: "[ppm]",
+            },
+            labels: {
+              formatter: (value) => {
+                return Math.round(value);
+              },
+            },
+          },
+          tooltip: {
+            y: {
+              formatter: function (value) {
+                return roundToTwo(value)
+              }
+            },
+          },
+          annotations: {
+            yaxis: [
+              {
+                y: 500,
+                borderColor: style.warningColor,
+                label: {
+                  borderColor: style.warningColor,
+                  style: {
+                    color: '#fff',
+                    fontSize: 9,
+                    background: style.warningColor
+                  },
+                  text: 'Critical above'
+                }
+              }
+            ]
+          }
+        });
+      }
     }
   }, [data]);
-  
+
   return (
     <div id="chart">
       <ToggleButtonGroup

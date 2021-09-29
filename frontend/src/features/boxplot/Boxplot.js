@@ -72,9 +72,9 @@ export const Boxplot = () => {
     },
     tooltip: {
       y: {
-          formatter: function(value) {
-              return roundToOne(value)
-          }
+        formatter: function (value) {
+          return roundToOne(value)
+        }
       }
     }
   });
@@ -102,9 +102,9 @@ export const Boxplot = () => {
         },
         tooltip: {
           y: {
-              formatter: function(value) {
-                  return roundToOne(value)
-              }
+            formatter: function (value) {
+              return roundToOne(value)
+            }
           }
         },
         plotOptions: {
@@ -115,6 +115,26 @@ export const Boxplot = () => {
             },
           },
         },
+        annotations: {
+          yaxis: [
+            {
+              y: 6.5,
+              y2: 7.5,
+              borderColor: style.lightGreen,
+              fillColor: style.lightGreen,
+              opacity: 0.075,
+              label: {
+                borderColor: style.lightGreen,
+                style: {
+                  color: style.textColor,
+                  fontSize: 9,
+                  background: style.lightGreen
+                },
+                text: 'Optimal'
+              }
+            }
+          ]
+        }
       });
     } else if (selectedData === 1) {
       setOptions({
@@ -137,9 +157,9 @@ export const Boxplot = () => {
         },
         tooltip: {
           y: {
-              formatter: function(value) {
-                  return roundToTwo(value)
-              }
+            formatter: function (value) {
+              return roundToTwo(value)
+            }
           }
         },
         plotOptions: {
@@ -150,6 +170,25 @@ export const Boxplot = () => {
             },
           },
         },
+        annotations: {
+          yaxis: [
+            {
+              y: 500,
+              borderColor: style.warningColor,
+              label: {
+                borderColor: style.warningColor,
+                position: 'left',
+                textAnchor: 'start',
+                style: {
+                  color: '#fff',
+                  fontSize: 9,
+                  background: style.warningColor
+                },
+                text: 'Critical above'
+              }
+            }
+          ]
+        }
       });
     }
   }, [selectedData]);
