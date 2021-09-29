@@ -3,6 +3,7 @@ import data from "./mockData.json";
 import axios from "axios";
 import { sortByBouy } from "./sorting";
 import { subDays } from "date-fns";
+import uuid from "react-uuid";
 
 const apiAdress = "https://data.fa.ase.in.tum.de/v1/measurements/frontend/";
 const bouys = [0, 1, 2, 69, 360, 420];
@@ -94,6 +95,7 @@ export const dataSlice = createSlice({
     selectedData: 0,
     bouyCount: 0,
     latestData: null,
+    latestDataUnformatted: null,
     latestDataState: "idle",
     dataOfLastDay: null,
     dataOfLastDayStatus: "idle",
@@ -149,6 +151,7 @@ export const dataSlice = createSlice({
       });
       state.bouyCount = bouys;
       state.latestData = relevantItems;
+      state.latestDataUnformatted = latestDataUnformatted.map(x => ({...x, id: uuid()}));
       state.latestDataState = "loaded";
     },
     [getLatestData.pending]: (state, action) => {

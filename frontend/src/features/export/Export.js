@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { DataGrid, GridToolbar as MuiGridToolbar, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbar } from "@mui/x-data-grid"
-import { mockData } from "./mockData";
 import { styled } from '@mui/material/styles';
-import { DateRangePicker } from "materialui-daterange-picker";
+// import { DateRangePicker } from "materialui-daterange-picker";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import IconButton from '@mui/material/IconButton';
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { getLatestData } from "../../dataSlice";
+
 export const Export = () => {
   const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
-  const latestData = useSelector((state) => state.data.latestData);
+  const latestDataUnformatted = useSelector((state) => state.data.latestDataUnformatted);
+  const latestDataState = useSelector((state) => state.data.latestDataState);
   useEffect(() => { }, [dispatch, style]);
 
   const [open, setOpen] = useState(false);
@@ -36,27 +38,27 @@ export const Export = () => {
       <div>
         <GridToolbarContainer>
           <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-            <div>
+            {/* <div>
               From <b>{dateToString(dateRange.startDate)}</b> to <b>{dateToString(dateRange.endDate)}</b>
             </div>
             <div>
               <IconButton aria-label="Pick date range" onClick={toggle}>
                 <DateRangeIcon />
               </IconButton>
-            </div>
+            </div> */}
             <div>
               <GridToolbar />
             </div>
           </div>
         </GridToolbarContainer>
-        <div className="date-range-picker">
+        {/* <div className="date-range-picker">
           <DateRangePicker
             open={open}
             toggle={toggle}
             onChange={(range) => setDateRange(range)}
             wrapperClassName="date-range-picker"
           />
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -65,59 +67,42 @@ export const Export = () => {
 
   const columns = [
     {
-      field: 'measuredAt', headerName: 'Measured At', minWidth: 200, type: "date",
+      field: 'date', headerName: 'Measured At', minWidth: 200,
       valueGetter: params => new Date(Date.parse(params.value)),
       valueFormatter: params => dateToString(params.value)
     },
-    { field: 'buoyId', headerName: 'Buoy', type: 'number', minWidth: 110 },
+    { field: 'buoyID', headerName: 'Buoy', type: 'number', minWidth: 110 },
     {
       field: 'location', headerName: 'Location', minWidth: 200, filterable: false, sortable: false,
-      valueGetter: params => `${params.getValue(params.id, 'longitude').toFixed(6)}, ${params.getValue(params.id, 'latitude').toFixed(6)}`
+      valueGetter: params => {
+        const longitude = params.value.longitude.toFixed(6);
+        const latitude = params.value.latitude.toFixed(6);
+        return `${longitude} ${latitude}`;
+      }
     },
-    { field: 'sensor', headerName: 'Sensor', minWidth: 130, valueFormatter: params => "TODO" },
+    { field: 'sensorTypeID', headerName: 'Sensor', minWidth: 130 },
     { field: 'value', headerName: 'Value', type: 'number', minWidth: 120 }
   ];
 
-  const data = null;
-
   useEffect(() => {
-    if (latestData) {
-      console.log(latestData);
-      data = latestData.reduce((prev, curr) => prev.concat(getMeasurementData(curr)), []);
+    if (latestDataState === "idle") {
+      const date = new Date();
+      const selectedTime = date.getTime();
+      dispatch(getLatestData({ selectedTime }));
     }
-  }, [dispatch, latestData])
+    if (latestDataUnformatted) {
+      console.log(latestDataUnformatted);
+    }
+  }, [dispatch, latestDataUnformatted, latestDataState])
 
   const toggle = () => setOpen(!open);
 
-  if (data) {
+  if (latestDataUnformatted) {
     return (<div style={{ height: 560, width: '100%', padding: 20, paddingTop:20, boxSizing: "border-box"}}>
-      <DataGrid rows={data} columns={columns} components={{
+      <DataGrid rows={latestDataUnformatted} columns={columns} components={{
         Toolbar: CustomizedGridToolbar
-      }} onFilterModelChange={e => console.log(e)}
-        filterModel={{
-          items: [
-            { id: '1', columnField: 'measuredAt', operatorValue: 'onOrBefore', value: `${dateRange.startDate.getFullYear()}-${dateRange.startDate.getMonth()}-${dateRange.startDate.getDate()}` },
-            // { id: '2', columnField: 'measuredAt', operatorValue: 'onOrBefore', value: `${dateRange.startDate.getFullYear()}-${dateRange.startDate.getMonth()}-${dateRange.startDate.getDate()}` }
-          ]
-        }} />
+      }} />
     </div>);
   }
   return (<div>Waiting for data ...</div>)
-}
-
-const getMeasurementData = measurement => {
-  const measuredAt = measurement.measuredAt;
-  const longitude = measurement.coordinate.longitude;
-  const latitude = measurement.coordinate.latitude;
-  const buoyId = measurement.buoyID;
-
-  return measurement.measurementData.map(data => ({
-    id: data.id,
-    measuredAt: measuredAt,
-    longitude: longitude,
-    latitude: latitude,
-    buoyId: buoyId,
-    sensorId: data.sensor.id,
-    value: data.value
-  }));
 }
