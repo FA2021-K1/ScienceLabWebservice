@@ -38,7 +38,7 @@ export const Export = () => {
   const data = jsonData.reduce((prev, curr) => prev.concat(getMeasurementData(curr)), []);
 
   if (data) {
-    return (<div style={{ height: 560, width: '100%', padding: 10, boxSizing: "border-box" }}>
+    return (<div style={{ height: 560, width: '100%', padding: 20, paddingTop:20, boxSizing: "border-box"}}>
       <DataGrid rows={data} columns={columns} components={{
         Toolbar: GridToolbar
       }} />
