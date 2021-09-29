@@ -30,8 +30,10 @@ export const Gauge = () => {
             
             const pHAvg = (pHSum / pHList.length);
             const TDSAvg = (TDSSum / TDSList.length);
-            const percentValue = calculatePercent(pHAvg, TDSAvg);
-            setPercentValue(percentValue)
+            const percentValueNew = calculatePercent(pHAvg, TDSAvg);
+            if (percentValueNew !== percentValue) {
+                setPercentValue(percentValueNew)
+            }
             setpHAverage(pHAvg);
             setTDSAverage(TDSAvg);
             setpHAverageMargin(pHAvg * 18.05 + 1);
