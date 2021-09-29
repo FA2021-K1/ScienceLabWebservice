@@ -1,4 +1,5 @@
 import Apodini
+import ApodiniHTTPProtocol
 import FluentKit
 import Shared
 
@@ -12,11 +13,14 @@ struct GetSensorType: Handler {
     @Throws(.notFound, reason: "The sensor type could not be found")
     var notFound: ApodiniError
 
-    func handle() async throws -> SensorType {
+    func handle() async throws -> Response<SensorType> {
         guard let sensorType = await databaseModel.readSensorType(sensorTypeID) else {
             throw notFound
         }
         
-        return sensorType
+        return .final(
+                    sensorType,
+                    information: AnyHTTPInformation(key: "Access-Control-Allow-Origin", rawValue: "*")
+                )
     }
 }
