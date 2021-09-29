@@ -19,37 +19,8 @@ export const ZoomableChart = () => {
 
   const [selectedSpan, setSelectedSpan] = useState("fiveYears");
 
-  const [series, setSeries] = useState([
-    {
-      name: "XYZ MOTORS",
-      data: [
-        [1532396593, 0],
-        [1532397593, 1],
-        [1532398593, 2],
-        [1532399593, 3],
-        [1532400593, 4],
-        [1532401593, 5],
-        [1532402593, 6],
-        [1532403593, 7],
-        [1532404593, 8],
-      ], //dummyData,
-    },
-    {
-      name: "ABC MOTORS",
-      data: [
-        [1532396593, 10],
-        [1532397593, 9],
-        [1532398593, 8],
-        [1532399593, 7],
-        [1532400593, 6],
-        [1532401593, 5],
-        [1532402593, 4],
-        [1532403593, 3],
-        [1532404593, 2],
-      ], //dummyData,
 
-    },
-  ]);
+  const [series, setSeries] = useState([]);
 
   const [options, setOptions] = useState({
     chart: {
@@ -76,7 +47,7 @@ export const ZoomableChart = () => {
       align: "left",
       style: {
         color: style.textColor,
-      }
+      },
     },
     fill: {
       type: "gradient",
@@ -90,8 +61,15 @@ export const ZoomableChart = () => {
     },
     yaxis: {
       title: {
-        text: 'pH Value [-]'
-      }
+
+        text: "pH Value [-]",
+      },
+      labels: {
+        formatter: (value) => {
+          return Math.round(value * 10) / 10;
+        },
+      },
+
     },
     xaxis: {
       type: "datetime",
@@ -127,34 +105,74 @@ export const ZoomableChart = () => {
 
   useEffect(() => {
     if (data) {
-      //setSeries(data)
-      // TODO: Add Data as soon as backend is done
+
+      let list = [];
+      for (let key in data) {
+        list.push({ name: key, data: data[key] });
+      }
+      setSeries(list);
     }
   }, [data]);
+
+
   return (
     <div id="chart">
       <ToggleButtonGroup
         value={selectedSpan}
         onChange={(e) => {
           setSelectedSpan(e.target.value);
+          let text;
+          switch (selectedData) {
+            case "0":
+              text = "pH Value [-]";
+              break;
+            case "1":
+              text = "TDS Value [-]";
+              break;
+            default:
+              text = "Weird measurement stuff";
+          }
+          setOptions({ ...options, yaxis: { title: { text: text } } });
         }}
         size="small"
         aria-label="spanSelection"
+
         sx={{ paddingRight: '10px' }}
+
       >
-        <ToggleButton value="fiveYears" aria-label="fiveYears" sx={{ height: "30px", fontSize: 12 }}>
+        <ToggleButton
+          value="fiveYears"
+          aria-label="fiveYears"
+          sx={{ height: "30px", fontSize: 12 }}
+        >
           5y
         </ToggleButton>
-        <ToggleButton value="oneYear" aria-label="oneYear" sx={{ height: "30px", fontSize: 12 }}>
+        <ToggleButton
+          value="oneYear"
+          aria-label="oneYear"
+          sx={{ height: "30px", fontSize: 12 }}
+        >
           1y
         </ToggleButton>
-        <ToggleButton value="oneMonth" aria-label="oneMonth" sx={{ height: "30px", fontSize: 12 }}>
+        <ToggleButton
+          value="oneMonth"
+          aria-label="oneMonth"
+          sx={{ height: "30px", fontSize: 12 }}
+        >
           1m
         </ToggleButton>
-        <ToggleButton value="oneWeek" aria-label="oneWeek" sx={{ height: "30px", fontSize: 12 }}>
+        <ToggleButton
+          value="oneWeek"
+          aria-label="oneWeek"
+          sx={{ height: "30px", fontSize: 12 }}
+        >
           1w
         </ToggleButton>
-        <ToggleButton value="oneDay" aria-label="oneDay" sx={{ height: "30px", fontSize: 12 }}>
+        <ToggleButton
+          value="oneDay"
+          aria-label="oneDay"
+          sx={{ height: "30px", fontSize: 12 }}
+        >
           1d
         </ToggleButton>
       </ToggleButtonGroup>
@@ -163,10 +181,18 @@ export const ZoomableChart = () => {
         color='primary'
         value={"pH"}
         exclusive
-        onChange={(e) => { }}
+
+        onChange={(e) => {
+          setSelectedData(e.target.value);
+        }}
       >
-        <ToggleButton value="pH" sx={{ height: "30px", fontSize: 12 }}>pH</ToggleButton>
-        <ToggleButton value="TDS" sx={{ height: "30px", fontSize: 12 }}>TDS</ToggleButton>
+        <ToggleButton value="0" sx={{ height: "30px", fontSize: 12 }}>
+          pH
+        </ToggleButton>
+        <ToggleButton value="1" sx={{ height: "30px", fontSize: 12 }}>
+          TDS
+        </ToggleButton>
+
       </ToggleButtonGroup>
       <Chart options={options} series={series} type="area" height={450} />
     </div>
