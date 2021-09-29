@@ -16,20 +16,31 @@ export const Sidebar = withRouter(props => {
 
   return (<div id="sidebar">
     <List>
-      {routes.map(({ path, name, Icon }, key) => {
-        const color = path.localeCompare(props.location.pathname) === 0 ? style.secondaryColor : style.lightGray;
-        return (
-          <Link key={`nav-item-${key}`} to={path}>
-            <ListItem key={`nav-list-item-${key}`} >
-              <ListItemIcon style={{ color: color }}>
-                <Icon />
-              </ListItemIcon>
-              <ListItemText primary={name} style={{ color: color }}/>
-            </ListItem>
-          </Link>
-        );
-      }
-      )}
+      {routes.map(({ path, name, Icon, externalUrl }, key) => {
+        const color = path?.localeCompare(props.location.pathname) === 0 ? style.secondaryColor : style.lightGray;
+        if (!externalUrl) {
+          return (
+            <Link key={`nav-item-${key}`} to={path}>
+              <ListItem key={`nav-list-item-${key}`} >
+                <ListItemIcon style={{ color: color }}>
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={name} style={{ color: color }} />
+              </ListItem>
+            </Link>
+          );
+        } else {
+          return (
+            <a href={path} target="blank">
+              <ListItem key={`nav-list-item-${key}`} >
+                <ListItemIcon style={{ color: style.lightGray }}>
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={name} style={{ color: style.lightGray }} />
+              </ListItem>
+            </a>)
+        }
+      })}
     </List>
   </div>)
 });

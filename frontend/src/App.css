@@ -72,3 +72,11 @@
 #content-container {
   position: relative;
 }
+
+.date-range-picker {
+  position: absolute;
+}
+
+a:hover {
+  cursor: pointer;
+}

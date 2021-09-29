@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { subDays } from "date-fns";
+import uuid from "react-uuid";
 
 const apiAdress = "https://data.fa.ase.in.tum.de/v1/measurements/frontend/";
 const bouys = {
@@ -17,6 +18,16 @@ const spanOptions = {
   oneDay: { aggregationLevel: 1, dateDifference: 1 },
 };
 
+export const getSensorTypes = createAsyncThunk(
+  "data/getSensorTypes",
+  async () => {
+    const path = "https://data.fa.ase.in.tum.de/v1/sensorTypes";
+    const request = path;
+    const response = await axios.get(request);
+    return response;
+  }
+);
+
 export const getLatestData = createAsyncThunk(
   "data/getLatestData",
   async ({ selectedTime }) => {
@@ -24,6 +35,16 @@ export const getLatestData = createAsyncThunk(
     const startDate = endDate - 10000;
     const path = apiAdress + "aggregated";
     const request = path + `?startDate=${startDate}&endDate=${endDate}`;
+    const response = await axios.get(request);
+    return response;
+  }
+);
+
+export const getData = createAsyncThunk(
+  "data/getData",
+  async ({ startDate, endDate }) => {
+    const path = apiAdress + "aggregated";
+    const request = path + `?startDate=${Math.round(startDate / 1000)}&endDate=${Math.round(endDate / 1000)}`;
     const response = await axios.get(request);
     return response;
   }
@@ -104,6 +125,10 @@ export const dataSlice = createSlice({
     dataAverageByDayState: "idle",
     dataBySpan: null,
     dataBySpanState: "idle",
+    sensorTypes: null,
+    sensorTypesState: "idle",
+    data: null,
+    dataState: "idle"
   },
   reducers: {
     updateSelectedTime: (state, action) => {
@@ -228,6 +253,28 @@ export const dataSlice = createSlice({
     [getDataOfLastDay.rejected]: (state, action) => {
       state.dataOfLastDayStatus = "rejected";
     },
+    [getSensorTypes.fulfilled]: (state, action) => {
+      const sensorTypes = action.payload.data.data;
+      state.sensorTypes = sensorTypes;
+      state.sensorTypesState = "loaded";
+    },
+    [getSensorTypes.pending]: (state, action) => {
+      state.sensorTypesState = "pending";
+    },
+    [getSensorTypes.rejected]: (state, action) => {
+      state.sensorTypesState = "rejected";
+    },
+    [getData.fulfilled]: (state, action) => {
+      const dataUnformatted = action.payload.data.data.measurements;
+      state.data = dataUnformatted.map(x => ({...x, id: uuid()}));
+      state.dataState = "loaded";
+    },
+    [getData.pending]: (state, action) => {
+      state.dataState = "pending";
+    },
+    [getSensorTypes.rejected]: (state, action) => {
+      state.dataState = "rejected";
+    }
   },
 });
 
