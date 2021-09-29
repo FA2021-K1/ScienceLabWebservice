@@ -56,5 +56,6 @@ public final class User: Model {
 public enum UserType: Int, Codable {
     case drone
     case frontend
+    case admin
 }
 

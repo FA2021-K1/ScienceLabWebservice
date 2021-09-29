@@ -15,6 +15,7 @@ public final class Measurement: Model {
     public var updatedAt: Date?
 
     @Timestamp(key: "measuredAt", on: .none)
+    //@Field(key: "measuredAt")
     public var measuredAt: Date?
 
     @Field(key: "coordinate")
@@ -51,6 +52,7 @@ extension Measurement: Comparable {
                   return false
           }
         
+        //return lhs.measuredAt < rhs.measuredAt
         return lhsMeasuredAt < rhsMeasuredAt
     }
 }
@@ -61,3 +63,29 @@ extension Measurement: Hashable {
         hasher.combine(id)
     }
 }
+/*
+extension TimestampFormatFactory {
+    public static var iso8601WithoutT: TimestampFormatFactory<ISO8601TimestampFormat> {
+        .init {
+            let formatter = ISO8601DateFormatter.threadSpecific
+            dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withFullDate, .withFullTime, .withTimeZone]
+            dateFormatter.timeZone = .current
+            return ISO8601TimestampFormat(formatter: formatter)
+        }
+    }
+}
+
+public struct ISO8601TimestampFormat: TimestampFormat {
+    public typealias Value = String
+
+    let formatter: ISO8601DateFormatter
+
+    public func parse(_ value: String) -> Date? {
+        self.formatter.date(from: value)
+    }
+
+    public func serialize(_ date: Date) -> String? {
+        self.formatter.string(from: date)
+    }
+}
+ */
