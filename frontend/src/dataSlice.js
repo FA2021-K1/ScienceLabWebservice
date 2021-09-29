@@ -132,9 +132,6 @@ export const dataSlice = createSlice({
       latestDataUnformatted.forEach((element) => {
         // const ID = typeof(bouys[element.buoyID]) === "string" ? bouys[element.buoyID] : bouys[element.buoyID.toString()];
         const ID = bouys[element.buoyID];
-        console.log(element)
-        console.log(bouys)
-        console.log(element.buoyID)
         if (relevantItems[ID] && !relevantItems[ID][element.sensorTypeID]) {
           relevantItems[ID][element.sensorTypeID] = {
             value: Math.round(element.value * 100) / 100,

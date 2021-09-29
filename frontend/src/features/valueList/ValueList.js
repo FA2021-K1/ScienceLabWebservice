@@ -13,7 +13,6 @@ import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
   const data = useSelector((state) => state.data.dataOfLastDayRaw);
-  console.log(data);
   const styleColor = useSelector((state) => state.style);
 
   const dateFormatter = (time) => {
