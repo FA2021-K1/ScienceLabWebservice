@@ -98,6 +98,7 @@ export const dataSlice = createSlice({
     latestData: null,
     latestDataState: "idle",
     dataOfLastDay: null,
+    dataOfLastDayRaw: null,
     dataOfLastDayStatus: "idle",
     dataAverageByDay: null,
     dataAverageByDayState: "idle",
@@ -218,6 +219,7 @@ export const dataSlice = createSlice({
         list.push({ x: key, y: relevantItems[key] });
       }
       state.dataOfLastDay = list;
+      state.dataOfLastDayRaw = averageDataUnformatted.map(element => {return {...element, buoyID:bouys[element.buoyID] }})
       state.dataOfLastDayStatus = "loaded";
     },
     [getDataOfLastDay.pending]: (state, action) => {
