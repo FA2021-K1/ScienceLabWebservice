@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import data from "./mockData.json";
 import axios from "axios";
-import { sortByBouy } from "./sorting";
 import { subDays } from "date-fns";
 import uuid from "react-uuid";
 
 const apiAdress = "https://data.fa.ase.in.tum.de/v1/measurements/frontend/";
-const bouys = [0, 1, 2, 69, 360, 420];
-const sensorTypes = [0, 1];
+const bouys = {
+  "69": "BERND",
+  "360": "PAUL",
+  "420": "SCRUM",
+};
+
 const spanOptions = {
   fiveYears: { aggregationLevel: 60 * 60 * 24 * 31, dateDifference: 365 * 5 },
   oneYear: { aggregationLevel: 60 * 60 * 24 * 5, dateDifference: 365 },
@@ -124,32 +126,33 @@ export const dataSlice = createSlice({
   },
   extraReducers: {
     [getLatestData.fulfilled]: (state, action) => {
-      console.log(action.payload);
       const latestDataUnformatted = action.payload.data.data.measurements;
       let relevantItems = {};
-      let bouys = 0;
+      let bouysCount = 0;
 
       latestDataUnformatted.forEach((element) => {
-        if (
-          relevantItems[element.buoyID] &&
-          !relevantItems[element.buoyID][element.sensorTypeID]
-        ) {
-          relevantItems[element.buoyID][element.sensorTypeID] = {
+        // const ID = typeof(bouys[element.buoyID]) === "string" ? bouys[element.buoyID] : bouys[element.buoyID.toString()];
+        const ID = bouys[element.buoyID];
+        console.log(element)
+        console.log(bouys)
+        console.log(element.buoyID)
+        if (relevantItems[ID] && !relevantItems[ID][element.sensorTypeID]) {
+          relevantItems[ID][element.sensorTypeID] = {
             value: Math.round(element.value * 100) / 100,
             location: element.location,
             date: element.date,
           };
-        } else if (!relevantItems[element.buoyID]) {
-          relevantItems[element.buoyID] = {};
-          relevantItems[element.buoyID][element.sensorTypeID] = {
+        } else if (!relevantItems[ID]) {
+          relevantItems[ID] = {};
+          relevantItems[ID][element.sensorTypeID] = {
             value: Math.round(element.value * 100) / 100,
             location: element.location,
             date: element.date,
           };
-          bouys++;
+          bouysCount++;
         }
       });
-      state.bouyCount = bouys;
+      state.bouyCount = bouysCount;
       state.latestData = relevantItems;
       state.latestDataUnformatted = latestDataUnformatted.map(x => ({...x, id: uuid()}));
       state.latestDataState = "loaded";
@@ -165,12 +168,13 @@ export const dataSlice = createSlice({
       const averageDataUnformatted = action.payload.data.data.measurements;
       let relevantItems = {};
       averageDataUnformatted.forEach((element) => {
-        relevantItems[element.buoyID]
-          ? relevantItems[element.buoyID].push([
+        const ID = bouys[element.buoyID];
+        relevantItems[ID]
+          ? relevantItems[ID].push([
               element.date,
               Math.round(element.value * 100) / 100,
             ])
-          : (relevantItems[element.buoyID] = [
+          : (relevantItems[ID] = [
               [element.date, Math.round(element.value * 100) / 100],
             ]);
       });
@@ -188,9 +192,10 @@ export const dataSlice = createSlice({
       const averageDataUnformatted = action.payload.data.data.measurements;
       let relevantItems = {};
       averageDataUnformatted.forEach((element) => {
-        relevantItems[element.buoyID]
-          ? relevantItems[element.buoyID].push([element.date, element.value])
-          : (relevantItems[element.buoyID] = [[element.date, element.value]]);
+        const ID = bouys[element.buoyID];
+        relevantItems[ID]
+          ? relevantItems[ID].push([element.date, element.value])
+          : (relevantItems[ID] = [[element.date, element.value]]);
       });
       state.dataBySpan = relevantItems;
       state.dataBySpanState = "loaded";
@@ -206,9 +211,10 @@ export const dataSlice = createSlice({
       const averageDataUnformatted = action.payload.data.data.measurements;
       let relevantItems = {};
       averageDataUnformatted.forEach((element) => {
-        relevantItems[element.buoyID]
-          ? relevantItems[element.buoyID].push(element.value)
-          : (relevantItems[element.buoyID] = [element.value]);
+        const ID = bouys[element.buoyID];
+        relevantItems[ID]
+          ? relevantItems[ID].push(element.value)
+          : (relevantItems[ID] = [element.value]);
       });
       let list = [];
       for (let key in relevantItems) {
