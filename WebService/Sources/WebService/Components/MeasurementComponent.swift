@@ -22,7 +22,7 @@ struct MeasurementComponent: Component {
                     DeleteMeasurement(measurementId: $measurementId)
                         .operation(.delete)
                 }
-            }.guard(AuthGuardHandler(allowedUserTypes: .drone, .admin))
+            }//.guard(AuthGuardHandler(allowedUserTypes: .drone, .admin))
             
             Group("frontend") {
                 Group("aggregated") {
@@ -36,14 +36,14 @@ struct MeasurementComponent: Component {
                 Group("sensors") {
                     GetSensors()
                 }
-            }.guard(AuthGuardHandler(allowedUserTypes: .frontend, .admin))
+            }//.guard(AuthGuardHandler(allowedUserTypes: .frontend, .admin))
             
             Group("admin") {
                 Group("removeAll") {
                     DeleteAllMeasurements()
                         .operation(.delete)
                 }
-            }.guard(AuthGuardHandler(allowedUserTypes: .admin))
+            }//.guard(AuthGuardHandler(allowedUserTypes: .admin))
         }
     }
 }
