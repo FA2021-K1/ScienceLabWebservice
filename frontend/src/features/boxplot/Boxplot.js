@@ -3,6 +3,7 @@ import Chart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
 import { optionsConfig } from "./boxplotConfig";
 import { getDataOfLastDay } from "../../dataSlice";
+import { roundToOne, roundToTwo } from "../../helperFunctions";
 
 export const Boxplot = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,13 @@ export const Boxplot = () => {
         },
       },
     },
+    tooltip: {
+      y: {
+        formatter: function (value) {
+          return roundToOne(value)
+        }
+      }
+    }
   });
 
   useEffect(() => {
@@ -92,6 +100,13 @@ export const Boxplot = () => {
             },
           },
         },
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return roundToOne(value)
+            }
+          }
+        },
         plotOptions: {
           boxPlot: {
             colors: {
@@ -100,6 +115,26 @@ export const Boxplot = () => {
             },
           },
         },
+        annotations: {
+          yaxis: [
+            {
+              y: 6.5,
+              y2: 7.5,
+              borderColor: style.lightGreen,
+              fillColor: style.lightGreen,
+              opacity: 0.075,
+              label: {
+                borderColor: style.lightGreen,
+                style: {
+                  color: style.textColor,
+                  fontSize: 9,
+                  background: style.lightGreen
+                },
+                text: 'Optimal'
+              }
+            }
+          ]
+        }
       });
     } else if (selectedData === 1) {
       setOptions({
@@ -120,6 +155,13 @@ export const Boxplot = () => {
             },
           },
         },
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return roundToTwo(value)
+            }
+          }
+        },
         plotOptions: {
           boxPlot: {
             colors: {
@@ -128,6 +170,25 @@ export const Boxplot = () => {
             },
           },
         },
+        annotations: {
+          yaxis: [
+            {
+              y: 500,
+              borderColor: style.warningColor,
+              label: {
+                borderColor: style.warningColor,
+                position: 'left',
+                textAnchor: 'start',
+                style: {
+                  color: '#fff',
+                  fontSize: 9,
+                  background: style.warningColor
+                },
+                text: 'Critical above'
+              }
+            }
+          ]
+        }
       });
     }
   }, [selectedData]);
