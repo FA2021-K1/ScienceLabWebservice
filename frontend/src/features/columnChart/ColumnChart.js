@@ -58,27 +58,27 @@ fill: {
     },
   });
 
-useEffect(() => {
-  if (data) {
-    let list = [];
-    for (let key in data) {
-      list.push(key);
-    }
-    setOptions({ ...options, xaxis: { categories: list } });
-    setSeries([
-      {
-        name: "pH-Value",
-        data: list.map((element) => data[element]["0"].value),
-      },
-      {
-        me: "TDS-Value",
-        data: list.map((element) => data[element]["1"].value),
-      }
 
-      // TODO: Add other Sensor Values accordingly
-    ]);
-  }
-}, [data]);
+  useEffect(() => {
+    if (data) {
+      let list = [];
+      for (let key in data) {
+        list.push(key);
+      }
+      setOptions({ ...options, xaxis: { categories: list } });
+      setSeries([
+        {
+          name: "pH-Value",
+          data: list.map((element) => data[element]["0"].value),
+        },
+        {
+          name: "TDS-Value",
+          data: list.map((element) => data[element]["1"].value),
+        }
+    
+        // TODO: Add other Sensor Values accordingly
+      ],[name]);
+
 
 
 return (

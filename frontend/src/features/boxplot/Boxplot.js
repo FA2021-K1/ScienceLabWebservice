@@ -153,9 +153,7 @@ export const Boxplot = () => {
           data: data,
         },
       ]);
-      console.log("data changed");
-      console.log(series);
-      console.log(data);
+
     }
   }, [data]);
 
