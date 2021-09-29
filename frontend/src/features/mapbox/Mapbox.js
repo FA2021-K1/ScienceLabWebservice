@@ -215,7 +215,9 @@ export const Mapbox = () => {
 
     return (
         <div>
-            <div className="sidebar top">
+            
+            <div ref={mapContainer} className="map-container" >
+            <div className="sidebar top" style = {{fontSize:"15px"}}>
                 {dateFormatter(new Date(selectedTime))}
                 {(new Date(selectedTime)).toLocaleString() ===
                     new Date().toLocaleString() ? null : (
@@ -238,7 +240,7 @@ export const Mapbox = () => {
                     dateFormatter={dateFormatter}
                 />
             </div>
-            <div ref={mapContainer} className="map-container" />
+            </div>
         </div>
     );
 }

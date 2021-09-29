@@ -25,12 +25,12 @@
 }
 
 .top {
-  margin-top: 170px;
-  padding: 6px 12px;
+  margin-left: 12px;
+  margin-top: 12px;
 }
 .bottom {
-  margin-top: 510px;
-  padding: 0px ;
+  margin-top: 360px;
+  margin-left: 12px ;
 }
 .info {
     width: 200px;

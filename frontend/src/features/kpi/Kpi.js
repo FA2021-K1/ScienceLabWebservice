@@ -50,7 +50,7 @@ export const Kpi = () => {
                 wrap="wrap"
                 style={{ overflow: "auto" }}
             >
-                <Grid item xs={12} md={3} >
+                <Grid item xs={6} md={3} >
                     <Item style={{ height: "100px" }} >
                         <Stack direction="row" spacing={3} style={{ paddingTop: "15px", paddingLeft: "15px" }}>
                             <Avatar alt="" sx={{ width: 56, height: 56, bgcolor: style.accentColor1light, paddingTop: "10px" }}>
@@ -68,7 +68,7 @@ export const Kpi = () => {
                         </Stack>
                     </Item>
                 </Grid>
-                <Grid item xs={12} md={3} >
+                <Grid item xs={6} md={3} >
                     <Item style={{ height: "100px" }}>
                         <Stack direction="row" spacing={3} style={{ paddingTop: "15px", paddingLeft: "15px" }}>
                             <Avatar alt="" sx={{ width: 56, height: 56, bgcolor: style.accentColor1light, paddingTop: "10px" }}>
@@ -85,7 +85,7 @@ export const Kpi = () => {
                         </Stack>
                     </Item>
                 </Grid>
-                <Grid item xs={12} md={3} >
+                <Grid item xs={6} md={3} >
                     <Item style={{ height: "100px" }}>
                         <Stack direction="row" spacing={3} style={{ paddingTop: "15px", paddingLeft: "15px" }}>
                             <Avatar alt="" sx={{ width: 56, height: 56, bgcolor: style.accentColor1light, paddingTop: "10px" }}>
@@ -102,7 +102,7 @@ export const Kpi = () => {
                         </Stack>
                     </Item>
                 </Grid>
-                <Grid item xs={12} md={3} >
+                <Grid item xs={6} md={3} >
                     <Item style={{ height: "100px" }}>
                         <Stack direction="row" spacing={3} style={{ paddingTop: "15px", paddingLeft: "15px" }}>
                             <Avatar alt="" sx={{ width: 56, height: 56, bgcolor: style.accentColor1light, paddingTop: "10px" }}>
