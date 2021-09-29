@@ -35,7 +35,6 @@ let package = Package(
                 .product(name: "ApodiniAuthorization", package: "Apodini"),
                 .product(name: "ApodiniAuthorizationJWT", package: "Apodini"),
                 .product(name: "ApodiniHTTPProtocol", package: "Apodini"),
-                .product(name: "ApodiniHTTP", package: "Apodini"),
                 .product(name: "Shared", package: "Shared"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "LoggingELK", package: "swift-log-elk"),

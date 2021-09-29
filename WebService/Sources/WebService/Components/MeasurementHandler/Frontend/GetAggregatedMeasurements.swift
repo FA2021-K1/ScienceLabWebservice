@@ -44,7 +44,7 @@ struct GetAggregatedMeasurements: Handler {
         }
         
         let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withFullDate, .withFullTime, .withTimeZone]
+        dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withTimeZone, .withFullDate, .withFullTime]
         dateFormatter.timeZone = .current
         
         // buoyID, sensorTypeID, date, value, position

@@ -20,18 +20,6 @@ struct AuthGuardHandler: Guard {
     )
     var authError: ApodiniError
     
-    @Throws(
-        .forbidden,
-        reason: "The user type doesn't match!"
-    )
-    var userTypeError: ApodiniError
-    
-    var allowedUserTypes: [UserType]
-    
-    init(allowedUserTypes: UserType...) {
-        self.allowedUserTypes = allowedUserTypes
-    }
-    
     func check() async throws {
         let bearerPrefix = "Bearer "
         guard let authorization = connection.information[httpHeader: "Authorization"],
@@ -40,10 +28,6 @@ struct AuthGuardHandler: Guard {
         }
         let token = String(authorization.dropFirst(bearerPrefix.count))
         
-        let user = try await databaseModel.verifyToken(token, signers: jwtSigners)
-        
-        if !allowedUserTypes.contains(where: { $0 == user.userType }) {
-            throw userTypeError
-        }
+        let _ = try await databaseModel.verifyToken(token, signers: jwtSigners)
     }
 }

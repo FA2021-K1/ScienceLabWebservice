@@ -21,6 +21,6 @@ struct SensorTypeComponent: Component {
                 DeleteSensorType(sensorTypeID: $sensorTypeID)
                     .operation(.delete)
             }
-        }
+        }//.guard(AuthGuardHandler(allowedUserTypes: .frontend, .admin))
     }
 }
