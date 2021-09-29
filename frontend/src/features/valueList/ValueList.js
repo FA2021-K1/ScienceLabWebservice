@@ -11,19 +11,15 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { sortByBouy } from "../../sorting";
 
-
-
 export const ValueList = () => {
-
   const jsonDataAll = useSelector((state) => state.data.latestData);
   const jsonData = jsonDataAll ? jsonDataAll[0] : null
   const style = useSelector((state) => state.style);
 
   const dateFormatter = (time) => {
     return format(time, "MMM dd HH:mm:ss");
-  };
-
-
+  }
+  
   const renderRow = ({ index }) => {
     let color = "white"
     if (jsonData[index].value >= 50) {
@@ -68,7 +64,6 @@ export const ValueList = () => {
   };
 
   return (
-    
     <Box sx={{ width: "100%", height: "100%", bgcolor: "background.paper" }}>
       <Stack spacing={2} direction="row">
         <div id="latest-data-received">
@@ -77,11 +72,9 @@ export const ValueList = () => {
           </div>
           <div id="more-data-button">
             <Link to="/export">
-              
-                <Button style={{ fontSize: "12px", backgroundColor: style.primaryColor}} variant="contained" href="">
+            <Button style={{ fontSize: "12px", backgroundColor: style.primaryColor}} variant="contained" href="">
                   More data
                 </Button>
-
             </Link>
           </div>
         </div>
@@ -99,6 +92,5 @@ export const ValueList = () => {
         "Data Loading"
       )}
     </Box>
-    
   );
 };

@@ -7,20 +7,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDataBySpan } from "../../dataSlice";
 
-
-
 export const ZoomableChart = () => {
-
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data.dataBySpan);
   const dataState = useSelector((state) => state.data.dataBySpanState);
-  const selectedData = useSelector((state) => state.data.selectedData)
   const style = useSelector((state) => state.style);
 
   const [selectedSpan, setSelectedSpan] = useState("fiveYears");
+  const [selectedData, setSelectedData] = useState("0");
 
-
-  const [series, setSeries] = useState([]);
+  const [series, setSeries] = useState([ ]);
 
   const [options, setOptions] = useState({
     chart: {
@@ -34,6 +30,10 @@ export const ZoomableChart = () => {
       },
       toolbar: {
         autoSelected: "zoom",
+
+        tools: {
+          customIcons: [],
+        },
       },
     },
     dataLabels: {
@@ -47,7 +47,7 @@ export const ZoomableChart = () => {
       align: "left",
       style: {
         color: style.textColor,
-      },
+      }
     },
     fill: {
       type: "gradient",
@@ -61,15 +61,13 @@ export const ZoomableChart = () => {
     },
     yaxis: {
       title: {
-
         text: "pH Value [-]",
       },
       labels: {
         formatter: (value) => {
-          return Math.round(value * 10) / 10;
+          return Math.round(value);
         },
       },
-
     },
     xaxis: {
       type: "datetime",
@@ -85,12 +83,20 @@ export const ZoomableChart = () => {
         },
       },
     },
+    legend: {
+      formatter: (value) => {
+        return "Bouy " + value;
+      }
+    },
   });
 
   useEffect(() => {
     if (dataState === "idle") {
       dispatch(
-        getDataBySpan({ selectedData: selectedData, selectedSpan: selectedSpan })
+        getDataBySpan({
+          selectedData: selectedData,
+          selectedSpan: selectedSpan,
+        })
       );
     }
   }, [selectedSpan, dataState, selectedData]);
@@ -98,100 +104,66 @@ export const ZoomableChart = () => {
   useEffect(() => {
     if (data) {
       dispatch(
-        getDataBySpan({ selectedData: selectedData, selectedSpan: selectedSpan })
+        getDataBySpan({
+          selectedData: selectedData,
+          selectedSpan: selectedSpan,
+        })
       );
     }
   }, [selectedSpan, selectedData]);
 
   useEffect(() => {
     if (data) {
-
-      let list = [];
-      for (let key in data) {
-        list.push({ name: key, data: data[key] });
+      let list = []
+      for(let key in data){
+        list.push({name: key, data: data[key]})
       }
-      setSeries(list);
+      setSeries(list)
+      // TODO: Add Data as soon as backend is done
     }
   }, [data]);
-
-
+  
   return (
     <div id="chart">
       <ToggleButtonGroup
         value={selectedSpan}
         onChange={(e) => {
           setSelectedSpan(e.target.value);
-          let text;
-          switch (selectedData) {
-            case "0":
-              text = "pH Value [-]";
-              break;
-            case "1":
-              text = "TDS Value [-]";
-              break;
-            default:
-              text = "Weird measurement stuff";
-          }
-          setOptions({ ...options, yaxis: { title: { text: text } } });
         }}
         size="small"
         aria-label="spanSelection"
 
-        sx={{ paddingRight: '10px' }}
+        sx={{ paddingRight: "10px" }}
 
       >
-        <ToggleButton
-          value="fiveYears"
-          aria-label="fiveYears"
-          sx={{ height: "30px", fontSize: 12 }}
-        >
+        <ToggleButton value="fiveYears" aria-label="fiveYears" sx={{ height: "30px", fontSize: 12 }}>
           5y
         </ToggleButton>
-        <ToggleButton
-          value="oneYear"
-          aria-label="oneYear"
-          sx={{ height: "30px", fontSize: 12 }}
-        >
+        <ToggleButton value="oneYear" aria-label="oneYear" sx={{ height: "30px", fontSize: 12 }}>
           1y
         </ToggleButton>
-        <ToggleButton
-          value="oneMonth"
-          aria-label="oneMonth"
-          sx={{ height: "30px", fontSize: 12 }}
-        >
+        <ToggleButton value="oneMonth" aria-label="oneMonth" sx={{ height: "30px", fontSize: 12 }}>
           1m
         </ToggleButton>
-        <ToggleButton
-          value="oneWeek"
-          aria-label="oneWeek"
-          sx={{ height: "30px", fontSize: 12 }}
-        >
+        <ToggleButton value="oneWeek" aria-label="oneWeek" sx={{ height: "30px", fontSize: 12 }}>
           1w
         </ToggleButton>
-        <ToggleButton
-          value="oneDay"
-          aria-label="oneDay"
-          sx={{ height: "30px", fontSize: 12 }}
-        >
+        <ToggleButton value="oneDay" aria-label="oneDay" sx={{ height: "30px", fontSize: 12 }}>
           1d
         </ToggleButton>
       </ToggleButtonGroup>
       <ToggleButtonGroup
         size="small"
-        color='primary'
-        value={"pH"}
+        color="primary"
+        value={selectedData}
         exclusive
 
         onChange={(e) => {
           setSelectedData(e.target.value);
         }}
       >
-        <ToggleButton value="0" sx={{ height: "30px", fontSize: 12 }}>
-          pH
-        </ToggleButton>
-        <ToggleButton value="1" sx={{ height: "30px", fontSize: 12 }}>
-          TDS
-        </ToggleButton>
+        <ToggleButton value="0" sx={{ height: "30px", fontSize: 12 }}>pH</ToggleButton>
+        <ToggleButton value="1" sx={{ height: "30px", fontSize: 12 }}>TDS</ToggleButton>
 
       </ToggleButtonGroup>
       <Chart options={options} series={series} type="area" height={450} />

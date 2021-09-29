@@ -2,101 +2,162 @@ import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
 import { optionsConfig } from "./boxplotConfig";
+import { getDataOfLastDay } from "../../dataSlice";
 
 export const Boxplot = () => {
   const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
   const selectedTime = useSelector((state) => state.data.selectedTime);
-  const data = useSelector((state) => state.data.dataAverageByDay);
-  const dataState = useSelector((state) => state.data.dataAverageByDayState);
-  const selectedData = useSelector(state => state.data.selectedData)
-  const [chartObj, setChartObj] = useState(null)
+  const data = useSelector((state) => state.data.dataOfLastDay);
+  const dataState = useSelector((state) => state.data.dataOfLastDayStatus);
+  const selectedData = useSelector((state) => state.data.selectedData);
 
-  const [series,] = useState([
+  const [series, setSeries] = useState([
     {
-      name: 'box',
-      type: 'boxPlot',
-      data: [
-        {
-          x: 1,
-          y: [31, 39, 45, 51, 59]
-        },
-        {
-          x: 2,
-          y: [39, 46, 55, 65, 71]
-        },
-        {
-          x: 3,
-          y: [29, 31, 35, 39, 44]
-        }
-      ]
+      name: "box",
+      type: "boxPlot",
+      data: [],
     },
-    {
-      name: 'outliers',
-      type: 'scatter',
-      data: [
-        {
-          x: 1,
-          y: 64
-        },
-        {
-          x: 2,
-          y: 27
-        },
-        {
-          x: 2,
-          y: 78
-        },
-        {
-          x: 3,
-          y: 15
-        }
-      ]
-    }
   ]);
 
-  const [options, setOptions] = useState(optionsConfig(style));
+  const [options, setOptions] = useState({
+    chart: {
+      type: "boxPlot",
+      width: "400",
+      toolbar: {
+        tools: {
+          download: true,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false,
+        },
+      },
+    },
+    legend: {
+      show: false,
+    },
+    colors: [style.pH, style.warningColor],
+    title: {
+      text: "Distribution of last 24h - pH",
+      align: "left",
+    },
+    xaxis: {
+      type: "numeric",
+      tooltip: {
+        enabled: false,
+      },
+      tickPlacement: "between",
+      // overwriteCategories: ["Bouy 1", "Bouy 2", "Bouy 3"],
+    },
+    plotOptions: {
+      boxPlot: {
+        colors: {
+          upper: style.pH,
+          lower: style.pH,
+        },
+      },
+    },
+    yaxis: {
+      title: {
+        text: "pH Value [-]",
+      },
+      labels: {
+        formatter: (value) => {
+          return Math.round(value);
+        },
+      },
+    },
+  });
 
   useEffect(() => {
-    if(selectedData === "pH"){
-      setOptions({...options, 
-        title: {text: "Data of last 24 h - "+ selectedData,style:{
-          color: style.textColor,
-      }},
+
+    if (selectedData === 0) {
+      setOptions({
+        ...options,
+        title: {
+          text: "Distribution of last 24h - pH",
+          style: {
+            color: style.textColor,
+          },
+        },
         yaxis: {
           title: {
-              text: "[-]",
+            text: "[-]",
           },
-      },
-      plotOptions: {
-        boxPlot: {
-            colors: {
-                upper: style.pH,
-                lower: style.pH
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
             },
-        }
-    },
-    })
-    }else if(selectedData === "TDS"){
-      setOptions({...options,
-        title: {text: "Data of last 24 h - "+ selectedData,style:{
-          color: style.textColor,
-      }},
+          },
+        },
+        plotOptions: {
+          boxPlot: {
+            colors: {
+              upper: style.pH,
+              lower: style.pH,
+            },
+          },
+        },
+      });
+    } else if (selectedData === 1) {
+      setOptions({
+        ...options,
+        title: {
+          text: "Distribution of last 24h - TDS",
+          style: {
+            color: style.textColor,
+          },
+        },
         yaxis: {
           title: {
-              text: "[ppm]",
+            text: "[ppm]",
           },
-      },
-      plotOptions: {
-        boxPlot: {
-            colors: {
-                upper: style.TDS,
-                lower: style.TDS
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
             },
-        }
-    },})
+          },
+        },
+        plotOptions: {
+          boxPlot: {
+            colors: {
+              upper: style.TDS,
+              lower: style.TDS,
+            },
+          },
+        },
+      });
     }
-  }, [selectedData])
+  }, [selectedData]);
+
+  useEffect(() => {
+    if (dataState === "idle") {
+      dispatch(getDataOfLastDay({ selectedTime, selectedData }));
+    }
+  }, [dataState]);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(getDataOfLastDay({ selectedTime, selectedData }));
+    }
+  }, [selectedTime, selectedData]);
+
+  useEffect(() => {
+    if (data) {
+      setSeries([
+        {
+          name: "box",
+          type: "boxPlot",
+          data: data,
+        },
+      ]);
+      console.log("data changed");
+      console.log(series);
+      console.log(data);
+    }
+  }, [data]);
 
   return (
     <div id="chart">
@@ -104,9 +165,8 @@ export const Boxplot = () => {
         options={options}
         series={series}
         type="boxPlot"
-        height={'350'}>
-      </Chart>
-
+        height={"350"}
+      ></Chart>
     </div>
   );
 };
