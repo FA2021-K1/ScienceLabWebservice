@@ -66,7 +66,7 @@ export const ColumnChart = () => {
           data: list.map((element) => data[element]["0"].value),
         },
         {
-          me: "TDS-Value",
+          name: "TDS-Value",
           data: list.map((element) => data[element]["1"].value),
         }
     
