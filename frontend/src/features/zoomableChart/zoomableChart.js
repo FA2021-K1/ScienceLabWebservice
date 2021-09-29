@@ -83,6 +83,11 @@ export const ZoomableChart = () => {
         },
       },
     },
+    legend: {
+      formatter: (value) => {
+        return "Bouy " + value;
+      }
+    },
   });
 
   useEffect(() => {
