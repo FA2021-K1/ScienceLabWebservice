@@ -8,7 +8,7 @@ import { updateSelectedTime, updateSelectedData } from "../../dataSlice";
 import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }) => {
-  const stepSize = 3 * 60 * 60 * 1000;
+  const stepSize = 1 * 60 * 60 * 1000;
   const todayStart = startOfToday();
   const dispatch = useDispatch();
   // const selectedData = useSelector(state => state.data.selectedData)
@@ -33,7 +33,7 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
   ];
 
   const roundHours = (date) => {
-    date.setHours(date.getHours() - (date.getHours() % 3));
+    date.setHours(date.getHours());
     return date;
   };
   const currentTimeRounded = roundHours(new Date());

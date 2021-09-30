@@ -56,12 +56,36 @@ export const Mapbox = () => {
     });
     const size = 150;
 
-    
+
     function createMarkerContent() {
         clearMarkers();
         for (let key in data) {
             const longitude = data[key][0].location.longitude
             const latitude = data[key][0].location.latitude
+
+            var markerColor;
+            if (data[key][0].value <= 5.5 || data[key][0].value >= 8.5 || data[key][1].value >= 700) {
+                markerColor = style.warningColor;
+            }else
+            {
+                markerColor = style.lightGreen;
+            }
+
+            var pHColor;
+            if (data[key][0].value <= 5.5 || data[key][0].value >= 8.5) {
+                pHColor = style.warningColor;
+            }else
+            {
+                pHColor = style.lightGreen;
+            }
+
+            var TDSColor;
+            if (data[key][1].value >= 700) {
+                TDSColor = style.warningColor;
+            }else
+            {
+                TDSColor = style.lightGreen;
+            }
 
             const popup = new mapboxgl.Popup({ offset: 25, className: 'mapbox-gl-popup' }).setHTML(
                 `   <h3>Buoy: ${key}</h3>
@@ -71,10 +95,12 @@ export const Mapbox = () => {
                 </div>
                 <div class="info"> 
                     <h4>Total Dissolved Solids:</h4>
-                    <p>${data[key][1]["value"]}ppm</p>
+                    <p>${data[key][1]["value"]} ppm</p>
                 </div>`
             )
-            var marker = new mapboxgl.Marker({ "color": style.accentColor1, className: 'mapbox-gl-marker' })
+            
+
+            var marker = new mapboxgl.Marker({ "color": markerColor, className: 'mapbox-gl-marker' })
                 .setLngLat([longitude, latitude])
                 .setPopup(popup)
                 .addTo(map.current)
@@ -86,7 +112,6 @@ export const Mapbox = () => {
                 },
             })
             markers.push(marker);
-            console.log("added markers " + markers.length);
         }
     }
     function clearMarkers(markersToRemove) {
@@ -215,31 +240,31 @@ export const Mapbox = () => {
 
     return (
         <div>
-            
+
             <div ref={mapContainer} className="map-container" >
-            <div className="sidebar top" style = {{fontSize:"15px"}}>
-                {dateFormatter(new Date(selectedTime))}
-                {(new Date(selectedTime)).toLocaleString() ===
-                    new Date().toLocaleString() ? null : (
-                    <Button
-                        onClick={() => {
-                            const date = (new Date()).getTime();
-                            setSelectedTime(date);
-                            dispatch(updateSelectedTime(date));
-                        }}
-                        size="small"
-                    >
-                        Reset
-                    </Button>
-                )}
-            </div>
-            <div className="sidebar bottom">
-                <SliderContainer
-                    selectedTime={selectedTime}
-                    setSelectedTime={setSelectedTime}
-                    dateFormatter={dateFormatter}
-                />
-            </div>
+                <div className="sidebar top" style={{ fontSize: "15px" }}>
+                    {dateFormatter(new Date(selectedTime))}
+                    {(new Date(selectedTime)).toLocaleString() ===
+                        new Date().toLocaleString() ? null : (
+                        <Button
+                            onClick={() => {
+                                const date = (new Date()).getTime();
+                                setSelectedTime(date);
+                                dispatch(updateSelectedTime(date));
+                            }}
+                            size="small"
+                        >
+                            Reset
+                        </Button>
+                    )}
+                </div>
+                <div className="sidebar bottom">
+                    <SliderContainer
+                        selectedTime={selectedTime}
+                        setSelectedTime={setSelectedTime}
+                        dateFormatter={dateFormatter}
+                    />
+                </div>
             </div>
         </div>
     );

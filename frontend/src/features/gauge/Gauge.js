@@ -48,20 +48,16 @@ export const Gauge = () => {
         
         var pH = Math.abs(pHAvg - 7);
         var pHPercent = 1 - pH/7;
-        console.log("pHPercent"+pHPercent);
 
         var TDSThreshold = 400;
         var TDSMax = 1200;
         var TDSPercent;
-        console.log("TDSvg"+ TDSAvg);
-        console.log("(TDSAvg)/(TDSMax - TDSThreshold)"+(TDSAvg)/(TDSMax - TDSThreshold));
         if (TDSAvg > TDSThreshold)
         {
             TDSPercent = 1 - (TDSAvg-TDSThreshold)/(TDSMax);
         }
         else 
             TDSPercent = 1;
-        console.log("TDSPercent" +TDSPercent);
         return (pHPercent+TDSPercent)/2;
     }
 

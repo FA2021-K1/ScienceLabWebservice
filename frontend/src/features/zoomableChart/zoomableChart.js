@@ -121,7 +121,6 @@ export const ZoomableChart = () => {
         list.push({ name: key, data: data[key] })
       }
       setSeries(list)
-      console.log("selectedData" + selectedData)
       if (selectedData === "0") {
         // PH Selected
         setOptions({
@@ -197,7 +196,7 @@ export const ZoomableChart = () => {
           annotations: {
             yaxis: [
               {
-                y: 500,
+                y: 700,
                 borderColor: style.warningColor,
                 label: {
                   borderColor: style.warningColor,
