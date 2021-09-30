@@ -173,7 +173,7 @@ export const Boxplot = () => {
         annotations: {
           yaxis: [
             {
-              y: 500,
+              y: 700,
               borderColor: style.warningColor,
               label: {
                 borderColor: style.warningColor,
