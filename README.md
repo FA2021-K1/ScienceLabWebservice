@@ -14,6 +14,15 @@ This repository includes the data management and data visualization systems for 
 The web service is based on server-side Swift with the Apodini framework as well as a PostgreSQL database.
 The web application is based on the React library and uses Apex Charts for modifiable visualizations.
 
+## Current status
+Currently, the Webservice provides two different views: Home and Export.
+### Home
+The intention of Home is to provide the user an overview of the current status of the water quality. At the top, the whole system is summarized using KPIs. Further, the map provides an easy way for issue identification as critical measurements are highlighted. Underneath the map different kinds of aggregation plots, which are interactively updated according to the slider on the map, serve for a deep dive into the data. The latest income raw data can be analysed in a list. Finally, an interactive zoomable linechart enables the user to interpret measurement developement over different time ranges.
+![Bild 30 09 21 um 11 30](https://user-images.githubusercontent.com/56644209/135427140-76cbd4a5-98ba-4bcc-9f9a-d2dc5d85a607.jpeg)
+### Export
+For an individual data analysis the user can export selected raw data as a csv file.
+![Bild 30 09 21 um 11 33](https://user-images.githubusercontent.com/56644209/135427381-4f17ad04-961a-4f7b-85d6-c9c46ac1f628.jpeg)
+
 ## Reaching the Deployed System
 
 Data Science Service
