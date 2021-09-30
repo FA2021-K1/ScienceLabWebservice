@@ -91,11 +91,11 @@ export const Mapbox = () => {
                 `   <h3>Buoy: ${key}</h3>
                 <div class="info"> 
                     <h4>ph-Value:</h4>
-                    <p>${data[key][0]["value"]}</p>
+                    <p>${data[key][1]["value"]}</p>
                 </div>
                 <div class="info"> 
                     <h4>Total Dissolved Solids:</h4>
-                    <p>${data[key][1]["value"]} ppm</p>
+                    <p>${data[key][0]["value"]} ppm</p>
                 </div>`
             )
             
@@ -248,7 +248,7 @@ export const Mapbox = () => {
                         new Date().toLocaleString() ? null : (
                         <Button
                             onClick={() => {
-                                const date = (new Date()).getTime();
+                                const date = (new Date('Sepember 30, 2021 10:00:00')).getTime();
                                 setSelectedTime(date);
                                 dispatch(updateSelectedTime(date));
                             }}
