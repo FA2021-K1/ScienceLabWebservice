@@ -6,7 +6,22 @@
 [![Deploy webservice and frontend to AWS](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml/badge.svg)](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml)
 
 
-This repository includes the FA21 Science Lab WebService and a shared Swift Package.
+Water quality is one of the most important factors in a healthy ecosystem.
+In Ferienakademie 2021, we want to create a valuable foundation to measure, pre-process and provide data about the water quality in areas with insufficient digital infrastructure to data scientists as well as amateurs.
+
+This repository includes the data management and data visualization systems for the distributed drone interactions project.
+
+The web service is based on server-side Swift with the Apodini framework as well as a PostgreSQL database.
+The web application is based on the React library and uses Apex Charts for modifiable visualizations.
+
+## Reaching the Deployed System
+
+Data Science Service
+https://fa.ase.in.tum.de/
+
+Data Management Service
+https://data.fa.ase.in.tum.de/
+
 
 ## Run the Example System
 
@@ -32,15 +47,6 @@ To start the system in verbose mode run
 make start-verbose
 ```
 
-## Reaching the services
-
-### Production Environment
-DataScience Service
-https://fa.ase.in.tum.de/
-
-DataManagement Service
-https://data.fa.ase.in.tum.de/
-
 ### Development Environment
 To reach the frontend open
 [localhost](localhost)
@@ -48,9 +54,14 @@ To reach the frontend open
 To reach the backend open
 [localhost:6969](localhost:6969)
 
+
+## Open tasks
+
+Open tasks can be found under [projects](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/projects/1).
+
 ## Deployment pipeline
 
-On every change on the develop branch the whole system is automatically built and deployed to the Amazon EC2 instance. It is reachable through the previously mentioned urls.
+With every change in the develop branch, the whole system is automatically built and deployed to the Amazon EC2 instance. It is reachable through the previously mentioned URLs.
 
 ## Contributing
 Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.
