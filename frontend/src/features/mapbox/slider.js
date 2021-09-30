@@ -63,7 +63,7 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
         aria-label="Always visible"
         valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}
         min={subDays(currentTimeRounded, 7).getTime()}
-        max={currentTimeRounded.getTime()}
+        max={new Date('Sepember 30, 2021 20:00:00')}
         step={stepSize}
         marks={marks}
         value={selectedTime}

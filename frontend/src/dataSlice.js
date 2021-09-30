@@ -112,7 +112,7 @@ export const getDataBySpan = createAsyncThunk(
 export const dataSlice = createSlice({
   name: "data",
   initialState: {
-    selectedTime: new Date().getTime(),
+    selectedTime: new Date('Sepember 30, 2021 20:00:00'),
     selectedData: 0,
     bouyCount: 0,
     latestData: null,
