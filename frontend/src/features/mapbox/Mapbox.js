@@ -144,15 +144,21 @@ export const Mapbox = () => {
     }
     function clearMarkers() {
         markers.forEach((marker) => marker.remove());
-        circleJson.data.features = [];
         markers = [];
         circleJson.data.features = [];
     }
+  
     useEffect(() => {
         createMarkerContent();
+        map.current.triggerRepaint(
+            console.log(circleJson)
+        );
             //markers.forEach(element => element.addTo(map.current))
-                
-
+            if (map.current.getSource("circlesPosition")){
+                console.log(circleJson)
+                map.current.getSource("circlesPosition").setData(circleJson)
+            }
+            map.current.on("load", () => {
                 if (map.current.hasImage("pulsing-dot")) {
                     map.current.removeImage("pulsing-dot")
                 }
@@ -163,10 +169,13 @@ export const Mapbox = () => {
                 }
 
                 if (map.current.getSource("circlesPosition")) {
-                    map.current.removeSource("circlesPosition")
+                    //map.current.getSource("circlesPosition").setData(circleJson)
                     
                 }
-                map.current.addSource('circlesPosition', circleJson);
+                else {
+                    map.current.addSource('circlesPosition', circleJson);
+                }
+                
                 console.log("second circles"+circleJson);
                 
                 
@@ -179,7 +188,7 @@ export const Mapbox = () => {
                         "icon-allow-overlap": true,
                     },
                 })
-            
+            });
     
     }, [data]);
     useEffect(() => {
