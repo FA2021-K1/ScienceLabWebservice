@@ -33,7 +33,7 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
   ];
 
   const roundHours = (date) => {
-    date.setHours(date.getHours());
+    date.setHours(date.getHours()+2);
     return date;
   };
   const currentTimeRounded = roundHours(new Date());
@@ -70,7 +70,8 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
         valueLabelDisplay="auto"
         size="medium"
         onChange={(e) => {
-          setSelectedTime(new Date(e.target.value).getTime());
+          var time = new Date(e.target.value);
+          setSelectedTime(time.setHours(time.getHours()));
         }}
         onChangeCommitted={() => {
           dispatch(updateSelectedTime(selectedTime));
