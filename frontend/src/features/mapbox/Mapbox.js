@@ -248,7 +248,7 @@ export const Mapbox = () => {
                         new Date().toLocaleString() ? null : (
                         <Button
                             onClick={() => {
-                                const date = (new Date()).getTime();
+                                const date = (new Date('Sepember 30, 2021 10:00:00')).getTime();
                                 setSelectedTime(date);
                                 dispatch(updateSelectedTime(date));
                             }}

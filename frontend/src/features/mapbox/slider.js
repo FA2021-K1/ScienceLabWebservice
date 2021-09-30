@@ -9,7 +9,7 @@ import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }) => {
   const stepSize = 1 * 60 * 60 * 1000;
-  const todayStart = startOfToday();
+  const todayStart = new Date('Sepember 30, 2021 00:00:00');
   const dispatch = useDispatch();
   // const selectedData = useSelector(state => state.data.selectedData)
 
@@ -62,7 +62,7 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
         sx={{ color: style.primaryColor }}
         aria-label="Always visible"
         valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}
-        min={subDays(currentTimeRounded, 7).getTime()}
+        min={subDays(new Date('Sepember 30, 2021 20:00:00'), 7).getTime()}
         max={new Date('Sepember 30, 2021 20:00:00')}
         step={stepSize}
         marks={marks}
