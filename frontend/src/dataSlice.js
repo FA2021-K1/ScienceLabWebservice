@@ -5,9 +5,9 @@ import uuid from "react-uuid";
 
 const apiAdress = "https://data.fa.ase.in.tum.de/v1/measurements/frontend/";
 const bouys = {
-  "69": "BERND",
-  "360": "PAUL",
-  "420": "SCRUM",
+  "1": "BERND",
+  "2": "PAUL",
+  "3": "SCRUM",
 };
 
 const spanOptions = {
