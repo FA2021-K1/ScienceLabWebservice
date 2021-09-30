@@ -13,7 +13,6 @@ import { sortByBouy } from "../../sorting";
 
 export const ValueList = () => {
   const data = useSelector((state) => state.data.dataOfLastDayRaw);
-  console.log(data);
   const styleColor = useSelector((state) => state.style);
 
   const dateFormatter = (time) => {
@@ -25,13 +24,13 @@ export const ValueList = () => {
     let sensor;
     if (data[index].sensorTypeID === 0) {
       sensor = "pH-Value"
-      if (data[index].value <= 5 || data[index].value >= 9) {
+      if (data[index].value <= 5.5 || data[index].value >= 8.5) {
         color = styleColor.warningColorLight;
       }
     }
     if (data[index].sensorTypeID === 1) {
       sensor = "TDS-Value"
-      if (data[index].value >= 800) {
+      if (data[index].value >= 700) {
         color = styleColor.warningColorLight;
       }
     }
