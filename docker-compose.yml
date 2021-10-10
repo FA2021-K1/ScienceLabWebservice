@@ -39,8 +39,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       LOGSTASH_HOST: ${LOGSTASH_HOST}
       LOGSTASH_PORT: ${LOGSTASH_PORT}
-    expose:
-      - "80"
+    ports:
+      - "80:80"
     # Pass the desired port to the Apodini web service
     command: ["--port", "80"]
    # labels:

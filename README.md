@@ -1,59 +1,18 @@
-# FA21 Science Lab WebService
+This is an example project demonstrating the observability features integrated into the server-side Swift Apodini framework in the course of my bachelor's thesis "Observabilit in Distributed Web Services".
 
-[![DOI](https://zenodo.org/badge/375610092.svg)](https://zenodo.org/badge/latestdoi/375610092)
-[![Build and Test](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml)
-[![Build Docker Compose](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml)
-[![Deploy webservice and frontend to AWS](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml/badge.svg)](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml)
+The example reuses the Apodini web service written for the Science Lab in the course of the Ferienakademie 2021.
 
+The core of this exampel is the test_observability.sh script. This script starts up all necessary services as Docker containers (so Apodini web service, ELK, Prometheus, Postgres and Grafana). 
+It then sends a number of example requests to the web service and opens the respective web interfaces of the observability tools. This enables the viewer to get an insight into the execution of the web service and the processing of the requests.
 
-This repository includes the FA21 Science Lab WebService and a shared Swift Package.
+To start the script, type this CMD in the console: ./test_observability.sh
 
-## Run the Example System
+Authentication details for Kibana (ELK):
+ELASTIC_USER=elastic
+ELASTIC_PASSWORD=FA2021
 
-You can start the local development environment using make.
+Authentication details for Prometheus:
+None
 
-To build the development containers run
-```
-make build
-```
-
-To start the system run
-```
-make start
-```
-
-To stop the system run
-```
-make stop
-```
-
-To start the system in verbose mode run
-```
-make start-verbose
-```
-
-## Reaching the services
-
-### Production Environment
-DataScience Service
-https://fa.ase.in.tum.de/
-
-DataManagement Service
-https://data.fa.ase.in.tum.de/
-
-### Development Environment
-To reach the frontend open
-[localhost](localhost)
-
-To reach the backend open
-[localhost:6969](localhost:6969)
-
-## Deployment pipeline
-
-On every change on the develop branch the whole system is automatically built and deployed to the Amazon EC2 instance. It is reachable through the previously mentioned urls.
-
-## Contributing
-Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.
-
-## License
-This project is licensed under the MIT License. See [License](https://github.com/Apodini/ApodiniExample/blob/develop/LICENSE) for more information.
+Authentication details for Grafana: 
+TBA
