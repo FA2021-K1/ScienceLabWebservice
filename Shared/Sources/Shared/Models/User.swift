@@ -57,5 +57,16 @@ public enum UserType: Int, Codable {
     case drone
     case frontend
     case admin
+    
+    public var userTypeName: String {
+        switch self {
+        case .drone:
+            return "drone"
+        case .frontend:
+            return "frontend"
+        case .admin:
+            return "admin"
+        }
+    }
 }
 

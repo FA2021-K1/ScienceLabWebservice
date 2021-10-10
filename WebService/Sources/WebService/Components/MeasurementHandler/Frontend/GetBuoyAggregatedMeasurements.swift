@@ -1,5 +1,6 @@
 import Apodini
 import ApodiniDatabase
+import ApodiniObserve
 import ApodiniHTTPProtocol
 import FluentKit
 import FluentPostgresDriver
@@ -31,10 +32,28 @@ struct GetBuoyAggregatedMeasurements: Handler {
     @Throws(.serverError, reason: "Please use a PostgreSQL database")
     var databaseError: ApodiniError
     
+    @ApodiniLogger
+    var logger
+    
+    @ApodiniRecorder(label: "resulting_aggregationBuoy_query_size")
+    var querySizeRecorder
+    
+    @ApodiniRecorder(label: "aggregationBuoy_level")
+    var aggregationLevelRecorder
+    
+    @ApodiniTimer(label: "aggregationBuoy_query_duration")
+    var aggregationQueryTimer
+    
+    @ApodiniTimer(label: "aggregationBuoy_singleRow_duration")
+    var aggregationSingleRowTimer
+    
     func handle() async throws -> Response<MeasurementBuoyFrontendContent> {
         guard let postgres = database as? PostgresDatabase else {
             throw databaseError
         }
+        
+        // Instrumentation
+        aggregationLevelRecorder.record(aggregationLevel)
         
         guard aggregationLevel > 0 else {
             throw aggregationLevelError
@@ -43,6 +62,9 @@ struct GetBuoyAggregatedMeasurements: Handler {
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withTimeZone, .withFullDate, .withFullTime]
         dateFormatter.timeZone = .current
+        
+        // Instrumentation
+        let startTime = DispatchTime.now()
         
         // sensorTypeID, date, value
         let measurementBuoyFrontendContent = try? await (postgres
@@ -64,8 +86,18 @@ struct GetBuoyAggregatedMeasurements: Handler {
           ORDER BY v."sensorTypeID" ASC, v."date" DESC;
         """)
         .map { rows -> MeasurementBuoyFrontendContent in
-            .init(measurements:
+            // Instrumentation
+            aggregationQueryTimer.recordInterval(since: startTime)
+            
+            querySizeRecorder.record(rows.count)
+            
+            logger.info("Fetched \(rows.count) rows for the aggregation buoy query with aggregation level \(aggregationLevel.description)")
+            
+            return .init(measurements:
                 rows.compactMap { row -> MeasurementFrontendBuoyValueContent? in
+                    // Instrumentation
+                    let startTime = DispatchTime.now()
+                
                     let data = row
                         .rowDescription
                         .fields
@@ -88,6 +120,9 @@ struct GetBuoyAggregatedMeasurements: Handler {
                           let value = Double(valueData) else {
                         return nil
                     }
+                
+                    // Instrumentation
+                    aggregationSingleRowTimer.recordInterval(since: startTime)
                     
                     return .init(sensorTypeID: sensorTypeIDEnum,
                                  date: date,

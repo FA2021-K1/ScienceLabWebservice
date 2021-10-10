@@ -1,5 +1,6 @@
 import Apodini
 import ApodiniDatabase
+import ApodiniObserve
 import ApodiniHTTPProtocol
 import FluentKit
 import FluentPostgresDriver
@@ -16,10 +17,25 @@ struct GetSensors: Handler {
     @Throws(.serverError, reason: "Please use a PostgreSQL database")
     var databaseError: ApodiniError
     
+    @ApodiniLogger
+    var logger
+    
+    @ApodiniRecorder(label: "resulting_sensor_query_size")
+    var querySizeRecorder
+    
+    @ApodiniTimer(label: "aggregation_sensor_query_duration")
+    var aggregationQueryTimer
+    
+    @ApodiniTimer(label: "aggregation_singleRow_sensor_query_duration")
+    var aggregationSingleRowTimer
+    
     func handle() async throws -> Response<SensorsByBuoyContent> {
         guard let postgres = database as? PostgresDatabase else {
             throw databaseError
         }
+        
+        // Instrumentation
+        let startTime = DispatchTime.now()
         
         // buoyID, sensorTypeID
         let sensorsByBuoyContent = try? await (postgres
@@ -29,8 +45,18 @@ struct GetSensors: Handler {
         """
         )
         .map { rows -> SensorsByBuoyContent in
-            .init(sensorsByBuoy:
+            // Instrumentation
+            aggregationQueryTimer.recordInterval(since: startTime)
+            
+            querySizeRecorder.record(rows.count)
+            
+            logger.info("Fetched \(rows.count) rows for the sensor query")
+            
+            return .init(sensorsByBuoy:
                 rows.reduce(into: [Int: [Int]]()) { partialResult, row in
+                    // Instrumentation
+                    let startTime = DispatchTime.now()
+                
                     if let rawBuoyID = row.column("buoyID"),
                        let buoyID = rawBuoyID.int,
                        let rawSensorTypeID = row.column("sensorTypeID"),
@@ -43,8 +69,10 @@ struct GetSensors: Handler {
                         } else {
                             partialResult[buoyID] = [sensorTypeID]
                         }
-                        
                     }
+                
+                    // Instrumentation
+                    aggregationSingleRowTimer.recordInterval(since: startTime)
                 }
             )
         })
