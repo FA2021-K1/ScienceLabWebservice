@@ -1,28 +1,6 @@
-version: "3.9"
+version: '3.9'
 
 services:
-    # React frontend of Science Lab
-  # frontend:
-  #  container_name: "frontend"
-  #  build:
-  #    context: ./frontend
-  #    dockerfile: Dockerfile
-  #  working_dir: "/app"
-  #  volumes:
-  #    - "./frontend:/app"
-  #  expose:
-  #    - "80"
-  #  labels:
-  #    - "traefik.enable=true"
-  #    - "traefik.http.routers.frontend.rule=Host(`localhost`)"
-  #    - "traefik.http.routers.frontend.entrypoints=web"
-  #    # We need to define the a service and specify, on which port our server is reachable
-  #    - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
-  #    # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
-  #    - "traefik.http.routers.frontend.service=frontend-service"
-  #  depends_on:
-  #    - science-lab-web-service
-      
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
@@ -32,52 +10,51 @@ services:
       dockerfile: ./WebService/Dockerfile
     image: "philippzagar/science-lab-web-service"
     environment:
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      LOGSTASH_HOST: ${LOGSTASH_HOST}
-      LOGSTASH_PORT: ${LOGSTASH_PORT}
-    ports:
-      - "80:80"
+        POSTGRES_HOST: ${POSTGRES_HOST}
+        POSTGRES_PORT: ${POSTGRES_PORT}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
+        LOGSTASH_HOST: ${LOGSTASH_HOST}
+        LOGSTASH_PORT: ${LOGSTASH_PORT}
+    expose:
+      - "80"
     # Pass the desired port to the Apodini web service
     command: ["--port", "80"]
-   # labels:
-   #   # The domain the service will respond to
-   #   - "traefik.http.routers.backend.rule=Host(`localhost`)"
-   #   # Allow request only from the predefined entry point named "web"
-   #   - "traefik.http.routers.backend.entrypoints=data"
-   #   # We need to define the a service and specify, on which port our server is reachable
-   #   - "traefik.http.services.backend-service.loadbalancer.server.port=6969"
-   #   # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
-   #   - "traefik.http.routers.backend.service=backend-service"
+    labels:
+      # The domain the service will respond to
+      - "traefik.http.routers.backend.rule=Host(`localhost`)"
+      # Allow request only from the predefined entry point named "web"
+      - "traefik.http.routers.backend.entrypoints=web"
+      # We need to define the a service and specify, on which port our server is reachable
+      - "traefik.http.services.backend-service.loadbalancer.server.port=80"
+      # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
+      - "traefik.http.routers.backend.service=backend-service"
     # Wait for PostreSQL, ES and Prometheus to start
     depends_on:
       - postgres
-
+      - elasticsearch
+      - prometheus
+      
   # Reverse Proxy to protect our service from direct access
-  #traefik:
-  #  image: "traefik:v2.4"
-  #  container_name: "traefik"
-  #  hostname: "traefik"
-  #  command:
-  #    # Enabling docker provider
-  #    - "--providers.docker=true"
-  #    # Traefik will listen to incoming request on the port 80 (HTTP)
-  #    - "--entrypoints.web.address=:80"
-  #    - "--entrypoints.data.address=:6969"
-  #  ports:
-  #    # 80 on the container is mapped to 80 on the server/VM/your Machine.
-  #    - "80:80"
-  #    - "6969:6969"
-  #  # Traefik needs the docker.sock to detect new docker container
-  #  volumes:
-  #    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  #  # Wait for PostreSQL to start
-  #  depends_on:
-  #    - science-lab-web-service
-  #    - frontend
+  traefik:
+    image: "traefik:v2.4"
+    container_name: "traefik"
+    hostname: "traefik"
+    command:
+      # Enabling docker provider
+      - "--providers.docker=true"
+      # Traefik will listen to incoming request on the port 80 (HTTP)
+      - "--entrypoints.web.address=:80"
+    ports:
+      # 80 on the container is mapped to 80 on the server/VM/your Machine.
+      - "80:80"
+    # Traefik needs the docker.sock to detect new docker container
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    # Wait for PostreSQL to start
+    depends_on:
+      - science-lab-web-service
 
   # PostgreSQL database for persistent data storage
   postgres:
@@ -85,14 +62,14 @@ services:
     container_name: "postgres"
     hostname: "postgres"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
     ports:
       # 5432 on the container is mapped to 5432 on the server/VM/your Machine.
       - "5432:5432"
     volumes:
-      - database-data:/var/lib/postgresql/data/ # Persist data even if container shuts down
+      - database-data:/var/lib/postgresql/data/     # Persist data even if container shuts down
       
   elasticsearch:
     container_name: "elasticsearch"
@@ -202,15 +179,15 @@ services:
       - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./Observability/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./Observability/grafana/:/etc/grafana/
     env_file:
       - ./Observability/grafana/config.monitoring
     restart: always
     depends_on:
       - prometheus
-      
+
 volumes:
-  database-data: # Volume for PostgreSQL
+  database-data:    # Volume for PostgreSQL
   elasticsearch:    # Volume for ElasticSearch
   prometheus_data:  # Volume for Prometheus
   grafana_data:     # Volume for Grafana

@@ -179,6 +179,8 @@ curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \
 --data-raw '[{"buoyID":1,"date":"2021-09-19T11:20:00+00","location":{"latitude":46.740395630301705,"longitude":11.441398763099977},"measurements":[{"sensorID":0,"sensorType":0,"measurement":5.598584139424248},{"sensorID":1,"sensorType":1,"measurement":1017.3475548923748}]},{"buoyID":2,"date":"2021-09-19T11:20:00+00","location":{"latitude":46.74310728778908,"longitude":11.445110622098499},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.080106513649299},{"sensorID":1,"sensorType":1,"measurement":453.9675473114685}]},{"buoyID":3,"date":"2021-09-19T11:20:00+00","location":{"latitude":46.74272438732934,"longitude":11.447414051839292},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.708771430071325},{"sensorID":1,"sensorType":1,"measurement":563.7500659454441}]}]'
 
+sleep 1
+
 curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \
 --data-raw '[{"buoyID":1,"date":"2021-09-19T11:30:00+00","location":{"latitude":46.74039975385313,"longitude":11.441402890210556},"measurements":[{"sensorID":0,"sensorType":0,"measurement":5.624001700220699},{"sensorID":1,"sensorType":1,"measurement":1021.5414709330291}]},{"buoyID":2,"date":"2021-09-19T11:30:00+00","location":{"latitude":46.74310573720791,"longitude":11.445115757203377},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.095852366467405},{"sensorID":1,"sensorType":1,"measurement":452.88457990194087}]},{"buoyID":3,"date":"2021-09-19T11:30:00+00","location":{"latitude":46.74272087328633,"longitude":11.447410211067242},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.70266128553018},{"sensorID":1,"sensorType":1,"measurement":564.4887098895326}]}]'
@@ -208,6 +210,8 @@ curl --location --request POST 'localhost:80/v1/measurements/drone' \
 curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \
 --data-raw '[{"buoyID":1,"date":"2021-09-19T10:20:00+00","location":{"latitude":46.74037937810827,"longitude":11.441382451641635},"measurements":[{"sensorID":0,"sensorType":0,"measurement":5.517606736069172},{"sensorID":1,"sensorType":1,"measurement":1000.9773042146653}]},{"buoyID":2,"date":"2021-09-19T10:20:00+00","location":{"latitude":46.743088621140764,"longitude":11.445091581038977},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.003677003784712},{"sensorID":1,"sensorType":1,"measurement":450.439389527205}]},{"buoyID":3,"date":"2021-09-19T10:20:00+00","location":{"latitude":46.74271776738328,"longitude":11.447413819545469},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.5257096833949015},{"sensorID":1,"sensorType":1,"measurement":555.4081765073335}]}]'
+
+sleep 1
 
 curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \
@@ -243,6 +247,8 @@ curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \
 --data-raw '[{"buoyID":1,"date":"2021-09-19T11:30:00+00","location":{"latitude":46.74039975385313,"longitude":11.441402890210556},"measurements":[{"sensorID":0,"sensorType":0,"measurement":5.624001700220699},{"sensorID":1,"sensorType":1,"measurement":1021.5414709330291}]},{"buoyID":2,"date":"2021-09-19T11:30:00+00","location":{"latitude":46.74310573720791,"longitude":11.445115757203377},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.095852366467405},{"sensorID":1,"sensorType":1,"measurement":452.88457990194087}]},{"buoyID":3,"date":"2021-09-19T11:30:00+00","location":{"latitude":46.74272087328633,"longitude":11.447410211067242},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.70266128553018},{"sensorID":1,"sensorType":1,"measurement":564.4887098895326}]}]'
 
+sleep 1
+
 curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \
 --data-raw '[{"buoyID":1,"date":"2021-09-19T11:40:00+00","location":{"latitude":46.74040385961401,"longitude":11.441405813212246},"measurements":[{"sensorID":0,"sensorType":0,"measurement":5.6308119495623385},{"sensorID":1,"sensorType":1,"measurement":1025.3933378359955}]},{"buoyID":2,"date":"2021-09-19T11:40:00+00","location":{"latitude":46.74310945179575,"longitude":11.445115630985985},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.115992902165098},{"sensorID":1,"sensorType":1,"measurement":454.10617612930844}]},{"buoyID":3,"date":"2021-09-19T11:40:00+00","location":{"latitude":46.74271873448667,"longitude":11.447413785132484},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.722258222663557},{"sensorID":1,"sensorType":1,"measurement":566.8372513924351}]}]'
@@ -280,6 +286,8 @@ curl --location --request POST 'localhost:80/v1/measurements/drone' \
 curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \
 --data-raw '[{"buoyID":1,"date":"2021-09-19T10:50:00+00","location":{"latitude":46.74038780487778,"longitude":11.441392337105729},"measurements":[{"sensorID":0,"sensorType":0,"measurement":5.567999394165069},{"sensorID":1,"sensorType":1,"measurement":1007.9591527110774}]},{"buoyID":2,"date":"2021-09-19T10:50:00+00","location":{"latitude":46.74309803937772,"longitude":11.445111284537706},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.044975602836766},{"sensorID":1,"sensorType":1,"measurement":453.1958722899337}]},{"buoyID":3,"date":"2021-09-19T10:50:00+00","location":{"latitude":46.74272407748943,"longitude":11.447417827471849},"measurements":[{"sensorID":0,"sensorType":0,"measurement":7.647533489559885},{"sensorID":1,"sensorType":1,"measurement":558.3909728568195}]}]'
+
+sleep 1
 
 curl --location --request POST 'localhost:80/v1/measurements/drone' \
 --header 'Content-Type: application/json' \

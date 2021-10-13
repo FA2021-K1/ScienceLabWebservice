@@ -40,7 +40,7 @@ struct ExampleWebService: WebService {
                 eventLoopGroup: eventLoopGroup,
                 backgroundActivityLogger: logger,
                 uploadInterval: TimeAmount.seconds(5),
-                logStorageSize: 32_000,
+                logStorageSize: 128_000,
                 maximumTotalLogStorageSize: 512_000
             )
         }
