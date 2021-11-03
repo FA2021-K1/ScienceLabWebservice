@@ -78,12 +78,18 @@ For example, the developer is able to take a look at the generated logs in Kiban
 - Password: FA2021
 Then create a new index pattern under the "Discover" section named "logstash-" and choose "timestamp" as the to be used time field. After finishing the setup, go back to "Discover" again and take a look at the created log data.
 
+![image](https://user-images.githubusercontent.com/25406915/140191244-77fe2951-200f-45b7-b3af-528802c58848.png)
+
 Another example is the visualization of metrics in Prometheus (is automatically opened). There is no authentication.
 The developer can now query metrics data via the PromQL query language, for example `request_counter` prints out how often each endpoint was accessed.
 Similar queries can be made for the error rate via `error_counter` or for the response time of a specific endpoint (or all of them) via `response_time_nanoseconds{endpoint="CreateMeasurement"}`. Furthermore, system metrics are also captured, all of them are prefixed with `process_`, for example `process_open_fds`.
 
+![image](https://user-images.githubusercontent.com/25406915/140191320-7e86557a-c65e-4e62-9936-ce348afb2650.png)
+
 Grafana builds on top of Prometheus and offers a better visualization of the gathered metrics data. No authentication is required.
 The system comes with a very small dashboard that can be accessed unter "Dashboards > Manage". Then, access the "ApodiniObserve example" dashboard and take a look at the graphs.
+
+![image](https://user-images.githubusercontent.com/25406915/140191378-ddd6d99f-87ff-42f2-9710-8e2f65d92d3d.png)
 
 ## Contributing
 Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.
