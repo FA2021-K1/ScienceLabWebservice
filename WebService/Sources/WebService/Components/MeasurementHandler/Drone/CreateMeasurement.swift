@@ -23,13 +23,13 @@ struct CreateMeasurement: Handler {
     @ApodiniCounter(label: "measurements_counter")
     var measurementsCounter
     
-    @ApodiniCounter(label: "measurementData_counter")
+    @ApodiniCounter(label: "measurement_data_counter")
     var measurementDataCounter
 
-    @ApodiniCounter(label: "sensorTypeNotConfigured_counter")
+    @ApodiniCounter(label: "sensortype_notconfigured_counter")
     var sensorTypeNotConfiguredCounter
     
-    @ApodiniTimer(label: "insertion_singleMeasurementData_duration")
+    @ApodiniTimer(label: "insertion_single_measurement_data_duration")
     var insertionDurationTimer
 
     func handle() async throws -> [Shared.Measurement] {

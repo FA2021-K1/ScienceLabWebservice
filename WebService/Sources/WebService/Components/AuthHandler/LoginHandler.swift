@@ -28,10 +28,10 @@ struct LoginHandler: Handler {
     @ApodiniLogger
     var logger
     
-    @ApodiniCounter(label: "loggedInUser_counter")
+    @ApodiniCounter(label: "loggedin_user_counter")
     var loggedInUserCounter
     
-    @ApodiniCounter(label: "failedLogin_counter")
+    @ApodiniCounter(label: "failed_login_counter")
     var failedLoginsCounter
 
     func handle() async throws -> Token {
@@ -51,10 +51,12 @@ struct LoginHandler: Handler {
             throw tokenError
         }
         
+        let loggedInUserToken = try await databaseModel.loginUser(String(name), String(password), signer: jwtSigners, error: unauthenticatedError)
+        
         // Instrumentation
         loggedInUserCounter.increment()
         logger.info("User was logged in with username \(name)", metadata: ["username": .string(String(name))])
         
-        return try await databaseModel.loginUser(String(name), String(password), signer: jwtSigners, error: unauthenticatedError)
+        return loggedInUserToken
     }
 }

@@ -35,16 +35,16 @@ struct GetBuoyAggregatedMeasurements: Handler {
     @ApodiniLogger
     var logger
     
-    @ApodiniRecorder(label: "resulting_aggregationBuoy_query_size")
+    @ApodiniRecorder(label: "resulting_aggregation_buoy_query_size")
     var querySizeRecorder
     
-    @ApodiniRecorder(label: "aggregationBuoy_level")
+    @ApodiniRecorder(label: "aggregation_buoy_level")
     var aggregationLevelRecorder
     
-    @ApodiniTimer(label: "aggregationBuoy_query_duration")
+    @ApodiniTimer(label: "aggregation_buoy_query_duration")
     var aggregationQueryTimer
     
-    @ApodiniTimer(label: "aggregationBuoy_singleRow_duration")
+    @ApodiniTimer(label: "aggregation_buoy_single_row_duration")
     var aggregationSingleRowTimer
     
     func handle() async throws -> Response<MeasurementBuoyFrontendContent> {

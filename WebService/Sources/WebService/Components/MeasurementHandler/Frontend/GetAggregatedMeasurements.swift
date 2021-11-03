@@ -47,7 +47,7 @@ struct GetAggregatedMeasurements: Handler {
     @ApodiniTimer(label: "aggregation_query_duration")
     var aggregationQueryTimer
     
-    @ApodiniTimer(label: "aggregation_singleRow_duration")
+    @ApodiniTimer(label: "aggregation_single_row_duration")
     var aggregationSingleRowTimer
     
     func handle() async throws -> Response<MeasurementFrontendContent> {

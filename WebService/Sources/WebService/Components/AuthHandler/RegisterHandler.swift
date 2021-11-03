@@ -20,11 +20,13 @@ struct RegistrationHandler: Handler {
     var userCounter
     
     func handle() async throws -> User {
+        let user = try await databaseModel.createUser(userMediator)
+        
         // Instrumentation
         userCounter.increment()
         logger.info("User was created with username \(userMediator.username)", metadata: ["username": .string(userMediator.username),
                                                                                           "type": .string(userMediator.type.userTypeName)])
         
-        return try await databaseModel.createUser(userMediator)
+        return user
     }
 }

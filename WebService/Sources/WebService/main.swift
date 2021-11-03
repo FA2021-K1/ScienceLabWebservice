@@ -13,7 +13,7 @@ import LoggingELK
 
 struct ExampleWebService: WebService {
     @Option(help: "The port the web service should bind to")
-    var port: Int = 8080
+    var port: Int = 80
     
     @Environment(\.eventLoopGroup)
     var eventLoopGroup
@@ -39,7 +39,7 @@ struct ExampleWebService: WebService {
                 useHTTPS: false,
                 eventLoopGroup: eventLoopGroup,
                 backgroundActivityLogger: logger,
-                uploadInterval: TimeAmount.seconds(5),
+                uploadInterval: TimeAmount.seconds(15),
                 logStorageSize: 128_000,
                 maximumTotalLogStorageSize: 512_000
             )
