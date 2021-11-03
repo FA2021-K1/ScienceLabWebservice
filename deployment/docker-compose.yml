@@ -12,6 +12,7 @@ services:
       - "traefik.http.routers.frontend.rule=Host(`fa.ase.in.tum.de`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+      
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
@@ -35,8 +36,10 @@ services:
       # Allow request only from the predefined entry point named "web"
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
+    # Wait for PostreSQL to start
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   # Reverse Proxy to protect our service from direct access
   traefik:
@@ -84,6 +87,11 @@ services:
     ports:
       # 5432 on the container is mapped to 5432 on the server/VM/your Machine.
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - database-data:/var/lib/postgresql/data/ # Persist data even if container shuts down
 

@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 services:
   frontend:
@@ -19,23 +19,24 @@ services:
       - "traefik.http.routers.frontend.entrypoints=web"
     depends_on:
       - science-lab-web-service
+      
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
     hostname: "webservice"
     image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:develop"
     environment:
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      LOGSTASH_HOST: ${LOGSTASH_HOST}
-      LOGSTASH_PORT: ${LOGSTASH_PORT}
+        POSTGRES_HOST: ${POSTGRES_HOST}
+        POSTGRES_PORT: ${POSTGRES_PORT}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
+        LOGSTASH_HOST: ${LOGSTASH_HOST}
+        LOGSTASH_PORT: ${LOGSTASH_PORT}
     expose:
-      - "6969"
+      - "80"
     # Pass the desired port to the Apodini web service
-    command: ["--port", "6969"]
+    command: ["--port", "80"]
     labels:
       # The domain the service will respond to
       - "traefik.http.routers.backend.rule=Host(`localhost`)"
@@ -43,8 +44,13 @@ services:
       - "traefik.http.routers.backend.entrypoints=data"
     # Wait for PostreSQL, ES and Prometheus to start
     depends_on:
-      - postgres
-
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_started
+      prometheus:
+        condition: service_started
+      
   # Reverse Proxy to protect our service from direct access
   traefik:
     image: "traefik:v2.4"
@@ -55,18 +61,15 @@ services:
       - "--providers.docker=true"
       # Traefik will listen to incoming request on the port 80 (HTTP)
       - "--entrypoints.web.address=:80"
-      - "--entrypoints.data.address=:6969"
     ports:
       # 80 on the container is mapped to 80 on the server/VM/your Machine.
       - "80:80"
-      - "6969:6969"
     # Traefik needs the docker.sock to detect new docker container
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     # Wait for PostreSQL to start
     depends_on:
       - science-lab-web-service
-      - frontend
 
   # PostgreSQL database for persistent data storage
   postgres:
@@ -74,13 +77,137 @@ services:
     container_name: "postgres"
     hostname: "postgres"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
     ports:
       # 5432 on the container is mapped to 5432 on the server/VM/your Machine.
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-      - database-data:/var/lib/postgresql/data/ # Persist data even if container shuts down
+      - database-data:/var/lib/postgresql/data/     # Persist data even if container shuts down
+      
+  elasticsearch:
+    container_name: "elasticsearch"
+    hostname: "elasticsearch"
+    build:
+      context: Observability/elasticsearch/
+      args:
+        ELK_VERSION: ${ELK_VERSION}
+    environment:
+        xpack.security.enabled: "true"
+        xpack.monitoring.collection.enabled: "true"
+        ELASTIC_USER: ${ELASTIC_USER}
+        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+        ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+        # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+        # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+        discovery.type: single-node
+    volumes:
+      - type: bind
+        source: ./Observability/elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    restart: always
+      
+  logstash:
+    container_name: "logstash"
+    hostname: "logstash"
+    build:
+      context: Observability/logstash/
+      args:
+        ELK_VERSION: ${ELK_VERSION}
+    volumes:
+      - type: bind
+        source: ./Observability/logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+      - type: bind
+        source: ./Observability/logstash/pipeline
+        target: /usr/share/logstash/pipeline
+    ports:
+      - "31311:31311"   # For HTTP connection
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      xpack.monitoring.enabled: "true"
+      xpack.monitoring.elasticsearch.hosts: '["http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]'
+      xpack.monitoring.elasticsearch.username: ${ELASTIC_USER}
+      xpack.monitoring.elasticsearch.password: ${ELASTIC_PASSWORD}
+      ELASTICSEARCH_HOST: ${ELASTICSEARCH_HOST}
+      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT}
+      ELASTICSEARCH_USER: ${ELASTIC_USER}
+      ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD}
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    restart: always
+    depends_on:
+      - elasticsearch
+      
+  kibana:
+    container_name: "kibana"
+    hostname: "kibana"
+    build:
+      context: Observability/kibana/
+      args:
+        ELK_VERSION: ${ELK_VERSION}
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]'
+      ELASTICSEARCH_USERNAME: ${ELASTIC_USER}
+      ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD}
+    volumes:
+      - type: bind
+        source: ./Observability/kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    restart: always
+    depends_on:
+      - elasticsearch
+      
+  prometheus:
+    image: "prom/prometheus"
+    container_name: "prometheus"
+    hostname: "prometheus"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./Observability/prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    restart: always
+
+  grafana:
+    image: "grafana/grafana"
+    container_name: "grafana"
+    hostname: "grafana"
+    user: "472"
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./Observability/grafana/:/etc/grafana/
+    env_file:
+      - ./Observability/grafana/config.monitoring
+    restart: always
+    depends_on:
+      - prometheus
+
 volumes:
-  database-data: # Volume for PostgreSQL
+  database-data:    # Volume for PostgreSQL
+  elasticsearch:    # Volume for ElasticSearch
+  prometheus_data:  # Volume for Prometheus
+  grafana_data:     # Volume for Grafana

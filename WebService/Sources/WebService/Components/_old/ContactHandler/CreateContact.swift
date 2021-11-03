@@ -12,7 +12,7 @@ struct CreateContact: Handler {
     @ApodiniLogger
     var logger
     
-    @ApodiniObserve.Counter(label: "counter")
+    @ApodiniCounter(label: "counter")
     var counter
 
     @Parameter(.http(.body))

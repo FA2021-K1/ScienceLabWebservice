@@ -1,11 +1,3 @@
-# FA21 Science Lab WebService
-
-[![DOI](https://zenodo.org/badge/375610092.svg)](https://zenodo.org/badge/latestdoi/375610092)
-[![Build and Test](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/build-and-test.yml)
-[![Build Docker Compose](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml/badge.svg)](https://github.com/Apodini/ApodiniExample/actions/workflows/docker-compose.yml)
-[![Deploy webservice and frontend to AWS](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml/badge.svg)](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/actions/workflows/deployment.yml)
-
-
 Water quality is one of the most important factors in a healthy ecosystem.
 In Ferienakademie 2021, we want to create a valuable foundation to measure, pre-process and provide data about the water quality in areas with insufficient digital infrastructure to data scientists as well as amateurs.
 
@@ -32,9 +24,12 @@ Data Management Service
 https://data.fa.ase.in.tum.de/
 
 
-## Run the Example System
+Authentication details for Kibana (ELK):
+ELASTIC_USER=elastic
+ELASTIC_PASSWORD=FA2021
 
-You can start the local development environment using make.
+Authentication details for Prometheus:
+None
 
 To build the development containers run
 ```
@@ -71,6 +66,12 @@ Open tasks can be found under [projects](https://github.com/fa21-collaborative-d
 ## Deployment pipeline
 
 With every change in the develop branch, the whole system is automatically built and deployed to the Amazon EC2 instance. It is reachable through the previously mentioned URLs.
+
+## Observability
+
+In this project, we integrated the observability functionalities of ApodiniObserve in order to showcase the features it provides to the server-side Swift Apodini framework. These functionalities were developed in the course of the bachelor's thesis "Observability in Distributed Web Services" of Philipp Zagar.
+
+To easily test the observability features, we provide the `test_observability.sh` script that starts up all necessary services as Docker containers (so the Apodini web service, ELK, Prometheus, Postgres and Grafana) and then sends a number of example requests to the web service. These requests generate telemetry data that is then displayed via the web interfaces of the observability tools, which are automatically opened at the end of the script. This enables the viewer to get an insight into the execution of the web service and the processing of the requests.
 
 ## Contributing
 Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.

@@ -4,9 +4,7 @@ import ApodiniObserve
 import ApodiniObserveMetricsPrometheus
 import ApodiniOpenAPI
 import ApodiniREST
-import Apodini
 import ApodiniDatabase
-import ApodiniAuthorization
 import ApodiniAuthorizationJWT
 import Shared
 import ArgumentParser
@@ -41,16 +39,22 @@ struct ExampleWebService: WebService {
                 useHTTPS: false,
                 eventLoopGroup: eventLoopGroup,
                 backgroundActivityLogger: logger,
-                uploadInterval: TimeAmount.seconds(5),
-                logStorageSize: 32_000,
+                uploadInterval: TimeAmount.seconds(15),
+                logStorageSize: 128_000,
                 maximumTotalLogStorageSize: 512_000
             )
         }
         
         // Setup of ApodiniMetrics with a Prometheus backend
-        MetricsConfiguration(handlerConfiguration: MetricPullHandlerConfiguration.defaultPrometheus,
+        MetricsConfiguration(handlerConfiguration: MetricPullHandlerConfiguration
+                                .defaultPrometheusWithConfig(
+                                    endpoint: "/metrics",
+                                    timerImplementation: .summary(),
+                                    defaultRecorderBuckets: .defaultBuckets
+                                ),
                              systemMetricsConfiguration: .default)
         
+        // Setup of ApodiniAuthorization
         JWTSigner(.hs256(key: "secret"))
         
         // Setup of database and add migrations to create the respective tables
@@ -62,8 +66,6 @@ struct ExampleWebService: WebService {
                 password: ProcessInfo.processInfo.environment["POSTGRES_PASSWORD"] ?? "FA2021",
                 database: ProcessInfo.processInfo.environment["POSTGRES_DB"] ?? "science_lab"),
             as: .psql)
-                //.addMigrations(ContactMigration())
-                //.addMigrations(ResidenceMigration())
                 .addMigrations(MeasurementMigration())
                 .addMigrations(SensorTypeMigration())
                 .addMigrations(SensorMigration())

@@ -13,7 +13,7 @@ scrape_configs:
   - job_name: 'prometheus'
 
     # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
+    scrape_interval: 15s
 
     static_configs:
       - targets: ['localhost:9090']
@@ -21,9 +21,11 @@ scrape_configs:
   - job_name:       'webservice'
 
     # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
+    scrape_interval: 15s
 
+    # If the web service is built outside of Docker (for example with XCode during the development process), please use the commented target provided below
+    # - targets: ['host.docker.internal']
     static_configs:
-      - targets: ['host.docker.internal:8080']
+      - targets: ['webservice']
         labels:
           group: 'apodini'
