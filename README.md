@@ -73,6 +73,8 @@ In this project, we integrated the observability functionalities of ApodiniObser
 
 To easily test the observability features, we provide the `test_observability.sh` script that starts up all necessary services as Docker containers (so the Apodini web service, ELK, Prometheus, Postgres and Grafana) and then sends a number of example requests to the web service. These requests generate telemetry data that is then displayed via the web interfaces of the observability tools, which are automatically opened at the end of the script. This enables the viewer to get an insight into the execution of the web service and the processing of the requests.
 
+![image](https://user-images.githubusercontent.com/25406915/140191734-1f98917c-800f-4aaa-be52-91c3c55ba936.png)
+
 For example, the developer is able to take a look at the generated logs in Kibana (is automatically opened). The authentication details are:
 - Username: elastic
 - Password: FA2021
