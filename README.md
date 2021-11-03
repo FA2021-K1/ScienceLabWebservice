@@ -73,6 +73,18 @@ In this project, we integrated the observability functionalities of ApodiniObser
 
 To easily test the observability features, we provide the `test_observability.sh` script that starts up all necessary services as Docker containers (so the Apodini web service, ELK, Prometheus, Postgres and Grafana) and then sends a number of example requests to the web service. These requests generate telemetry data that is then displayed via the web interfaces of the observability tools, which are automatically opened at the end of the script. This enables the viewer to get an insight into the execution of the web service and the processing of the requests.
 
+For example, the developer is able to take a look at the generated logs in Kibana (is automatically opened). The authentication details are:
+- Username: elastic
+- Password: FA2021
+Then create a new index pattern under the "Discover" section named "logstash-" and choose "timestamp" as the to be used time field. After finishing the setup, go back to "Discover" again and take a look at the created log data.
+
+Another example is the visualization of metrics in Prometheus (is automatically opened). There is no authentication.
+The developer can now query metrics data via the PromQL query language, for example `request_counter` prints out how often each endpoint was accessed.
+Similar queries can be made for the error rate via `error_counter` or for the response time of a specific endpoint (or all of them) via `response_time_nanoseconds{endpoint="CreateMeasurement"}`. Furthermore, system metrics are also captured, all of them are prefixed with `process_`, for example `process_open_fds`.
+
+Grafana builds on top of Prometheus and offers a better visualization of the gathered metrics data. No authentication is required.
+The system comes with a very small dashboard that can be accessed unter "Dashboards > Manage". Then, access the "ApodiniObserve example" dashboard and take a look at the graphs.
+
 ## Contributing
 Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.
 

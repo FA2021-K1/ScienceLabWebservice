@@ -310,4 +310,4 @@ else
   echo "Otherwise run \"docker compose down -v\" in order to shut down all the containers and delete created volumes"
 fi
 
-echo "ApodiniObserve script finished!\n"
+echo "ApodiniObserve script finished!"
