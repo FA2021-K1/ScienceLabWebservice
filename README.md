@@ -78,6 +78,7 @@ To easily test the observability features, we provide the `test_observability.sh
 For example, the developer is able to take a look at the generated logs in Kibana (is automatically opened). The authentication details are:
 - Username: elastic
 - Password: FA2021
+
 Then create a new index pattern under the "Discover" section named "logstash-" and choose "timestamp" as the to be used time field. After finishing the setup, go back to "Discover" again and take a look at the created log data.
 
 ![image](https://user-images.githubusercontent.com/25406915/140191244-77fe2951-200f-45b7-b3af-528802c58848.png)
