@@ -1,74 +1,222 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import { useDispatch, useSelector } from "react-redux";
+import { optionsConfig } from "./boxplotConfig";
+import { getDataOfLastDay } from "../../dataSlice";
+import { roundToOne, roundToTwo } from "../../helperFunctions";
 
 export const Boxplot = () => {
-  const [series,] = useState([
+  const dispatch = useDispatch();
+  const style = useSelector((state) => state.style);
+  const selectedTime = useSelector((state) => state.data.selectedTime);
+  const data = useSelector((state) => state.data.dataOfLastDay);
+  const dataState = useSelector((state) => state.data.dataOfLastDayStatus);
+  const selectedData = useSelector((state) => state.data.selectedData);
+
+  const [series, setSeries] = useState([
     {
-      name: "pH Value",
+      name: "box",
       type: "boxPlot",
-      data: [
-        {
-          x: 'Bouy 1',
-          y: [54, 66, 69, 75, 88],
-        },
-        {
-          x: 'Bouy 2',
-          y: [43, 65, 69, 76, 81],
-        },
-        {
-          x: 'Bouy 3',
-          y: [31, 39, 45, 51, 59],
-        },
-      ],
-    },
-    {
-      name: "Dissolved Solids",
-      type: "scatter",
-      data: [
-        {
-          x: 'Bouy 1',
-          y: 32,
-        },
-        {
-          x: 'Bouy 2',
-          y: 25,
-        },
-        {
-          x: 'Bouy 3',
-          y: 64,
-        },
-      ],
+      data: [],
     },
   ]);
 
-  const [options,] = useState({
+  const [options, setOptions] = useState({
     chart: {
       type: "boxPlot",
-      width: '400'
+      width: "400",
+      toolbar: {
+        tools: {
+          download: true,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false,
+        },
+      },
     },
-    colors: ["#008FFB", "#FEB019"],
+    legend: {
+      show: false,
+    },
+    colors: [style.pH, style.warningColor],
     title: {
-      text: "BoxPlot - Last 24 h",
+      text: "Distribution of last 24h - pH",
       align: "left",
     },
     xaxis: {
-      type: "categories",
+      type: "numeric",
       tooltip: {
         enabled: false,
+      },
+      tickPlacement: "between",
+      // overwriteCategories: ["Bouy 1", "Bouy 2", "Bouy 3"],
+    },
+    plotOptions: {
+      boxPlot: {
+        colors: {
+          upper: style.pH,
+          lower: style.pH,
+        },
       },
     },
     yaxis: {
       title: {
-          text: 'pH Value [-]'
-      }
-  },
-    
-
-    tooltip: {
-      shared: false,
-      intersect: true,
+        text: "pH Value [-]",
+      },
+      labels: {
+        formatter: (value) => {
+          return Math.round(value);
+        },
+      },
     },
+    tooltip: {
+      y: {
+        formatter: function (value) {
+          return roundToOne(value)
+        }
+      }
+    }
   });
+
+  useEffect(() => {
+
+    if (selectedData === 0) {
+      setOptions({
+        ...options,
+        title: {
+          text: "Distribution of last 24h - pH",
+          style: {
+            color: style.textColor,
+          },
+        },
+        yaxis: {
+          title: {
+            text: "[-]",
+          },
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
+            },
+          },
+        },
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return roundToOne(value)
+            }
+          }
+        },
+        plotOptions: {
+          boxPlot: {
+            colors: {
+              upper: style.pH,
+              lower: style.pH,
+            },
+          },
+        },
+        annotations: {
+          yaxis: [
+            {
+              y: 6.5,
+              y2: 7.5,
+              borderColor: style.lightGreen,
+              fillColor: style.lightGreen,
+              opacity: 0.075,
+              label: {
+                borderColor: style.lightGreen,
+                style: {
+                  color: style.textColor,
+                  fontSize: 9,
+                  background: style.lightGreen
+                },
+                text: 'Optimal'
+              }
+            }
+          ]
+        }
+      });
+    } else if (selectedData === 1) {
+      setOptions({
+        ...options,
+        title: {
+          text: "Distribution of last 24h - TDS",
+          style: {
+            color: style.textColor,
+          },
+        },
+        yaxis: {
+          title: {
+            text: "[ppm]",
+          },
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
+            },
+          },
+        },
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return roundToTwo(value)
+            }
+          }
+        },
+        plotOptions: {
+          boxPlot: {
+            colors: {
+              upper: style.TDS,
+              lower: style.TDS,
+            },
+          },
+        },
+        annotations: {
+          yaxis: [
+            {
+              y: 700,
+              borderColor: style.warningColor,
+              label: {
+                borderColor: style.warningColor,
+                position: 'left',
+                textAnchor: 'start',
+                style: {
+                  color: '#fff',
+                  fontSize: 9,
+                  background: style.warningColor
+                },
+                text: 'Critical above'
+              }
+            }
+          ]
+        }
+      });
+    }
+  }, [selectedData]);
+
+  useEffect(() => {
+    if (dataState === "idle") {
+      dispatch(getDataOfLastDay({ selectedTime, selectedData }));
+    }
+  }, [dataState]);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(getDataOfLastDay({ selectedTime, selectedData }));
+    }
+  }, [selectedTime, selectedData]);
+
+  useEffect(() => {
+    if (data) {
+      setSeries([
+        {
+          name: "box",
+          type: "boxPlot",
+          data: data,
+        },
+      ]);
+
+    }
+  }, [data]);
 
   return (
     <div id="chart">
@@ -76,8 +224,8 @@ export const Boxplot = () => {
         options={options}
         series={series}
         type="boxPlot"
-        height={'350'}
-      />
+        height={"350"}
+      ></Chart>
     </div>
   );
 };

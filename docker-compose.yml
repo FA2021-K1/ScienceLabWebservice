@@ -1,14 +1,30 @@
 version: '3.9'
 
 services:
+  frontend:
+    container_name: "frontend"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    working_dir: "/app"
+    volumes:
+      - "./frontend:/app"
+      - "/usr/app/node_modules"
+    expose:
+      - "3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=3000"
+      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+    depends_on:
+      - science-lab-web-service
+      
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
     hostname: "webservice"
-    build:
-      context: ./
-      dockerfile: ./WebService/Dockerfile
-    image: "philippzagar/science-lab-web-service"
+    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:develop"
     environment:
         POSTGRES_HOST: ${POSTGRES_HOST}
         POSTGRES_PORT: ${POSTGRES_PORT}
@@ -25,11 +41,7 @@ services:
       # The domain the service will respond to
       - "traefik.http.routers.backend.rule=Host(`localhost`)"
       # Allow request only from the predefined entry point named "web"
-      - "traefik.http.routers.backend.entrypoints=web"
-      # We need to define the a service and specify, on which port our server is reachable
-      - "traefik.http.services.backend-service.loadbalancer.server.port=80"
-      # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
-      - "traefik.http.routers.backend.service=backend-service"
+      - "traefik.http.routers.backend.entrypoints=data"
     # Wait for PostreSQL, ES and Prometheus to start
     depends_on:
       postgres:

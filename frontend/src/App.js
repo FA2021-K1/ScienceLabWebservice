@@ -1,90 +1,178 @@
-import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom"
+import routes from "./routes";
+import { Breadcrumbs } from "./features/breadcrumbs/Breadcrumbs";
 import { useDispatch, useSelector } from "react-redux";
 
-import Grid from "@material-ui/core/Grid";
-import "./App.css";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import { useEffect, useState } from 'react';
+import { styled, useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MuiDrawer from '@mui/material/Drawer';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { makeStyles } from "@material-ui/core/styles";
+import { Sidebar } from "./features/sidebar/Sidebar";
+import { updateSidebar } from "./sidebarSlice";
 
-import { Header } from "./features/header/Header.js";
+const drawerWidth = 240;
 
-import { LineChart } from "./features/lineChart/LineChart";
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
 
-import { Mapbox } from "./features/mapbox/Mapbox";
-import { Boxplot } from "./features/boxplot/Boxplot";
-import { ValueList } from "./features/valueList/ValueList";
-import { ZoomableChart } from "./features/zoomableChart/zoomableChart";
-import { ColumnChart } from "./features/columnChart/ColumnChart";
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(5)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(7)} + 1px)`,
+  },
+});
 
-
-import { getJsonData } from "./dataSlice";
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
 }));
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  homeButton: {
+    marginRight: theme.spacing(2),
+  },
+}));
+
+const DrawerCreator = style => styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': { ...openedMixin(theme), backgroundColor: style.sidebarColor },
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': { ...closedMixin(theme), backgroundColor: style.sidebarColor },
+    }),
+  }),
+);
 
 export const App = () => {
   const dispatch = useDispatch();
-  const dataState = useSelector((state) => state.data.dataState);
-  const style = useSelector((state) => state.style)
-  //const data = useSelector((state) => state.data.data);
+  const theme = useTheme();
 
-  useEffect(() => {
-    console.log(style)
-    if (dataState === "idle") {
-      dispatch(getJsonData());
-    }
-  }, [dispatch, dataState, style]);
+  const handleDrawerOpen = () => {
+    dispatch(updateSidebar(true));
+  };
+
+  const handleDrawerClose = () => {
+    dispatch(updateSidebar(false));
+  };
+
+  const style = useSelector((state) => state.style);
+  const open = useSelector((state) => state.sidebar.open);
+
+  useEffect(() => { }, [dispatch, style, open]);
+
+  const Drawer = DrawerCreator(style);
+
   return (
-    <React.StrictMode>
-      <Header />
-      <body className="App-background">
-        <Grid
-          container
-          spacing={2}
-          alignItems="center"
-          className="App-Grid"
-          autoWidth="true"
-        >
-          <Grid item xs={12} xl={12}>
-            <Item>
-              <Mapbox />
-            </Item>
-          </Grid>
-
-          <Grid item xs={4} xl={4} >
-          <Item>
-            <ColumnChart />
-            </Item>
-          </Grid>
-          <Grid item xs={4} xl={4}>
-          <Item>
-            <Boxplot />
-            </Item>
-          </Grid>
-          <Grid item xs={4} xl={4}>
-          <Item>
-            <LineChart />
-            </Item>
-          </Grid>
-
-          <Grid item xs={3} xl={3}>
-            <Item>
-            <ValueList />
-            </Item>
-          </Grid>
-          <Grid item xs={9} xl={9} >
-          <Item>
-            <ZoomableChart />
-
-            </Item>
-          </Grid>
-        </Grid>
-      </body>
-    </React.StrictMode>
+    <Box sx={{ display: 'flex', padding: 0 }}>
+      <Router>
+        <CssBaseline />
+        <div id="header-container">
+          <AppBar position="fixed" open={open} style={{ background: style.secondaryColor, color: "#ffffff" }}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Link to="/home">
+                <Typography variant="h6" color="inherit">
+                  ScienceLab @ FA 2021
+                </Typography>
+              </Link>
+              <Breadcrumbs />
+            </Toolbar>
+          </AppBar>
+        </div>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <Sidebar />
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3, padding: 0 }}>
+          <DrawerHeader />
+          <Switch>
+            <Route exact path="/" render={() => {
+              return (<Redirect to="/home" />)
+            }} />
+            {routes.map(({ path, Component, externalUrl }, key) => {
+              if (!externalUrl) {
+                return (
+                  <Route exact path={path} key={key} render={props => {
+                    return (
+                      <div>
+                        <div id="content-container">
+                          <Component {...props} />
+                        </div>
+                      </div>
+                    );
+                  }} />
+                )
+              }
+            })}
+          </Switch>
+        </Box>
+      </Router>
+    </Box>
   );
-};
-
-export default App;
+}

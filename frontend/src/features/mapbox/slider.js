@@ -2,13 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { subDays, startOfToday, format } from "date-fns";
+import {useState}from 'react';
 
-import { updateSelectedTime } from "../../dataSlice";
+import { updateSelectedTime, updateSelectedData } from "../../dataSlice";
+import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }) => {
-  const stepSize = 3 * 60 * 60 * 1000;
-  const todayStart = startOfToday();
+  const stepSize = 1 * 60 * 60 * 1000;
+  const todayStart = new Date('Sepember 30, 2021 00:00:00');
   const dispatch = useDispatch();
+  // const selectedData = useSelector(state => state.data.selectedData)
 
   const marks = [
     {
@@ -30,34 +33,51 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
   ];
 
   const roundHours = (date) => {
-    date.setHours(date.getHours() - (date.getHours() % 3));
+    date.setHours(date.getHours()+2);
     return date;
   };
   const currentTimeRounded = roundHours(new Date());
   const style = useSelector((state) => state.style)
-
+  const handleValueChange = (event, newAlignment) => {
+    if (newAlignment !== null) { //enforce selection
+      setAlignment(newAlignment);}
+    dispatch(updateSelectedData(newAlignment))
+  };
+  const [alignment, setAlignment] = useState('pH');
   return (
+    <div>
     <Box sx={{ width: 350, px: 2, py: 1 }}>
+    <ToggleButtonGroup
+      size = "small"
+        color='primary'
+        value={alignment}
+        exclusive
+        onChange={handleValueChange}
+      >
+        <ToggleButton value="pH">pH</ToggleButton>
+        <ToggleButton value="TDS">TDS</ToggleButton>
+      </ToggleButtonGroup>
+      <hr style={{color:style.lightGray, opacity: "50%"}}/>
       <Slider
-        sx = {{color: style.primaryColor}}
+        sx={{ color: style.primaryColor }}
         aria-label="Always visible"
-        defaultValue={currentTimeRounded}
         valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}
-        min={subDays(currentTimeRounded, 7).getTime()}
-        max={currentTimeRounded.getTime()}
+        min={subDays(new Date('Sepember 30, 2021 20:00:00'), 7).getTime()}
+        max={new Date('Sepember 30, 2021 20:00:00')}
         step={stepSize}
         marks={marks}
-        value={selectedTime.getTime()}
+        value={selectedTime}
         valueLabelDisplay="auto"
         size="medium"
         onChange={(e) => {
-          setSelectedTime(new Date(e.target.value));
-          console.log(e.target.value);
+          var time = new Date(e.target.value);
+          setSelectedTime(time.setHours(time.getHours()));
         }}
         onChangeCommitted={() => {
           dispatch(updateSelectedTime(selectedTime));
         }}
       />
     </Box>
+    </div>
   );
 };

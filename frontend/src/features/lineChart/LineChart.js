@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import { getDataAverageByDay } from "../../dataSlice";
+import { roundToOne, roundToTwo } from "../../helperFunctions";
+
 import { useDispatch, useSelector } from "react-redux";
 
 export const LineChart = () => {
+  const dispatch = useDispatch();
   const style = useSelector((state) => state.style);
+  const selectedTime = useSelector((state) => state.data.selectedTime);
+  const data = useSelector((state) => state.data.dataAverageByDay);
+  const dataState = useSelector((state) => state.data.dataAverageByDayState);
+  const selectedData = useSelector((state) => state.data.selectedData);
 
-  const [series, ] = useState([
-    {
-      name: "pHS",
-      data: [28, 29, 33, 36, 32, 32, 33],
-    },
-    {
-      name: "Dissolved solids",
-      data: [12, 11, 14, 18, 17, 13, 13],
-    },
-  ]);
-  const [options, ] = useState({
+  const [series, setSeries] = useState([]);
+
+  const [options, setOptions] = useState({
     chart: {
       height: 400,
       type: "line",
@@ -28,19 +28,22 @@ export const LineChart = () => {
         opacity: 0.2,
       },
       toolbar: {
-        show: false,
+        tools: {
+          download: true,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false,
+        },
       },
     },
-    colors: [style.Green, style.Blue],
-    dataLabels: {
-      enabled: true,
-    },
-    stroke: {
-      curve: "smooth",
-    },
+
+    colors: [style.TDS, style.pH],
     title: {
       text: "Average measurements",
       align: "left",
+      color: style.textColor,
     },
     grid: {
       borderColor: "#e7e7e7",
@@ -53,31 +56,154 @@ export const LineChart = () => {
       size: 1,
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-      title: {
-        text: "Month",
-      },
+      type: "datetime",
     },
     yaxis: {
       title: {
         text: "[ppm]",
       },
-      min: 5,
-      max: 40,
+      labels: {
+        formatter: (value) => {
+          return Math.round(value);
+        },
+      },
+    },
+    tooltip: {
+      y: {
+        formatter: function (value) {
+          return roundToOne(value)
+        }
+      },
     },
     legend: {
-      position: "top",
-      horizontalAlign: "right",
-      floating: true,
-      offsetY: -25,
-      offsetX: -5,
+      position: "bottom",
+      horizontalAlign: "center"
     },
   });
 
+  useEffect(() => {
+    // Load when the Sides first loads
+    if (dataState === "idle") {
+      dispatch(getDataAverageByDay({ selectedTime, selectedData }));
+      // TODO: Make selected Data dependet of the selected Value
+    }
+  }, [dataState]);
+
+  useEffect(() => {
+    // Change Series to refresh chart data as soon as the data changes
+    if (data) {
+      let list = [];
+      for (let key in data) {
+        list.push({ name: key, data: data[key] });
+      }
+      setSeries(list);
+      // TODO: Wait for backend to finish their shit
+    }
+  }, [data]);
+
+  useEffect(() => {
+    // When the selected Time Changes and there is already Data: Load new Data
+    if (data) {
+      dispatch(getDataAverageByDay({ selectedTime, selectedData }));
+    }
+  }, [selectedTime, selectedData]);
+
+  useEffect(() => {
+
+    if (selectedData === 0) {
+      // PH Selected
+      setOptions({
+        ...options,
+        colors: style.pHShades,
+        title: { text: "Means per day of last 7 days - pH", style: { color: style.textColor } },
+
+        yaxis: {
+          title: {
+            text: "[-]",
+          },
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
+            },
+          },
+
+        },
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return roundToOne(value)
+            }
+          },
+        },
+        annotations: {
+          yaxis: [
+            {
+              y: 6.5,
+              y2: 7.5,
+              borderColor: style.lightGreen,
+              fillColor: style.lightGreen,
+              opacity: 0.075,
+              label: {
+                borderColor: style.lightGreen,
+                style: {
+                  color: style.textColor,
+                  fontSize: 9,
+                  background: style.lightGreen
+                },
+                text: 'Optimal'
+              }
+            }
+          ]
+        }
+      });
+    } else if (selectedData === 1) {
+      // TDS Selected
+      setOptions({
+        ...options,
+        colors: style.TDSShades,
+        title: { text: "Means per day of last 7 days - TDS", style: { color: style.textColor } },
+
+        yaxis: {
+          title: {
+            text: "[ppm]",
+          },
+          labels: {
+            formatter: (value) => {
+              return Math.round(value);
+            },
+          },
+        },
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return roundToTwo(value)
+            }
+          },
+        },
+        annotations: {
+          yaxis: [
+            {
+              y: 700,
+              borderColor: style.warningColor,
+              label: {
+                borderColor: style.warningColor,
+                style: {
+                  color: '#fff',
+                  fontSize: 9,
+                  background: style.warningColor
+                },
+                text: 'Critical above'
+              }
+            }
+          ]
+        }
+      });
+    }
+  }, [selectedData]);
+
   return (
     <div id="chart">
-      <Chart options={options} series={series} type="line" 
-      height={'350'}/>
+      <Chart options={options} series={series} type="line" height={"350"} />
     </div>
   );
 };
