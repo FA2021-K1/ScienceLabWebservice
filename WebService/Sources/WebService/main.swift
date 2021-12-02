@@ -1,7 +1,7 @@
 import Foundation
 import Apodini
 import ApodiniObserve
-import ApodiniObserveMetricsPrometheus
+import ApodiniObservePrometheus
 import ApodiniOpenAPI
 import ApodiniREST
 import ApodiniDatabase
@@ -28,7 +28,7 @@ struct ExampleWebService: WebService {
         }
         
         // Defines on which hostname and port the webservice should be bound to, configurable via CLI-arguments, else defaults
-        HTTPConfiguration(port: port)
+        HTTPConfiguration(bindAddress: .interface("0.0.0.0", port: port))
         
         // Setup of ApodiniLogger with a LogstashLogHandler backend
         LoggerConfiguration(logHandlers: LogstashLogHandler.init,
