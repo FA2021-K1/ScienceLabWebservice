@@ -11,9 +11,8 @@ let package = Package(
         .executable(name: "WebService", targets: ["WebService"])
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .branch("feature/metrics")),
-        //.package(url: "https://github.com/Apodini/Apodini.git", from: "0.5.0"),
-        //.package(path: "../../Apodini"),
+        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.6.1")),
+        .package(url: "https://github.com/Apodini/ApodiniObservePrometheus.git", .upToNextMinor(from: "0.1.0")),
         .package(path: "../Shared"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(url: "https://github.com/Apodini/swift-log-elk.git", from: "0.2.0"),
@@ -29,7 +28,7 @@ let package = Package(
                 .product(name: "Apodini", package: "Apodini"),
                 .product(name: "ApodiniREST", package: "Apodini"),
                 .product(name: "ApodiniObserve", package: "Apodini"),
-                .product(name: "ApodiniObserveMetricsPrometheus", package: "Apodini"),
+                .product(name: "ApodiniObservePrometheus", package: "ApodiniObservePrometheus"),
                 .product(name: "ApodiniOpenAPI", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
                 .product(name: "ApodiniAuthorization", package: "Apodini"),

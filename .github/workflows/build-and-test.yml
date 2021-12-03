@@ -1,6 +1,10 @@
 name: Build and Test (deprecated)
 
-on: workflow_dispatch
+on:
+  pull_request:
+    paths:
+      - 'WebService/**'
+  workflow_dispatch:
 
 jobs:
   # Doesn't work since MacOS12 is required, not available via GitHub Actions yet
