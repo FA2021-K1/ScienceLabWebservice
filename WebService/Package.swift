@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.7.1")),
         .package(url: "https://github.com/Apodini/ApodiniObservePrometheus.git", .upToNextMinor(from: "0.1.2")),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
-        .package(url: "https://github.com/Apodini/swiftt-log-elk.git", from: "0.2.0"),
+        .package(url: "https://github.com/Apodini/swift-log-elk.git", from: "0.2.0"),
         .package(url: "https://github.com/vapor-community/bcrypt.git", from: "1.1.0"),
         .package(url: "https://github.com/vapor/jwt-kit.git", from: "4.0.0"),
         .package(path: "../Shared")
