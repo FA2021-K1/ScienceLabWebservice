@@ -15,7 +15,7 @@ else
   sleep 60
 
   # Register User 1
-  curl --fail-with-body --fail-with-body--location --request POST 'localhost:8080/auth' \
+  curl --fail-with-body --location --request POST 'localhost:8080/auth' \
   --header 'Content-Type: application/json' \
   --data-raw '{
       "username": "drone01",

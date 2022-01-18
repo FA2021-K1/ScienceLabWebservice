@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     environment:
       REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN: ${REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN}
-      REACT_APP_SCIENCE_LAB_WEB_SERVICE_API: "http://webservice/v1/"
+      REACT_APP_SCIENCE_LAB_WEB_SERVICE_API: "http://webservice/"
     expose:
       - "3000"
     ports:
