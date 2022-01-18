@@ -6,28 +6,27 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    working_dir: "/app"
-    volumes:
-      - "./frontend:/app"
-      - "/usr/app/node_modules"
+    environment:
+      REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN: ${REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN}
+      REACT_APP_SCIENCE_LAB_WEB_SERVICE_API: "http://webservice/v1/"
     expose:
       - "3000"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.port=3000"
-      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
+    ports:
+      # 3000 on the container is mapped to 80 on the server/VM/your Machine.
+      - "80:3000"
     depends_on:
       - science-lab-web-service
-      
+  
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
     hostname: "webservice"
-    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:develop"
+    build:
+      context: .
+      dockerfile: ./WebService/Dockerfile
     environment:
-        POSTGRES_HOST: ${POSTGRES_HOST}
-        POSTGRES_PORT: ${POSTGRES_PORT}
+        POSTGRES_HOST: "postgres"
+        POSTGRES_PORT: 5432
         POSTGRES_USER: ${POSTGRES_USER}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_DB: ${POSTGRES_DB}
@@ -35,17 +34,11 @@ services:
         LOGSTASH_PORT: ${LOGSTASH_PORT}
     expose:
       - "80"
+    ports:
+      # 80 on the container is mapped to 8080 on the server/VM/your Machine.
+      - "8080:80"
     # Pass the desired port to the Apodini web service
     command: ["--port", "80"]
-    labels:
-      # The domain the service will respond to
-      - "traefik.http.routers.backend.rule=Host(`localhost`)"
-      # Allow request only from the predefined entry point named "web"
-      - "traefik.http.routers.backend.entrypoints=web"
-      # We need to define the a service and specify, on which port our server is reachable
-      - "traefik.http.services.backend-service.loadbalancer.server.port=80"
-      # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
-      - "traefik.http.routers.backend.service=backend-service"
     # Wait for PostreSQL, ES and Prometheus to start
     depends_on:
       postgres:
@@ -54,26 +47,6 @@ services:
         condition: service_started
       prometheus:
         condition: service_started
-      
-  # Reverse Proxy to protect our service from direct access
-  traefik:
-    image: "traefik:v2.4"
-    container_name: "traefik"
-    hostname: "traefik"
-    command:
-      # Enabling docker provider
-      - "--providers.docker=true"
-      # Traefik will listen to incoming request on the port 80 (HTTP)
-      - "--entrypoints.web.address=:80"
-    ports:
-      # 80 on the container is mapped to 80 on the server/VM/your Machine.
-      - "80:80"
-    # Traefik needs the docker.sock to detect new docker container
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    # Wait for PostreSQL to start
-    depends_on:
-      - science-lab-web-service
 
   # PostgreSQL database for persistent data storage
   postgres:
@@ -84,9 +57,8 @@ services:
         POSTGRES_USER: ${POSTGRES_USER}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_DB: ${POSTGRES_DB}
-    ports:
-      # 5432 on the container is mapped to 5432 on the server/VM/your Machine.
-      - "5432:5432"
+    expose:
+      - "5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 10s
@@ -94,7 +66,7 @@ services:
       retries: 5
     volumes:
       - database-data:/var/lib/postgresql/data/     # Persist data even if container shuts down
-      
+
   elasticsearch:
     container_name: "elasticsearch"
     hostname: "elasticsearch"
@@ -118,11 +90,11 @@ services:
       - type: volume
         source: elasticsearch
         target: /usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
-      - "9300:9300"
+    expose:
+      - "9200"
+      - "9300"
     restart: always
-      
+
   logstash:
     container_name: "logstash"
     hostname: "logstash"
@@ -137,12 +109,12 @@ services:
       - type: bind
         source: ./Observability/logstash/pipeline
         target: /usr/share/logstash/pipeline
-    ports:
-      - "31311:31311"   # For HTTP connection
-      - "5044:5044"
-      - "5000:5000/tcp"
-      - "5000:5000/udp"
-      - "9600:9600"
+    expose:
+      - "31311"   # For HTTP connection
+      - "5044"
+      - "5000/tcp"
+      - "5000/udp"
+      - "9600"
     environment:
       xpack.monitoring.enabled: "true"
       xpack.monitoring.elasticsearch.hosts: '["http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]'

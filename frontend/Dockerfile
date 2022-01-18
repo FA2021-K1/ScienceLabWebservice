@@ -1,19 +1,16 @@
 # pull official base image
-FROM node:16-alpine3.11
+FROM node:16
 
 # set working directory
 WORKDIR /app
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# ENV PATH /app/node_modules/.bin:$PATH
 
-# install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-
-RUN npm install
-
+# Copy all source files
 COPY . .
 
+RUN npm install --legacy-peer-deps
+
 # start app
-CMD ["npm", "start"]
+CMD npm start

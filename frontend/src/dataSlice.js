@@ -3,7 +3,7 @@ import axios from "axios";
 import { subDays } from "date-fns";
 import uuid from "react-uuid";
 
-const apiAdress = "https://data.fa.ase.in.tum.de/v1/measurements/frontend/";
+const apiAdress = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + "/measurements/frontend";
 const bouys = {
   "1": "BERND",
   "2": "PAUL",
@@ -21,7 +21,7 @@ const spanOptions = {
 export const getSensorTypes = createAsyncThunk(
   "data/getSensorTypes",
   async () => {
-    const path = "https://data.fa.ase.in.tum.de/v1/sensorTypes";
+    const path = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + "/sensorTypes";
     const request = path;
     const response = await axios.get(request);
     return response;

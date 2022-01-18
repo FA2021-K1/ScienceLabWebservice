@@ -1,3 +1,5 @@
+# FA 2021 - Data Management and Data Visualization
+
 Water quality is one of the most important factors in a healthy ecosystem.
 In Ferienakademie 2021, we want to create a valuable foundation to measure, pre-process and provide data about the water quality in areas with insufficient digital infrastructure to data scientists as well as amateurs.
 
@@ -7,57 +9,28 @@ The web service is based on server-side Swift with the Apodini framework as well
 The web application is based on the React library and uses Apex Charts for modifiable visualizations.
 
 ## Current status
+
 Currently, the Webservice provides two different views: Home and Export.
+
 ### Home
 The intention of Home is to provide the user an overview of the current status of the water quality. At the top, the whole system is summarized using KPIs. Further, the map provides an easy way for issue identification as critical measurements are highlighted. Underneath the map different kinds of aggregation plots, which are interactively updated according to the slider on the map, serve for a deep dive into the data. The latest income raw data can be analysed in a list. Finally, an interactive zoomable linechart enables the user to interpret measurement developement over different time ranges.
 ![Bild 30 09 21 um 11 30](https://user-images.githubusercontent.com/56644209/135427140-76cbd4a5-98ba-4bcc-9f9a-d2dc5d85a607.jpeg)
+
 ### Export
 For an individual data analysis the user can export selected raw data as a csv file.
 ![Bild 30 09 21 um 11 33](https://user-images.githubusercontent.com/56644209/135427381-4f17ad04-961a-4f7b-85d6-c9c46ac1f628.jpeg)
 
-## Reaching the Deployed System
+## Starting the Web Service and Web Application
 
-Data Science Service
-https://fa.ase.in.tum.de/
+The frontend application uses [Mapbox](https://www.mapbox.com/) to display the map in the web application. You neeed to obtain an [access token](https://docs.mapbox.com/api/overview/#access-tokens-and-token-scopes) to use the web service. Replace the placeholder `ACCESS_TOKEN` in the `.env` file in this directory with your access key.
 
-Data Management Service
-https://data.fa.ase.in.tum.de/
-
-
-Authentication details for Kibana (ELK):
-ELASTIC_USER=elastic
-ELASTIC_PASSWORD=FA2021
-
-Authentication details for Prometheus:
-None
-
-To build the development containers run
+After defining the mapbox key you can start the web service and web application oon your machine using the `docker compose` command:
 ```
-make build
+$ docker compose up --build
 ```
 
-To start the system run
-```
-make start
-```
-
-To stop the system run
-```
-make stop
-```
-
-To start the system in verbose mode run
-```
-make start-verbose
-```
-
-### Development Environment
-To reach the frontend open
-[localhost](localhost)
-
-To reach the backend open
-[localhost:6969](localhost:6969)
-
+You can inspect the  web interface at http://localhost
+The web service is expoed at port 8080: http://localhost:8080
 
 ## Open tasks
 
@@ -65,7 +38,7 @@ Open tasks can be found under [projects](https://github.com/fa21-collaborative-d
 
 ## Deployment pipeline
 
-With every change in the develop branch, the whole system is automatically built and deployed to the Amazon EC2 instance. It is reachable through the previously mentioned URLs.
+With every change in the develop branch, the whole system is automatically built and deployed to the Amazon EC2 instance.
 
 ## Observability
 
@@ -79,7 +52,7 @@ For example, the developer is able to take a look at the generated logs in Kiban
 - Username: elastic
 - Password: FA2021
 
-Then create a new index pattern under the "Discover" section named "logstash-" and choose "timestamp" as the to be used time field. After finishing the setup, go back to "Discover" again and take a look at the created log data.
+Then create a new index pattern under the "Discover" section named "logstash-*" and choose "timestamp" as the to be used time field. After finishing the setup, go back to "Discover" again and take a look at the created log data.
 
 ![image](https://user-images.githubusercontent.com/25406915/140191244-77fe2951-200f-45b7-b3af-528802c58848.png)
 
@@ -98,4 +71,4 @@ The system comes with a very small dashboard that can be accessed unter "Dashboa
 Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.
 
 ## License
-This project is licensed under the MIT License. See [License](https://github.com/Apodini/ApodiniExample/blob/develop/LICENSE) for more information.
+This project is licensed under the MIT License. See [License](https://github.com/fa21-collaborative-drone-interactions/ScienceLabWebservice/blob/develop/LICENSE) for more information.

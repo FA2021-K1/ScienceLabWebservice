@@ -11,7 +11,8 @@ import ArgumentParser
 import FluentPostgresDriver
 import LoggingELK
 
-struct ExampleWebService: WebService {
+
+struct FA2021WebService: WebService {
     @Option(help: "The port the web service should bind to")
     var port: Int = 80
     
@@ -20,6 +21,7 @@ struct ExampleWebService: WebService {
     
     @Environment(\.logger)
     var logger
+    
     
     var configuration: Configuration {
         // Exposed interfaces, in this case a RESTful API and an OpenAPI documentation generated with it
@@ -87,5 +89,4 @@ struct ExampleWebService: WebService {
     }
 }
 
-ExampleWebService.main()
-
+FA2021WebService.main()

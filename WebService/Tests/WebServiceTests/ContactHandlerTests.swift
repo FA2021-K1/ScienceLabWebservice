@@ -4,6 +4,7 @@ import Shared
 import XCTApodini
 import XCTApodiniDatabase
 
+
 final class ContactHandlerTests: XCTApodiniDatabaseTest {
     override func setUpWithError() throws {
         try super.setUpWithError()

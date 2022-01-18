@@ -1,0 +1,9 @@
+- Paul Schmiedmayer
+- Aaron Tacke
+- Mareike Weber
+- Viola Li
+- Philipp, Zagar
+- Felix Rinderer
+- Leander Pfeiffer 
+- Christoph Gruber
+- Moritz Sternemann

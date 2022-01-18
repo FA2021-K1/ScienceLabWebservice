@@ -1,6 +1,6 @@
 import { subDays } from "date-fns";
 
-path = "https://data.fa.ase.in.tum.de/data/aggregated";
+path = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + "/data/aggregated";
 //Sensor Typ abfragen und dann passenden integer eingeben
 sensorType = 1;
 
