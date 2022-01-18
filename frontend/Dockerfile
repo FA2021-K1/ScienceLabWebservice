@@ -15,7 +15,5 @@ RUN npm install
 # Copy all source files
 COPY . .
 
-RUN npm install
-
 # start app
 CMD npm start
