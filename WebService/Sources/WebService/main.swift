@@ -33,8 +33,10 @@ struct FA2021WebService: WebService {
         HTTPConfiguration(bindAddress: .interface("0.0.0.0", port: port))
         
         // Setup of ApodiniLogger with a LogstashLogHandler backend
-        LoggerConfiguration(logHandlers: LogstashLogHandler.init,
-                            logLevel: .info) {
+        LoggerConfiguration(
+            logHandlers: LogstashLogHandler.init,
+            logLevel: .info
+        ) {
             LogstashLogHandler.setup(
                 hostname: ProcessInfo.processInfo.environment["LOGSTASH_HOST"] ?? "0.0.0.0",
                 port: Int(ProcessInfo.processInfo.environment["LOGSTASH_PORT"] ?? "31311") ?? 31311,
@@ -48,13 +50,14 @@ struct FA2021WebService: WebService {
         }
         
         // Setup of ApodiniMetrics with a Prometheus backend
-        MetricsConfiguration(handlerConfiguration: MetricPullHandlerConfiguration
-                                .defaultPrometheusWithConfig(
-                                    endpoint: "/metrics",
-                                    timerImplementation: .summary(),
-                                    defaultRecorderBuckets: .defaultBuckets
-                                ),
-                             systemMetricsConfiguration: .default)
+        MetricsConfiguration(
+            handlerConfiguration: MetricPullHandlerConfiguration.defaultPrometheusWithConfig(
+                endpoint: "/metrics",
+                timerImplementation: .summary(),
+                defaultRecorderBuckets: .defaultBuckets
+            ),
+            systemMetricsConfiguration: .default
+        )
         
         // Setup of ApodiniAuthorization
         JWTSigner(.hs256(key: "secret"))
@@ -66,15 +69,16 @@ struct FA2021WebService: WebService {
                 port: Int(ProcessInfo.processInfo.environment["POSTGRES_PORT"] ?? "5432") ?? 5432,
                 username: ProcessInfo.processInfo.environment["POSTGRES_USER"] ?? "ScienceLab",
                 password: ProcessInfo.processInfo.environment["POSTGRES_PASSWORD"] ?? "FA2021",
-                database: ProcessInfo.processInfo.environment["POSTGRES_DB"] ?? "science_lab"),
-            as: .psql)
-                .addMigrations(MeasurementMigration())
-                .addMigrations(SensorTypeMigration())
-                .addMigrations(SensorMigration())
-                .addMigrations(MeasurementDataMigration())
-                .addMigrations(UserMigration())
-                .addMigrations(TokenMigration())
-                
+                database: ProcessInfo.processInfo.environment["POSTGRES_DB"] ?? "science_lab"
+            ),
+            as: .psql
+        )
+            .addMigrations(MeasurementMigration())
+            .addMigrations(SensorTypeMigration())
+            .addMigrations(SensorMigration())
+            .addMigrations(MeasurementDataMigration())
+            .addMigrations(UserMigration())
+            .addMigrations(TokenMigration())
     }
 
     var content: some Component {
@@ -88,5 +92,6 @@ struct FA2021WebService: WebService {
             .record(.all)
     }
 }
+
 
 FA2021WebService.main()
