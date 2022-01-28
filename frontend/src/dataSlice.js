@@ -3,7 +3,7 @@ import axios from "axios";
 import { subDays } from "date-fns";
 import uuid from "react-uuid";
 
-const apiAdress = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + "/measurements/frontend";
+const apiAdress = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + "/measurements/frontend/";
 const bouys = {
   "1": "BERND",
   "2": "PAUL",
