@@ -89,17 +89,21 @@ export const ValueList = () => {
           </div>
         </div>
       </Stack>
-      {data ? (
-        <FixedSizeList style={{ marginTop: "20px", height: "450px" }}
-          height={400}
-          itemSize={50}
-          itemCount={100}
-        >
-          {renderRow}
-        </FixedSizeList>
-      ) : (
-        "Data Loading"
-      )}
+      {
+        !data
+          ? ("Data Loading")
+          : !data.length
+            ? ("No Data")
+            : (
+              <FixedSizeList style={{ marginTop: "20px", height: "450px" }}
+                height={400}
+                itemSize={50}
+                itemCount={100}
+              >
+                {renderRow}
+              </FixedSizeList>
+            )
+      }
     </Box>
   );
 };
