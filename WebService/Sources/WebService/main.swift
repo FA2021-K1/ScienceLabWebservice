@@ -22,7 +22,6 @@ struct FA2021WebService: WebService {
     @Environment(\.logger)
     var logger
     
-    
     var configuration: Configuration {
         // Exposed interfaces, in this case a RESTful API and an OpenAPI documentation generated with it
         REST(encoder: jsonEncoder, decoder: jsonDecoder) {

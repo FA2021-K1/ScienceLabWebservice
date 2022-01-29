@@ -3,7 +3,7 @@ import axios from "axios";
 import { subDays } from "date-fns";
 import uuid from "react-uuid";
 
-const apiAdress = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + "/measurements/frontend";
+const apiAdress = process.env.REACT_APP_SCIENCE_LAB_WEB_SERVICE_API + "/measurements/frontend/";
 const bouys = {
   "1": "BERND",
   "2": "PAUL",
@@ -190,12 +190,12 @@ export const dataSlice = createSlice({
         const ID = bouys[element.buoyID];
         relevantItems[ID]
           ? relevantItems[ID].push([
-              element.date,
-              Math.round(element.value * 100) / 100,
-            ])
+            element.date,
+            Math.round(element.value * 100) / 100,
+          ])
           : (relevantItems[ID] = [
-              [element.date, Math.round(element.value * 100) / 100],
-            ]);
+            [element.date, Math.round(element.value * 100) / 100],
+          ]);
       });
       state.dataAverageByDay = relevantItems;
       state.dataAverageByDayState = "loaded";
@@ -240,7 +240,7 @@ export const dataSlice = createSlice({
         list.push({ x: key, y: relevantItems[key] });
       }
       state.dataOfLastDay = list;
-      state.dataOfLastDayRaw = averageDataUnformatted.map(element => {return {...element, buoyID:bouys[element.buoyID] }})
+      state.dataOfLastDayRaw = averageDataUnformatted.map(element => { return { ...element, buoyID: bouys[element.buoyID] } })
       state.dataOfLastDayStatus = "loaded";
     },
     [getDataOfLastDay.pending]: (state, action) => {
@@ -262,7 +262,7 @@ export const dataSlice = createSlice({
     },
     [getData.fulfilled]: (state, action) => {
       const dataUnformatted = action.payload.data.data.measurements;
-      state.data = dataUnformatted.map(x => ({...x, id: uuid()}));
+      state.data = dataUnformatted.map(x => ({ ...x, id: uuid() }));
       state.dataState = "loaded";
     },
     [getData.pending]: (state, action) => {

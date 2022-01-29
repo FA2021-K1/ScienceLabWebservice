@@ -1,5 +1,6 @@
 import Foundation
 
+/*
 extension Date: LosslessStringConvertible {
     public init?(_ description: String) {
         if let timeInterval = Double(description) {
@@ -9,3 +10,4 @@ extension Date: LosslessStringConvertible {
         return nil
     }
 }
+ */

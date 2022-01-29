@@ -66,6 +66,13 @@ struct GetAggregatedMeasurements: Handler {
         dateFormatter.formatOptions = [.withDashSeparatorInDate, .withSpaceBetweenDateAndTime, .withColonSeparatorInTime, .withFullDate, .withFullTime, .withTimeZone]
         dateFormatter.timeZone = .current
         
+        print("")
+        print("")
+        print(dateFormatter.string(from: startDate))
+        print(dateFormatter.string(from: endDate))
+        print("")
+        print("")
+        
         // Instrumentation
         let startTime = DispatchTime.now()
         
