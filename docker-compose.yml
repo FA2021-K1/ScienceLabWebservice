@@ -9,8 +9,6 @@ services:
     environment:
       REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN: ${REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN}
       REACT_APP_SCIENCE_LAB_WEB_SERVICE_API: "http://webservice/"
-    expose:
-      - "3000"
     ports:
       # 3000 on the container is mapped to 80 on the server/VM/your Machine.
       - "80:3000"
@@ -33,12 +31,12 @@ services:
         LOGSTASH_HOST: ${LOGSTASH_HOST}
         LOGSTASH_PORT: ${LOGSTASH_PORT}
     expose:
-      - "80"
+      - "8080"
     ports:
       # 80 on the container is mapped to 8080 on the server/VM/your Machine.
-      - "8080:80"
+      - "8080:8080"
     # Pass the desired port to the Apodini web service
-    command: ["--port", "80"]
+    command: ["--port", "8080"]
     # Wait for PostreSQL, ES and Prometheus to start
     depends_on:
       postgres:
@@ -172,7 +170,8 @@ services:
     hostname: "grafana"
     user: "472"
     ports:
-      - "3000:3000"
+      # Expose on host port 4000 as 3000
+      - "4000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
       - ./Observability/grafana/:/etc/grafana/
