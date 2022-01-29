@@ -14,7 +14,7 @@ import LoggingELK
 
 struct FA2021WebService: WebService {
     @Option(help: "The port the web service should bind to")
-    var port: Int = 80
+    var port: Int = 8080
     
     @Environment(\.eventLoopGroup)
     var eventLoopGroup

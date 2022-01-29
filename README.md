@@ -22,7 +22,7 @@ For an individual data analysis the user can export selected raw data as a csv f
 
 ## Starting the Web Service and Web Application
 
-The frontend application uses [Mapbox](https://www.mapbox.com/) to display the map in the web application. You neeed to obtain an [access token](https://docs.mapbox.com/api/overview/#access-tokens-and-token-scopes) to use the web service. Replace the placeholder `ACCESS_TOKEN` in the `.env` file in this directory with your access key.
+The frontend application uses [Mapbox](https://www.mapbox.com/) to display the map in the web application. You neeed to obtain an [access token](https://docs.mapbox.com/api/overview/#access-tokens-and-token-scopes) to use the web service. Replace the placeholder `REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN` in the `.env` file in this directory with your access key.
 
 After defining the mapbox key you can start the web service and web application oon your machine using the `docker compose` command:
 ```
