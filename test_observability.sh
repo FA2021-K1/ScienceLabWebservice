@@ -302,10 +302,10 @@ else
   curl --fail-with-body --location --request GET 'localhost:8080/measurements/frontend/aggregated/buoy?startDate=1532396593&endDate=1832396593'
 
   # Open Websites
-  open http://localhost/
-  open http://localhost:5601/
-  open http://localhost:9090/
-  open http://localhost:3000/
+  open http://localhost/      # frontend
+  open http://localhost:5601/ # Kibana
+  open http://localhost:9090/ # Prometheus
+  open http://localhost:4000/ # Grafana
 
   echo "Please run the script with the -d tag (so \"./test_observability.sh -d\") to delete all create containers and volumes"
   echo "Otherwise run \"docker compose down -v\" in order to shut down all the containers and delete created volumes"
