@@ -14,9 +14,9 @@
         "package": "Apodini",
         "repositoryURL": "https://github.com/Apodini/Apodini.git",
         "state": {
-          "branch": null,
-          "revision": "f3f148d171cd49f022409215f36f9b8bf6bc79c8",
-          "version": "0.8.0"
+          "branch": "lukaskollmer/improve-param-decoding",
+          "revision": "999dd74fb918186b49632b7e1e544f382b8d8db8",
+          "version": null
         }
       },
       {
