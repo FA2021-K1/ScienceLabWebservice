@@ -5,13 +5,19 @@ services:
     container_name: "frontend"
     build:
       context: ./frontend
-      dockerfile: Dockerfile
-    environment:
-      REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN: ${REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN}
-      REACT_APP_SCIENCE_LAB_WEB_SERVICE_API: ${BASE_URL}
-    ports:
-      # 3000 on the container is mapped to 80 on the server/VM/your Machine.
-      - "80:3000"
+      dockerfile: Dockerfile.prod
+      args:
+        - REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=${REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN}
+        - REACT_APP_SCIENCE_LAB_WEB_SERVICE_API=/api
+    expose:
+      # The frontend is only exposed internally to the reverse proxy
+      - "80"
+    labels:
+      # Expose the service via traefik
+      - "traefik.enable=true"
+      # Forward all traffic that is not for the API
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
     depends_on:
       - science-lab-web-service
 
@@ -23,28 +29,60 @@ services:
       context: .
       dockerfile: ./WebService/Dockerfile
     environment:
-      POSTGRES_HOST: "postgres"
-      POSTGRES_PORT: 5432
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       LOGSTASH_HOST: ${LOGSTASH_HOST}
       LOGSTASH_PORT: ${LOGSTASH_PORT}
     expose:
+      # The webservice is exposed internally to the reverse proxy
       - "8080"
     ports:
-      # 80 on the container is mapped to 8080 on the server/VM/your Machine.
+      # Expose the webservice externally so the API can be used
+      # 8080 on the container is mapped to 8080 on the server/VM/your Machine.
       - "8080:8080"
     # Pass the desired port to the Apodini web service
-    command: [ "--port", "8080" ]
-    # Wait for PostreSQL, ES and Prometheus to start
+    command: ["--port", "8080"]
+    labels:
+      # Expose the service via traefik
+      - "traefik.enable=true"
+      # Forward all traffic incoming at /api
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.middlewares.backend_stripprefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.backend.middlewares=backend_stripprefix@docker"
+      - "traefik.http.services.backend.loadbalancer.server.port=8080"
     depends_on:
+      # Wait for PostreSQL, ES and Prometheus to start
       postgres:
         condition: service_healthy
       elasticsearch:
         condition: service_started
       prometheus:
         condition: service_started
+
+  traefik:
+    image: "traefik:v2.6"
+    container_name: "traefik"
+    hostname: "traefik"
+    command:
+      # Enabling docker provider
+      - "--providers.docker=true"
+      # Don't expose all services by default
+      - "--providers.docker.exposedByDefault=false"
+      # Traefik will listen to incoming requests on port 80 (HTTP) and forward them from the `web` entrypoint.
+      - "--entrypoints.web.address=:80"
+      # Enable the web UI
+      # - "--api.insecure=true"
+    ports:
+      # 80 on the container is mapped to 80 on the server/VM/your Machine.
+      - "80:80"
+      # The web UI
+      # - "8081:8080"
+    volumes:
+      # Traefik needs the docker.sock to detect new docker containers
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   # PostgreSQL database for persistent data storage
   postgres:
@@ -64,7 +102,8 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - database-data:/var/lib/postgresql/data/ # Persist data even if container shuts down
+      # Persist data even if container shuts down
+      - database-data:/var/lib/postgresql/data/
 
   elasticsearch:
     container_name: "elasticsearch"
@@ -171,7 +210,7 @@ services:
     hostname: "grafana"
     user: "472"
     ports:
-      # Expose on host port 4000 as 3000
+      # 3000 on the container is mapped to 4000 on the server/VM/your Machine.
       - "4000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
