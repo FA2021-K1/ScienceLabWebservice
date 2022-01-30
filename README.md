@@ -29,8 +29,12 @@ After defining the mapbox key you can start the web service and web application 
 $ docker compose up --build
 ```
 
-You can inspect the  web interface at http://localhost
-The web service is expoed at port 8080: http://localhost:8080
+The services are exposed as follows:
+  - The web interface at port 80: http://localhost
+  - The web service at port 8080: http://localhost:8080
+  - Kibana at port 5601: http://localhost:5601
+  - Prometheus at port 9090: http://localhost:9090
+  - Grafana at port 4000: http://localhost:4000
 
 ## Open tasks
 
