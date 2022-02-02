@@ -8,11 +8,11 @@ else
   echo "Script started!"
 
   # Start all containers
-  # docker compose -p sciencelabwebservice up -d
+  docker compose -p sciencelabwebservice up -d
 
   # Just to make sure that each container (especially from the ELK stack) is ready
-  # echo "Wait until all services are started!"
-  # sleep 60
+  echo "Wait until all services are started!"
+  sleep 60
 
   # Register User 1
   curl --fail-with-body --location --request POST 'localhost:8080/auth' \
