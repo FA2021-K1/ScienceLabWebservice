@@ -44,7 +44,7 @@ services:
       # 8080 on the container is mapped to 8080 on the server/VM/your Machine.
       - "8080:8080"
     # Pass the desired port to the Apodini web service
-    command: ["--port", "8080"]
+    command: [ "--port", "8080" ]
     labels:
       # Expose the service via traefik
       - "traefik.enable=true"
@@ -61,6 +61,7 @@ services:
         condition: service_started
       prometheus:
         condition: service_started
+    restart: always
 
   traefik:
     image: "traefik:v2.6"
