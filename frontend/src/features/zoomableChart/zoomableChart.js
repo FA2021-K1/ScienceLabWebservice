@@ -125,7 +125,7 @@ export const ZoomableChart = () => {
         // PH Selected
         setOptions({
           ...options,
-          colors: style.pHShades,
+          colors: [...style.pHShades],
           title: { text: "Measurement development over time - pH", style: { color: style.textColor } },
 
           yaxis: {
@@ -173,7 +173,7 @@ export const ZoomableChart = () => {
         // TDS Selected
         setOptions({
           ...options,
-          colors: style.TDSShades,
+          colors: [...style.TDSShades],
           title: { text: "Measurement development over time - TDS", style: { color: style.textColor } },
 
           yaxis: {

@@ -109,12 +109,11 @@ export const LineChart = () => {
   }, [selectedTime, selectedData]);
 
   useEffect(() => {
-
     if (selectedData === 0) {
       // PH Selected
       setOptions({
         ...options,
-        colors: style.pHShades,
+        colors: [...style.pHShades],
         title: { text: "Means per day of last 7 days - pH", style: { color: style.textColor } },
 
         yaxis: {
@@ -160,7 +159,7 @@ export const LineChart = () => {
       // TDS Selected
       setOptions({
         ...options,
-        colors: style.TDSShades,
+        colors: [...style.TDSShades],
         title: { text: "Means per day of last 7 days - TDS", style: { color: style.textColor } },
 
         yaxis: {
