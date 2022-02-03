@@ -129,7 +129,7 @@ export const Export = () => {
 
   const toggle = () => setOpen(!open);
 
-  if (sensorTypes) {
+  if (sensorTypes && data) {
     return (<div style={{ height: 560, width: '100%', padding: 20, paddingTop: 20, boxSizing: "border-box" }}>
       <DataGrid rows={data} columns={columns} components={{
         Toolbar: CustomizedGridToolbar
