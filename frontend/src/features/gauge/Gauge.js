@@ -1,5 +1,5 @@
 import GaugeChart from 'react-gauge-chart'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
 
 export const Gauge = () => {
@@ -87,17 +87,17 @@ export const Gauge = () => {
             <h4 align="left" style={{ fontSize: "14px", marginLeft: "8px", color: style.textColor, marginTop:"-10px"}}> Latest measurement means of buoys</h4>
             <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor }}> ph-Value: {pHAverage ? roundToOne(pHAverage) : null} </h5> 
             <div style={{ marginTop: "-10px", marginLeft: "17px" }}>
-                <img src="pHColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
+                <img src="pHColorScale.png" alt="pH color scale" style={{ opacity: "0.85", width: "270px" }} />
                 <div style={{ marginTop: "-17px", marginLeft: pHAverageMargin + "px" }}>
-                    <img src="arrow_fill.png" style={{ opacity: "0.85", width: "15px" }} />
+                    <img src="arrow_fill.png" alt="" style={{ opacity: "0.85", width: "15px" }} />
                 </div>
             </div>
 
             <h5 align="left" style={{ fontSize: "12px", marginLeft: "8px", color: style.textColor, marginTop:"-5px" }}> TDS: {TDSAverage ? roundToTwo(TDSAverage) : null} ppm</h5> 
             <div style={{ marginTop: "-10px", marginLeft: "17px"  }}>
-                <img src="TDSColorScale.png" style={{ opacity: "0.85", width: "270px" }} />
+                <img src="TDSColorScale.png" alt="TDS color scale" style={{ opacity: "0.85", width: "270px" }} />
                 <div style={{ marginTop: "-17px", marginLeft: TDSAverageMargin + "px" }}>
-                    <img src="arrow_fill.png" style={{ opacity: "0.85", width: "15px" }} />
+                    <img src="arrow_fill.png" alt="" style={{ opacity: "0.85", width: "15px" }} />
                 </div>
             </div>
         </div>

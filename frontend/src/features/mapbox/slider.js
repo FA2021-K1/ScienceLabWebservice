@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import { subDays, startOfToday, format } from "date-fns";
+import { subDays, format } from "date-fns";
 import {useState}from 'react';
 
 import { updateSelectedTime, updateSelectedData } from "../../dataSlice";
-import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }) => {
   const stepSize = 1 * 60 * 60 * 1000;
@@ -32,11 +32,6 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
     },
   ];
 
-  const roundHours = (date) => {
-    date.setHours(date.getHours()+2);
-    return date;
-  };
-  const currentTimeRounded = roundHours(new Date());
   const style = useSelector((state) => state.style)
   const handleValueChange = (event, newAlignment) => {
     if (newAlignment !== null) { //enforce selection
