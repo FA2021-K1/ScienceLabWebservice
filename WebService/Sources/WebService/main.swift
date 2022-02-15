@@ -1,6 +1,7 @@
 import Foundation
 import Apodini
 import ApodiniObserve
+import ApodiniObserveOpenTelemetry
 import ApodiniObservePrometheus
 import ApodiniOpenAPI
 import ApodiniREST
@@ -57,6 +58,11 @@ struct FA2021WebService: WebService {
             ),
             systemMetricsConfiguration: .default
         )
+
+        // Setup of Tracing with an OpenTelemetry backend
+        TracingConfiguration(
+            .defaultOpenTelemetry(serviceName: "FA2021")
+        )
         
         // Setup of ApodiniAuthorization
         JWTSigner(.hs256(key: "secret"))
@@ -83,12 +89,16 @@ struct FA2021WebService: WebService {
     var content: some Component {
         MeasurementComponent()
             .record(.all)
+            .trace()
         SensorTypeComponent()
             .record(.all)
+            .trace()
         AuthComponent()
             .record(.all)
+            .trace()
         DummyComponent()
             .record(.all)
+            .trace()
     }
 }
 

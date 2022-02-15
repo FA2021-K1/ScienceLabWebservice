@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "Apodini",
-        "repositoryURL": "https://github.com/Apodini/Apodini.git",
-        "state": {
-          "branch": "develop",
-          "revision": "98ee74e58569228f435b9b0d99bcf1296db6d8e0",
-          "version": null
-        }
-      },
-      {
         "package": "ApodiniDocumentExport",
         "repositoryURL": "https://github.com/Apodini/ApodiniDocumentExport.git",
         "state": {
@@ -38,21 +29,12 @@
         }
       },
       {
-        "package": "ApodiniObservePrometheus",
-        "repositoryURL": "https://github.com/Apodini/ApodiniObservePrometheus.git",
-        "state": {
-          "branch": null,
-          "revision": "9ad2e78337148b3c53f1c8e50c965a4ab67fa287",
-          "version": "0.1.3"
-        }
-      },
-      {
         "package": "ApodiniTypeInformation",
         "repositoryURL": "https://github.com/Apodini/ApodiniTypeInformation.git",
         "state": {
           "branch": null,
-          "revision": "7f089211eb7a7f060b3f570bae9ea03fd05da073",
-          "version": "0.3.2"
+          "revision": "40247bedd5153b7641e95a11bd826b16a15fd12e",
+          "version": "0.3.6"
         }
       },
       {
@@ -159,8 +141,8 @@
         "repositoryURL": "https://github.com/GraphQLSwift/GraphQL",
         "state": {
           "branch": null,
-          "revision": "151c2f18dd12bd7bb6ab301a212c1da2010415ea",
-          "version": "2.2.0"
+          "revision": "283cc4de56b994a00b2724328221b7a1bc846ddc",
+          "version": "2.2.1"
         }
       },
       {
@@ -168,8 +150,8 @@
         "repositoryURL": "https://github.com/grpc/grpc-swift.git",
         "state": {
           "branch": null,
-          "revision": "5cc08ebf77e68598bfe4c793927d0f2838598607",
-          "version": "1.6.1"
+          "revision": "d7961746769616d0b81bda771de5648ebfa1abf9",
+          "version": "1.7.1"
         }
       },
       {
@@ -195,8 +177,8 @@
         "repositoryURL": "https://github.com/Apodini/MetadataSystem.git",
         "state": {
           "branch": null,
-          "revision": "30b8886934e49d64130868ac0b89219c35fc5447",
-          "version": "0.1.3"
+          "revision": "f655813f1953af8d3aaac432dad35f394e7bdf75",
+          "version": "0.1.6"
         }
       },
       {
@@ -204,8 +186,8 @@
         "repositoryURL": "https://github.com/mattpolzin/OpenAPIKit.git",
         "state": {
           "branch": null,
-          "revision": "4986552e76c331a99770428bd2be77ad76068c08",
-          "version": "2.4.0"
+          "revision": "328d11996ccc43205bd861535021d8c22168a08a",
+          "version": "2.5.0"
         }
       },
       {
@@ -213,8 +195,8 @@
         "repositoryURL": "https://github.com/slashmo/opentelemetry-swift.git",
         "state": {
           "branch": null,
-          "revision": "e4f825fc2c7475553075a3c93b5ddadb5d4f5ec9",
-          "version": "0.1.1"
+          "revision": "6d3cc7c896b4dd426494ea59a5b67c9425b593cc",
+          "version": "0.2.0"
         }
       },
       {
@@ -402,8 +384,8 @@
         "repositoryURL": "https://github.com/apple/swift-distributed-tracing.git",
         "state": {
           "branch": null,
-          "revision": "fce1f7c91ad5a733500ea1cdd7ccd7aed9130536",
-          "version": "0.1.4"
+          "revision": "7a89c904d80fd2dc7c6071806f38d5d0b2d5a1b5",
+          "version": "0.2.0"
         }
       },
       {
@@ -411,17 +393,8 @@
         "repositoryURL": "https://github.com/apple/swift-distributed-tracing-baggage.git",
         "state": {
           "branch": null,
-          "revision": "b68b3277985555995298426a35084b832dbc51ae",
-          "version": "0.1.1"
-        }
-      },
-      {
-        "package": "swift-distributed-tracing-baggage-core",
-        "repositoryURL": "https://github.com/apple/swift-distributed-tracing-baggage-core.git",
-        "state": {
-          "branch": null,
-          "revision": "9a2884a37f39e08ebd225627c400feae9c6ea8df",
-          "version": "0.1.1"
+          "revision": "c8457ce61adc6a3b9e6223ca147f5196f99e22cc",
+          "version": "0.2.3"
         }
       },
       {
@@ -483,8 +456,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio-http2.git",
         "state": {
           "branch": null,
-          "revision": "6e94a7be32891d1b303a3fcfde8b5bf64d162e74",
-          "version": "1.19.1"
+          "revision": "000ca94f9de92c95b9ac85d44600b7b0fe25a3e5",
+          "version": "1.19.2"
         }
       },
       {
