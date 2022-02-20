@@ -36,6 +36,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       LOGSTASH_HOST: ${LOGSTASH_HOST}
       LOGSTASH_PORT: ${LOGSTASH_PORT}
+      OTLP_HOST: ${OTLP_HOST}
+      OTLP_PORT: ${OTLP_PORT}
     expose:
       # The webservice is exposed internally to the reverse proxy
       - "8080"
