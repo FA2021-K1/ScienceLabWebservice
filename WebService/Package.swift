@@ -12,10 +12,8 @@ let package = Package(
         .executable(name: "WebService", targets: ["WebService"])
     ],
     dependencies: [
-//        .package(url: "https://github.com/Apodini/Apodini.git", .branch("develop")),
-        .package(name: "Apodini", path: "../../Apodini-review"),
-//        .package(url: "https://github.com/Apodini/ApodiniObservePrometheus.git", .upToNextMinor(from: "0.1.3")),
-        .package(name: "ApodiniObservePrometheus", path: "../../ApodiniObservePrometheus"),
+        .package(url: "https://github.com/Apodini/Apodini.git", .branch("feature/automatic-tracing")),
+        .package(url: "https://github.com/Apodini/ApodiniObservePrometheus.git", .branch("update-apodini")),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(url: "https://github.com/Apodini/swift-log-elk.git", from: "0.2.0"),
         .package(url: "https://github.com/vapor-community/bcrypt.git", from: "1.1.0"),
