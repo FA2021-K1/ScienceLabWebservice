@@ -22,7 +22,5 @@ jobs:
     with:
       path: ./WebService
       packagename: ScienceLabWebservice
-      testdocc: false
-      supportsmacos11: false
       aptgetdependencies: libsqlite3-dev
       yumdependencies: sqlite-devel

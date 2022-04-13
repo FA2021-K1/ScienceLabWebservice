@@ -51,8 +51,13 @@
         "repositoryURL": "https://github.com/vapor/fluent-kit.git",
         "state": {
           "branch": null,
+<<<<<<< HEAD
           "revision": "d5273e8d050c51dd7e1d3a4dab08fe32ec9ffffa",
           "version": "1.20.0"
+=======
+          "revision": "63c13b1fcc5266d35df676a8e75bbb602497f12b",
+          "version": "1.23.4"
+>>>>>>> develop
         }
       },
       {
@@ -60,8 +65,13 @@
         "repositoryURL": "https://github.com/vapor/jwt-kit.git",
         "state": {
           "branch": null,
+<<<<<<< HEAD
           "revision": "1822bb0abf0a31a4b5078ec19061c548835253b5",
           "version": "4.3.0"
+=======
+          "revision": "5f9c44d4c196cc06c3fc601f279169f121d6f62d",
+          "version": "4.4.0"
+>>>>>>> develop
         }
       },
       {
@@ -78,8 +88,13 @@
         "repositoryURL": "https://github.com/vapor/sql-kit.git",
         "state": {
           "branch": null,
+<<<<<<< HEAD
           "revision": "9cc30f8cef132e91a07e36005612b37f918731fc",
           "version": "3.16.0"
+=======
+          "revision": "afc74d888649f2b2a2f8cc7963be5eb179409610",
+          "version": "3.17.0"
+>>>>>>> develop
         }
       },
       {
@@ -87,8 +102,13 @@
         "repositoryURL": "https://github.com/apple/swift-crypto.git",
         "state": {
           "branch": null,
+<<<<<<< HEAD
           "revision": "a8911e0fadc25aef1071d582355bd1037a176060",
           "version": "2.0.4"
+=======
+          "revision": "067254c79435de759aeef4a6a03e43d087d61312",
+          "version": "2.0.5"
+>>>>>>> develop
         }
       },
       {
@@ -105,8 +125,13 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
+<<<<<<< HEAD
           "revision": "51c3fc2e4a0fcdf4a25089b288dd65b73df1b0ef",
           "version": "2.37.0"
+=======
+          "revision": "d6e3762e0a5f7ede652559f53623baf11006e17c",
+          "version": "2.39.0"
+>>>>>>> develop
         }
       }
     ]
