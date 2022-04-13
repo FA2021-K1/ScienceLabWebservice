@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DataGrid, GridToolbar as MuiGridToolbar, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbar } from "@mui/x-data-grid"
+import { DataGrid, GridToolbar as MuiGridToolbar, GridToolbarContainer } from "@mui/x-data-grid"
 import { styled } from '@mui/material/styles';
 import { DateRangePicker } from "materialui-daterange-picker";
 import DateRangeIcon from "@material-ui/icons/DateRange";
@@ -38,12 +38,6 @@ export const Export = () => {
       }
     })
   );
-
-  const loadData = () => {
-    const startDate = dateRange.startDate.getTime();
-    const endDate = dateRange.endDate.getTime();
-    dispatch(getData({ startDate, endDate }));
-  }
 
   const CustomizedGridToolbar = () => {
     return (
@@ -120,7 +114,9 @@ export const Export = () => {
 
   useEffect(() => {
     if (dataState === "idle") {
-      loadData();
+      const startDate = dateRange.startDate.getTime();
+      const endDate = dateRange.endDate.getTime();
+      dispatch(getData({ startDate, endDate }));
     }
     if (sensorTypesState === "idle") {
       dispatch(getSensorTypes());
@@ -129,7 +125,7 @@ export const Export = () => {
 
   const toggle = () => setOpen(!open);
 
-  if (sensorTypes) {
+  if (sensorTypes && data) {
     return (<div style={{ height: 560, width: '100%', padding: 20, paddingTop: 20, boxSizing: "border-box" }}>
       <DataGrid rows={data} columns={columns} components={{
         Toolbar: CustomizedGridToolbar

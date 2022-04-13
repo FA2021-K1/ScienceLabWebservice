@@ -121,7 +121,8 @@ services:
     hostname: "grafana-develop"
     user: "472"
     ports:
-      - "3000:3000"
+      # Expose on host port 4000 as 3000 is used for the frontend
+      - "4000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
       - ./Observability/grafana/provisioning/:/etc/grafana/provisioning/

@@ -1,24 +1,32 @@
 # pull official base image
 FROM node:16-alpine3.11 as build
 
+# Build time environment variables
+ARG REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN
+ARG REACT_APP_SCIENCE_LAB_WEB_SERVICE_API=/api
+ENV REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=$REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN
+ENV REACT_APP_SCIENCE_LAB_WEB_SERVICE_API=$REACT_APP_SCIENCE_LAB_WEB_SERVICE_API
+ENV NODE_ENV=production
+
 # set working directory
 WORKDIR /app
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-ARG MAPBOX_API_KEY
-
 # install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --legacy-peer-deps
+COPY package.json package-lock.json ./
+# Install exact versions from package-lock.json
+RUN npm ci
 
 # add app
-COPY . ./
+COPY . .
 
 # start app
-RUN REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=$MAPBOX_API_KEY npm run build
+RUN npm run build
+
+# remove unnecessary files from package dependencies
+RUN npm prune
 
 # production environment
 FROM nginx:stable-alpine

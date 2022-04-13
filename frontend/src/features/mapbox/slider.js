@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import { subDays, startOfToday, format } from "date-fns";
+import { subDays, format } from "date-fns";
 import {useState}from 'react';
 
 import { updateSelectedTime, updateSelectedData } from "../../dataSlice";
-import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }) => {
   const stepSize = 1 * 60 * 60 * 1000;
-  const todayStart = new Date('Sepember 30, 2021 00:00:00');
+  const todayStart = new Date('September 30, 2021 00:00:00');
   const dispatch = useDispatch();
   // const selectedData = useSelector(state => state.data.selectedData)
 
@@ -32,11 +32,6 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
     },
   ];
 
-  const roundHours = (date) => {
-    date.setHours(date.getHours()+2);
-    return date;
-  };
-  const currentTimeRounded = roundHours(new Date());
   const style = useSelector((state) => state.style)
   const handleValueChange = (event, newAlignment) => {
     if (newAlignment !== null) { //enforce selection
@@ -62,8 +57,8 @@ export const SliderContainer = ({ selectedTime, setSelectedTime, dateFormatter }
         sx={{ color: style.primaryColor }}
         aria-label="Always visible"
         valueLabelFormat={(value) => <div>{dateFormatter(new Date(value))}</div>}
-        min={subDays(new Date('Sepember 30, 2021 20:00:00'), 7).getTime()}
-        max={new Date('Sepember 30, 2021 20:00:00')}
+        min={subDays(new Date('September 30, 2021 20:00:00'), 7).getTime()}
+        max={new Date('September 30, 2021 20:00:00')}
         step={stepSize}
         marks={marks}
         value={selectedTime}

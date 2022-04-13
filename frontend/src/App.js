@@ -3,13 +3,12 @@ import routes from "./routes";
 import { Breadcrumbs } from "./features/breadcrumbs/Breadcrumbs";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -17,7 +16,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { makeStyles } from "@material-ui/core/styles";
 import { Sidebar } from "./features/sidebar/Sidebar";
 import { updateSidebar } from "./sidebarSlice";
 
@@ -69,15 +67,6 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-}));
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  homeButton: {
-    marginRight: theme.spacing(2),
-  },
 }));
 
 const DrawerCreator = style => styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -169,6 +158,7 @@ export const App = () => {
                   }} />
                 )
               }
+              return (null)
             })}
           </Switch>
         </Box>

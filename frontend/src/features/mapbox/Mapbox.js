@@ -71,21 +71,21 @@ export const Mapbox = () => {
                 markerColor = style.lightGreen;
             }
 
-            var pHColor;
-            if (data[key][0].value <= 5.5 || data[key][0].value >= 8.5) {
-                pHColor = style.warningColor;
-            }else
-            {
-                pHColor = style.lightGreen;
-            }
+            // var pHColor;
+            // if (data[key][0].value <= 5.5 || data[key][0].value >= 8.5) {
+            //     pHColor = style.warningColor;
+            // }else
+            // {
+            //     pHColor = style.lightGreen;
+            // }
 
-            var TDSColor;
-            if (data[key][1].value >= 700) {
-                TDSColor = style.warningColor;
-            }else
-            {
-                TDSColor = style.lightGreen;
-            }
+            // var TDSColor;
+            // if (data[key][1].value >= 700) {
+            //     TDSColor = style.warningColor;
+            // }else
+            // {
+            //     TDSColor = style.lightGreen;
+            // }
 
             const popup = new mapboxgl.Popup({ offset: 25, className: 'mapbox-gl-popup' }).setHTML(
                 `   <h3>Buoy: ${key}</h3>
@@ -248,7 +248,7 @@ export const Mapbox = () => {
                         new Date().toLocaleString() ? null : (
                         <Button
                             onClick={() => {
-                                const date = (new Date('Sepember 30, 2021 10:00:00')).getTime();
+                                const date = (new Date('September 30, 2021 10:00:00')).getTime();
                                 setSelectedTime(date);
                                 dispatch(updateSelectedTime(date));
                             }}

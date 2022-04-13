@@ -5,75 +5,85 @@ services:
     container_name: "frontend"
     build:
       context: ./frontend
-      dockerfile: Dockerfile
-    working_dir: "/app"
-    volumes:
-      - "./frontend:/app"
-      - "/usr/app/node_modules"
+      dockerfile: Dockerfile.prod
+      args:
+        - REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN=${REACT_APP_SCIENCE_LAB_MAP_ACCESS_TOKEN}
+        - REACT_APP_SCIENCE_LAB_WEB_SERVICE_API=/api
     expose:
-      - "3000"
+      # The frontend is only exposed internally to the reverse proxy
+      - "80"
     labels:
+      # Expose the service via traefik
       - "traefik.enable=true"
-      - "traefik.port=3000"
-      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
+      # Forward all traffic that is not for the API
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
     depends_on:
       - science-lab-web-service
-      
+
   # Science Lab Web Service
   science-lab-web-service:
     container_name: "science-lab-web-service"
     hostname: "webservice"
-    image: "ghcr.io/fa21-collaborative-drone-interactions/sciencelabwebservice:develop"
+    build:
+      context: .
+      dockerfile: ./WebService/Dockerfile
     environment:
-        POSTGRES_HOST: ${POSTGRES_HOST}
-        POSTGRES_PORT: ${POSTGRES_PORT}
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        POSTGRES_DB: ${POSTGRES_DB}
-        LOGSTASH_HOST: ${LOGSTASH_HOST}
-        LOGSTASH_PORT: ${LOGSTASH_PORT}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      LOGSTASH_HOST: ${LOGSTASH_HOST}
+      LOGSTASH_PORT: ${LOGSTASH_PORT}
     expose:
-      - "80"
+      # The webservice is exposed internally to the reverse proxy
+      - "8080"
+    ports:
+      # Expose the webservice externally so the API can be used
+      # 8080 on the container is mapped to 8080 on the server/VM/your Machine.
+      - "8080:8080"
     # Pass the desired port to the Apodini web service
-    command: ["--port", "80"]
+    command: [ "--port", "8080" ]
     labels:
-      # The domain the service will respond to
-      - "traefik.http.routers.backend.rule=Host(`localhost`)"
-      # Allow request only from the predefined entry point named "web"
-      - "traefik.http.routers.backend.entrypoints=web"
-      # We need to define the a service and specify, on which port our server is reachable
-      - "traefik.http.services.backend-service.loadbalancer.server.port=80"
-      # We have to add this service to our router "backend". That's how the router knows where to forward the  requests
-      - "traefik.http.routers.backend.service=backend-service"
-    # Wait for PostreSQL, ES and Prometheus to start
+      # Expose the service via traefik
+      - "traefik.enable=true"
+      # Forward all traffic incoming at /api
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.middlewares.backend_stripprefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.backend.middlewares=backend_stripprefix@docker"
+      - "traefik.http.services.backend.loadbalancer.server.port=8080"
     depends_on:
+      # Wait for PostreSQL, ES and Prometheus to start
       postgres:
         condition: service_healthy
       elasticsearch:
         condition: service_started
       prometheus:
         condition: service_started
-      
-  # Reverse Proxy to protect our service from direct access
+    restart: always
+
   traefik:
-    image: "traefik:v2.4"
+    image: "traefik:v2.6"
     container_name: "traefik"
     hostname: "traefik"
     command:
       # Enabling docker provider
       - "--providers.docker=true"
-      # Traefik will listen to incoming request on the port 80 (HTTP)
+      # Don't expose all services by default
+      - "--providers.docker.exposedByDefault=false"
+      # Traefik will listen to incoming requests on port 80 (HTTP) and forward them from the `web` entrypoint.
       - "--entrypoints.web.address=:80"
+      # Enable the web UI
+      # - "--api.insecure=true"
     ports:
       # 80 on the container is mapped to 80 on the server/VM/your Machine.
       - "80:80"
-    # Traefik needs the docker.sock to detect new docker container
+      # The web UI
+      # - "8081:8080"
     volumes:
+      # Traefik needs the docker.sock to detect new docker containers
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    # Wait for PostreSQL to start
-    depends_on:
-      - science-lab-web-service
 
   # PostgreSQL database for persistent data storage
   postgres:
@@ -81,20 +91,21 @@ services:
     container_name: "postgres"
     hostname: "postgres"
     environment:
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       # 5432 on the container is mapped to 5432 on the server/VM/your Machine.
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: [ "CMD-SHELL", "pg_isready" ]
       interval: 10s
       timeout: 5s
       retries: 5
     volumes:
-      - database-data:/var/lib/postgresql/data/     # Persist data even if container shuts down
-      
+      # Persist data even if container shuts down
+      - database-data:/var/lib/postgresql/data/
+
   elasticsearch:
     container_name: "elasticsearch"
     hostname: "elasticsearch"
@@ -103,14 +114,14 @@ services:
       args:
         ELK_VERSION: ${ELK_VERSION}
     environment:
-        xpack.security.enabled: "true"
-        xpack.monitoring.collection.enabled: "true"
-        ELASTIC_USER: ${ELASTIC_USER}
-        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-        ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-        # Use single node discovery in order to disable production mode and avoid bootstrap checks.
-        # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-        discovery.type: single-node
+      xpack.security.enabled: "true"
+      xpack.monitoring.collection.enabled: "true"
+      ELASTIC_USER: ${ELASTIC_USER}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
     volumes:
       - type: bind
         source: ./Observability/elasticsearch/config/elasticsearch.yml
@@ -118,11 +129,11 @@ services:
       - type: volume
         source: elasticsearch
         target: /usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
-      - "9300:9300"
+    expose:
+      - "9200"
+      - "9300"
     restart: always
-      
+
   logstash:
     container_name: "logstash"
     hostname: "logstash"
@@ -137,12 +148,12 @@ services:
       - type: bind
         source: ./Observability/logstash/pipeline
         target: /usr/share/logstash/pipeline
-    ports:
-      - "31311:31311"   # For HTTP connection
-      - "5044:5044"
-      - "5000:5000/tcp"
-      - "5000:5000/udp"
-      - "9600:9600"
+    expose:
+      - "31311" # For HTTP connection
+      - "5044"
+      - "5000/tcp"
+      - "5000/udp"
+      - "9600"
     environment:
       xpack.monitoring.enabled: "true"
       xpack.monitoring.elasticsearch.hosts: '["http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]'
@@ -156,7 +167,7 @@ services:
     restart: always
     depends_on:
       - elasticsearch
-      
+
   kibana:
     container_name: "kibana"
     hostname: "kibana"
@@ -177,7 +188,7 @@ services:
     restart: always
     depends_on:
       - elasticsearch
-      
+
   prometheus:
     image: "prom/prometheus"
     container_name: "prometheus"
@@ -200,7 +211,8 @@ services:
     hostname: "grafana"
     user: "472"
     ports:
-      - "3000:3000"
+      # 3000 on the container is mapped to 4000 on the server/VM/your Machine.
+      - "4000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
       - ./Observability/grafana/:/etc/grafana/
@@ -211,7 +223,7 @@ services:
       - prometheus
 
 volumes:
-  database-data:    # Volume for PostgreSQL
-  elasticsearch:    # Volume for ElasticSearch
-  prometheus_data:  # Volume for Prometheus
-  grafana_data:     # Volume for Grafana
+  database-data: # Volume for PostgreSQL
+  elasticsearch: # Volume for ElasticSearch
+  prometheus_data: # Volume for Prometheus
+  grafana_data: # Volume for Grafana

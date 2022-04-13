@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
-import { optionsConfig } from "./boxplotConfig";
 import { getDataOfLastDay } from "../../dataSlice";
 import { roundToOne, roundToTwo } from "../../helperFunctions";
 

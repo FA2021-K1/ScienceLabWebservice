@@ -1,24 +1,24 @@
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-    monitor: 'apodini-webservice'
+    monitor: "apodini-webservice"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
+  - job_name: "prometheus"
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 15s
 
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ["localhost:9090"]
 
-  - job_name:       'webservice'
+  - job_name: "webservice"
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 15s
@@ -26,6 +26,6 @@ scrape_configs:
     # If the web service is built outside of Docker (for example with XCode during the development process), please use the commented target provided below
     # - targets: ['host.docker.internal']
     static_configs:
-      - targets: ['webservice']
+      - targets: ["webservice:8080"]
         labels:
-          group: 'apodini'
+          group: "apodini"
