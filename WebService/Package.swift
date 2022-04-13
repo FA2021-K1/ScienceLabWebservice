@@ -28,6 +28,7 @@ let package = Package(
                 .product(name: "ApodiniREST", package: "Apodini"),
                 .product(name: "ApodiniObserve", package: "Apodini"),
                 .product(name: "ApodiniObservePrometheus", package: "ApodiniObservePrometheus"),
+                .product(name: "ApodiniObserveOpenTelemetry", package: "Apodini"),
                 .product(name: "ApodiniOpenAPI", package: "Apodini"),
                 .product(name: "ApodiniDatabase", package: "Apodini"),
                 .product(name: "ApodiniAuthorization", package: "Apodini"),

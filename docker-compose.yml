@@ -36,6 +36,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       LOGSTASH_HOST: ${LOGSTASH_HOST}
       LOGSTASH_PORT: ${LOGSTASH_PORT}
+      OTLP_HOST: ${OTLP_HOST}
+      OTLP_PORT: ${OTLP_PORT}
     expose:
       # The webservice is exposed internally to the reverse proxy
       - "8080"
@@ -221,6 +223,24 @@ services:
     restart: always
     depends_on:
       - prometheus
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    command: ["--config=/etc/config.yml"]
+    volumes:
+      - ./Observability/otel-collector/collector-config.yml:/etc/config.yml
+    ports:
+      # Expose on host port 4317
+      - 4317:4317
+    depends_on: [jaeger]
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      # Expose on host port 16686
+      - 16686:16686
 
 volumes:
   database-data: # Volume for PostgreSQL
